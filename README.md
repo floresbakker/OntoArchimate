@@ -6,7 +6,7 @@ The Archimate Ontology provides a comprehensive description of the Archimate voc
 
 # Status
 
-Unstable, work in progress.
+Unstable, work in progress. Still trying to understand the subtleties of the Archimate language. From reading blogs it seems that the Archimate language itself still has interoperability issues, meaning that in different applications a architectural design will be shown differently or with errors.
 
 # Background
 
@@ -37,7 +37,7 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
   </folder>
 </archimate:model>
 ```
-This graphic is rendered in a browser as follows:
+This graphic is rendered in Archie as follows:
 
 ![An example of an Archimate-document](/Examples/ArchimateExample.JPG)
 
