@@ -39,7 +39,7 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
 ```
 This graphic is rendered in a browser as follows:
 
-![An example of an Archimate-document](/Examples/ArchimateExample.jpg)
+![An example of an Archimate-document](/Examples/ArchimateExample.JPG)
 
 ## Expressing the Archimate-document in RDF
 
@@ -127,7 +127,7 @@ A. Install all necessary libraries:
 	2. pip install bs4
 	3. pip install rdflib
 
-B. Place one or more SVG-files in the input folder in OntoArchimate\Tools\Archimate2RDF\Input. Only ordinary Archimate-files can be processed. 
+B. Place one or more Archimate-files in the input folder in OntoArchimate\Tools\Archimate2RDF\Input. Only ordinary Archimate-files can be processed. 
 
 C. Run the script in the command prompt by typing: 
 
@@ -140,7 +140,7 @@ D. Go to the output folder in OntoArchimate\Tools\Archimate2RDF\Output and grab 
 
 ## RDF2Archimate
 
-The tool RDF2Archimate is used to read a RDF-based representation of an Archimate-document into a graph and then serialize and save this to an actual SVG-file. 
+The tool RDF2Archimate is used to read a RDF-based representation of an Archimate-document into a graph and then serialize and save this to an actual Archimate-file. 
 
 ### How to use RDF2Archimate
 
@@ -150,7 +150,7 @@ A. Install all necessary libraries (in this order):
 	2. pip install pyshacl
 	3. pip install rdflib
 
-NOTE: pyshacl has a dependency with an older RDFlib version. However, for an optimal functioning of the semantic SVG-vocabulary, the most recent release of RDFlib should be used. Hence, it is advised to first install pyshacl and then RDFlib, so that RDFlib is installed having the latest version. This is currently the least instrusive way of handling the dependency, offering accessibility for those not well versed in Python. 
+NOTE: pyshacl has a dependency with an older RDFlib version. However, for an optimal functioning of the semantic Archimate-vocabulary, the most recent release of RDFlib should be used. Hence, it is advised to first install pyshacl and then RDFlib, so that RDFlib is installed having the latest version. This is currently the least instrusive way of handling the dependency, offering accessibility for those not well versed in Python. 
 
 B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\RDF2Archimate\Input. A Turtle-file should represent a Archimate-document using the Archimate-vocabulary from this repository.
 
