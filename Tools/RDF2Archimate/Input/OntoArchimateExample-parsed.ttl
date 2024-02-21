@@ -1,0 +1,54 @@
+@prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
+@prefix doc: <https://data.rijksfinancien.nl/archimate/doc/id/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml1: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
+
+doc:1 a archimate:Document ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/0/0> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/0/0> a archimate:Model ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/00/1> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/00/3> ;
+    xmlns:archimate "http://www.archimatetool.com/archimate" ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xml1:xmlns "http://www.archimatetool.com/archimate" ;
+    archimate:id "id-377d65038f614b3885cbdf30304d02ae" ;
+    archimate:name "OntoArchimate" ;
+    archimate:version "5.0.0" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/1> a archimate:Folder ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/100/1> ;
+    archimate:id "id-3d6f2fbf1f0743e6904d70cd318eb080" ;
+    archimate:name "Application" ;
+    archimate:type "application" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/100/1> a archimate:Element ;
+    xsi:type "archimate:ApplicationComponent" ;
+    archimate:id "id-2dab151425234cebaec68c56edfcdf2b" ;
+    archimate:name "Purchasing" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/3> a archimate:Folder ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/300/1> ;
+    archimate:id "id-7e0e0ced065441d1a96e56e667b51fbb" ;
+    archimate:name "Views" ;
+    archimate:type "diagrams" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/300/1> a archimate:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1300/1> ;
+    xsi:type "archimate:ArchimateDiagramModel" ;
+    archimate:id "id-7f2d44f14c5f468892a4d46ccc0dde09" ;
+    archimate:name "Default View" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1300/1> a archimate:Child ;;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11300/1> ;
+    xsi:type "archimate:DiagramObject" ;
+    archimate:archimateElement "id-2dab151425234cebaec68c56edfcdf2b" ;
+    archimate:id "id-6254d9d15058420a8dd73b711dadb2e6" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11300/1> a archimate:Bounds ;
+    archimate:height "55" ;
+    archimate:width "120" ;
+    archimate:x "487" ;
+    archimate:y "251" .
