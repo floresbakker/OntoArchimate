@@ -10,16 +10,16 @@
     <documentation xml:lang="en">Example of a basic model with two elements and a relationship</documentation>
 
     <elements>
-        <element identifier="ba1" xsi:type="BusinessActor">
+        <element identifier="pietje" xsi:type="BusinessActor">
             <name xml:lang="en">A Business Actor</name>
         </element>
-        <element identifier="br1" xsi:type="BusinessRole">
+        <element identifier="pukje" xsi:type="BusinessRole">
             <name xml:lang="en">A Business Role</name>
         </element>
     </elements>
     
     <relationships>
-        <relationship identifier="relation-1" source="ba1" target="br1" xsi:type="Assignment">
+        <relationship identifier="relation-1" source="pietje" target="pukje" xsi:type="Assignment">
             <name xml:lang="en">Assignment Relationship</name>
         </relationship>
     </relationships>

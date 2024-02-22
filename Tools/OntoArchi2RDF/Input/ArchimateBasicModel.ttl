@@ -1,0 +1,34 @@
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix dcm: <http://purl.org/dc/dcmitype/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
+prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix model: <https://data.rijksfinancien.nl/ontoarchi/id/>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix respec: <https://respec.org/model/>
+prefix section: <https://data.rijksfinancien.nl/svg/id/section/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix standard: <https://data.rijksfinancien.nl/svg/id/standard/>
+prefix status: <http://purl.org/adms/status/>
+prefix vann: <http://purl.org/vocab/vann/>
+prefix void: <http://rdfs.org/ns/void#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+
+model:BasicModel rdf:type ontoarchi:Model;
+    skos:prefLabel "Basic Model";
+    skos:definition "Example of a basic model with two elements and a relationship".
+
+model:aBusinessActor rdf:type ontoarchi:BusinessActor;
+   skos:prefLabel "A business actor";
+   skos:definition "An example of a business actor".
+
+model:aBusinessRole rdf:type ontoarchi:BusinessRole;
+   skos:prefLabel "A business role";
+   skos:definition "An example of a business role".
+
+model:aBusinessActor ontoarchi:assignedTo model:aBusinessRole.
+
