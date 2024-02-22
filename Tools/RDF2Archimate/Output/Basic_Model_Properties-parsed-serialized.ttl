@@ -313,13 +313,27 @@ xml1:xmlns a owl:DatatypeProperty ;
 doc:1 a archimate:Document ;
     rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/0/0> ;
     prov:wasGeneratedBy doc:1-svg-document-generation ;
-    archimate:fragment "<?xml version=\"1.0\" encoding=\"UTF-8\"?><model id=\"id-377d65038f614b3885cbdf30304d02ae\" version=\"5.0.0\" name=\"OntoArchimate\" xmlns=\"http://www.archimatetool.com/archimate\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:archimate=\"http://www.archimatetool.com/archimate\"><folder id=\"id-3d6f2fbf1f0743e6904d70cd318eb080\" type=\"application\" name=\"Application\"><element id=\"id-2dab151425234cebaec68c56edfcdf2b\" name=\"Purchasing\" xsi:type=\"archimate:ApplicationComponent\"></element></folder><folder id=\"id-7e0e0ced065441d1a96e56e667b51fbb\" type=\"diagrams\" name=\"Views\"><element id=\"id-7f2d44f14c5f468892a4d46ccc0dde09\" name=\"Default View\" xsi:type=\"archimate:ArchimateDiagramModel\"><child id=\"id-6254d9d15058420a8dd73b711dadb2e6\" archimateElement=\"id-2dab151425234cebaec68c56edfcdf2b\" xsi:type=\"archimate:DiagramObject\"><bounds y=\"251\" x=\"487\" width=\"120\" height=\"55\"></bounds></child></element></folder></model>"^^xsd:string ;
+    archimate:fragment "<?xml version=\"1.0\" encoding=\"UTF-8\"?><model version=\"1.0\" identifier=\"model-2\" xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model with Properties</name><documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship and some Properties</documentation><documentation><documentation><documentation>A new property value</documentation></documentation></documentation><elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name><name><name><name>4000</name></name></name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name><name><name><name>3000</name></name></name></element></elements><relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships><name><name type=\"number\" identifier=\"propdef-1\"><name>Cost</name></name><name type=\"string\" identifier=\"propdef-2\"><name>User Property</name></name></name></model>"^^xsd:string ;
     dom:documentType documentType:archimate .
 
 <https://data.rijksfinancien.nl/archimate/id/standard/archimate> a dct:Standard ;
     dct:created "2023-10-29"^^xsd:date ;
     dct:source "http://www.opengroup.org/xsd/archimate/3.0/"^^xsd:anyURI ;
     skos:prefLabel "The ArchiMate® Enterprise Architecture Modeling Language"@en .
+
+archimate:Bounds a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The bounds element"@en ;
+    skos:prefLabel "the bounds element"@en ;
+    xml1:tag "bounds" .
+
+archimate:Child a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The child element"@en ;
+    skos:prefLabel "the child element"@en ;
+    xml1:tag "child" .
 
 archimate:Color a owl:Class ;
     rdfs:isDefinedBy archimate: ;
@@ -342,26 +356,19 @@ archimate:Diagrams a owl:Class ;
     skos:prefLabel "the diagrams element"@en ;
     xml1:tag "diagrams" .
 
-archimate:Documentation a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The documentation element"@en ;
-    skos:prefLabel "the documentation element"@en ;
-    xml1:tag "documentation" .
-
-archimate:Elements a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The Elements element"@en ;
-    skos:prefLabel "the Elements element"@en ;
-    xml1:tag "elements" .
-
 archimate:FillColor a owl:Class ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:DomElement ;
     skos:definition "The fillcolor element"@en ;
     skos:prefLabel "the fillcolor element"@en ;
     xml1:tag "fillcolor" .
+
+archimate:Folder a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The folder element"@en ;
+    skos:prefLabel "the folder element"@en ;
+    xml1:tag "folder" .
 
 archimate:Font a owl:Class ;
     rdfs:isDefinedBy archimate: ;
@@ -398,13 +405,6 @@ archimate:Metadata a owl:Class ;
     skos:prefLabel "the metadata element"@en ;
     xml1:tag "metadata" .
 
-archimate:Name a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The name element"@en ;
-    skos:prefLabel "the name element"@en ;
-    xml1:tag "name" .
-
 archimate:Node a owl:Class ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:DomElement ;
@@ -418,20 +418,6 @@ archimate:Organizations a owl:Class ;
     skos:definition "The organizations element"@en ;
     skos:prefLabel "the organizations element"@en ;
     xml1:tag "organizations" .
-
-archimate:Relationship a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The relationship element"@en ;
-    skos:prefLabel "the relationship element"@en ;
-    xml1:tag "relationship" .
-
-archimate:Relationships a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The relationships element"@en ;
-    skos:prefLabel "the relationships element"@en ;
-    xml1:tag "relationships" .
 
 archimate:Schema a owl:Class ;
     rdfs:isDefinedBy archimate: ;
@@ -789,118 +775,328 @@ xml1:documentRestriction a owl:Restriction ;
 
 <https://data.rijksfinancien.nl/archimate/doc/id/0/0> a archimate:Model ;
     rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/00/0> ;
+    rdf:_10 <https://data.rijksfinancien.nl/archimate/doc/id/00/9> ;
+    rdf:_11 <https://data.rijksfinancien.nl/archimate/doc/id/00/10> ;
+    rdf:_12 <https://data.rijksfinancien.nl/archimate/doc/id/00/11> ;
+    rdf:_13 <https://data.rijksfinancien.nl/archimate/doc/id/00/12> ;
     rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/00/1> ;
     rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/00/2> ;
     rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/00/3> ;
     rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/00/4> ;
-    xmlns:archimate "http://www.archimatetool.com/archimate" ;
+    rdf:_6 <https://data.rijksfinancien.nl/archimate/doc/id/00/5> ;
+    rdf:_7 <https://data.rijksfinancien.nl/archimate/doc/id/00/6> ;
+    rdf:_8 <https://data.rijksfinancien.nl/archimate/doc/id/00/7> ;
+    rdf:_9 <https://data.rijksfinancien.nl/archimate/doc/id/00/8> ;
     xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
-    xml1:xmlns "http://www.archimatetool.com/archimate" ;
-    archimate:fragment "<model id=\"id-377d65038f614b3885cbdf30304d02ae\" version=\"5.0.0\" name=\"OntoArchimate\" xmlns=\"http://www.archimatetool.com/archimate\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:archimate=\"http://www.archimatetool.com/archimate\"><folder id=\"id-3d6f2fbf1f0743e6904d70cd318eb080\" type=\"application\" name=\"Application\"><element id=\"id-2dab151425234cebaec68c56edfcdf2b\" name=\"Purchasing\" xsi:type=\"archimate:ApplicationComponent\"></element></folder><folder id=\"id-7e0e0ced065441d1a96e56e667b51fbb\" type=\"diagrams\" name=\"Views\"><element id=\"id-7f2d44f14c5f468892a4d46ccc0dde09\" name=\"Default View\" xsi:type=\"archimate:ArchimateDiagramModel\"><child id=\"id-6254d9d15058420a8dd73b711dadb2e6\" archimateElement=\"id-2dab151425234cebaec68c56edfcdf2b\" xsi:type=\"archimate:DiagramObject\"><bounds y=\"251\" x=\"487\" width=\"120\" height=\"55\"></bounds></child></element></folder></model>"^^xsd:string ;
-    archimate:id "id-377d65038f614b3885cbdf30304d02ae" ;
-    archimate:name "OntoArchimate" ;
-    archimate:version "5.0.0" .
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archimate:fragment "<model version=\"1.0\" identifier=\"model-2\" xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model with Properties</name><documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship and some Properties</documentation><documentation><documentation><documentation>A new property value</documentation></documentation></documentation><elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name><name><name><name>4000</name></name></name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name><name><name><name>3000</name></name></name></element></elements><relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships><name><name type=\"number\" identifier=\"propdef-1\"><name>Cost</name></name><name type=\"string\" identifier=\"propdef-2\"><name>User Property</name></name></name></model>"^^xsd:string ;
+    archimate:identifier "model-2" ;
+    archimate:version "1.0" .
 
 <https://data.rijksfinancien.nl/archimate/doc/id/00/0> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/1> a archimate:Folder ;
+<https://data.rijksfinancien.nl/archimate/doc/id/00/1> a archimate:Name ;
     rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/100/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/100/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/100/2> ;
-    archimate:fragment "<folder id=\"id-3d6f2fbf1f0743e6904d70cd318eb080\" type=\"application\" name=\"Application\"><element id=\"id-2dab151425234cebaec68c56edfcdf2b\" name=\"Purchasing\" xsi:type=\"archimate:ApplicationComponent\"></element></folder>"^^xsd:string ;
-    archimate:id "id-3d6f2fbf1f0743e6904d70cd318eb080" ;
-    archimate:name "Application" ;
-    archimate:type "application" .
+    xml1:lang "en" ;
+    archimate:fragment "<name xml:lang=\"en\">Basic Model with Properties</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/10> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/11> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1100/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1100/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1100/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/1100/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/1100/4> ;
+    archimate:fragment "<name><name type=\"number\" identifier=\"propdef-1\"><name>Cost</name></name><name type=\"string\" identifier=\"propdef-2\"><name>User Property</name></name></name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/12> a archimate:TextElement ;
+    archimate:fragment "" .
 
 <https://data.rijksfinancien.nl/archimate/doc/id/00/2> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/3> a archimate:Folder ;
+<https://data.rijksfinancien.nl/archimate/doc/id/00/3> a archimate:Documentation ;
     rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/300/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/300/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/300/2> ;
-    archimate:fragment "<folder id=\"id-7e0e0ced065441d1a96e56e667b51fbb\" type=\"diagrams\" name=\"Views\"><element id=\"id-7f2d44f14c5f468892a4d46ccc0dde09\" name=\"Default View\" xsi:type=\"archimate:ArchimateDiagramModel\"><child id=\"id-6254d9d15058420a8dd73b711dadb2e6\" archimateElement=\"id-2dab151425234cebaec68c56edfcdf2b\" xsi:type=\"archimate:DiagramObject\"><bounds y=\"251\" x=\"487\" width=\"120\" height=\"55\"></bounds></child></element></folder>"^^xsd:string ;
-    archimate:id "id-7e0e0ced065441d1a96e56e667b51fbb" ;
-    archimate:name "Views" ;
-    archimate:type "diagrams" .
+    xml1:lang "en" ;
+    archimate:fragment "<documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship and some Properties</documentation>"^^xsd:string .
 
 <https://data.rijksfinancien.nl/archimate/doc/id/00/4> a archimate:TextElement ;
     archimate:fragment "" .
 
+<https://data.rijksfinancien.nl/archimate/doc/id/00/5> a archimate:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/500/2> ;
+    archimate:fragment "<documentation><documentation><documentation>A new property value</documentation></documentation></documentation>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/6> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/7> a archimate:Elements ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/700/4> ;
+    archimate:fragment "<elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name><name><name><name>4000</name></name></name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name><name><name><name>3000</name></name></name></element></elements>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/8> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/9> a archimate:Relationships ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/900/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/900/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/900/2> ;
+    archimate:fragment "<relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships>"^^xsd:string .
+
 doc:1-svg-document-generation a prov:Activity ;
-    prov:atTime "2024-02-22T12:28:36.543445+00:00"^^xsd:dateTime ;
+    prov:atTime "2024-02-22T12:28:22.373268+00:00"^^xsd:dateTime ;
     prov:used archimate:,
         rule:Document .
 
 <https://data.rijksfinancien.nl/archimate/doc/id/100/0> a archimate:TextElement ;
+    archimate:fragment "Basic Model with Properties" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1100/0> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/100/1> a archimate:Element ;
-    xsi:type "archimate:ApplicationComponent" ;
-    archimate:fragment "<element id=\"id-2dab151425234cebaec68c56edfcdf2b\" name=\"Purchasing\" xsi:type=\"archimate:ApplicationComponent\"></element>"^^xsd:string ;
-    archimate:id "id-2dab151425234cebaec68c56edfcdf2b" ;
-    archimate:name "Purchasing" .
+<https://data.rijksfinancien.nl/archimate/doc/id/1100/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11100/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/11100/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/11100/2> ;
+    archimate:fragment "<name type=\"number\" identifier=\"propdef-1\"><name>Cost</name></name>"^^xsd:string ;
+    archimate:identifier "propdef-1" ;
+    archimate:type "number" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/100/2> a archimate:TextElement ;
+<https://data.rijksfinancien.nl/archimate/doc/id/1100/2> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/11300/0> a archimate:TextElement ;
+<https://data.rijksfinancien.nl/archimate/doc/id/1100/3> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/31100/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/31100/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/31100/2> ;
+    archimate:fragment "<name type=\"string\" identifier=\"propdef-2\"><name>User Property</name></name>"^^xsd:string ;
+    archimate:identifier "propdef-2" ;
+    archimate:type "string" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1100/4> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/11300/1> a archimate:Bounds ;
-    archimate:fragment "<bounds y=\"251\" x=\"487\" width=\"120\" height=\"55\"></bounds>"^^xsd:string ;
-    archimate:height "55" ;
-    archimate:width "120" ;
-    archimate:x "487" ;
-    archimate:y "251" .
-
-<https://data.rijksfinancien.nl/archimate/doc/id/11300/2> a archimate:TextElement ;
+<https://data.rijksfinancien.nl/archimate/doc/id/11100/0> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1300/0> a archimate:TextElement ;
+<https://data.rijksfinancien.nl/archimate/doc/id/11100/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/111100/0> ;
+    archimate:fragment "<name>Cost</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11100/2> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1300/1> a archimate:Child ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11300/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/11300/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/11300/2> ;
-    xsi:type "archimate:DiagramObject" ;
-    archimate:archimateElement "id-2dab151425234cebaec68c56edfcdf2b" ;
-    archimate:fragment "<child id=\"id-6254d9d15058420a8dd73b711dadb2e6\" archimateElement=\"id-2dab151425234cebaec68c56edfcdf2b\" xsi:type=\"archimate:DiagramObject\"><bounds y=\"251\" x=\"487\" width=\"120\" height=\"55\"></bounds></child>"^^xsd:string ;
-    archimate:id "id-6254d9d15058420a8dd73b711dadb2e6" .
+<https://data.rijksfinancien.nl/archimate/doc/id/111100/0> a archimate:TextElement ;
+    archimate:fragment "Cost" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1300/2> a archimate:TextElement ;
+<https://data.rijksfinancien.nl/archimate/doc/id/1131700/0> a archimate:TextElement ;
+    archimate:fragment "4000" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1133700/0> a archimate:TextElement ;
+    archimate:fragment "3000" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11500/0> a archimate:TextElement ;
+    archimate:fragment "A new property value" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11700/0> a archimate:TextElement ;
+    archimate:fragment "A Business Actor" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11900/0> a archimate:TextElement ;
+    archimate:fragment "Assignment Relationship" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/131100/0> a archimate:TextElement ;
+    archimate:fragment "User Property" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/131700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/131700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1131700/0> ;
+    archimate:fragment "<name>4000</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/131700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/133700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/133700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1133700/0> ;
+    archimate:fragment "<name>3000</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/133700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/13700/0> a archimate:TextElement ;
+    archimate:fragment "A Business Role" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1500/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1500/1> a archimate:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11500/0> ;
+    archimate:fragment "<documentation>A new property value</documentation>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1500/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11700/0> ;
+    xml1:lang "en" ;
+    archimate:fragment "<name xml:lang=\"en\">A Business Actor</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/3> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/31700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/31700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/31700/2> ;
+    archimate:fragment "<name><name><name>4000</name></name></name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/4> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1900/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1900/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11900/0> ;
+    xml1:lang "en" ;
+    archimate:fragment "<name xml:lang=\"en\">Assignment Relationship</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1900/2> a archimate:TextElement ;
     archimate:fragment "" .
 
 <https://data.rijksfinancien.nl/archimate/doc/id/300/0> a archimate:TextElement ;
+    archimate:fragment "Example of a basic model with two elements and a relationship and some Properties" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/31100/0> a archimate:TextElement ;
     archimate:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/300/1> a archimate:Element ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1300/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1300/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1300/2> ;
-    xsi:type "archimate:ArchimateDiagramModel" ;
-    archimate:fragment "<element id=\"id-7f2d44f14c5f468892a4d46ccc0dde09\" name=\"Default View\" xsi:type=\"archimate:ArchimateDiagramModel\"><child id=\"id-6254d9d15058420a8dd73b711dadb2e6\" archimateElement=\"id-2dab151425234cebaec68c56edfcdf2b\" xsi:type=\"archimate:DiagramObject\"><bounds y=\"251\" x=\"487\" width=\"120\" height=\"55\"></bounds></child></element>"^^xsd:string ;
-    archimate:id "id-7f2d44f14c5f468892a4d46ccc0dde09" ;
-    archimate:name "Default View" .
+<https://data.rijksfinancien.nl/archimate/doc/id/31100/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/131100/0> ;
+    archimate:fragment "<name>User Property</name>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/300/2> a archimate:TextElement ;
+<https://data.rijksfinancien.nl/archimate/doc/id/31100/2> a archimate:TextElement ;
     archimate:fragment "" .
 
-archimate:Bounds a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The bounds element"@en ;
-    skos:prefLabel "the bounds element"@en ;
-    xml1:tag "bounds" .
+<https://data.rijksfinancien.nl/archimate/doc/id/31700/0> a archimate:TextElement ;
+    archimate:fragment "" .
 
-archimate:Child a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The child element"@en ;
-    skos:prefLabel "the child element"@en ;
-    xml1:tag "child" .
+<https://data.rijksfinancien.nl/archimate/doc/id/31700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/131700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/131700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/131700/2> ;
+    archimate:fragment "<name><name>4000</name></name>"^^xsd:string ;
+    archimate:propertyDefinitionRef "propdef-1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/31700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/33700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/33700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/133700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/133700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/133700/2> ;
+    archimate:fragment "<name><name>3000</name></name>"^^xsd:string ;
+    archimate:propertyDefinitionRef "propdef-1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/33700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/13700/0> ;
+    xml1:lang "en" ;
+    archimate:fragment "<name xml:lang=\"en\">A Business Role</name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/3> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/33700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/33700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/33700/2> ;
+    archimate:fragment "<name><name><name>3000</name></name></name>"^^xsd:string .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/4> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/1> a archimate:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1500/2> ;
+    archimate:fragment "<documentation><documentation>A new property value</documentation></documentation>"^^xsd:string ;
+    archimate:propertyDefinitionRef "propdef-2" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/1> a archimate:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/1700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/1700/4> ;
+    xsi:type "BusinessActor" ;
+    archimate:fragment "<element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name><name><name><name>4000</name></name></name></element>"^^xsd:string ;
+    archimate:identifier "ba1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/3> a archimate:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/3700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/3700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/3700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/3700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/3700/4> ;
+    xsi:type "BusinessRole" ;
+    archimate:fragment "<element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name><name><name><name>3000</name></name></name></element>"^^xsd:string ;
+    archimate:identifier "br1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/4> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/900/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/900/1> a archimate:Relationship ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1900/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1900/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1900/2> ;
+    xsi:type "Assignment" ;
+    archimate:fragment "<relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship>"^^xsd:string ;
+    archimate:identifier "relation-1" ;
+    archimate:source "ba1" ;
+    archimate:target "br1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/900/2> a archimate:TextElement ;
+    archimate:fragment "" .
 
 archimate:Document a owl:Class ;
     dct:conformsTo archimate: ;
@@ -909,12 +1105,33 @@ archimate:Document a owl:Class ;
     skos:definition "An archimate document consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<circle>’, and an end tag, such as ‘</circle>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The Archimate Core Vocabulary defines a set of elements that can be used in an archimate document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document."@en ;
     skos:prefLabel "archimate document"@en .
 
+archimate:Elements a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The Elements element"@en ;
+    skos:prefLabel "the Elements element"@en ;
+    xml1:tag "elements" .
+
 archimate:Model a owl:Class ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:DomElement ;
     skos:definition "The <xml> xml element represents the root (top-level element) of an xml document, so it is also referred to as the root element. All other elements must be descendants of this element."@en ;
     skos:prefLabel "the model element"@en ;
     xml1:tag "model" .
+
+archimate:Relationship a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The relationship element"@en ;
+    skos:prefLabel "the relationship element"@en ;
+    xml1:tag "relationship" .
+
+archimate:Relationships a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The relationships element"@en ;
+    skos:prefLabel "the relationships element"@en ;
+    xml1:tag "relationships" .
 
 archimate:documentRestriction a owl:Restriction ;
     rdfs:isDefinedBy archimate: ;
@@ -1090,13 +1307,6 @@ archimate:Element a owl:Class ;
     skos:prefLabel "the Element element"@en ;
     xml1:tag "element" .
 
-archimate:Folder a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The folder element"@en ;
-    skos:prefLabel "the folder element"@en ;
-    xml1:tag "folder" .
-
 rule:Document a sh:SPARQLRule ;
     rdfs:label "Archimate document generation rule"@en ;
     rdfs:comment "A rule that creates the upper Archimate fragment for an Archimate document and connects it with the previously generated tree of serialized Archimate elements and their Archimate fragments."@en ;
@@ -1142,6 +1352,13 @@ construct {
     dct:source "https://www.w3.org/TR/xlink/#traversal-atts"^^xsd:anyURI ;
     rdfs:isDefinedBy xlink: ;
     skos:prefLabel "§ 5.7 Traversal Attributes (label, from, and to)"@en .
+
+archimate:Documentation a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The documentation element"@en ;
+    skos:prefLabel "the documentation element"@en ;
+    xml1:tag "documentation" .
 
 xmlns: a void:Dataset,
         owl:Ontology ;
@@ -1207,12 +1424,12 @@ xsi: a void:Dataset,
     rdfs:isDefinedBy xml1: ;
     skos:prefLabel "Extensible Markup Language (XML) 1.1 (Second Edition)"@en .
 
-archimate:TextElement a owl:Class ;
-    dct:conformsTo <https://www.w3.org/TR/SVG11/text.html#TextElement> ;
+archimate:Name a owl:Class ;
     rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf dom:Element ;
-    skos:definition "A plain text element in an Archimate document."@en ;
-    skos:prefLabel "The Archimate DOM text element"@en .
+    rdfs:subClassOf archimate:DomElement ;
+    skos:definition "The name element"@en ;
+    skos:prefLabel "the name element"@en ;
+    xml1:tag "name" .
 
 xlink: a void:Dataset,
         owl:Ontology ;
@@ -1301,6 +1518,13 @@ xml1:attribute a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "Property that is the parent property of all existing XML attributes. An attribute is a name-value pair that is associated with an XML element. Attributes provide additional information about an element and are specified within the start tag of an element. Attributes can modify the behavior or appearance of an element, define relationships between elements, or provide other metadata. The name of the attribute is followed by an equal sign (=) and the attribute's value, which is enclosed in double or single quotes. Some attributes affect the element simply by their presence in the start tag of the element, with the value implicitly being an empty string."@en ;
     skos:prefLabel "has attribute property"@en .
+
+archimate:TextElement a owl:Class ;
+    dct:conformsTo <https://www.w3.org/TR/SVG11/text.html#TextElement> ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf dom:Element ;
+    skos:definition "A plain text element in an Archimate document."@en ;
+    skos:prefLabel "The Archimate DOM text element"@en .
 
 archimate: a void:Dataset,
         owl:Ontology,

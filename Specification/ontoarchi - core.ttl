@@ -1,0 +1,559 @@
+prefix dcm: <http://purl.org/dc/dcmitype/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa: <http://www.w3.org/ns/rdfa#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix status: <http://purl.org/adms/status/>
+prefix vann: <http://purl.org/vocab/vann/>
+prefix void: <http://rdfs.org/ns/void#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xmlns: <http://www.w3.org/2000/xmlns/> 
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
+prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
+prefix graph: <https://data.rijksfinancien.nl/ontoarchi/graph/>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix respec: <https://respec.org/model/>
+prefix rule: <https://data.rijksfinancien.nl/ontoarchi/model/rule/>
+prefix section: <https://data.rijksfinancien.nl/ontoarchi/id/section/>
+prefix shp: <https://data.rijksfinancien.nl/ontoarchi/model/shp/>
+prefix standard: <https://data.rijksfinancien.nl/ontoarchi/id/standard/>
+prefix target: <https://data.rijksfinancien.nl/ontoarchi/model/target/>
+
+ontoarchi:
+    a
+      owl:Ontology,
+      respec:Ontology,
+      void:Dataset;
+    dct:created '2024-02-14'^^xsd:date;
+    dct:creator
+      'Flores Bakker';
+    respec:introduction '''
+Introduction of ontoarchi vocabulary.
+'''@en;
+   respec:objective '''Objective of ontoarchi vocabulary'''@en;
+    respec:audience '''Audience of ontoarchi vocabulary'''@en;
+    dct:description '''Description of ontoarchi vocabulary'''@en;
+    dct:abstract '''Abstract of ontoarchi vocabulary'''@en; 
+    skos:example """
+
+An example of an ontoarchi model:
+
+
+
+This can be represented in RDF using the ontoarchi vocabulary as follows:
+
+
+""";
+    dct:language 'iso639-1:en';
+    dct:license 'https://creativecommons.org/licenses/by/4.0/'^^xsd:anyURI;
+    dct:publisher <https://www.example.com>;
+    dct:status status:UnderDevelopment;
+    dct:title 'OntoArchi Core Vocabulary'@en;
+    dct:source <https://www.example.com/ontoarchi-vocabulary>;
+    foaf:homepage 'https://www.example.com/'^^xsd:anyURI;
+    owl:versionInfo '1.0';
+    vann:preferredNamespacePrefix 'ontoarchi';
+    vann:preferredNamespaceUri 'https://data.rijksfinancien.nl/ontoarchi/model/def/';
+    void:uriRegexPattern '^https://data.rijksfinancien.nl/ontoarchi/model/def/';
+    void:uriSpace 'https://data.rijksfinancien.nl/xml/ontoarchi/def/'^^xsd:anyURI.
+
+ontoarchi:Model a owl:Class;
+    skos:definition 'A model in Archimate.'@en;
+    skos:prefLabel 'Model'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Element a owl:Class;
+    skos:definition 'An element in Archimate.'@en;
+    skos:prefLabel 'element'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationCollaboration a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationCollaboration";
+    skos:definition 'An application collaboration in Archimate.'@en;
+    skos:prefLabel 'application collaboration'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationComponent a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationComponent";
+    skos:definition 'An application component in Archimate.'@en;
+    skos:prefLabel 'application component'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationEvent a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationEvent";
+    skos:definition 'An application event in Archimate.'@en;
+    skos:prefLabel 'application event'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationFunction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationFunction";
+    skos:definition 'An application function in Archimate.'@en;
+    skos:prefLabel 'application function'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationInteraction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationInteraction";
+    skos:definition 'An application interaction in Archimate.'@en;
+    skos:prefLabel 'application interaction'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationInterface a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationInterface";
+    skos:definition 'An application interface in Archimate.'@en;
+    skos:prefLabel 'application interface'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationProcess a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationProcess";
+    skos:definition 'An application process in Archimate.'@en;
+    skos:prefLabel 'application process'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ApplicationService a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ApplicationService";
+    skos:definition 'An application service in Archimate.'@en;
+    skos:prefLabel 'application service'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Artifact a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Artifact";
+    skos:definition 'An artifact in Archimate.'@en;
+    skos:prefLabel 'artifact'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Assessment a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Assessment";
+    skos:definition 'An assessment in Archimate.'@en;
+    skos:prefLabel 'assessment'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessActor a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessActor";
+    skos:definition 'A business actor in Archimate.'@en;
+    skos:prefLabel 'business actor'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessRole a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessRole";
+    skos:definition 'A business role in Archimate.'@en;
+    skos:prefLabel 'business role'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessCollaboration a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessCollaboration";
+    skos:definition 'A business collaboration in Archimate.'@en;
+    skos:prefLabel 'business collaboration'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessEvent a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessEvent";
+    skos:definition 'A business event in Archimate.'@en;
+    skos:prefLabel 'business event'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessFunction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessFunction";
+    skos:definition 'A business function in Archimate.'@en;
+    skos:prefLabel 'business function'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessInteraction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessInteraction";
+    skos:definition 'A business interaction in Archimate.'@en;
+    skos:prefLabel 'business interaction'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessInterface a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessInterface";
+    skos:definition 'A business interface in Archimate.'@en;
+    skos:prefLabel 'business interface'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:BusinessObject a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "BusinessObject";
+    skos:definition 'A business object in Archimate.'@en;
+    skos:prefLabel 'business object'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Capability a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Capability";
+    skos:definition 'A capability in Archimate.'@en;
+    skos:prefLabel 'capability'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:CommunicationNetwork a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "CommunicationNetwork";
+    skos:definition 'A communication network in Archimate.'@en;
+    skos:prefLabel 'communication network'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Constraint a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Constraint";
+    skos:definition 'A constraint in Archimate.'@en;
+    skos:prefLabel 'constraint'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Contract a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Contract";
+    skos:definition 'A contract in Archimate.'@en;
+    skos:prefLabel 'contract'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:CourseOfAction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "CourseOfAction";
+    skos:definition 'A course of action in Archimate.'@en;
+    skos:prefLabel 'course of action'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:DataObject a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "DataObject";
+    skos:definition 'A data object in Archimate.'@en;
+    skos:prefLabel 'data object'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Deliverable a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Deliverable";
+    skos:definition 'A deliverable in Archimate.'@en;
+    skos:prefLabel 'deliverable'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Device a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Device";
+    skos:definition 'A device in Archimate.'@en;
+    skos:prefLabel 'device'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:DistributionNetwork a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "DistributionNetwork";
+    skos:definition 'A distribution network in Archimate.'@en;
+    skos:prefLabel 'distribution network'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Driver a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Driver";
+    skos:definition 'A driver in Archimate.'@en;
+    skos:prefLabel 'driver'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Equipment a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Equipment";
+    skos:definition 'An equipment in Archimate.'@en;
+    skos:prefLabel 'equipment'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Facility a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Facility";
+    skos:definition 'A facility in Archimate.'@en;
+    skos:prefLabel 'facility'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Gap a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Gap";
+    skos:definition 'A gap in Archimate.'@en;
+    skos:prefLabel 'gap'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Goal a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Goal";
+    skos:definition 'A goal in Archimate.'@en;
+    skos:prefLabel 'goal'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:ImplementationEvent a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "ImplementationEvent";
+    skos:definition 'An implementation event in Archimate.'@en;
+    skos:prefLabel 'implementation event'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Material a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Material";
+    skos:definition 'A material in Archimate.'@en;
+    skos:prefLabel 'material'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Meaning a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Meaning";
+    skos:definition 'A meaning in Archimate.'@en;
+    skos:prefLabel 'meaning'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Node a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Node";
+    skos:definition 'A node in Archimate.'@en;
+    skos:prefLabel 'node'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Outcome a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Outcome";
+    skos:definition 'An outcome in Archimate.'@en;
+    skos:prefLabel 'outcome'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Path a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Path";
+    skos:definition 'A path in Archimate.'@en;
+    skos:prefLabel 'path'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Plateau a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Plateau";
+    skos:definition 'A plateau in Archimate.'@en;
+    skos:prefLabel 'plateau'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Principle a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Principle";
+    skos:definition 'A principle in Archimate.'@en;
+    skos:prefLabel 'principle'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Product a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Product";
+    skos:definition 'A product in Archimate.'@en;
+    skos:prefLabel 'product'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Representation a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Representation";
+    skos:definition 'A representation in Archimate.'@en;
+    skos:prefLabel 'representation'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Requirement a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Requirement";
+    skos:definition 'A requirement in Archimate.'@en;
+    skos:prefLabel 'requirement'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Resource a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Resource";
+    skos:definition 'A resource in Archimate.'@en;
+    skos:prefLabel 'resource'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Stakeholder a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Stakeholder";
+    skos:definition 'A stakeholder in Archimate.'@en;
+    skos:prefLabel 'stakeholder'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:SystemSoftware a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "SystemSoftware";
+    skos:definition 'A system software in Archimate.'@en;
+    skos:prefLabel 'system software'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyCollaboration a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyCollaboration";
+    skos:definition 'A technology collaboration in Archimate.'@en;
+    skos:prefLabel 'technology collaboration'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyEvent a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyEvent";
+    skos:definition 'A technology event in Archimate.'@en;
+    skos:prefLabel 'technology event'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyFunction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyFunction";
+    skos:definition 'A technology function in Archimate.'@en;
+    skos:prefLabel 'technology function'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyInteraction a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyInteraction";
+    skos:definition 'A technology interaction in Archimate.'@en;
+    skos:prefLabel 'technology interaction'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyInterface a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyInterface";
+    skos:definition 'A technology interface in Archimate.'@en;
+    skos:prefLabel 'technology interface'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyProcess a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyProcess";
+    skos:definition 'A technology process in Archimate.'@en;
+    skos:prefLabel 'technology process'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:TechnologyService a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "TechnologyService";
+    skos:definition 'A technology service in Archimate.'@en;
+    skos:prefLabel 'technology service'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:Value a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "Value";
+    skos:definition 'A value in Archimate.'@en;
+    skos:prefLabel 'value'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:WorkPackage a owl:Class;
+    rdfs:subClassOf ontoarchi:Element;
+    xsi:type "WorkPackage";
+    skos:definition 'A work package in Archimate.'@en;
+    skos:prefLabel 'work package'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+#### Properties
+
+ontoarchi:relationship a owl:ObjectProperty;
+    rdfs:domain ontoarchi:Element;
+    rdfs:range ontoarchi:Element;
+    skos:prefLabel 'the relationship attribute'@en;
+    rdfs:isDefinedBy archimate:.
+
+ontoarchi:assignedTo a owl:ObjectProperty;
+     rdfs:subPropertyOf ontoarchi:relationship;
+     xsi:type "Assignment";
+     skos:prefLabel "Assignment Relationship'@en;
+     rdfs:isDefinedBy archimate:.
+
+ontoarchi:access a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Access";
+    skos:prefLabel 'Access Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:aggregation a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Aggregation";
+    skos:prefLabel 'Aggregation Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:association a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Association";
+    skos:prefLabel 'Association Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:composition a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Composition";
+    skos:prefLabel 'Composition Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:flow a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Flow";
+    skos:prefLabel 'Flow Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:influence a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Influence";
+    skos:prefLabel 'Influence Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:property a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Property";
+    skos:prefLabel 'Property Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:readAccess a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:access;
+    xsi:type "ReadAccess";
+    skos:prefLabel 'Read Access Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:readWriteAccess a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:access;
+    xsi:type "ReadWriteAccess";
+    skos:prefLabel 'Read-Write Access Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:realization a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Realization";
+    skos:prefLabel 'Realization Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:serving a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Serving";
+    skos:prefLabel 'Serving Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:specialization a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Specialization";
+    skos:prefLabel 'Specialization Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:triggering a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:relationship;
+    xsi:type "Triggering";
+    skos:prefLabel 'Triggering Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+ontoarchi:writeAccess a owl:ObjectProperty;
+    rdfs:subPropertyOf ontoarchi:access;
+    xsi:type "WriteAccess";
+    skos:prefLabel 'Write Access Relationship'@en;
+    rdfs:isDefinedBy ontoarchi:.

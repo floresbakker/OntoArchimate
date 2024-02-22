@@ -1,0 +1,228 @@
+prefix dcm: <http://purl.org/dc/dcmitype/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa: <http://www.w3.org/ns/rdfa#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix status: <http://purl.org/adms/status/>
+prefix vann: <http://purl.org/vocab/vann/>
+prefix void: <http://rdfs.org/ns/void#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xmlns: <http://www.w3.org/2000/xmlns/> 
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
+prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
+prefix graph: <https://data.rijksfinancien.nl/ontoarchi/graph/>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix respec: <https://respec.org/model/>
+prefix rule: <https://data.rijksfinancien.nl/ontoarchi/model/rule/>
+prefix section: <https://data.rijksfinancien.nl/ontoarchi/id/section/>
+prefix shp: <https://data.rijksfinancien.nl/ontoarchi/model/shp/>
+prefix standard: <https://data.rijksfinancien.nl/ontoarchi/id/standard/>
+prefix target: <https://data.rijksfinancien.nl/ontoarchi/model/target/>
+
+ontoarchi:
+    a
+      owl:Ontology,
+      respec:Ontology,
+      void:Dataset;
+    dct:created '2024-02-14'^^xsd:date;
+    dct:creator
+      'Flores Bakker';
+    respec:introduction '''
+Introduction of ontoarchi vocabulary.
+'''@en;
+   respec:objective '''Objective of ontoarchi vocabulary'''@en;
+    respec:audience '''Audience of ontoarchi vocabulary'''@en;
+    dct:description '''Description of ontoarchi vocabulary'''@en;
+    dct:abstract '''Abstract of ontoarchi vocabulary'''@en; 
+    skos:example """
+
+An example of an ontoarchi model:
+
+
+
+This can be represented in RDF using the ontoarchi vocabulary as follows:
+
+
+""";
+    dct:language 'iso639-1:en';
+    dct:license 'https://creativecommons.org/licenses/by/4.0/'^^xsd:anyURI;
+    dct:publisher <https://www.example.com>;
+    dct:status status:UnderDevelopment;
+    dct:title 'ontoarchi Core Vocabulary'@en;
+    dct:source <https://www.example.com/ontoarchi-vocabulary>;
+    foaf:homepage 'https://www.example.com/'^^xsd:anyURI;
+    owl:versionInfo '1.0';
+    vann:preferredNamespacePrefix 'ontoarchi';
+    vann:preferredNamespaceUri 'https://data.rijksfinancien.nl/ontoarchi/model/def/';
+    void:uriRegexPattern '^https://data.rijksfinancien.nl/ontoarchi/model/def/';
+    void:uriSpace 'https://data.rijksfinancien.nl/xml/ontoarchi/def/'^^xsd:anyURI.
+
+
+### Logic
+
+shp:Element
+    a sh:NodeShape;
+    sh:rule rule:Element;
+    sh:targetClass ontoarchi:Element;
+    skos:prefLabel 'element shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+  
+  rule:Element
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate fragment based on an ontoarchi element.'@en;
+    skos:prefLabel 'ontoarchi element rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-element to be serialized.
+  ?element rdf:type archimate:Element;
+           archimate:identifier ?identifier;
+           xsi:type ?xsiType;
+           rdf:_1 ?elementNameNode.
+   ?elementNameNode rdf:type archimate:Name;
+           archimate:name ?archimateName;
+           xml:lang "en".
+
+} where {
+
+  # Get the ontoarchi tag of the ontoarchi-element to be serialized.
+  $this skos:prefLabel ?archimateName.
+  $this rdf:type ?ontoarchiElement.
+  ?ontoarchiElement rdfs:subClassOf ontoarchi:Element;
+    xsi:type ?xsiType.
+  
+
+''';
+    rdfs:isDefinedBy ontoarchi:.
+
+shp:Relationship
+    a sh:NodeShape;
+    sh:rule rule:Relationship;
+    sh:targetSubjectsOf ontoarchi:relationship;
+    skos:prefLabel 'relationship shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+rule:Relationship
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate fragment based on an ontoarchi relationship.'@en;
+    skos:prefLabel 'ontoarchi relationship rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-relationship
+  ?relationship rdf:type archimate:Relationship;
+           archimate:identifier ?identifier;
+           xsi:type ?xsiType;
+           rdf:_1 ?relationshipNameNode.
+   ??relationshipNameNode rdf:type archimate:Name;
+           archimate:name ?archimateName;
+           xml:lang "en".
+
+} where {
+
+  # Get the ontoarchi metadata of the ontoarchi-relationship
+  $this ?relationship ?relatedElement.
+  ?relationship rdfs:subPropertyOf ontoarchi:relationship;
+    skos:prefLabel ?archimateName;
+    xsi:type ?xsiType.
+  
+
+''';
+    rdfs:isDefinedBy ontoarchi:.
+
+shp:Document
+    a sh:NodeShape;
+    sh:rule rule:Document;
+    sh:targetClass ontoarchi:Model;
+    skos:prefLabel 'document shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+rule:Document
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate document based on an ontoarchi model.'@en;
+    skos:prefLabel 'ontoarchi document rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-relationship
+  ?document rdf:type archimate:Document;
+         rdf:_1 ?model.
+  ?model rdf:type archimate:Model;
+         xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+         xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+         xml:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+         archimate:identifier ?modelIdentifier ;
+         archimate:version ?modelVersion ;
+         rdf:_1 ?modelNameNode;
+         rdf:_2 ?modelDocumentation;
+         rdf:_3 ?elementsNode;
+         rdf:_4 ?relationshipsNode;
+         rdf:_5 ?organizationsNode;
+         rdf:_6 ?propertiesNode;
+         rdf:_7 ?propertyDefinitionsNode;
+         rdf:_8 ?viewsNode.
+  ?modelNameNode rdf:type archimate:Name;
+         archimate:name ?archimateNameModel;
+         xml:lang "en".
+  ?modelDocumentation rdf:type archimate:Documentation;
+         rdf:_1 ?documentationNameNode.
+  ?documentationNameNode rdf:type archimate:Name;
+         archimate:name ?archimateNameDocumentation;
+         xml:lang "en".
+  ?elementsNode rdf:type archimate:Elements.
+  ?relationshipsNode rdf:type archimate:Relationships.
+  ?organizationsNode rdf:type archimate:Organizations.
+  ?propertiesNode rdf:type archimate:Properties.
+  ?propertyDefinitionsNode rdf:type archimate:PropertyDefinitions.
+  ?viewsNode rdf:type archimate:Views.
+
+} where {
+
+  # Get the ontoarchi metadata of the ontoarchi-relationship
+  $this ?relationship ?relatedElement.
+  ?relationship rdfs:subPropertyOf ontoarchi:relationship;
+    skos:prefLabel ?archimateName;
+    xsi:type ?xsiType.
+  
+
+''';
+    rdfs:isDefinedBy ontoarchi:.

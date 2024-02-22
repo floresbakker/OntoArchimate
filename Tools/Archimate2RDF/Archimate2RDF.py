@@ -65,7 +65,7 @@ def generate_element_id(element):
 
 # loop through any xml files in the input directory
 for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Input"):
-    if filename.endswith(".archimate"):
+    if filename.endswith(".xml"):
         file_path = os.path.join(directory_path+"OntoArchimate/Tools/Archimate2RDF/Input", filename)
         
         # Establish the stem of the file name for reuse in newly created files

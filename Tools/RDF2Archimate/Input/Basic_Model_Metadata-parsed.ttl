@@ -1,0 +1,200 @@
+@prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
+@prefix doc: <https://data.rijksfinancien.nl/archimate/doc/id/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml1: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
+
+doc:1 a archimate:Document ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/0/0> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/0/0> a archimate:Model ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/00/0> ;
+    rdf:_10 <https://data.rijksfinancien.nl/archimate/doc/id/00/9> ;
+    rdf:_11 <https://data.rijksfinancien.nl/archimate/doc/id/00/10> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/00/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/00/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/00/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/00/4> ;
+    rdf:_6 <https://data.rijksfinancien.nl/archimate/doc/id/00/5> ;
+    rdf:_7 <https://data.rijksfinancien.nl/archimate/doc/id/00/6> ;
+    rdf:_8 <https://data.rijksfinancien.nl/archimate/doc/id/00/7> ;
+    rdf:_9 <https://data.rijksfinancien.nl/archimate/doc/id/00/8> ;
+    xmlns:dc "http://purl.org/dc/elements/1.1/" ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd     http://purl.org/dc/elements/1.1/ http://dublincore.org/schemas/xmls/qdc/2008/02/11/dc.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archimate:identifier "model-1" ;
+    archimate:version "1.0" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/100/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/10> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/3> a archimate:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/300/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/4> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/5> a archimate:Metadata ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/500/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/500/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/500/4> ;
+    rdf:_6 <https://data.rijksfinancien.nl/archimate/doc/id/500/5> ;
+    rdf:_7 <https://data.rijksfinancien.nl/archimate/doc/id/500/6> ;
+    rdf:_8 <https://data.rijksfinancien.nl/archimate/doc/id/500/7> ;
+    rdf:_9 <https://data.rijksfinancien.nl/archimate/doc/id/500/8> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/6> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/7> a archimate:Elements ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/700/4> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/8> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/00/9> a archimate:Relationships ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/900/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/900/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/900/2> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/100/0> a archimate:TextElement ;
+    archimate:fragment "Basic Model" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11700/0> a archimate:TextElement ;
+    archimate:fragment "A Business Actor" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/11900/0> a archimate:TextElement ;
+    archimate:fragment "Assignment Relationship" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/13700/0> a archimate:TextElement ;
+    archimate:fragment "A Business Role" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1500/0> a archimate:TextElement ;
+    archimate:fragment ">Dublin Core" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11700/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1900/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1900/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11900/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/1900/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/300/0> a archimate:TextElement ;
+    archimate:fragment "Example of basic model with two elements and a relationship and Metadata" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3500/0> a archimate:TextElement ;
+    archimate:fragment "1.1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/1> a archimate:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/13700/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/3700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/1> a archimate:Schema ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1500/0> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/3> a archimate:SchemaVersion ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/3500/0> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/4> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/5> a archimate:SchemaVersion ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/5500/0> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/6> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/7> a archimate:SchemaVersion ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/7500/0> .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/500/8> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/5500/0> a archimate:TextElement ;
+    archimate:fragment "Basic Model example with Metadata" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/1> a archimate:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1700/2> ;
+    xsi:type "BusinessActor" ;
+    archimate:identifier "ba1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/2> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/3> a archimate:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/3700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/3700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/3700/2> ;
+    xsi:type "BusinessRole" ;
+    archimate:identifier "br1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/700/4> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/7500/0> a archimate:TextElement ;
+    archimate:fragment "Phil Beauvoir" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/900/0> a archimate:TextElement ;
+    archimate:fragment "" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/900/1> a archimate:Relationship ;
+    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1900/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1900/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1900/2> ;
+    xsi:type "Assignment" ;
+    archimate:identifier "relation-1" ;
+    archimate:source "ba1" ;
+    archimate:target "br1" .
+
+<https://data.rijksfinancien.nl/archimate/doc/id/900/2> a archimate:TextElement ;
+    archimate:fragment "" .
+

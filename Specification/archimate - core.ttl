@@ -144,6 +144,14 @@ archimate:TextElement
     skos:prefLabel 'the bounds element'@en;
     rdfs:isDefinedBy archimate:.
 
+  archimate:Documentation
+    a owl:Class;
+    xml:tag 'documentation';
+    rdfs:subClassOf archimate:DomElement;
+    skos:definition 'The documentation element'@en;
+    skos:prefLabel 'the documentation element'@en;
+    rdfs:isDefinedBy archimate:.
+
   archimate:Element
     a owl:Class;
     xml:tag 'element';
@@ -190,6 +198,14 @@ archimate:TextElement
     rdfs:subClassOf archimate:DomElement;
     skos:definition 'The node element'@en;
     skos:prefLabel 'the node element'@en;
+    rdfs:isDefinedBy archimate:.
+
+  archimate:Relationship
+    a owl:Class;
+    xml:tag 'relationship';
+    rdfs:subClassOf archimate:DomElement;
+    skos:definition 'The relationship element'@en;
+    skos:prefLabel 'the relationship element'@en;
     rdfs:isDefinedBy archimate:.
 
   archimate:Relationships
