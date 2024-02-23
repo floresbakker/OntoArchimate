@@ -40,36 +40,13 @@ def iteratePyShacl(vocabulary, serializable_graph):
         debug=False,
         )
       
-        # Query to know if the document has been fully serialised by testing whether the root has a archimate:fragment property. If it has, the algorithm has reached the final level of the document.
-        resultquery = serializable_graph.query('''
-            
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-
-        ASK 
-        WHERE {
-          ?document a archimate:Document ;
-                  archimate:fragment ?fragment.
-        }
-
-        ''')   
-
-        # Check whether another iteration is needed. If the archimate root of the document contains a archimate:fragment statement then the serialisation is considered done.
-        for result in resultquery:
-            if result == False:
-                writeGraph(serializable_graph)
-                iteratePyShacl(vocabulary, serializable_graph)
-            else: 
-                print ("Document is serialised.")
-                writeGraph(serializable_graph)
-             
+        writeGraph(serializable_graph)             
 
 # Get the Archimate vocabulary and place it in a string
 ontoarchi_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/ontoarchi - core.ttl")
 ontoarchi_serialisation = readGraphFromFile(directory_path + "OntoArchimate/Specification/ontoarchi - serialisation.ttl")
 
-vocabulary = ontoarchi_vocabulary + ontoarchi_serialisation 
+vocabulary = ontoarchi_vocabulary 
 
 # loop through any turtle files in the input directory
 for filename in os.listdir(directory_path+"OntoArchimate/Tools/OntoArchi2RDF/Input"):
@@ -93,10 +70,14 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/OntoArchi2RDF/Inp
 
         # Call the shacl engine with the Archimate vocabulary and the document to be serialized
         iteratePyShacl(ontoarchi_serialisation, serializable_graph)
+        document_graph = readGraphFromFile(directory_path+"/OntoArchimate/Tools/OntoArchi2RDF/Output/"+filename_stem+"-serialized.ttl")
+        serializable_graph_string = vocabulary + document_graph
+        serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="ttl")
+        iteratePyShacl(ontoarchi_serialisation, serializable_graph)
 
-        # Prepare a graph to query the serialized document
-        serialized_graph = rdflib.Graph().parse(directory_path+"/OntoArchimate/Tools/OntoArchi2RDF/Output/"+filename_stem+"-serialized.ttl" , format="ttl")
 
+
+        
     else:
         print ("No turtle file ('*.ttl') detected")
 

@@ -1,4 +1,5 @@
 prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix cmdb: <http://example.org/cmdb/>
 prefix dcm: <http://purl.org/dc/dcmitype/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
@@ -22,7 +23,7 @@ model:BasicModel rdf:type ontoarchi:Model;
     skos:prefLabel "Basic Model";
     skos:definition "Example of a basic model with two elements and a relationship".
 
-model:aBusinessActor rdf:type ontoarchi:BusinessActor;
+model:aBusinessActor rdf:type ontoarchi:BusinessActor, org:Role;
    skos:prefLabel "A business actor";
    skos:definition "An example of a business actor".
 
@@ -31,4 +32,10 @@ model:aBusinessRole rdf:type ontoarchi:BusinessRole;
    skos:definition "An example of a business role".
 
 model:aBusinessActor ontoarchi:assignedTo model:aBusinessRole.
+
+model:IBOS rdf:type ontoarchi:ApplicationComponent.
+
+cmdb:IBOS rdf:type cmdb:Application;
+          dct:conformsTo model:IBOS.
+
 

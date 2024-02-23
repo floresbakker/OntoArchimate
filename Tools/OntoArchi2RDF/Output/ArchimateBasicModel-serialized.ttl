@@ -4,15 +4,16 @@
 @prefix model: <https://data.rijksfinancien.nl/ontoarchi/id/> .
 @prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix respec: <https://respec.org/model/> .
-@prefix rule: <https://data.rijksfinancien.nl/ontoarchi/model/rule/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shp: <https://data.rijksfinancien.nl/ontoarchi/model/shp/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix status: <http://purl.org/adms/status/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix xml1: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
 
@@ -20,16 +21,18 @@ model:BasicModel a ontoarchi:Model ;
     skos:definition "Example of a basic model with two elements and a relationship" ;
     skos:prefLabel "Basic Model" .
 
-model:aBusinessActor a ontoarchi:BusinessActor ;
-    skos:definition "An example of a business actor" ;
-    skos:prefLabel "A business actor" ;
-    ontoarchi:assignedTo model:aBusinessRole .
-
-model:aBusinessActor-Element a archimate:Element ;
-    xsi:type "BusinessActor" .
-
-model:aBusinessRole-Element a archimate:Element ;
-    xsi:type "BusinessRole" .
+model:BasicModel-Model a archimate:Model ;
+    rdf:_1 model:BasicModel-ModelName ;
+    rdf:_2 model:BasicModel-Documentation ;
+    rdf:_3 model:BasicModel-Elements ;
+    rdf:_4 model:BasicModel-Relationships ;
+    rdf:_5 model:BasicModel-Organizations ;
+    rdf:_6 model:BasicModel-Properties ;
+    rdf:_7 model:BasicModel-PropertyDefinitions ;
+    rdf:_8 model:BasicModel-Views ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" .
 
 ontoarchi:ApplicationCollaboration a owl:Class ;
     rdfs:isDefinedBy ontoarchi: ;
@@ -462,4 +465,163 @@ ontoarchi:realization a owl:ObjectProperty ;
     xsi:type "Realization" ;
     skos:prefLabel "Realization Relationship"@en .
 
-ontoarchi:serving a 
+ontoarchi:serving a owl:ObjectProperty ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subPropertyOf ontoarchi:relationship ;
+    xsi:type "Serving" ;
+    skos:prefLabel "Serving Relationship"@en .
+
+ontoarchi:specialization a owl:ObjectProperty ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subPropertyOf ontoarchi:relationship ;
+    xsi:type "Specialization" ;
+    skos:prefLabel "Specialization Relationship"@en .
+
+ontoarchi:triggering a owl:ObjectProperty ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subPropertyOf ontoarchi:relationship ;
+    xsi:type "Triggering" ;
+    skos:prefLabel "Triggering Relationship"@en .
+
+ontoarchi:writeAccess a owl:ObjectProperty ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subPropertyOf ontoarchi:access ;
+    xsi:type "WriteAccess" ;
+    skos:prefLabel "Write Access Relationship"@en .
+
+model:BasicModel-Documentation a archimate:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationName .
+
+model:BasicModel-DocumentationName a archimate:Name ;
+    xml1:lang "en" ;
+    archimate:name "Example of a basic model with two elements and a relationship" .
+
+model:BasicModel-Elements a archimate:Elements ;
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessRole-Element .
+
+model:BasicModel-ModelName a archimate:Name ;
+    xml1:lang "en" ;
+    archimate:name "Basic Model" .
+
+model:BasicModel-Organizations a archimate:Organizations .
+
+model:BasicModel-Properties a archimate:Properties .
+
+model:BasicModel-PropertyDefinitions a archimate:PropertyDefinitions .
+
+model:BasicModel-Relationships a archimate:Relationships ;
+    rdf:_1 ontoarchi:assignedTo-Relationship .
+
+model:BasicModel-Views a archimate:Views .
+
+model:aBusinessActor a ontoarchi:BusinessActor ;
+    skos:definition "An example of a business actor" ;
+    skos:prefLabel "A business actor" ;
+    ontoarchi:assignedTo model:aBusinessRole .
+
+model:aBusinessActor-Element a archimate:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    xsi:type "BusinessActor" ;
+    prov:wasDerivedFrom model:aBusinessActor ;
+    archimate:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementName a archimate:Name ;
+    xml1:lang "en" ;
+    archimate:name "A business actor" .
+
+model:aBusinessRole-Element a archimate:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    xsi:type "BusinessRole" ;
+    prov:wasDerivedFrom model:aBusinessRole ;
+    archimate:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementName a archimate:Name ;
+    xml1:lang "en" ;
+    archimate:name "A business role" .
+
+ontoarchi:BusinessActor a owl:Class ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subClassOf ontoarchi:Element ;
+    xsi:type "BusinessActor" ;
+    skos:definition "A business actor in Archimate."@en ;
+    skos:prefLabel "business actor"@en .
+
+ontoarchi:BusinessRole a owl:Class ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subClassOf ontoarchi:Element ;
+    xsi:type "BusinessRole" ;
+    skos:definition "A business role in Archimate."@en ;
+    skos:prefLabel "business role"@en .
+
+ontoarchi:Model a owl:Class ;
+    rdfs:isDefinedBy ontoarchi: ;
+    skos:definition "A model in Archimate."@en ;
+    skos:prefLabel "Model"@en .
+
+ontoarchi:assignedTo-Relationship a archimate:Relationship ;
+    rdf:_1 ontoarchi:assignedTo-Relationship-RelationshipName ;
+    xsi:type "Assignment" ;
+    archimate:source "BusinessActor1" ;
+    archimate:target "BusinessRole1" .
+
+ontoarchi:assignedTo-Relationship-RelationshipName a archimate:Name ;
+    xml1:lang "en" ;
+    archimate:name "Assignment Relationship"@en .
+
+model:aBusinessRole a ontoarchi:BusinessRole ;
+    skos:definition "An example of a business role" ;
+    skos:prefLabel "A business role" .
+
+ontoarchi:access a owl:ObjectProperty ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:subPropertyOf ontoarchi:relationship ;
+    xsi:type "Access" ;
+    skos:prefLabel "Access Relationship"@en .
+
+ontoarchi:relationship a owl:ObjectProperty ;
+    rdfs:domain ontoarchi:Element ;
+    rdfs:isDefinedBy ontoarchi: ;
+    rdfs:range ontoarchi:Element ;
+    skos:prefLabel "the relationship attribute"@en .
+
+ontoarchi:Element a owl:Class ;
+    rdfs:isDefinedBy ontoarchi: ;
+    skos:definition "An element in Archimate."@en ;
+    skos:prefLabel "element"@en .
+
+ontoarchi: a void:Dataset,
+        owl:Ontology,
+        respec:Ontology ;
+    dct:abstract "Abstract of ontoarchi vocabulary"@en ;
+    dct:created "2024-02-14"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "Description of ontoarchi vocabulary"@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "https://creativecommons.org/licenses/by/4.0/"^^xsd:anyURI ;
+    dct:publisher <https://www.example.com> ;
+    dct:source <https://www.example.com/ontoarchi-vocabulary> ;
+    dct:status status:UnderDevelopment ;
+    dct:title "OntoArchi Core Vocabulary"@en ;
+    vann:preferredNamespacePrefix "ontoarchi" ;
+    vann:preferredNamespaceUri "https://data.rijksfinancien.nl/ontoarchi/model/def/" ;
+    void:uriRegexPattern "^https://data.rijksfinancien.nl/ontoarchi/model/def/" ;
+    void:uriSpace "https://data.rijksfinancien.nl/xml/ontoarchi/def/"^^xsd:anyURI ;
+    owl:versionInfo "1.0" ;
+    skos:example """
+
+An example of an ontoarchi model:
+
+
+
+This can be represented in RDF using the ontoarchi vocabulary as follows:
+
+
+""" ;
+    foaf:homepage "https://www.example.com/"^^xsd:anyURI ;
+    respec:audience "Audience of ontoarchi vocabulary"@en ;
+    respec:introduction """
+Introduction of ontoarchi vocabulary.
+"""@en ;
+    respec:objective "Objective of ontoarchi vocabulary"@en .
+

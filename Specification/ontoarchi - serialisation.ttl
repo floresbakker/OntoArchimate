@@ -69,96 +69,6 @@ This can be represented in RDF using the ontoarchi vocabulary as follows:
 
 ### Logic
 
-  shp:Element
-    a sh:NodeShape;
-    sh:rule rule:Element;
-    sh:targetClass ontoarchi:Element;
-    skos:prefLabel 'element shape'@en;
-    rdfs:isDefinedBy ontoarchi:.
-
-  rule:Element
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an archimate fragment based on an ontoarchi element.'@en;
-    skos:prefLabel 'ontoarchi element rule'@en;
-    sh:construct '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
-prefix xml: <http://www.w3.org/XML/1998/namespace#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
-
-construct {
-
-  # create the ontoarchi-fragment for the ontoarchi-element to be serialized.
-  ?element rdf:type archimate:Element;
-           archimate:identifier ?identifier;
-           xsi:type ?xsiType;
-           rdf:_1 ?elementNameNode.
-  ?elementNameNode rdf:type archimate:Name;
-           archimate:name ?archimateName;
-           xml:lang "en".
-
-} where {
-
-  # Get the ontoarchi tag of the ontoarchi-element to be serialized.
-  $this rdf:type ?ontoarchiElement;
-        skos:prefLabel ?archimateName.
-  ?ontoarchiElement rdfs:subClassOf ontoarchi:Element;
-        xsi:type ?xsiType.
-  BIND(IRI(CONCAT(STR($this),"-Element")) as ?element)
-  }
-
-''';
-    rdfs:isDefinedBy ontoarchi:.
-
-shp:Relationship
-    a sh:NodeShape;
-    sh:rule rule:Relationship;
-    sh:targetSubjectsOf ontoarchi:relationship;
-    skos:prefLabel 'relationship shape'@en;
-    rdfs:isDefinedBy ontoarchi:.
-
-rule:Relationship
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an archimate fragment based on an ontoarchi relationship.'@en;
-    skos:prefLabel 'ontoarchi relationship rule'@en;
-    sh:construct '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
-prefix xml: <http://www.w3.org/XML/1998/namespace#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
-
-construct {
-
-  # create the ontoarchi-fragment for the ontoarchi-relationship
-  ?relationship rdf:type archimate:Relationship;
-           archimate:identifier ?identifier;
-           xsi:type ?xsiType;
-           rdf:_1 ?relationshipNameNode.
-   ?relationshipNameNode rdf:type archimate:Name;
-           archimate:name ?archimateName;
-           xml:lang "en".
-   BIND(IRI(CONCAT(STR($this),"-Relationship")) as ?relationship)
-} where {
-
-  # Get the ontoarchi metadata of the ontoarchi-relationship
-  $this ?relationship ?relatedElement.
-  ?relationship rdfs:subPropertyOf ontoarchi:relationship;
-    skos:prefLabel ?archimateName;
-    xsi:type ?xsiType.
-  }
-
-''';
-    rdfs:isDefinedBy ontoarchi:.
 
 shp:Document
     a sh:NodeShape;
@@ -178,6 +88,7 @@ prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -218,15 +129,126 @@ construct {
 
 } where {
 
-  # Get the ontoarchi metadata of the ontoarchi-relationship
-  $this ?relationship ?relatedElement.
-  ?relationship rdfs:subPropertyOf ontoarchi:relationship;
-    skos:prefLabel ?archimateName;
-    xsi:type ?xsiType.
+  # Get the ontoarchi model
+    $this  skos:prefLabel ?archimateNameModel;
+           skos:definition ?archimateNameDocumentation.
+    BIND(IRI(CONCAT(STR($this),"-Model")) as ?model)
+    BIND(IRI(CONCAT(STR($this),"-ModelName")) as ?modelNameNode)
+    BIND(IRI(CONCAT(STR($this),"-Documentation")) as ?modelDocumentation)
+    BIND(IRI(CONCAT(STR($this),"-DocumentationName")) as ?documentationNameNode)
+    BIND(IRI(CONCAT(STR($this),"-Elements")) as ?elementsNode)
+    BIND(IRI(CONCAT(STR($this),"-Relationships")) as ?relationshipsNode)
+    BIND(IRI(CONCAT(STR($this),"-Organizations")) as ?organizationsNode)
+    BIND(IRI(CONCAT(STR($this),"-Properties")) as ?propertiesNode)
+    BIND(IRI(CONCAT(STR($this),"-PropertyDefinitions")) as ?propertyDefinitionsNode)
+    BIND(IRI(CONCAT(STR($this),"-Views")) as ?viewsNode)
   }
 
 ''';
     rdfs:isDefinedBy ontoarchi:.
+
+
+  shp:Element
+    a sh:NodeShape;
+    sh:rule rule:Element;
+    sh:targetClass ontoarchi:Element;
+    skos:prefLabel 'element shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+  rule:Element
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate fragment based on an ontoarchi element.'@en;
+    skos:prefLabel 'ontoarchi element rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#> 
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-element to be serialized.
+  ?element rdf:type archimate:Element;
+           prov:wasDerivedFrom $this;
+           archimate:identifier ?identifier;
+           xsi:type ?xsiType;
+           rdf:_1 ?elementNameNode.
+  ?elementNameNode rdf:type archimate:Name;
+           archimate:name ?archimateName;
+           xml:lang "en".
+
+} where {
+
+  # Get the ontoarchi tag of the ontoarchi-element to be serialized.
+  $this rdf:type ?ontoarchiElement;
+        skos:prefLabel ?archimateName.
+  ?ontoarchiElement rdfs:subClassOf ontoarchi:Element;
+        xsi:type ?xsiType.
+  BIND(IRI(CONCAT(STR($this),"-Element")) as ?element)
+  BIND(IRI(CONCAT(STR($this),"-ElementName")) as ?elementNameNode)
+  }
+
+''';
+    rdfs:isDefinedBy ontoarchi:.
+
+shp:Relationship
+    a sh:NodeShape;
+    sh:rule rule:Relationship;
+    sh:targetClass archimate:Element;
+    skos:prefLabel 'relationship shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+rule:Relationship
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate fragment based on an ontoarchi relationship.'@en;
+    skos:prefLabel 'ontoarchi relationship rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-relationship
+  ?relationship rdf:type archimate:Relationship;
+           xsi:type ?xsiType;
+           archimate:source ?source;
+           archimate:target ?target;
+           rdf:_1 ?relationshipNameNode.
+   ?relationshipNameNode rdf:type archimate:Name;
+           archimate:name ?archimateName;
+           xml:lang "en".
+  
+} where {
+
+  # Get the ontoarchi metadata of the ontoarchi-relationship
+  $this prov:wasDerivedFrom ?element;
+        archimate:identifier ?source.
+  ?element ?relationship ?relatedElement.
+  ?xmlTargetElement prov:wasDerivedFrom ?relatedElement;
+                    archimate:identifier ?target.  
+  ?relationship rdfs:subPropertyOf ontoarchi:relationship;
+    skos:prefLabel ?archimateName;
+    xsi:type ?xsiType.
+  BIND(IRI(CONCAT(STR(?relationship),"-Relationship")) as ?relationship)
+  BIND(IRI(CONCAT(STR(?relationship),"-RelationshipName")) as ?relationshipNameNode)
+  }
+
+''';
+    rdfs:isDefinedBy ontoarchi:.
+
 
 shp:ElementConnector
     a sh:NodeShape;
@@ -254,25 +276,198 @@ construct {
 
   # create the ontoarchi-fragment for the ontoarchi-relationship
   
-  ?elementsNode ?member ?element.
+  $this ?rdf_member ?element.
   
 
 } where {
+  ?element rdf:type archimate:Element.
+  BIND(IRI(CONCAT(str(rdf:),"_", str(function:getElementPosition(?element)))) as ?rdf_member)  
+  }
+''';
+    rdfs:isDefinedBy ontoarchi:.
 
+shp:RelationshipConnector
+    a sh:NodeShape;
+    sh:rule rule:RelationshipConnector;
+    sh:targetClass archimate:Relationships;
+    skos:prefLabel 'archimate relationships shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+rule:RelationshipConnector
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that connects all individual archimate relationships with the relationships node in an archimate document.'@en;
+    skos:prefLabel 'OntoArchi relationship connector rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-relationship
   
-  # Get the elements ordered alphabetically on each IRI
-      {
-        SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
+  $this ?rdf_member ?relationship.
+  
+
+} where {
+  ?relationship rdf:type archimate:Relationship.
+  BIND(IRI(CONCAT(str(rdf:),"_", str(function:getRelationshipPosition(?relationship)))) as ?rdf_member)  
+  }
+''';
+    rdfs:isDefinedBy ontoarchi:.
+
+
+shp:ElementIdentifier
+    a sh:NodeShape;
+    sh:rule rule:ElementIdentifier;
+    sh:targetClass archimate:Element;
+    skos:prefLabel 'Element Identifier shape'@en;
+    rdfs:isDefinedBy ontoarchi:.
+
+rule:ElementIdentifier
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate identifier for an archimate element'@en;
+    skos:prefLabel 'archimate element identifier rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the ontoarchi-fragment for the ontoarchi-relationship
+  
+  $this archimate:identifier ?identifier .
+  
+
+} where {
+  $this xsi:type ?xsiType.
+  BIND(CONCAT(?xsiType, str(function:getSubElementPosition($this))) as ?identifier)  
+  }
+''';
+    rdfs:isDefinedBy ontoarchi:.
+
+function:getSubElementPosition
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns alphabetical position of an archimate element within the set of elements that share the same xsi:type." ;
+    sh:parameter [
+        sh:path function:input ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element for which the position has to be returned." ;
+    ] ;
+    sh:returnType xsd:integer ;
+    sh:select """
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+       SELECT ?result WHERE {
+       {SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
         WHERE {
-          ?element rdf:type archimate:Element.
+          ?element rdf:type archimate:Element;
+                   xsi:type ?xsiType.
           OPTIONAL {
-            ?prevElement rdf:type archimate:Element
-            FILTER(str(?prevElement) < str(?Element))
+            ?prevElement rdf:type archimate:Element;
+                         xsi:type ?xsiType.
+            FILTER(str(?prevElement) < str(?element))
           }
         }
         GROUP BY ?element
         ORDER BY ?element
+        }
+       FILTER (?element = $input)
+       BIND(?member as ?result)
       }
-  }
-''';
-    rdfs:isDefinedBy ontoarchi:.
+        """ .
+
+function:getElementPosition
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns alphabetical position of an archimate element within the set of all elements." ;
+    sh:parameter [
+        sh:path function:input ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element for which the position has to be returned." ;
+    ] ;
+    sh:returnType xsd:integer ;
+    sh:select """
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+       SELECT ?result WHERE {
+       {SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
+        WHERE {
+          ?element rdf:type archimate:Element.
+          OPTIONAL {
+            ?prevElement rdf:type archimate:Element.
+            FILTER(str(?prevElement) < str(?element))
+          }
+        }
+        GROUP BY ?element
+        ORDER BY ?element
+        }
+       FILTER (?element = $input)
+       BIND(?member as ?result)
+      }
+        """ .
+
+function:getRelationshipPosition
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns alphabetical position of an archimate relationship within the set of all relationships." ;
+    sh:parameter [
+        sh:path function:input ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The relationship for which the position has to be returned." ;
+    ] ;
+    sh:returnType xsd:integer ;
+    sh:select """
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix function: <https://data.rijksfinancien.nl/ontoarchi/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+       SELECT ?result WHERE {
+       {SELECT ?relationship (COUNT(?prevRelationship) + 1 AS ?member)
+        WHERE {
+          ?relationship rdf:type archimate:Relationship.
+          OPTIONAL {
+            ?prevRelationship rdf:type archimate:Relationship.
+            FILTER(str(?prevRelationship) < str(?relationship))
+          }
+        }
+        GROUP BY ?relationship
+        ORDER BY ?relationship
+        }
+       FILTER (?relationship = $input)
+       BIND(?member as ?result)
+      }
+        """ .
