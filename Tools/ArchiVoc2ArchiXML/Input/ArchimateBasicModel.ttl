@@ -1,4 +1,4 @@
-prefix ontoarchi: <https://data.rijksfinancien.nl/ontoarchi/model/def/>
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix dcm: <http://purl.org/dc/dcmitype/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
@@ -18,17 +18,17 @@ prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 
-model:BasicModel rdf:type ontoarchi:Model;
+model:BasicModel rdf:type archimate:Model;
     skos:prefLabel "Basic Model";
     skos:definition "Example of a basic model with two elements and a relationship".
 
-model:aBusinessActor rdf:type ontoarchi:BusinessActor;
+model:aBusinessActor rdf:type archimate:BusinessActor;
    skos:prefLabel "A business actor";
    skos:definition "An example of a business actor".
 
-model:aBusinessRole rdf:type ontoarchi:BusinessRole;
+model:aBusinessRole rdf:type archimate:BusinessRole;
    skos:prefLabel "A business role";
    skos:definition "An example of a business role".
 
-model:aBusinessActor ontoarchi:assignedTo model:aBusinessRole.
+model:aBusinessActor archimate:assignedTo model:aBusinessRole.
 

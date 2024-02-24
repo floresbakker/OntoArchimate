@@ -22,7 +22,7 @@ def readGraphFromFile(file_path):
 
 # Function to write a graph to a file
 def writeGraph(graph):
-    graph.serialize(destination=directory_path+"/OntoArchimate/Tools/OntoArchi2RDF/Output/"+filename_stem+"-serialized.ttl", format="turtle")
+    graph.serialize(destination=directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXML/Output/"+filename_stem+"-serialized.ttl", format="turtle")
 
 # Function to call the PyShacl engine so that a RDF model of a Archimate document can be serialized to Archimate-code.
 def iteratePyShacl(vocabulary, serializable_graph):
@@ -40,18 +40,19 @@ def iteratePyShacl(vocabulary, serializable_graph):
         debug=False,
         )
       
+        # Write the results to the file
         writeGraph(serializable_graph)             
 
 # Get the Archimate vocabulary and place it in a string
-ontoarchi_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/ontoarchi - core.ttl")
-ontoarchi_serialisation = readGraphFromFile(directory_path + "OntoArchimate/Specification/ontoarchi - serialisation.ttl")
+ontoarchi_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/archimate - core.ttl")
+ontoarchi_serialisation = readGraphFromFile(directory_path + "OntoArchimate/Specification/archimate - serialisation.ttl")
 
 vocabulary = ontoarchi_vocabulary 
 
 # loop through any turtle files in the input directory
-for filename in os.listdir(directory_path+"OntoArchimate/Tools/OntoArchi2RDF/Input"):
+for filename in os.listdir(directory_path+"OntoArchimate/Tools/ArchiVoc2ArchiXML/Input"):
     if filename.endswith(".ttl"):
-        file_path = os.path.join(directory_path+"OntoArchimate/Tools/OntoArchi2RDF/Input", filename)
+        file_path = os.path.join(directory_path+"OntoArchimate/Tools/ArchiVoc2ArchiXML/Input", filename)
         
         # Establish the stem of the file name for reuse in newly created files
         filename_stem = os.path.splitext(filename)[0]
@@ -66,18 +67,15 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/OntoArchi2RDF/Inp
         serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="ttl")
 
         # Inform user
-        print ("Transforming ontoarchi to archimate (RDF) as contained in document '" + filename + "'...")
+        print ("\nTransforming archimate model to archiXML model as contained in document '" + filename + "'...")
 
         # Call the shacl engine with the Archimate vocabulary and the document to be serialized
         iteratePyShacl(ontoarchi_serialisation, serializable_graph)
-        document_graph = readGraphFromFile(directory_path+"/OntoArchimate/Tools/OntoArchi2RDF/Output/"+filename_stem+"-serialized.ttl")
+        
+        # Start second iteration to build upon the first run
+        document_graph = readGraphFromFile(directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXML/Output/"+filename_stem+"-serialized.ttl")
         serializable_graph_string = vocabulary + document_graph
         serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="ttl")
         iteratePyShacl(ontoarchi_serialisation, serializable_graph)
 
-
-
-        
-    else:
-        print ("No turtle file ('*.ttl') detected")
-
+    

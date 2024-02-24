@@ -1,0 +1,305 @@
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
+@prefix doc: <https://data.rijksfinancien.nl/archixml/doc/id/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml1: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
+
+doc:1 a archiXML:Document ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/0/0> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/0/0> a archiXML:Model ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/00/0> ;
+    rdf:_10 <https://data.rijksfinancien.nl/archixml/doc/id/00/9> ;
+    rdf:_11 <https://data.rijksfinancien.nl/archixml/doc/id/00/10> ;
+    rdf:_12 <https://data.rijksfinancien.nl/archixml/doc/id/00/11> ;
+    rdf:_13 <https://data.rijksfinancien.nl/archixml/doc/id/00/12> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/00/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/00/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/00/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/00/4> ;
+    rdf:_6 <https://data.rijksfinancien.nl/archixml/doc/id/00/5> ;
+    rdf:_7 <https://data.rijksfinancien.nl/archixml/doc/id/00/6> ;
+    rdf:_8 <https://data.rijksfinancien.nl/archixml/doc/id/00/7> ;
+    rdf:_9 <https://data.rijksfinancien.nl/archixml/doc/id/00/8> ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archiXML:identifier "model-2" ;
+    archiXML:version "1.0" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/100/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/10> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/11> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1100/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/1100/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/1100/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/1100/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/1100/4> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/12> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/3> a archiXML:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/300/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/5> a archiXML:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/500/2> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/6> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/7> a archiXML:Elements ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/700/4> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/8> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/00/9> a archiXML:Relationships ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/900/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/900/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/900/2> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/100/0> a archiXML:TextElement ;
+    archiXML:fragment "Basic Model with Properties" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1100/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1100/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/11100/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/11100/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/11100/2> ;
+    archiXML:identifier "propdef-1" ;
+    archiXML:type "number" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1100/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1100/3> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/31100/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/31100/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/31100/2> ;
+    archiXML:identifier "propdef-2" ;
+    archiXML:type "string" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1100/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/11100/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/11100/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/111100/0> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/11100/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/111100/0> a archiXML:TextElement ;
+    archiXML:fragment "Cost" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1131700/0> a archiXML:TextElement ;
+    archiXML:fragment "4000" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1133700/0> a archiXML:TextElement ;
+    archiXML:fragment "3000" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/11500/0> a archiXML:TextElement ;
+    archiXML:fragment "A new property value" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/11700/0> a archiXML:TextElement ;
+    archiXML:fragment "A Business Actor" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/11900/0> a archiXML:TextElement ;
+    archiXML:fragment "Assignment Relationship" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/131100/0> a archiXML:TextElement ;
+    archiXML:fragment "User Property" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/131700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/131700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1131700/0> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/131700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/133700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/133700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1133700/0> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/133700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/13700/0> a archiXML:TextElement ;
+    archiXML:fragment "A Business Role" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1500/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1500/1> a archiXML:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/11500/0> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1500/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/11700/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/3> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/31700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/31700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/31700/2> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1900/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1900/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/11900/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/1900/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/300/0> a archiXML:TextElement ;
+    archiXML:fragment "Example of a basic model with two elements and a relationship and some Properties" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/31100/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/31100/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/131100/0> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/31100/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/31700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/31700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/131700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/131700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/131700/2> ;
+    archiXML:propertyDefinitionRef "propdef-1" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/31700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/33700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/33700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/133700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/133700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/133700/2> ;
+    archiXML:propertyDefinitionRef "propdef-1" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/33700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/3700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/3700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/13700/0> ;
+    xml1:lang "en" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/3700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/3700/3> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/33700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/33700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/33700/2> .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/3700/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/500/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/500/1> a archiXML:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/1500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/1500/2> ;
+    archiXML:propertyDefinitionRef "propdef-2" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/500/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/700/1> a archiXML:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/1700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/1700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/1700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/1700/4> ;
+    xsi:type "BusinessActor" ;
+    archiXML:identifier "ba1" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/700/3> a archiXML:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/3700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/3700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/3700/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/3700/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/3700/4> ;
+    xsi:type "BusinessRole" ;
+    archiXML:identifier "br1" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/700/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/900/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/900/1> a archiXML:Relationship ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1900/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/1900/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/1900/2> ;
+    xsi:type "Assignment" ;
+    archiXML:identifier "relation-1" ;
+    archiXML:source "ba1" ;
+    archiXML:target "br1" .
+
+<https://data.rijksfinancien.nl/archixml/doc/id/900/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
+

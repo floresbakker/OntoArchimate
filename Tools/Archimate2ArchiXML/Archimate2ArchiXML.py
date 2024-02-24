@@ -22,8 +22,8 @@ directory_path = "C:/Users/Administrator/Documents/Branches/"
 # namespace declaration
 rdf         = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 rdfs        = Namespace("http://www.w3.org/2000/01/rdf-schema#")
-doc         = Namespace("https://data.rijksfinancien.nl/archimate/doc/id/")
-archimate   = Namespace("https://data.rijksfinancien.nl/archimate/model/def/")
+doc         = Namespace("https://data.rijksfinancien.nl/archixml/doc/id/")
+archiXML   = Namespace("https://data.rijksfinancien.nl/archixml/model/def/")
 xml         = Namespace("http://www.w3.org/XML/1998/namespace#")
 xmlns       = Namespace("http://www.w3.org/2000/xmlns/")
 xlink       = Namespace("http://www.w3.org/1999/xlink#")
@@ -60,13 +60,10 @@ def generate_element_id(element):
     
     return element_id.replace("[document]/","")
 
-
-
-
 # loop through any xml files in the input directory
-for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Input"):
+for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2ArchiXML/Input"):
     if filename.endswith(".xml"):
-        file_path = os.path.join(directory_path+"OntoArchimate/Tools/Archimate2RDF/Input", filename)
+        file_path = os.path.join(directory_path+"OntoArchimate/Tools/Archimate2ArchiXML/Input", filename)
         
         # Establish the stem of the file name for reuse in newly created files
         filename_stem = os.path.splitext(filename)[0]
@@ -75,20 +72,19 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
         xml_doc = readGraphFromFile (file_path)
 
         # initialize graph
-        g = Graph(bind_namespaces="rdflib")
-        
+        g = Graph(bind_namespaces="rdflib")      
       
         g.bind("rdf", rdf)
         g.bind("rdfs", rdfs)
         g.bind("doc", doc)
-        g.bind("archimate", archimate)
+        g.bind("archiXML", archiXML)
         g.bind("xml", xml)
         g.bind("xmlns", xmlns)
         g.bind("xlink", xlink)
         g.bind("xsi", xsi)
 
         # fill graph with html vocabulary
-        xml_graph = Graph().parse(directory_path+"OntoArchimate/Specification/archimate - core.ttl" , format="ttl")
+        xml_graph = Graph().parse(directory_path+"OntoArchimate/Specification/archiXML - core.ttl" , format="ttl")
 
         # string for query to establish IRI of a 'tag' HTML element
         tagquerystring = '''
@@ -106,10 +102,7 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
         soup = BeautifulSoup(xml_doc, features="xml")
         root_element = soup.contents[0]
         root_id = generate_element_id(root_element)
-       
-        
-       
-      
+
         # loop through each element in the XML document
         for element in soup.descendants:
             # check if the element is an XML tag element
@@ -128,7 +121,7 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
                 # add a document node as a container of the XML-tree
                 if element.name == 'model':
                     document_id = '1'
-                    g.add((doc[document_id], RDF.type, archimate["Document"]))
+                    g.add((doc[document_id], RDF.type, archiXML["Document"]))
                     g.add((doc[document_id], rdf["_" + str(document_id)], doc[element_id]))
         
                 # establish optional attributes of the element
@@ -149,12 +142,12 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
                             namespace_uri = xsi
                         elif namespace == 'xmlns':
                             namespace_uri = xmlns
-                        elif namespace == 'archimate':
-                            namespace_uri = archimate
+                        elif namespace == 'archiXML':
+                            namespace_uri = archiXML
                         else:
                             namespace_uri = None  # Unknown namespace prefix
                     else:
-                        namespace_uri = archimate
+                        namespace_uri = archiXML
                         local_name = attribute 
         
                     # If namespace is found, add RDF triple
@@ -167,9 +160,6 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
                         # Add optional attributes of the element to the graph
                         g.add((doc[element_id], namespace_uri[local_name], Literal(attribute_value)))
                     
-                    
-                    
-
                 # go through the direct children of the element
                 member_count = 0 # initialize count
                 for child in element.children:
@@ -196,7 +186,7 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
                       g.add((doc[element_id], rdf["_" + str(member_count)], doc[child_id]))  
                       
                       # write to graph that the child element is of type TextElement
-                      g.add((doc[child_id], RDF.type, archimate["TextElement"]))
+                      g.add((doc[child_id], RDF.type, archiXML["TextElement"]))
                       
                       # empty content (of type None) in html needs to be converted to empty string
                       if element.string == None: 
@@ -205,11 +195,11 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2RDF/Inp
                           text_fragment = element.string
                       
                       # write string content of the text element to the graph
-                      g.add((doc[child_id], archimate["fragment"], Literal(text_fragment)))
+                      g.add((doc[child_id], archiXML["fragment"], Literal(text_fragment)))
 
         # write the resulting graph to file
-        g.serialize(destination=directory_path+"OntoArchimate/Tools/Archimate2RDF/Output/" + filename_stem + "-parsed.ttl", format="turtle")
+        g.serialize(destination=directory_path+"OntoArchimate/Tools/Archimate2ArchiXML/Output/" + filename_stem + "-parsed.ttl", format="turtle")
         
-        print ("archimate file ", filename," is succesfullly transformed to file ", filename_stem + "-parsed.ttl in Turtle format.")
+        print ("\nArchimate file '", filename,"' is succesfullly transformed to file", filename_stem + "-parsed.ttl in Turtle format.")
     else: 
-        print ('Warning: file in directory "input" is no archimate file and cannot be parsed.')
+        print ('\nWarning: file in directory "input" is no archimate file and cannot be parsed.')

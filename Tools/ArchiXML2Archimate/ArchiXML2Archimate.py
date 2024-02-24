@@ -22,7 +22,7 @@ def readGraphFromFile(file_path):
 
 # Function to write a graph to a file
 def writeGraph(graph):
-    graph.serialize(destination=directory_path+"/OntoArchimate/Tools/RDF2Archimate/Output/"+filename_stem+"-serialized.ttl", format="turtle")
+    graph.serialize(destination=directory_path+"/OntoArchimate/Tools/ArchiXML2Archimate/Output/"+filename_stem+"-serialized.ttl", format="turtle")
 
 # Function to call the PyShacl engine so that a RDF model of a Archimate document can be serialized to Archimate-code.
 def iteratePyShacl(vocabulary, serializable_graph):
@@ -45,12 +45,12 @@ def iteratePyShacl(vocabulary, serializable_graph):
             
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+        PREFIX archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 
         ASK 
         WHERE {
-          ?document a archimate:Document ;
-                  archimate:fragment ?fragment.
+          ?document a archiXML:Document ;
+                  archiXML:fragment ?fragment.
         }
 
         ''')   
@@ -66,8 +66,8 @@ def iteratePyShacl(vocabulary, serializable_graph):
              
 
 # Get the Archimate vocabulary and place it in a string
-archimate_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/archimate - core.ttl")
-archimate_serialisation = readGraphFromFile(directory_path + "OntoArchimate/Specification/archimate - serialisation.ttl")
+archimate_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/archiXML - core.ttl")
+archimate_serialisation = readGraphFromFile(directory_path + "OntoArchimate/Specification/archiXML - serialisation.ttl")
 xml_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/xml - core.ttl")
 xmlns_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/xmlns - core.ttl")
 xlink_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/xlink - core.ttl")
@@ -76,9 +76,9 @@ xsi_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification
 vocabulary = archimate_vocabulary + archimate_serialisation + xml_vocabulary + xmlns_vocabulary + xlink_vocabulary + xsi_vocabulary
 
 # loop through any turtle files in the input directory
-for filename in os.listdir(directory_path+"OntoArchimate/Tools/RDF2Archimate/Input"):
+for filename in os.listdir(directory_path+"OntoArchimate/Tools/ArchiXML2Archimate/Input"):
     if filename.endswith(".ttl"):
-        file_path = os.path.join(directory_path+"OntoArchimate/Tools/RDF2Archimate/Input", filename)
+        file_path = os.path.join(directory_path+"OntoArchimate/Tools/ArchiXML2Archimate/Input", filename)
         
         # Establish the stem of the file name for reuse in newly created files
         filename_stem = os.path.splitext(filename)[0]
@@ -99,29 +99,28 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/RDF2Archimate/Inp
         iteratePyShacl(archimate_serialisation, serializable_graph)
 
         # Prepare a graph to query the serialized document
-        serialized_graph = rdflib.Graph().parse(directory_path+"/OntoArchimate/Tools/RDF2Archimate/Output/"+filename_stem+"-serialized.ttl" , format="ttl")
+        serialized_graph = rdflib.Graph().parse(directory_path+"/OntoArchimate/Tools/ArchiXML2Archimate/Output/"+filename_stem+"-serialized.ttl" , format="ttl")
 
         # Query to get the resulting fragment of the document
         documentQuery = serialized_graph.query('''
             
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+        PREFIX archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 
         select ?fragment
         WHERE {
-          ?document a archimate:Document ;
-                  archimate:fragment ?fragment.
+          ?document a archiXML:Document ;
+                  archiXML:fragment ?fragment.
         }
 
         ''')   
 
         # Write serialized html to actual html file
         for result in documentQuery:
-            with open(directory_path+"/OntoArchimate/Tools/RDF2Archimate/Output/"+filename_stem+"-serialized.archimate", 'w', encoding='utf-8') as file:
+            with open(directory_path+"/OntoArchimate/Tools/ArchiXML2Archimate/Output/"+filename_stem+"-serialized.archimate", 'w', encoding='utf-8') as file:
                file.write(result.fragment)
-               print ("Document is saved to Archimate-format as " + filename_stem+"-serialized.archimate")
+               print ("\nDocument is saved to Archimate-format as " + filename_stem+"-serialized.archimate")
 
-    else:
-        print ("No turtle file ('*.ttl') detected")
+  
 

@@ -1,25 +1,23 @@
-@prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
 @prefix dcm: <http://purl.org/dc/dcmitype/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix doc: <https://data.rijksfinancien.nl/archimate/doc/id/> .
+@prefix doc: <https://data.rijksfinancien.nl/archixml/doc/id/> .
 @prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/> .
 @prefix dom: <https://data.rijksfinancien.nl/dom/model/def/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix function: <https://data.rijksfinancien.nl/archimate/model/function/> .
-@prefix graph: <https://data.rijksfinancien.nl/archimate/graph/> .
+@prefix function: <https://data.rijksfinancien.nl/archixml/model/function/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix respec: <https://respec.org/model/> .
-@prefix rule: <https://data.rijksfinancien.nl/archimate/model/rule/> .
+@prefix rule: <https://data.rijksfinancien.nl/archixml/model/rule/> .
 @prefix section: <https://data.rijksfinancien.nl/xsi/id/section/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shp: <https://data.rijksfinancien.nl/archimate/model/shp/> .
+@prefix shp: <https://data.rijksfinancien.nl/archixml/model/shp/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix standard: <https://data.rijksfinancien.nl/xsi/id/standard/> .
 @prefix status: <http://purl.org/adms/status/> .
-@prefix target: <https://data.rijksfinancien.nl/archimate/model/target/> .
+@prefix target: <https://data.rijksfinancien.nl/archixml/model/target/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix xlink: <http://www.w3.org/1999/xlink#> .
@@ -310,335 +308,332 @@ xml1:xmlns a owl:DatatypeProperty ;
     skos:prefLabel "the xmlns attribute"@en ;
     xml1:key "xmlns" .
 
-doc:1 a archimate:Document ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/0/0> ;
-    prov:wasGeneratedBy doc:1-svg-document-generation ;
-    archimate:fragment "<?xml version=\"1.0\" encoding=\"UTF-8\"?><model version=\"1.0\" identifier=\"model-1\" xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model</name><documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship</documentation><elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element></elements><relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships></model>"^^xsd:string ;
-    dom:documentType documentType:archimate .
+doc:1 a archiXML:Document ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/0/0> .
 
-<https://data.rijksfinancien.nl/archimate/id/standard/archimate> a dct:Standard ;
+<https://data.rijksfinancien.nl/archixml/id/standard/archimate> a dct:Standard ;
     dct:created "2023-10-29"^^xsd:date ;
     dct:source "http://www.opengroup.org/xsd/archimate/3.0/"^^xsd:anyURI ;
     skos:prefLabel "The ArchiMate® Enterprise Architecture Modeling Language"@en .
 
-archimate:Bounds a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Bounds a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The bounds element"@en ;
     skos:prefLabel "the bounds element"@en ;
     xml1:tag "bounds" .
 
-archimate:Child a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Child a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The child element"@en ;
     skos:prefLabel "the child element"@en ;
     xml1:tag "child" .
 
-archimate:Color a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Color a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The color element"@en ;
     skos:prefLabel "the color element"@en ;
     xml1:tag "color" .
 
-archimate:Connection a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Connection a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The connection element"@en ;
     skos:prefLabel "the connection element"@en ;
     xml1:tag "connection" .
 
-archimate:Diagrams a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Diagrams a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The diagrams element"@en ;
     skos:prefLabel "the diagrams element"@en ;
     xml1:tag "diagrams" .
 
-archimate:FillColor a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:FillColor a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The fillcolor element"@en ;
     skos:prefLabel "the fillcolor element"@en ;
     xml1:tag "fillcolor" .
 
-archimate:Folder a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Folder a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The folder element"@en ;
     skos:prefLabel "the folder element"@en ;
     xml1:tag "folder" .
 
-archimate:Font a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Font a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The font element"@en ;
     skos:prefLabel "the font element"@en ;
     xml1:tag "font" .
 
-archimate:Item a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Item a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The item element"@en ;
     skos:prefLabel "the item element"@en ;
     xml1:tag "item" .
 
-archimate:Label a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Label a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The label element"@en ;
     skos:prefLabel "the label element"@en ;
     xml1:tag "label" .
 
-archimate:LineColor a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:LineColor a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The linecolor element"@en ;
     skos:prefLabel "the linecolor element"@en ;
     xml1:tag "linecolor" .
 
-archimate:Metadata a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Metadata a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The metadata element"@en ;
     skos:prefLabel "the metadata element"@en ;
     xml1:tag "metadata" .
 
-archimate:Node a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Node a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The node element"@en ;
     skos:prefLabel "the node element"@en ;
     xml1:tag "node" .
 
-archimate:Organizations a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Organizations a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The organizations element"@en ;
     skos:prefLabel "the organizations element"@en ;
     xml1:tag "organizations" .
 
-archimate:Schema a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Schema a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The schema element"@en ;
     skos:prefLabel "the schema element"@en ;
     xml1:tag "schema" .
 
-archimate:SchemaVersion a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:SchemaVersion a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The schema version element"@en ;
     skos:prefLabel "the schema version element"@en ;
     xml1:tag "schemaversion" .
 
-archimate:SourceConnection a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:SourceConnection a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The source connection element"@en ;
     skos:prefLabel "the source connection element"@en ;
     xml1:tag "sourceConnection" .
 
-archimate:Style a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Style a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The style element"@en ;
     skos:prefLabel "the style element"@en ;
     xml1:tag "style" .
 
-archimate:View a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:View a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The view element"@en ;
     skos:prefLabel "the view element"@en ;
     xml1:tag "view" .
 
-archimate:Views a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Views a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The views element"@en ;
     skos:prefLabel "the views element"@en ;
     xml1:tag "views" .
 
-archimate:a a owl:DatatypeProperty ;
+archiXML:a a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the a attribute"@en ;
     xml1:key "a" .
 
-archimate:archimateElement a owl:DatatypeProperty ;
+archiXML:archimateElement a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the archimateElement attribute"@en ;
     xml1:key "archimateElement" .
 
-archimate:b a owl:DatatypeProperty ;
+archiXML:b a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the b attribute"@en ;
     xml1:key "b" .
 
-archimate:elementRef a owl:DatatypeProperty ;
+archiXML:elementRef a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the elementRef attribute"@en ;
     xml1:key "elementRef" .
 
-archimate:fragment a owl:DatatypeProperty ;
+archiXML:fragment a owl:DatatypeProperty ;
     rdfs:domain dom:Element ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range rdf:XML ;
     skos:definition "Property that links the xml fragment that is represented by an element within a XML-based archimate document to that element."@en ;
     skos:prefLabel "fragment property"@en .
 
-archimate:g a owl:DatatypeProperty ;
+archiXML:g a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the g attribute"@en ;
     xml1:key "g" .
 
-archimate:h a owl:DatatypeProperty ;
+archiXML:h a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the h attribute"@en ;
     xml1:key "h" .
 
-archimate:height a owl:DatatypeProperty ;
+archiXML:height a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the height attribute"@en ;
     xml1:key "height" .
 
-archimate:id a owl:DatatypeProperty ;
+archiXML:id a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the id attribute"@en ;
     xml1:key "id" .
 
-archimate:identifier a owl:DatatypeProperty ;
+archiXML:identifier a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the identifier attribute"@en ;
     xml1:key "identifier" .
 
-archimate:identifierRef a owl:DatatypeProperty ;
+archiXML:identifierRef a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the identifierRef attribute"@en ;
     xml1:key "identifierRef" .
 
-archimate:name a owl:DatatypeProperty ;
+archiXML:name a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the name attribute"@en ;
     xml1:key "name" .
 
-archimate:r a owl:DatatypeProperty ;
+archiXML:r a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the r attribute"@en ;
     xml1:key "r" .
 
-archimate:relationshipRef a owl:DatatypeProperty ;
+archiXML:relationshipRef a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the relationshipRef attribute"@en ;
     xml1:key "relationshipRef" .
 
-archimate:size a owl:DatatypeProperty ;
+archiXML:size a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the size attribute"@en ;
     xml1:key "size" .
 
-archimate:source a owl:DatatypeProperty ;
+archiXML:source a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the source attribute"@en ;
     xml1:key "source" .
 
-archimate:target a owl:DatatypeProperty ;
+archiXML:target a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the target attribute"@en ;
     xml1:key "target" .
 
-archimate:type a owl:DatatypeProperty ;
+archiXML:type a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the type attribute"@en ;
     xml1:key "type" .
 
-archimate:version a owl:DatatypeProperty ;
+archiXML:version a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the version attribute"@en ;
     xml1:key "version" .
 
-archimate:w a owl:DatatypeProperty ;
+archiXML:w a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the w attribute"@en ;
     xml1:key "w" .
 
-archimate:width a owl:DatatypeProperty ;
+archiXML:width a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the width attribute"@en ;
     xml1:key "width" .
 
-archimate:x a owl:DatatypeProperty ;
+archiXML:x a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the x attribute"@en ;
     xml1:key "x" .
 
-archimate:y a owl:DatatypeProperty ;
+archiXML:y a owl:DatatypeProperty ;
     rdfs:domain xml1:DomElement ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf xml1:attribute ;
     skos:prefLabel "the y attribute"@en ;
@@ -684,13 +679,13 @@ SELECT ?result WHERE {
          $attribute xml:key ?key;
          rdfs:isDefinedBy ?ontology.   
          ?ontology vann:preferredNamespacePrefix ?prefix.
-         BIND(IF(?prefix = "archimate" || $attribute = xml:xmlns,?key, CONCAT(?prefix,":",?key)) as ?result).
+         BIND(IF(?prefix = "archiXML" || $attribute = xml:xmlns,?key, CONCAT(?prefix,":",?key)) as ?result).
   }
 
        """ .
 
 shp:Document a sh:NodeShape ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     sh:description "A Archimate document contains a required documenttype Archimate and a root Archimate element."@en ;
     sh:name "Archimate Document"@en ;
     sh:property shp:Document_documentType,
@@ -699,9 +694,9 @@ shp:Document a sh:NodeShape ;
     sh:target target:Document .
 
 shp:SerializableElement a sh:NodeShape ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     skos:prefLabel "serializable element shape"@en ;
-    sh:rule rule:Serialize_Archimate_fragment_Archimate_Element ;
+    sh:rule rule:SerializeArchimateFragment ;
     sh:target target:SerializableElement .
 
 <https://data.rijksfinancien.nl/svg/id/standard/archimate> a dct:Standard ;
@@ -773,214 +768,243 @@ xml1:documentRestriction a owl:Restriction ;
     owl:onProperty dom:documentType ;
     skos:prefLabel "xml document type restriction"@en .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/0/0> a archimate:Model ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/00/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/00/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/00/2> ;
-    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/00/3> ;
-    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/00/4> ;
-    rdf:_6 <https://data.rijksfinancien.nl/archimate/doc/id/00/5> ;
-    rdf:_7 <https://data.rijksfinancien.nl/archimate/doc/id/00/6> ;
-    rdf:_8 <https://data.rijksfinancien.nl/archimate/doc/id/00/7> ;
-    rdf:_9 <https://data.rijksfinancien.nl/archimate/doc/id/00/8> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/0/0> a archiXML:Model ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/00/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/00/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/00/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/00/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/00/4> ;
+    rdf:_6 <https://data.rijksfinancien.nl/archixml/doc/id/00/5> ;
+    rdf:_7 <https://data.rijksfinancien.nl/archixml/doc/id/00/6> ;
+    rdf:_8 <https://data.rijksfinancien.nl/archixml/doc/id/00/7> ;
+    rdf:_9 <https://data.rijksfinancien.nl/archixml/doc/id/00/8> ;
     xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
     xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
     xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
-    archimate:fragment "<model version=\"1.0\" identifier=\"model-1\" xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model</name><documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship</documentation><elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element></elements><relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships></model>"^^xsd:string ;
-    archimate:identifier "model-1" ;
-    archimate:version "1.0" .
+    archiXML:fragment "<model version=\"1.0\" identifier=\"model-1\" xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model</name><documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship</documentation><elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element></elements><relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships></model>"^^xsd:string ;
+    archiXML:identifier "model-1" ;
+    archiXML:version "1.0" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/0> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/1> a archimate:Name ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/100/0> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/00/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/100/0> ;
     xml1:lang "en" ;
-    archimate:fragment "<name xml:lang=\"en\">Basic Model</name>"^^xsd:string .
+    archiXML:fragment "<name xml:lang=\"en\">Basic Model</name>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/2> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/3> a archimate:Documentation ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/300/0> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/00/3> a archiXML:Documentation ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/300/0> ;
     xml1:lang "en" ;
-    archimate:fragment "<documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship</documentation>"^^xsd:string .
+    archiXML:fragment "<documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship</documentation>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/4> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/5> a archimate:Elements ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/500/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/500/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/500/2> ;
-    rdf:_4 <https://data.rijksfinancien.nl/archimate/doc/id/500/3> ;
-    rdf:_5 <https://data.rijksfinancien.nl/archimate/doc/id/500/4> ;
-    archimate:fragment "<elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element></elements>"^^xsd:string .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/5> a archiXML:Elements ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/500/2> ;
+    rdf:_4 <https://data.rijksfinancien.nl/archixml/doc/id/500/3> ;
+    rdf:_5 <https://data.rijksfinancien.nl/archixml/doc/id/500/4> ;
+    archiXML:fragment "<elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element></elements>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/6> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/6> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/7> a archimate:Relationships ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/700/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/700/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/700/2> ;
-    archimate:fragment "<relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships>"^^xsd:string .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/7> a archiXML:Relationships ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/700/2> ;
+    archiXML:fragment "<relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/8> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/00/8> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-doc:1-svg-document-generation a prov:Activity ;
-    prov:atTime "2024-02-22T12:28:10.909038+00:00"^^xsd:dateTime ;
-    prov:used archimate:,
-        rule:Document .
+<https://data.rijksfinancien.nl/archixml/doc/id/100/0> a archiXML:TextElement ;
+    archiXML:fragment "Basic Model" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/100/0> a archimate:TextElement ;
-    archimate:fragment "Basic Model" .
+<https://data.rijksfinancien.nl/archixml/doc/id/11500/0> a archiXML:TextElement ;
+    archiXML:fragment "A Business Actor" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/11500/0> a archimate:TextElement ;
-    archimate:fragment "A Business Actor" .
+<https://data.rijksfinancien.nl/archixml/doc/id/11700/0> a archiXML:TextElement ;
+    archiXML:fragment "Assignment Relationship" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/11700/0> a archimate:TextElement ;
-    archimate:fragment "Assignment Relationship" .
+<https://data.rijksfinancien.nl/archixml/doc/id/13500/0> a archiXML:TextElement ;
+    archiXML:fragment "A Business Role" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/13500/0> a archimate:TextElement ;
-    archimate:fragment "A Business Role" .
+<https://data.rijksfinancien.nl/archixml/doc/id/1500/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1500/0> a archimate:TextElement ;
-    archimate:fragment "" .
-
-<https://data.rijksfinancien.nl/archimate/doc/id/1500/1> a archimate:Name ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11500/0> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/1500/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/11500/0> ;
     xml1:lang "en" ;
-    archimate:fragment "<name xml:lang=\"en\">A Business Actor</name>"^^xsd:string .
+    archiXML:fragment "<name xml:lang=\"en\">A Business Actor</name>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1500/2> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/1500/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1700/0> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1700/1> a archimate:Name ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11700/0> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/11700/0> ;
     xml1:lang "en" ;
-    archimate:fragment "<name xml:lang=\"en\">Assignment Relationship</name>"^^xsd:string .
+    archiXML:fragment "<name xml:lang=\"en\">Assignment Relationship</name>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1700/2> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/1700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/300/0> a archimate:TextElement ;
-    archimate:fragment "Example of a basic model with two elements and a relationship" .
+<https://data.rijksfinancien.nl/archixml/doc/id/300/0> a archiXML:TextElement ;
+    archiXML:fragment "Example of a basic model with two elements and a relationship" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/3500/0> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/3500/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/3500/1> a archimate:Name ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/13500/0> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/3500/1> a archiXML:Name ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/13500/0> ;
     xml1:lang "en" ;
-    archimate:fragment "<name xml:lang=\"en\">A Business Role</name>"^^xsd:string .
+    archiXML:fragment "<name xml:lang=\"en\">A Business Role</name>"^^xsd:string .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/3500/2> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/3500/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/500/0> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/500/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/500/1> a archimate:Element ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1500/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1500/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1500/2> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/500/1> a archiXML:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/1500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/1500/2> ;
     xsi:type "BusinessActor" ;
-    archimate:fragment "<element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element>"^^xsd:string ;
-    archimate:identifier "ba1" .
+    archiXML:fragment "<element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element>"^^xsd:string ;
+    archiXML:identifier "ba1" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/500/2> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/500/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/500/3> a archimate:Element ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/3500/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/3500/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/3500/2> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/500/3> a archiXML:Element ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/3500/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/3500/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/3500/2> ;
     xsi:type "BusinessRole" ;
-    archimate:fragment "<element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element>"^^xsd:string ;
-    archimate:identifier "br1" .
+    archiXML:fragment "<element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element>"^^xsd:string ;
+    archiXML:identifier "br1" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/500/4> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/500/4> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/700/0> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/700/0> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/700/1> a archimate:Relationship ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1700/0> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/1700/1> ;
-    rdf:_3 <https://data.rijksfinancien.nl/archimate/doc/id/1700/2> ;
+<https://data.rijksfinancien.nl/archixml/doc/id/700/1> a archiXML:Relationship ;
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/1700/0> ;
+    rdf:_2 <https://data.rijksfinancien.nl/archixml/doc/id/1700/1> ;
+    rdf:_3 <https://data.rijksfinancien.nl/archixml/doc/id/1700/2> ;
     xsi:type "Assignment" ;
-    archimate:fragment "<relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship>"^^xsd:string ;
-    archimate:identifier "relation-1" ;
-    archimate:source "ba1" ;
-    archimate:target "br1" .
+    archiXML:fragment "<relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship>"^^xsd:string ;
+    archiXML:identifier "relation-1" ;
+    archiXML:source "ba1" ;
+    archiXML:target "br1" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/700/2> a archimate:TextElement ;
-    archimate:fragment "" .
+<https://data.rijksfinancien.nl/archixml/doc/id/700/2> a archiXML:TextElement ;
+    archiXML:fragment "" .
 
-archimate:Document a owl:Class ;
-    dct:conformsTo archimate: ;
-    rdfs:isDefinedBy archimate: ;
-    owl:equivalentClass archimate:documentRestriction ;
-    skos:definition "An archimate document consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<circle>’, and an end tag, such as ‘</circle>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The Archimate Core Vocabulary defines a set of elements that can be used in an archimate document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document."@en ;
+archiXML:Document a owl:Class ;
+    dct:conformsTo archiXML: ;
+    rdfs:isDefinedBy archiXML: ;
+    owl:equivalentClass archiXML:documentRestriction ;
+    skos:definition "An archimate document consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<element>’, and an end tag, such as ‘</element>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The ArchiXML Core Vocabulary defines a set of elements that can be used in an archimate document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document."@en ;
     skos:prefLabel "archimate document"@en .
 
-archimate:Documentation a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Documentation a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The documentation element"@en ;
     skos:prefLabel "the documentation element"@en ;
     xml1:tag "documentation" .
 
-archimate:Elements a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Elements a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The Elements element"@en ;
     skos:prefLabel "the Elements element"@en ;
     xml1:tag "elements" .
 
-archimate:Model a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
-    skos:definition "The <xml> xml element represents the root (top-level element) of an xml document, so it is also referred to as the root element. All other elements must be descendants of this element."@en ;
+archiXML:Model a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The model element represents the root (top-level element) of the Archimate xml document. All other elements must be descendants of this element."@en ;
     skos:prefLabel "the model element"@en ;
     xml1:tag "model" .
 
-archimate:Relationship a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Relationship a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The relationship element"@en ;
     skos:prefLabel "the relationship element"@en ;
     xml1:tag "relationship" .
 
-archimate:Relationships a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Relationships a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The relationships element"@en ;
     skos:prefLabel "the relationships element"@en ;
     xml1:tag "relationships" .
 
-archimate:documentRestriction a owl:Restriction ;
-    rdfs:isDefinedBy archimate: ;
+archiXML:documentRestriction a owl:Restriction ;
+    rdfs:isDefinedBy archiXML: ;
     owl:hasValue documentType:archimate ;
     owl:onProperty dom:documentType ;
     skos:prefLabel "archimate document type restriction"@en .
 
-rule:Serialize_Archimate_fragment_Archimate_Element a sh:SPARQLRule ;
+rule:Document a sh:SPARQLRule ;
+    rdfs:label "Archimate document generation rule"@en ;
+    rdfs:comment "A rule that creates the upper Archimate fragment for an Archimate document and connects it with the previously generated tree of serialized Archimate elements and their Archimate fragments."@en ;
+    rdfs:isDefinedBy archiXML: ;
+    sh:construct """
+prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
+prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
+prefix archiXML <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix rule: <https://data.rijksfinancien.nl/archixml/model/rule/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+construct {
+  $this
+    dom:documentType documentType:archimate;
+    archiXML:fragment ?fragmentDocument;
+    prov:wasGeneratedBy ?activity.
+  ?activity
+    a prov:Activity;
+    prov:atTime ?activityDateTime;
+    prov:used
+      archiXML: , # Archimate Ontology
+      rule:Document.
+} where {
+  $this ?member ?root.
+  ?root rdf:type archiXML:Model;
+        archiXML:fragment ?fragmentRoot.
+  bind(strdt(concat(\"\"\"<?xml version="1.0" encoding="UTF-8"?>\"\"\",str(?fragmentRoot)),xsd:string) as ?fragmentDocument)
+  bind(iri(concat(str($this),'-svg-document-generation')) as ?activity)
+  bind(now() as ?activityDateTime)
+}""" .
+
+rule:SerializeArchimateFragment a sh:SPARQLRule ;
     rdfs:comment "A rule that creates an Archimate fragment for an Archimate element."@en ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     skos:prefLabel "Archimate element fragment serialisation rule"@en ;
     sh:construct """
 
-prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
+prefix function: <https://data.rijksfinancien.nl/archixml/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
@@ -988,7 +1012,7 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 construct {
 
   # create the Archimate-fragment for the Archimate-element to be serialized.
-  $this archimate:fragment ?fragment.
+  $this archiXML:fragment ?fragment.
 } where {
 
   # Get the Archimate tag of the Archimate-element to be serialized.
@@ -1011,7 +1035,7 @@ construct {
       {
         select ?member ?fragment {
           $this ?member ?element.
-          ?element archimate:fragment ?fragment.
+          ?element archiXML:fragment ?fragment.
           filter(strstarts(str(?member),concat(str(rdf:),'_')))
         }
         order by xsd:integer(strafter(str(?member),concat(str(rdf:),'_')))
@@ -1034,7 +1058,7 @@ construct {
 shp:Document_documentType a sh:PropertyShape ;
     rdfs:label "has document type Archimate"@en ;
     rdfs:comment "An Archimate document contains excactly one document type with value ‘Archimate’."@en ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     sh:hasValue documentType:svg ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -1042,30 +1066,32 @@ shp:Document_documentType a sh:PropertyShape ;
 
 shp:Document_root a sh:PropertyShape ;
     rdfs:label "has root element svg"@en ;
-    rdfs:comment "The <svg> tag is the root of the Archimate document and a container for all other Archimate elements (except for the <!DOCTYPE> tag). A Archimate document contains no less and no more than one svg tag."@en ;
-    rdfs:isDefinedBy archimate: ;
-    sh:class archimate:Svg ;
+    rdfs:comment "The <model> tag is the root of the Archimate document and a container for all other Archimate elements (except for the <!DOCTYPE> tag). A Archimate document contains no less and no more than one model tag."@en ;
+    rdfs:isDefinedBy archiXML: ;
+    sh:class archiXML:model ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
     sh:path rdfs:member .
 
 target:Document a sh:SPARQLTarget ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     sh:select """
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 
-select $this {
-  $this a archimate:Document.
+prefix archi: <https://data.rijksfinancien.nl/archixml/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+select $this where {
+  $this rdf:type archi:Document.
   filter not exists {
-    $this archimate:fragment [].
+    $this archi:fragment [].
   }
 }""" .
 
 target:SerializableElement a sh:SPARQLTarget ;
-    rdfs:isDefinedBy archimate: ;
+    rdfs:isDefinedBy archiXML: ;
     sh:select """
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -1078,14 +1104,14 @@ select $this {
   
   # The Archimate element must not have an XML fragment yet.
   filter not exists {
-    $this archimate:fragment [].
+    $this archiXML:fragment [].
   }
   # The Archimate element may not contain one or more child elements that lack an Archimate fragment.
   minus {
     $this ?member ?childElement.
     ?childElement a/rdfs:subClassOf* dom:Element.
     filter not exists {
-      ?childElement archimate:fragment [].
+      ?childElement archiXML:fragment [].
     }
   }
 }""" .
@@ -1132,46 +1158,12 @@ section:2.6.3 a dcm:Text ;
     rdfs:isDefinedBy xsi: ;
     skos:prefLabel "§ 2.6.3 xsi:schemaLocation, xsi:noNamespaceSchemaLocation"@en .
 
-archimate:Element a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Element a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The Element element"@en ;
     skos:prefLabel "the Element element"@en ;
     xml1:tag "element" .
-
-rule:Document a sh:SPARQLRule ;
-    rdfs:label "Archimate document generation rule"@en ;
-    rdfs:comment "A rule that creates the upper Archimate fragment for an Archimate document and connects it with the previously generated tree of serialized Archimate elements and their Archimate fragments."@en ;
-    rdfs:isDefinedBy archimate: ;
-    sh:construct """
-prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
-prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix rule: <https://data.rijksfinancien.nl/archimate/model/rule/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-
-construct {
-  $this
-    dom:documentType documentType:archimate;
-    archimate:fragment ?fragmentDocument;
-    prov:wasGeneratedBy ?activity.
-  ?activity
-    a prov:Activity;
-    prov:atTime ?activityDateTime;
-    prov:used
-      archimate: , # Archimate Ontology
-      rule:Document.
-} where {
-  $this ?member ?root.
-  ?root rdf:type archimate:Model;
-        archimate:fragment ?fragmentRoot.
-  bind(strdt(concat(\"\"\"<?xml version="1.0" encoding="UTF-8"?>\"\"\",str(?fragmentRoot)),xsd:string) as ?fragmentDocument)
-  bind(iri(concat(str($this),'-svg-document-generation')) as ?activity)
-  bind(now() as ?activityDateTime)
-}""" .
 
 <https://data.rijksfinancien.nl/xlink/id/section/5.5> a dcm:Text ;
     dct:isPartOf <https://data.rijksfinancien.nl/xlink/id/standard/xlink> ;
@@ -1185,9 +1177,9 @@ construct {
     rdfs:isDefinedBy xlink: ;
     skos:prefLabel "§ 5.7 Traversal Attributes (label, from, and to)"@en .
 
-archimate:Name a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:DomElement ;
+archiXML:Name a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
     skos:definition "The name element"@en ;
     skos:prefLabel "the name element"@en ;
     xml1:tag "name" .
@@ -1233,7 +1225,6 @@ xsi: a void:Dataset,
     dct:title "XSI Ontology"@en ;
     vann:preferredNamespacePrefix "xsi" ;
     vann:preferredNamespaceUri "http://www.w3.org/XML/1998/namespace" ;
-    void:subSet graph:model ;
     void:uriRegexPattern "^http://www.w3.org/XML/1998/namespace" ;
     void:uriSpace "http://www.w3.org/XML/1998/namespace"^^xsd:anyURI ;
     owl:imports dct:,
@@ -1296,9 +1287,8 @@ svg:y2 "409.21478" .""" ;
     foaf:depiction "https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg"^^xsd:anyURI ;
     foaf:homepage "https://www.rijksfinancien.nl/"^^xsd:anyURI .
 
-archimate:TextElement a owl:Class ;
-    dct:conformsTo <https://www.w3.org/TR/SVG11/text.html#TextElement> ;
-    rdfs:isDefinedBy archimate: ;
+archiXML:TextElement a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:subClassOf dom:Element ;
     skos:definition "A plain text element in an Archimate document."@en ;
     skos:prefLabel "The Archimate DOM text element"@en .
@@ -1337,9 +1327,8 @@ xml1:Element a owl:Class ;
     skos:prefLabel "XML DOM element"@en ;
     xml1:tag "element" .
 
-archimate:DomElement a owl:Class ;
-    dct:conformsTo <https://www.w3.org/TR/SVG11/text.html#TextElement> ;
-    rdfs:isDefinedBy archimate: ;
+archiXML:DomElement a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
     rdfs:subClassOf dom:Element ;
     skos:definition "An element with namespace URI <> as defined in the Archimate specification, that is used to create and manipulate Archimate content."@en ;
     skos:prefLabel "The Archimate DOM element"@en .
@@ -1351,7 +1340,7 @@ xml1:attribute a owl:DatatypeProperty ;
     skos:definition "Property that is the parent property of all existing XML attributes. An attribute is a name-value pair that is associated with an XML element. Attributes provide additional information about an element and are specified within the start tag of an element. Attributes can modify the behavior or appearance of an element, define relationships between elements, or provide other metadata. The name of the attribute is followed by an equal sign (=) and the attribute's value, which is enclosed in double or single quotes. Some attributes affect the element simply by their presence in the start tag of the element, with the value implicitly being an empty string."@en ;
     skos:prefLabel "has attribute property"@en .
 
-archimate: a void:Dataset,
+archiXML: a void:Dataset,
         owl:Ontology,
         respec:Ontology ;
     dct:abstract """
@@ -1377,13 +1366,13 @@ This description elaborates on the purpose, scope, and capabilities of the Archi
     dct:language "iso639-1:en" ;
     dct:license "https://creativecommons.org/licenses/by/4.0/"^^xsd:anyURI ;
     dct:publisher <https://www.example.com> ;
-    dct:source <https://www.example.com/archimate-vocabulary> ;
+    dct:source <https://www.opengroup.org/xsd/archimate/> ;
     dct:status status:UnderDevelopment ;
-    dct:title "Archimate Core Vocabulary"@en ;
-    vann:preferredNamespacePrefix "archimate" ;
-    vann:preferredNamespaceUri "https://data.rijksfinancien.nl/archimate/model/def/" ;
-    void:uriRegexPattern "^https://data.rijksfinancien.nl/archimate/model/def/" ;
-    void:uriSpace "https://data.rijksfinancien.nl/xml/archimate/def/"^^xsd:anyURI ;
+    dct:title "ArchiXML Core Vocabulary"@en ;
+    vann:preferredNamespacePrefix "archiXML" ;
+    vann:preferredNamespaceUri "https://data.rijksfinancien.nl/archixml/model/def/" ;
+    void:uriRegexPattern "^https://data.rijksfinancien.nl/archixml/model/def/" ;
+    void:uriSpace "https://data.rijksfinancien.nl/xml/archixml/def/"^^xsd:anyURI ;
     owl:versionInfo "1.0" ;
     skos:example """
 
@@ -1394,8 +1383,17 @@ An example of an Archimate model:
 This can be represented in RDF using the Archimate vocabulary as follows:
 
 
+""",
+        """
+
+An example of an Archimate model:
+
+
+This can be represented in RDF using the ArchiXML vocabulary as follows:
+
+
 """ ;
-    foaf:homepage "https://www.example.com/"^^xsd:anyURI ;
+    foaf:homepage "https://www.opengroup.org/xsd/archimate/" ;
     respec:audience """
 The target audience for the Archimate ontology includes architects, researchers, practitioners, tool developers, and enthusiasts working in the fields of enterprise architecture, semantic web technologies, ontology engineering, and related disciplines. 
 
