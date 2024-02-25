@@ -39,7 +39,7 @@ def iteratePyShacl(vocabulary, serializable_graph):
         iterate_rules=False, # Not using the iterate rules function of PyShacl as it seems to not be working properly. Instead, offer each new resulting state freshly to PyShacl.
         debug=False,
         )
-      
+        
         # Query to know if the document has been fully serialised by testing whether the root has a archimate:fragment property. If it has, the algorithm has reached the final level of the document.
         resultquery = serializable_graph.query('''
             
@@ -58,6 +58,7 @@ def iteratePyShacl(vocabulary, serializable_graph):
         # Check whether another iteration is needed. If the archimate root of the document contains a archimate:fragment statement then the serialisation is considered done.
         for result in resultquery:
             if result == False:
+                "...not yet fully serialised. Running another SHACL iteration..."
                 writeGraph(serializable_graph)
                 iteratePyShacl(vocabulary, serializable_graph)
             else: 

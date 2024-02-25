@@ -7,6 +7,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix function: <https://data.rijksfinancien.nl/archixml/model/function/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix respec: <https://respec.org/model/> .
@@ -309,7 +310,10 @@ xml1:xmlns a owl:DatatypeProperty ;
     xml1:key "xmlns" .
 
 doc:1 a archiXML:Document ;
-    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/0/0> .
+    rdf:_1 <https://data.rijksfinancien.nl/archixml/doc/id/0/0> ;
+    prov:wasGeneratedBy doc:1-svg-document-generation ;
+    archiXML:fragment "<?xml version=\"1.0\" encoding=\"UTF-8\"?><model version=\"1.0\" identifier=\"model-1\" xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model</name><documentation xml:lang=\"en\">Example of a basic model with two elements and a relationship</documentation><elements><element identifier=\"ba1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A Business Actor</name></element><element identifier=\"br1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A Business Role</name></element></elements><relationships><relationship identifier=\"relation-1\" source=\"ba1\" target=\"br1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name></relationship></relationships></model>"^^xsd:string ;
+    dom:documentType documentType:archimate .
 
 <https://data.rijksfinancien.nl/archixml/id/standard/archimate> a dct:Standard ;
     dct:created "2023-10-29"^^xsd:date ;
@@ -679,7 +683,7 @@ SELECT ?result WHERE {
          $attribute xml:key ?key;
          rdfs:isDefinedBy ?ontology.   
          ?ontology vann:preferredNamespacePrefix ?prefix.
-         BIND(IF(?prefix = "archiXML" || $attribute = xml:xmlns,?key, CONCAT(?prefix,":",?key)) as ?result).
+         BIND(IF(?prefix = "archiXML" || $attribute = xml:xmlns,?key, CONCAT(?prefix,":",?key)) as ?result)
   }
 
        """ .
@@ -824,6 +828,11 @@ xml1:documentRestriction a owl:Restriction ;
 <https://data.rijksfinancien.nl/archixml/doc/id/00/8> a archiXML:TextElement ;
     archiXML:fragment "" .
 
+doc:1-svg-document-generation a prov:Activity ;
+    prov:atTime "2024-02-25T18:15:31.884787+00:00"^^xsd:dateTime ;
+    prov:used archiXML:,
+        rule:Document .
+
 <https://data.rijksfinancien.nl/archixml/doc/id/100/0> a archiXML:TextElement ;
     archiXML:fragment "Basic Model" .
 
@@ -961,40 +970,6 @@ archiXML:documentRestriction a owl:Restriction ;
     owl:onProperty dom:documentType ;
     skos:prefLabel "archimate document type restriction"@en .
 
-rule:Document a sh:SPARQLRule ;
-    rdfs:label "Archimate document generation rule"@en ;
-    rdfs:comment "A rule that creates the upper Archimate fragment for an Archimate document and connects it with the previously generated tree of serialized Archimate elements and their Archimate fragments."@en ;
-    rdfs:isDefinedBy archiXML: ;
-    sh:construct """
-prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
-prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
-prefix archiXML <https://data.rijksfinancien.nl/archixml/model/def/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix rule: <https://data.rijksfinancien.nl/archixml/model/rule/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-
-construct {
-  $this
-    dom:documentType documentType:archimate;
-    archiXML:fragment ?fragmentDocument;
-    prov:wasGeneratedBy ?activity.
-  ?activity
-    a prov:Activity;
-    prov:atTime ?activityDateTime;
-    prov:used
-      archiXML: , # Archimate Ontology
-      rule:Document.
-} where {
-  $this ?member ?root.
-  ?root rdf:type archiXML:Model;
-        archiXML:fragment ?fragmentRoot.
-  bind(strdt(concat(\"\"\"<?xml version="1.0" encoding="UTF-8"?>\"\"\",str(?fragmentRoot)),xsd:string) as ?fragmentDocument)
-  bind(iri(concat(str($this),'-svg-document-generation')) as ?activity)
-  bind(now() as ?activityDateTime)
-}""" .
-
 rule:SerializeArchimateFragment a sh:SPARQLRule ;
     rdfs:comment "A rule that creates an Archimate fragment for an Archimate element."@en ;
     rdfs:isDefinedBy archiXML: ;
@@ -1077,13 +1052,13 @@ target:Document a sh:SPARQLTarget ;
     rdfs:isDefinedBy archiXML: ;
     sh:select """
 
-prefix archi: <https://data.rijksfinancien.nl/archixml/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select $this where {
-  $this rdf:type archi:Document.
+  $this rdf:type archiXML:Document.
   filter not exists {
-    $this archi:fragment [].
+    $this archiXML:fragment [].
   }
 }""" .
 
@@ -1164,6 +1139,40 @@ archiXML:Element a owl:Class ;
     skos:definition "The Element element"@en ;
     skos:prefLabel "the Element element"@en ;
     xml1:tag "element" .
+
+rule:Document a sh:SPARQLRule ;
+    rdfs:label "Archimate document generation rule"@en ;
+    rdfs:comment "A rule that creates the upper Archimate fragment for an Archimate document and connects it with the previously generated tree of serialized Archimate elements and their Archimate fragments."@en ;
+    rdfs:isDefinedBy archiXML: ;
+    sh:construct """
+prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
+prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix rule: <https://data.rijksfinancien.nl/archixml/model/rule/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+construct {
+  $this
+    dom:documentType documentType:archimate;
+    archiXML:fragment ?fragmentDocument;
+    prov:wasGeneratedBy ?activity.
+  ?activity
+    a prov:Activity;
+    prov:atTime ?activityDateTime;
+    prov:used
+      archiXML: , # Archimate Ontology
+      rule:Document.
+} where {
+  $this ?member ?root.
+  ?root rdf:type archiXML:Model;
+        archiXML:fragment ?fragmentRoot.
+  bind(strdt(concat(\"\"\"<?xml version="1.0" encoding="UTF-8"?>\"\"\",str(?fragmentRoot)),xsd:string) as ?fragmentDocument)
+  bind(iri(concat(str($this),'-svg-document-generation')) as ?activity)
+  bind(now() as ?activityDateTime)
+}""" .
 
 <https://data.rijksfinancien.nl/xlink/id/section/5.5> a dcm:Text ;
     dct:isPartOf <https://data.rijksfinancien.nl/xlink/id/standard/xlink> ;

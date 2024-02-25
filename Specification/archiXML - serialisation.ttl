@@ -207,7 +207,7 @@ select $this where {
     sh:construct '''
 prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
-prefix archiXML <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -275,7 +275,7 @@ SELECT ?result WHERE {
          $attribute xml:key ?key;
          rdfs:isDefinedBy ?ontology.   
          ?ontology vann:preferredNamespacePrefix ?prefix.
-         BIND(IF(?prefix = "archiXML" || $attribute = xml:xmlns,?key, CONCAT(?prefix,":",?key)) as ?result).
+         BIND(IF(?prefix = "archiXML" || $attribute = xml:xmlns,?key, CONCAT(?prefix,":",?key)) as ?result)
   }
 
        """ .
