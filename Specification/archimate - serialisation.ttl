@@ -1,4 +1,5 @@
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix dcm: <http://purl.org/dc/dcmitype/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
@@ -20,7 +21,6 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
 prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
 prefix graph: <https://data.rijksfinancien.nl/archimate/graph/>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix respec: <https://respec.org/model/>
 prefix rule: <https://data.rijksfinancien.nl/archimate/model/rule/>
 prefix section: <https://data.rijksfinancien.nl/archimate/id/section/>
@@ -79,15 +79,17 @@ shp:Document
 
 rule:Document
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an archimate document based on an archimate model.'@en;
+    rdfs:comment 'A rule that creates an archimate XML document representation in RDF based on an archimate model.'@en;
     skos:prefLabel 'archimate document rule'@en;
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
+prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -96,14 +98,15 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
 construct {
 
   # create the archimate-fragment for the archimate-relationship
-  ?document rdf:type archimate:Document;
+  ?document rdf:type archiXML:Document;
+         dom:documentType documentType:archimate ;
          rdf:_1 ?model.
-  ?model rdf:type archimate:Model;
+  ?model rdf:type archiXML:Model;
          xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
          xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
          xml:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
-         archimate:identifier ?modelIdentifier ;
-         archimate:version ?modelVersion ;
+         archiXML:identifier ?modelIdentifier ;
+         archiXML:version ?modelVersion ;
          rdf:_1 ?modelNameNode;
          rdf:_2 ?modelDocumentation;
          rdf:_3 ?elementsNode;
@@ -112,30 +115,34 @@ construct {
          rdf:_6 ?propertiesNode;
          rdf:_7 ?propertyDefinitionsNode;
          rdf:_8 ?viewsNode.
-  ?modelNameNode rdf:type archimate:Name;
-         archimate:name ?archimateNameModel;
+  ?modelNameNode rdf:type archiXML:Name;
+         rdf:_1 ?modelNameTextNode;
          xml:lang "en".
-  ?modelDocumentation rdf:type archimate:Documentation;
-         rdf:_1 ?documentationNameNode.
-  ?documentationNameNode rdf:type archimate:Name;
-         archimate:name ?archimateNameDocumentation;
+  ?modelNameTextNode rdf:type archiXML:Text;
+         archiXML:fragment ?archimateNameModel.
+  ?modelDocumentation rdf:type archiXML:Documentation;
+         rdf:_1 ?documentationTextNode;
          xml:lang "en".
-  ?elementsNode rdf:type archimate:Elements.
-  ?relationshipsNode rdf:type archimate:Relationships.
-  ?organizationsNode rdf:type archimate:Organizations.
-  ?propertiesNode rdf:type archimate:Properties.
-  ?propertyDefinitionsNode rdf:type archimate:PropertyDefinitions.
-  ?viewsNode rdf:type archimate:Views.
+  ?documentationTextNode rdf:type archiXML:Text;
+         archiXML:fragment ?archimateDocumentation.
+  ?elementsNode rdf:type archiXML:Elements.
+  ?relationshipsNode rdf:type archiXML:Relationships.
+  ?organizationsNode rdf:type archiXML:Organizations.
+  ?propertiesNode rdf:type archiXML:Properties.
+  ?propertyDefinitionsNode rdf:type archiXML:PropertyDefinitions.
+  ?viewsNode rdf:type archiXML:Views.
 
 } where {
 
   # Get the archimate model
     $this  skos:prefLabel ?archimateNameModel;
-           skos:definition ?archimateNameDocumentation.
+           skos:definition ?archimateDocumentation.
+    BIND(IRI(CONCAT(STR($this),"-Document")) as ?document)
     BIND(IRI(CONCAT(STR($this),"-Model")) as ?model)
     BIND(IRI(CONCAT(STR($this),"-ModelName")) as ?modelNameNode)
+    BIND(IRI(CONCAT(STR($this),"-ModelNameText")) as ?modelNameTextNode)
     BIND(IRI(CONCAT(STR($this),"-Documentation")) as ?modelDocumentation)
-    BIND(IRI(CONCAT(STR($this),"-DocumentationName")) as ?documentationNameNode)
+    BIND(IRI(CONCAT(STR($this),"-DocumentationText")) as ?documentationTextNode)
     BIND(IRI(CONCAT(STR($this),"-Elements")) as ?elementsNode)
     BIND(IRI(CONCAT(STR($this),"-Relationships")) as ?relationshipsNode)
     BIND(IRI(CONCAT(STR($this),"-Organizations")) as ?organizationsNode)
@@ -162,10 +169,10 @@ construct {
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#> 
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -174,14 +181,16 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
 construct {
 
   # create the archimate-fragment for the archimate-element to be serialized.
-  ?element rdf:type archimate:Element;
+  ?element rdf:type archiXML:Element;
            prov:wasDerivedFrom $this;
-           archimate:identifier ?identifier;
+           archiXML:identifier ?identifier;
            xsi:type ?xsiType;
            rdf:_1 ?elementNameNode.
-  ?elementNameNode rdf:type archimate:Name;
-           archimate:name ?archimateName;
+  ?elementNameNode rdf:type archiXML:Name;
+           rdf:_1 ?elementNameTextNode;
            xml:lang "en".
+   ?elementNameTextNode rdf:type archiXML:Text;
+           archiXML:fragment ?archimateName.
 
 } where {
 
@@ -192,6 +201,7 @@ construct {
         xsi:type ?xsiType.
   BIND(IRI(CONCAT(STR($this),"-Element")) as ?element)
   BIND(IRI(CONCAT(STR($this),"-ElementName")) as ?elementNameNode)
+  BIND(IRI(CONCAT(STR($this),"-ElementNameText")) as ?elementNameTextNode)
   }
 
 ''';
@@ -200,7 +210,7 @@ construct {
 shp:Relationship
     a sh:NodeShape;
     sh:rule rule:Relationship;
-    sh:targetClass archimate:Element;
+    sh:targetClass archiXML:Element;
     skos:prefLabel 'relationship shape'@en;
     rdfs:isDefinedBy archimate:.
 
@@ -211,10 +221,10 @@ rule:Relationship
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -222,28 +232,31 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
 construct {
 
   # create the archimate-fragment for the archimate-relationship
-  ?relationship rdf:type archimate:Relationship;
+  ?relationship rdf:type archiXML:Relationship;
            xsi:type ?xsiType;
-           archimate:source ?source;
-           archimate:target ?target;
+           archiXML:source ?source;
+           archiXML:target ?target;
            rdf:_1 ?relationshipNameNode.
-   ?relationshipNameNode rdf:type archimate:Name;
-           archimate:name ?archimateName;
+   ?relationshipNameNode rdf:type archiXML:Name;
+           rdf:_1 ?relationshipNameTextNode;
            xml:lang "en".
+   ?relationshipNameTextNode rdf:type archiXML:Text;
+           archiXML:fragment ?archimateName.
   
 } where {
 
   # Get the archimate metadata of the archimate-relationship
   $this prov:wasDerivedFrom ?element;
-        archimate:identifier ?source.
+        archiXML:identifier ?source.
   ?element ?relationship ?relatedElement.
   ?xmlTargetElement prov:wasDerivedFrom ?relatedElement;
-                    archimate:identifier ?target.  
+                    archiXML:identifier ?target.  
   ?relationship rdfs:subPropertyOf archimate:relationship;
     skos:prefLabel ?archimateName;
     xsi:type ?xsiType.
   BIND(IRI(CONCAT(STR(?relationship),"-Relationship")) as ?relationship)
   BIND(IRI(CONCAT(STR(?relationship),"-RelationshipName")) as ?relationshipNameNode)
+  BIND(IRI(CONCAT(STR(?relationship),"-RelationshipNameText")) as ?relationshipNameTextNode)
   }
 
 ''';
@@ -253,7 +266,7 @@ construct {
 shp:ElementConnector
     a sh:NodeShape;
     sh:rule rule:ElementConnector;
-    sh:targetClass archimate:Elements;
+    sh:targetClass archiXML:Elements;
     skos:prefLabel 'archimate elements shape'@en;
     rdfs:isDefinedBy archimate:.
 
@@ -264,10 +277,10 @@ rule:ElementConnector
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -276,12 +289,14 @@ construct {
 
   # create the archimate-fragment for the archimate-relationship
   
+  ?model rdf:_3 $this.
   $this ?rdf_member ?element.
   
 
 } where {
-  ?element rdf:type archimate:Element.
+  ?element rdf:type archiXML:Element.
   BIND(IRI(CONCAT(str(rdf:),"_", str(function:getElementPosition(?element)))) as ?rdf_member)  
+  BIND(IRI(CONCAT(REPLACE(STR($this),"-Elements", "-Model"))) as ?model)
   }
 ''';
     rdfs:isDefinedBy archimate:.
@@ -289,7 +304,7 @@ construct {
 shp:RelationshipConnector
     a sh:NodeShape;
     sh:rule rule:RelationshipConnector;
-    sh:targetClass archimate:Relationships;
+    sh:targetClass archiXML:Relationships;
     skos:prefLabel 'archimate relationships shape'@en;
     rdfs:isDefinedBy archimate:.
 
@@ -300,10 +315,10 @@ rule:RelationshipConnector
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -313,11 +328,13 @@ construct {
   # create the archimate-fragment for the archimate-relationship
   
   $this ?rdf_member ?relationship.
+  ?relationship archiXML:identifier ?identifier.
   
 
 } where {
-  ?relationship rdf:type archimate:Relationship.
+  ?relationship rdf:type archiXML:Relationship.
   BIND(IRI(CONCAT(str(rdf:),"_", str(function:getRelationshipPosition(?relationship)))) as ?rdf_member)  
+  BIND(CONCAT("Relation_",str(function:getRelationshipPosition(?relationship))) as ?identifier)
   }
 ''';
     rdfs:isDefinedBy archimate:.
@@ -326,7 +343,7 @@ construct {
 shp:ElementIdentifier
     a sh:NodeShape;
     sh:rule rule:ElementIdentifier;
-    sh:targetClass archimate:Element;
+    sh:targetClass archiXML:Element;
     skos:prefLabel 'Element Identifier shape'@en;
     rdfs:isDefinedBy archimate:.
 
@@ -337,10 +354,10 @@ rule:ElementIdentifier
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -349,7 +366,7 @@ construct {
 
   # create the archimate-fragment for the archimate-relationship
   
-  $this archimate:identifier ?identifier .
+  $this archiXML:identifier ?identifier .
   
 
 } where {
@@ -358,6 +375,42 @@ construct {
   }
 ''';
     rdfs:isDefinedBy archimate:.
+
+shp:ModelIdentifier
+    a sh:NodeShape;
+    sh:rule rule:ModelIdentifier;
+    sh:targetClass archiXML:Model;
+    skos:prefLabel 'Model Identifier shape'@en;
+    rdfs:isDefinedBy archimate:.
+
+rule:ModelIdentifier
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate identifier for an archimate model'@en;
+    skos:prefLabel 'archimate model identifier rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+construct {
+
+  # create the archimate-fragment for the archimate-relationship
+  
+  $this archiXML:identifier ?identifier .
+  
+
+} where {
+  BIND(CONCAT("Model-", str(function:getModelPosition($this))) as ?identifier)  
+  }
+''';
+    rdfs:isDefinedBy archimate:.
+
 
 function:getSubElementPosition
     a sh:SPARQLFunction ;
@@ -371,10 +424,10 @@ function:getSubElementPosition
     sh:select """
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -382,10 +435,10 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
        SELECT ?result WHERE {
        {SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
         WHERE {
-          ?element rdf:type archimate:Element;
+          ?element rdf:type archiXML:Element;
                    xsi:type ?xsiType.
           OPTIONAL {
-            ?prevElement rdf:type archimate:Element;
+            ?prevElement rdf:type archiXML:Element;
                          xsi:type ?xsiType.
             FILTER(str(?prevElement) < str(?element))
           }
@@ -410,10 +463,10 @@ function:getElementPosition
     sh:select """
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -421,9 +474,9 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
        SELECT ?result WHERE {
        {SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
         WHERE {
-          ?element rdf:type archimate:Element.
+          ?element rdf:type archiXML:Element.
           OPTIONAL {
-            ?prevElement rdf:type archimate:Element.
+            ?prevElement rdf:type archiXML:Element.
             FILTER(str(?prevElement) < str(?element))
           }
         }
@@ -447,10 +500,10 @@ function:getRelationshipPosition
     sh:select """
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix xml: <http://www.w3.org/XML/1998/namespace#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
@@ -458,9 +511,9 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
        SELECT ?result WHERE {
        {SELECT ?relationship (COUNT(?prevRelationship) + 1 AS ?member)
         WHERE {
-          ?relationship rdf:type archimate:Relationship.
+          ?relationship rdf:type archiXML:Relationship.
           OPTIONAL {
-            ?prevRelationship rdf:type archimate:Relationship.
+            ?prevRelationship rdf:type archiXML:Relationship.
             FILTER(str(?prevRelationship) < str(?relationship))
           }
         }
@@ -468,6 +521,43 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
         ORDER BY ?relationship
         }
        FILTER (?relationship = $input)
+       BIND(?member as ?result)
+      }
+        """ .
+
+function:getModelPosition
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns alphabetical position of an archimate model within the set of all models." ;
+    sh:parameter [
+        sh:path function:input ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The model for which the position has to be returned." ;
+    ] ;
+    sh:returnType xsd:integer ;
+    sh:select """
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+
+       SELECT ?result WHERE {
+       {SELECT ?model (COUNT(?prevModel) + 1 AS ?member)
+        WHERE {
+          ?model rdf:type archiXML:Model.
+          OPTIONAL {
+            ?prevModel rdf:type archiXML:Model.
+            FILTER(str(?prevModel) < str(?model))
+          }
+        }
+        GROUP BY ?model
+        ORDER BY ?model
+        }
+       FILTER (?model = $input)
        BIND(?member as ?result)
       }
         """ .

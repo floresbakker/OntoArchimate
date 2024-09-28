@@ -1,7 +1,10 @@
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
 @prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/> .
+@prefix dom: <https://data.rijksfinancien.nl/dom/model/def/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix model: <https://data.rijksfinancien.nl/ontoarchi/id/> .
+@prefix model: <https://data.rijksfinancien.nl/archimate/id/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -15,6 +18,14 @@
 @prefix xmlns: <http://www.w3.org/2000/xmlns/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
+
+model:BasicModel a archimate:Model ;
+    skos:definition "Example of a basic model with two elements and a relationship" ;
+    skos:prefLabel "Basic Model" .
+
+model:BasicModel-Document a archiXML:Document ;
+    rdf:_1 model:BasicModel-Model ;
+    dom:documentType documentType:archimate .
 
 archimate:ApplicationCollaboration a owl:Class ;
     rdfs:isDefinedBy archimate: ;
@@ -471,11 +482,18 @@ archimate:writeAccess a owl:ObjectProperty ;
     xsi:type "WriteAccess" ;
     skos:prefLabel "Write Access Relationship"@en .
 
-model:BasicModel a archimate:Model ;
-    skos:definition "Example of a basic model with two elements and a relationship" ;
-    skos:prefLabel "Basic Model" .
+model:BasicModel-Documentation a archiXML:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationText ;
+    xml1:lang "en" .
 
-model:BasicModel-Model a archimate:Model ;
+model:BasicModel-DocumentationText a archiXML:TextElement ;
+    archiXML:fragment "Example of a basic model with two elements and a relationship" .
+
+model:BasicModel-Elements a archiXML:Elements ;
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessRole-Element .
+
+model:BasicModel-Model a archiXML:Model ;
     rdf:_1 model:BasicModel-ModelName ;
     rdf:_2 model:BasicModel-Documentation ;
     rdf:_3 model:BasicModel-Elements ;
@@ -486,7 +504,57 @@ model:BasicModel-Model a archimate:Model ;
     rdf:_8 model:BasicModel-Views ;
     xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
     xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
-    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" .
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archiXML:identifier "Model-1" .
+
+model:BasicModel-ModelName a archiXML:Name ;
+    rdf:_1 model:BasicModel-ModelNameText ;
+    xml1:lang "en" .
+
+model:BasicModel-ModelNameText a archiXML:TextElement ;
+    archiXML:fragment "Basic Model" .
+
+model:BasicModel-Organizations a archiXML:Organizations .
+
+model:BasicModel-Properties a archiXML:Properties .
+
+model:BasicModel-PropertyDefinitions a archiXML:PropertyDefinitions .
+
+model:BasicModel-Relationships a archiXML:Relationships ;
+    rdf:_1 archimate:assignedTo-Relationship .
+
+model:BasicModel-Views a archiXML:Views .
+
+model:aBusinessActor a archimate:BusinessActor ;
+    skos:definition "An example of a business actor" ;
+    skos:prefLabel "A business actor" ;
+    archimate:assignedTo model:aBusinessRole .
+
+model:aBusinessActor-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    xsi:type "BusinessActor" ;
+    prov:wasDerivedFrom model:aBusinessActor ;
+    archiXML:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessActor-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementNameText a archiXML:TextElement ;
+    archiXML:fragment "A business actor" .
+
+model:aBusinessRole-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    xsi:type "BusinessRole" ;
+    prov:wasDerivedFrom model:aBusinessRole ;
+    archiXML:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessRole-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementNameText a archiXML:TextElement ;
+    archiXML:fragment "A business role" .
 
 archimate:BusinessActor a owl:Class ;
     rdfs:isDefinedBy archimate: ;
@@ -502,71 +570,24 @@ archimate:BusinessRole a owl:Class ;
     skos:definition "A business role in Archimate."@en ;
     skos:prefLabel "business role"@en .
 
-archimate:assignedTo-Relationship a archimate:Relationship ;
-    rdf:_1 archimate:assignedTo-Relationship-RelationshipName ;
-    xsi:type "Assignment" ;
-    archimate:source "BusinessActor1" ;
-    archimate:target "BusinessRole1" .
-
-archimate:assignedTo-Relationship-RelationshipName a archimate:Name ;
-    xml1:lang "en" ;
-    archimate:name "Assignment Relationship"@en .
-
-model:BasicModel-Documentation a archimate:Documentation ;
-    rdf:_1 model:BasicModel-DocumentationName .
-
-model:BasicModel-DocumentationName a archimate:Name ;
-    xml1:lang "en" ;
-    archimate:name "Example of a basic model with two elements and a relationship" .
-
-model:BasicModel-Elements a archimate:Elements ;
-    rdf:_1 model:aBusinessActor-Element ;
-    rdf:_2 model:aBusinessRole-Element .
-
-model:BasicModel-ModelName a archimate:Name ;
-    xml1:lang "en" ;
-    archimate:name "Basic Model" .
-
-model:BasicModel-Organizations a archimate:Organizations .
-
-model:BasicModel-Properties a archimate:Properties .
-
-model:BasicModel-PropertyDefinitions a archimate:PropertyDefinitions .
-
-model:BasicModel-Relationships a archimate:Relationships ;
-    rdf:_1 archimate:assignedTo-Relationship .
-
-model:BasicModel-Views a archimate:Views .
-
-model:aBusinessActor a archimate:BusinessActor ;
-    skos:definition "An example of a business actor" ;
-    skos:prefLabel "A business actor" ;
-    archimate:assignedTo model:aBusinessRole .
-
-model:aBusinessActor-Element a archimate:Element ;
-    rdf:_1 model:aBusinessActor-ElementName ;
-    xsi:type "BusinessActor" ;
-    prov:wasDerivedFrom model:aBusinessActor ;
-    archimate:identifier "BusinessActor1" .
-
-model:aBusinessActor-ElementName a archimate:Name ;
-    xml1:lang "en" ;
-    archimate:name "A business actor" .
-
-model:aBusinessRole-Element a archimate:Element ;
-    rdf:_1 model:aBusinessRole-ElementName ;
-    xsi:type "BusinessRole" ;
-    prov:wasDerivedFrom model:aBusinessRole ;
-    archimate:identifier "BusinessRole1" .
-
-model:aBusinessRole-ElementName a archimate:Name ;
-    xml1:lang "en" ;
-    archimate:name "A business role" .
-
 archimate:Model a owl:Class ;
     rdfs:isDefinedBy archimate: ;
     skos:definition "A model in Archimate."@en ;
     skos:prefLabel "Model"@en .
+
+archimate:assignedTo-Relationship a archiXML:Relationship ;
+    rdf:_1 archimate:assignedTo-Relationship-RelationshipName ;
+    xsi:type "Assignment" ;
+    archiXML:identifier "Relation_1" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+archimate:assignedTo-Relationship-RelationshipName a archiXML:Name ;
+    rdf:_1 archimate:assignedTo-Relationship-RelationshipNameText ;
+    xml1:lang "en" .
+
+archimate:assignedTo-Relationship-RelationshipNameText a archiXML:TextElement ;
+    archiXML:fragment "Assignment Relationship"@en .
 
 model:aBusinessRole a archimate:BusinessRole ;
     skos:definition "An example of a business role" ;

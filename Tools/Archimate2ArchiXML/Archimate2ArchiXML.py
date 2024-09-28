@@ -15,19 +15,21 @@ import os
 
 from rdflib.namespace import NamespaceManager
 
-# Set the path to the desired standard directory. 
-directory_path = "C:/Users/Administrator/Documents/Branches/"
+# Get the current working directory in which the file is located.
+current_dir = os.getcwd()
 
+# Set the path to the desired standard directory. 
+directory_path = os.path.abspath(os.path.join(current_dir, '..'))
 
 # namespace declaration
 rdf         = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 rdfs        = Namespace("http://www.w3.org/2000/01/rdf-schema#")
 doc         = Namespace("https://data.rijksfinancien.nl/archixml/doc/id/")
-archiXML   = Namespace("https://data.rijksfinancien.nl/archixml/model/def/")
-xml         = Namespace("http://www.w3.org/XML/1998/namespace#")
-xmlns       = Namespace("http://www.w3.org/2000/xmlns/")
-xlink       = Namespace("http://www.w3.org/1999/xlink#")
-xsi         = Namespace("http://www.w3.org/2001/XMLSchema-instance#")
+archiXML    = Namespace("https://data.rijksfinancien.nl/archixml/model/def/")
+xml         = Namespace("http://www.w3.org/XML/model/def/")
+xmlns       = Namespace("http://www.w3.org/2000/xmlns/model/def/")
+xlink       = Namespace("https://www.w3.org/1999/xlink/model/def/")
+xsi         = Namespace("http://www.w3.org/2001/XMLSchema-instance/model/def/")
 
 # function to read a graph (as a string) from a file 
 def readGraphFromFile(file_path):
@@ -37,33 +39,30 @@ def readGraphFromFile(file_path):
             file_content = file.read()
     return file_content
 
-def generate_element_id(element):
-    
-    parent_string = ""
-    for parent in element.parents:
-        parent_sibling_count = 0
-        for parent_sibling in parent.previous_siblings:    
-            parent_sibling_count = parent_sibling_count + 1
-        horizontal_parental_index = parent_sibling_count
-        if parent.name:
-            parent_string = parent_string + str(horizontal_parental_index)
-        else:
-            parent_string = parent_string + "0"
-        
-    
-    count_sibling = 0
-    for sibling in element.previous_siblings:    
-        count_sibling = count_sibling + 1
-    horizontal_index = count_sibling
-    
-    element_id = f"{parent_string}/{horizontal_index}" 
-    
-    return element_id.replace("[document]/","")
+def generate_node_id(node):
+    # Base case: If there's no parent, return an empty string (root-level element)
+    if node.parent is None:
+        return "1"
+
+    # Initialize the sibling index for the current element
+    sibling_index = 1
+    # Count previous siblings (including text and non-element nodes)
+    for sibling in node.previous_siblings:
+        sibling_index += 1
+
+    # Recursive call: Get the parent's ID
+    parent_id = generate_node_id(node.parent)
+
+    # If the parent ID is not empty, append the current element's sibling index
+    if parent_id:
+        return f"{parent_id}.{sibling_index}"
+    else:
+        return str(sibling_index)  # This happens at the root level
 
 # loop through any xml files in the input directory
-for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2ArchiXML/Input"):
+for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiXML/Input"):
     if filename.endswith(".xml"):
-        file_path = os.path.join(directory_path+"OntoArchimate/Tools/Archimate2ArchiXML/Input", filename)
+        file_path = os.path.join(directory_path+"/OntoArchimate/Tools/Archimate2ArchiXML/Input", filename)
         
         # Establish the stem of the file name for reuse in newly created files
         filename_stem = os.path.splitext(filename)[0]
@@ -84,48 +83,48 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2ArchiXM
         g.bind("xsi", xsi)
 
         # fill graph with html vocabulary
-        xml_graph = Graph().parse(directory_path+"OntoArchimate/Specification/archiXML - core.ttl" , format="ttl")
+        xml_graph = Graph().parse(directory_path+"/OntoArchimate/Specification/archiXML - core.ttl" , format="ttl")
 
-        # string for query to establish IRI of a 'tag' HTML element
+        # string for query to establish IRI of a 'tag' HTML node
         tagquerystring = '''
             
         prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        prefix xml: <http://www.w3.org/XML/1998/namespace#>
+        prefix xml: <http://www.w3.org/XML/model/def/>
 
-        select ?element_IRI where {
-          ?element_IRI xml:tag ?tag
+        select ?node_IRI where {
+          ?node_IRI xml:tag ?tag
         }
         '''
 
         # parse xml document
         soup = BeautifulSoup(xml_doc, features="xml")
-        root_element = soup.contents[0]
-        root_id = generate_element_id(root_element)
+        root_node = soup.contents[0]
+        root_id = generate_node_id(root_node)
 
-        # loop through each element in the XML document
-        for element in soup.descendants:
-            # check if the element is an XML tag element
-            if isinstance(element, Tag):
-                # establish unique id for the XML tag element
-                element_id = generate_element_id(element)
+        # loop through each node in the XML document
+        for node in soup.descendants:
+            # check if the node is an XML tag node
+            if isinstance(node, Tag):
+                # establish unique id for the XML tag node
+                node_id = generate_node_id(node)
                 
                 # establish IRI for the tag class based on the HTML vocabulary
-                tag_result = xml_graph.query(tagquerystring, initBindings={"tag" : Literal(element.name)})
+                tag_result = xml_graph.query(tagquerystring, initBindings={"tag" : Literal(node.name)})
                 for row in tag_result:
-                    tag_IRI = row.element_IRI
+                    tag_IRI = row.node_IRI
                     
-                # add the element to the graph with its unique identifier as IRI and its tag as type
-                g.add((doc[element_id], RDF.type, tag_IRI))
+                # add the node to the graph with its unique identifier as IRI and its tag as type
+                g.add((doc[node_id], RDF.type, tag_IRI))
                 
                 # add a document node as a container of the XML-tree
-                if element.name == 'model':
+                if node.name == 'model':
                     document_id = '1'
                     g.add((doc[document_id], RDF.type, archiXML["Document"]))
-                    g.add((doc[document_id], rdf["_" + str(document_id)], doc[element_id]))
+                    g.add((doc[document_id], rdf["_" + str(document_id)], doc[node_id]))
         
-                # establish optional attributes of the element
-                for attribute, values in element.attrs.items():
+                # establish optional attributes of the node
+                for attribute, values in node.attrs.items():
                     # Check if it's the default namespace declaration
                     if attribute == 'xmlns':
                         namespace_uri = xml
@@ -157,48 +156,48 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/Archimate2ArchiXM
                             attribute_value = ' '.join(values)
                         else:  # If it's a single value, keep it as is
                             attribute_value = values
-                        # Add optional attributes of the element to the graph
-                        g.add((doc[element_id], namespace_uri[local_name], Literal(attribute_value)))
+                        # Add optional attributes of the node to the graph
+                        g.add((doc[node_id], namespace_uri[local_name], Literal(attribute_value)))
                     
-                # go through the direct children of the element
+                # go through the direct children of the node
                 member_count = 0 # initialize count
-                for child in element.children:
-                    member_count = member_count + 1 # count the number of direct children, so that we can establish the sequence of appearance of the children within the parent element, through the 'rdf:_x' property between parent and child.
+                for child in node.children:
+                    member_count = member_count + 1 # count the number of direct children, so that we can establish the sequence of appearance of the children within the parent node, through the 'rdf:_x' property between parent and child.
                     
-                    # if the child is an html tag element get its unique identifier based on sourceline and sourcepos
+                    # if the child is an html tag node get its unique identifier based on sourceline and sourcepos
                     if isinstance(child, Tag):
                       if child.name == None  :
                           childname = ""
                       else:
                           childname = child.name
-                      child_id = generate_element_id(child)
-                      g.add((doc[element_id], rdf["_" + str(member_count)], doc[child_id]))
+                      child_id = generate_node_id(child)
+                      g.add((doc[node_id], rdf["_" + str(member_count)], doc[child_id]))
                       
-                    # if the child is an text element, create a unique identifier based on sourceline and sourcepos of its parent and the sequence position of the child within the parent, as the html-parser does not have sourceline and sourcepos available as attributes for text elements.
+                    # if the child is an text node, create a unique identifier based on sourceline and sourcepos of its parent and the sequence position of the child within the parent, as the html-parser does not have sourceline and sourcepos available as attributes for text nodes.
                     elif isinstance(child, NavigableString):
                       if child.name == None  :
-                            childname = "TextElement"
+                            childname = "Text"
                       else:
                             childname = child.name
-                      child_id = generate_element_id(child)
+                      child_id = generate_node_id(child)
                       
-                      # write to graph that the parent element has a child with a certain sequence position
-                      g.add((doc[element_id], rdf["_" + str(member_count)], doc[child_id]))  
+                      # write to graph that the parent node has a child with a certain sequence position
+                      g.add((doc[node_id], rdf["_" + str(member_count)], doc[child_id]))  
                       
-                      # write to graph that the child element is of type TextElement
-                      g.add((doc[child_id], RDF.type, archiXML["TextElement"]))
+                      # write to graph that the child node is of type Text
+                      g.add((doc[child_id], RDF.type, archiXML["Text"]))
                       
                       # empty content (of type None) in html needs to be converted to empty string
-                      if element.string == None: 
+                      if node.string == None: 
                           text_fragment = "" 
                       else:
-                          text_fragment = element.string
+                          text_fragment = node.string
                       
-                      # write string content of the text element to the graph
+                      # write string content of the text node to the graph
                       g.add((doc[child_id], archiXML["fragment"], Literal(text_fragment)))
 
         # write the resulting graph to file
-        g.serialize(destination=directory_path+"OntoArchimate/Tools/Archimate2ArchiXML/Output/" + filename_stem + "-parsed.ttl", format="turtle")
+        g.serialize(destination=directory_path+"/OntoArchimate/Tools/Archimate2ArchiXML/Output/" + filename_stem + "-parsed.ttl", format="turtle")
         
         print ("\nArchimate file '", filename,"' is succesfullly transformed to file", filename_stem + "-parsed.ttl in Turtle format.")
     else: 

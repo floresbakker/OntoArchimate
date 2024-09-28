@@ -13,8 +13,8 @@ prefix status: <http://purl.org/adms/status/>
 prefix vann: <http://purl.org/vocab/vann/>
 prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xml: <http://www.w3.org/XML/1998/namespace#>
-prefix xmlns: <http://www.w3.org/2000/xmlns/> 
+prefix xml: <http://www.w3.org/XML/model/def/>
+prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> 
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
 
 prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>

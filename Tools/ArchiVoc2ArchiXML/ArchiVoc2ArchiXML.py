@@ -9,8 +9,12 @@ import pyshacl
 import rdflib 
 import os
 
+# Get the current working directory in which the file is located.
+current_dir = os.getcwd()
+
 # Set the path to the desired standard directory. 
-directory_path = "C:/Users/Administrator/Documents/Branches/"
+directory_path = os.path.abspath(os.path.join(current_dir, '..', '..', '..'))
+
 
 # Function to read a graph (as a string) from a file 
 def readGraphFromFile(file_path):
@@ -31,8 +35,8 @@ def iteratePyShacl(vocabulary, serializable_graph):
         pyshacl.validate(
         data_graph=serializable_graph,
         shacl_graph=vocabulary,
-        data_graph_format="turtle",
-        shacl_graph_format="turtle",
+        data_graph_format="ttl",
+        shacl_graph_format="ttl",
         advanced=True,
         inplace=True,
         inference=None,
@@ -44,15 +48,15 @@ def iteratePyShacl(vocabulary, serializable_graph):
         writeGraph(serializable_graph)             
 
 # Get the Archimate vocabulary and place it in a string
-ontoarchi_vocabulary = readGraphFromFile(directory_path + "OntoArchimate/Specification/archimate - core.ttl")
-ontoarchi_serialisation = readGraphFromFile(directory_path + "OntoArchimate/Specification/archimate - serialisation.ttl")
+ontoarchi_vocabulary = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
+ontoarchi_serialisation = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - serialisation.ttl")
 
 vocabulary = ontoarchi_vocabulary 
 
 # loop through any turtle files in the input directory
-for filename in os.listdir(directory_path+"OntoArchimate/Tools/ArchiVoc2ArchiXML/Input"):
+for filename in os.listdir(directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXML/Input"):
     if filename.endswith(".ttl"):
-        file_path = os.path.join(directory_path+"OntoArchimate/Tools/ArchiVoc2ArchiXML/Input", filename)
+        file_path = os.path.join(directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXML/Input", filename)
         
         # Establish the stem of the file name for reuse in newly created files
         filename_stem = os.path.splitext(filename)[0]
@@ -64,7 +68,7 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/ArchiVoc2ArchiXML
         serializable_graph_string = vocabulary + document_graph
 
         # Create a graph of the string containing the Archimate vocabulary and the RDF-model of some Archimate document
-        serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="ttl")
+        serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="turtle")
 
         # Inform user
         print ("\nTransforming archimate model to archiXML model as contained in document '" + filename + "'...")
@@ -75,7 +79,9 @@ for filename in os.listdir(directory_path+"OntoArchimate/Tools/ArchiVoc2ArchiXML
         # Start second iteration to build upon the first run
         document_graph = readGraphFromFile(directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXML/Output/"+filename_stem+"-serialized.ttl")
         serializable_graph_string = vocabulary + document_graph
-        serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="ttl")
+        serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="turtle")
         iteratePyShacl(ontoarchi_serialisation, serializable_graph)
+       
+        print ("\n...Done")
 
     

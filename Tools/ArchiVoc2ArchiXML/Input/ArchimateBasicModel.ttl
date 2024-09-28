@@ -4,7 +4,7 @@ prefix dct: <http://purl.org/dc/terms/>
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
 prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix model: <https://data.rijksfinancien.nl/ontoarchi/id/>
+prefix model: <https://data.rijksfinancien.nl/archimate/id/>
 prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -24,11 +24,18 @@ model:BasicModel rdf:type archimate:Model;
 
 model:aBusinessActor rdf:type archimate:BusinessActor;
    skos:prefLabel "A business actor";
-   skos:definition "An example of a business actor".
+   skos:definition "An example of a business actor";
+   rdfs:isDefinedBy model:BasicModel.
 
 model:aBusinessRole rdf:type archimate:BusinessRole;
    skos:prefLabel "A business role";
-   skos:definition "An example of a business role".
+   skos:definition "An example of a business role";
+   rdfs:isDefinedBy model:BasicModel.
 
 model:aBusinessActor archimate:assignedTo model:aBusinessRole.
 
+model:relationship1 rdf:type rdf:Statement;
+                    rdf:subject model:aBusinessActor;
+					rdf:predicate model:assignedTo;
+					rdf:object model:aBusinessRole;
+					rdfs:isDefinedBy model:BasicModel.
