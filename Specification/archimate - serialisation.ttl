@@ -1,7 +1,7 @@
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix dcm: <http://purl.org/dc/dcmitype/>
 prefix dct: <http://purl.org/dc/terms/>
+prefix dom:       <http://www.w3.org/DOM/model/def/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix owl: <http://www.w3.org/2002/07/owl#>
@@ -14,19 +14,18 @@ prefix status: <http://purl.org/adms/status/>
 prefix vann: <http://purl.org/vocab/vann/>
 prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xml: <http://www.w3.org/XML/1998/namespace#>
-prefix xmlns: <http://www.w3.org/2000/xmlns/> 
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+prefix xml: <http://www.w3.org/XML/model/def/>
+prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> 
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
-prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
-prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
-prefix graph: <https://data.rijksfinancien.nl/archimate/graph/>
-prefix respec: <https://respec.org/model/>
-prefix rule: <https://data.rijksfinancien.nl/archimate/model/rule/>
-prefix section: <https://data.rijksfinancien.nl/archimate/id/section/>
-prefix shp: <https://data.rijksfinancien.nl/archimate/model/shp/>
-prefix standard: <https://data.rijksfinancien.nl/archimate/id/standard/>
-prefix target: <https://data.rijksfinancien.nl/archimate/model/target/>
+prefix graph:     <https://data.rijksfinancien.nl/archimate/graph/>
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix respec:    <https://respec.org/model/>
+prefix rule:      <https://data.rijksfinancien.nl/archimate/model/rule/>
+prefix section:   <https://data.rijksfinancien.nl/archimate/id/section/>
+prefix shp:       <https://data.rijksfinancien.nl/archimate/model/shp/>
+prefix standard:  <https://data.rijksfinancien.nl/archimate/id/standard/>
+prefix target:    <https://data.rijksfinancien.nl/archimate/model/target/>
 
 archimate:
     a
@@ -85,21 +84,19 @@ rule:Document
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
-prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/>
 prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix xml: <http://www.w3.org/XML/1998/namespace#>
+prefix xml: <http://www.w3.org/XML/1998/namespace/model/def/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
   # create the archimate-fragment for the archimate-relationship
   ?document rdf:type archiXML:Document;
-         dom:documentType documentType:archimate ;
          rdf:_1 ?model.
   ?model rdf:type archiXML:Model;
          xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;

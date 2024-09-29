@@ -16,7 +16,6 @@ prefix status: <http://purl.org/adms/status/>
 prefix vann: <http://purl.org/vocab/vann/>
 prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xml: <http://www.w3.org/XML/1998/namespace#>
 
 model:BasicModel rdf:type archimate:Model;
     skos:prefLabel "Basic Model";
