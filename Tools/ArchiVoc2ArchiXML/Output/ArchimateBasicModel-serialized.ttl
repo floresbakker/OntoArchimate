@@ -384,73 +384,85 @@ archimate:WorkPackage a owl:Class ;
     skos:definition "A work package in Archimate."@en ;
     skos:prefLabel "work package"@en .
 
-archimate:aggregation a owl:ObjectProperty ;
+archimate:aggregation a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Aggregation" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Aggregation Relationship"@en .
 
-archimate:composition a owl:ObjectProperty ;
+archimate:composition a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Composition" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Composition Relationship"@en .
 
-archimate:flow a owl:ObjectProperty ;
+archimate:flow a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Flow" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Flow Relationship"@en .
 
-archimate:influence a owl:ObjectProperty ;
+archimate:influence a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Influence" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Influence Relationship"@en .
 
-archimate:property a owl:ObjectProperty ;
+archimate:property a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Property" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Property Relationship"@en .
 
-archimate:readAccess a owl:ObjectProperty ;
+archimate:readAccess a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "ReadAccess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:access ;
     skos:prefLabel "Read Access Relationship"@en .
 
-archimate:readWriteAccess a owl:ObjectProperty ;
+archimate:readWriteAccess a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "ReadWriteAccess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:access ;
     skos:prefLabel "Read-Write Access Relationship"@en .
 
-archimate:realization a owl:ObjectProperty ;
+archimate:realization a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Realization" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Realization Relationship"@en .
 
-archimate:serving a owl:ObjectProperty ;
+archimate:serving a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Serving" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Serving Relationship"@en .
 
-archimate:specialization a owl:ObjectProperty ;
+archimate:specialization a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Specialization" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Specialization Relationship"@en .
 
-archimate:triggering a owl:ObjectProperty ;
+archimate:triggering a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Triggering" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Triggering Relationship"@en .
 
-archimate:writeAccess a owl:ObjectProperty ;
+archimate:writeAccess a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "WriteAccess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:access ;
@@ -461,7 +473,7 @@ model:BasicModel-Documentation a archiXML:Documentation ;
     xml1:lang "en" .
 
 model:BasicModel-DocumentationText a archiXML:Text ;
-    archiXML:fragment "Example of a basic model with two elements and a relationship" .
+    xml1:fragment "Example of a basic model with two elements and a relationship" .
 
 model:BasicModel-Elements a archiXML:Elements ;
     rdf:_1 model:aBusinessActor-Element ;
@@ -488,7 +500,7 @@ model:BasicModel-ModelName a archiXML:Name ;
     xml1:lang "en" .
 
 model:BasicModel-ModelNameText a archiXML:Text ;
-    archiXML:fragment "Basic Model" .
+    xml1:fragment "Basic Model" .
 
 model:BasicModel-Organizations a archiXML:Organizations .
 
@@ -513,7 +525,7 @@ model:aBusinessActor-ElementName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aBusinessActor-ElementNameText a archiXML:Text ;
-    archiXML:fragment "A business actor" .
+    xml1:fragment "A business actor" .
 
 model:aBusinessObject-Element a archiXML:Element ;
     rdf:_1 model:aBusinessObject-ElementName ;
@@ -526,7 +538,7 @@ model:aBusinessObject-ElementName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aBusinessObject-ElementNameText a archiXML:Text ;
-    archiXML:fragment "A business role" .
+    xml1:fragment "A business role" .
 
 model:aBusinessRole-Element a archiXML:Element ;
     rdf:_1 model:aBusinessRole-ElementName ;
@@ -539,7 +551,7 @@ model:aBusinessRole-ElementName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aBusinessRole-ElementNameText a archiXML:Text ;
-    archiXML:fragment "A business role" .
+    xml1:fragment "A business role" .
 
 model:aRelationship1-Relationship a archiXML:Relationship ;
     rdf:_1 model:aRelationship1-RelationshipName ;
@@ -554,7 +566,7 @@ model:aRelationship1-RelationshipName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aRelationship1-RelationshipNameText a archiXML:Text ;
-    archiXML:fragment "Assignment Relationship"@en .
+    xml1:fragment "Assignment Relationship"@en .
 
 model:aRelationship2 a archimate:Relationship ;
     rdfs:isDefinedBy model:BasicModel ;
@@ -577,7 +589,7 @@ model:aRelationship2-RelationshipName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aRelationship2-RelationshipNameText a archiXML:Text ;
-    archiXML:fragment "Association Relationship"@en .
+    xml1:fragment "Association Relationship"@en .
 
 archimate:BusinessActor a owl:Class ;
     dct:identifier "BusinessActor" ;
@@ -605,13 +617,15 @@ archimate:Model a owl:Class ;
     skos:definition "A model in Archimate."@en ;
     skos:prefLabel "Model"@en .
 
-archimate:assignedTo a owl:ObjectProperty ;
+archimate:assignedTo a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Assignment" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
     skos:prefLabel "Assignment Relationship"@en .
 
-archimate:association a owl:ObjectProperty ;
+archimate:association a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Association" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
@@ -640,7 +654,8 @@ model:aRelationship1 a archimate:Relationship ;
     archimate:relationship archimate:assignedTo ;
     archimate:to model:aBusinessRole .
 
-archimate:access a owl:ObjectProperty ;
+archimate:access a owl:ObjectProperty,
+        archimate:Relationship ;
     dct:identifier "Access" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
@@ -655,6 +670,12 @@ archimate:relationship a owl:ObjectProperty ;
     rdfs:isDefinedBy archimate: ;
     rdfs:range archimate:Element ;
     skos:prefLabel "the relationship attribute"@en .
+
+archimate:Relationship a owl:Class ;
+    dct:identifier "Relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A relationship in Archimate."@en ;
+    skos:prefLabel "relationship"@en .
 
 archimate:Element a owl:Class ;
     rdfs:isDefinedBy archimate: ;

@@ -48,36 +48,35 @@ def iteratePyShacl(vocabulary, serializable_graph):
         resultquery = serializable_graph.query('''
             
         PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>                                              
-        prefix prov: <http://www.w3.org/ns/prov#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
         ASK 
         WHERE {
-                      
-            ?modelComponents ?implements ?archimateConcepts.
-            ?archimateConcepts rdfs:isDefinedBy archimate:.
             
-            FILTER NOT EXISTS {
-            ?modelComponents ?implements ?archimateConcepts.
-            ?archimateConcepts rdfs:isDefinedBy archimate:.
+            #....are there model components that apply archimate classes 
+            ?modelComponents rdf:type ?archimateClass.
+            ?archimateClass rdf:type owl:Class; 
+            rdfs:isDefinedBy archimate:.
             
-            MINUS {
-                    ?prov prov:wasDerivedFrom ?modelComponents    
-                }
-               }
+            # ...that do not come from the archimate vocabulary itself
+           FILTER NOT EXISTS {?modelComponents rdfs:isDefinedBy archimate:}
+            
+           # ...but are not yet processed into a RDF representation of XML?
+           FILTER NOT EXISTS {?XML prov:wasDerivedFrom ?modelComponents    
               }
+            }
         ''')   
 
         # Check whether another iteration is needed. If the archimate root of the document contains a archimate:fragment statement then the serialisation is considered done.
         for result in resultquery:
             if result == True:
-                "...not yet fully serialised. Running another SHACL iteration..."
                 writeGraph(serializable_graph)
                 iteratePyShacl(vocabulary, serializable_graph)
             else: 
                 print ("Done.")
-                writeGraph(serializable_graph)
+                writeGraph(serializable_graph)                                    
                
 
 # Get the Archimate vocabulary and place it in a string

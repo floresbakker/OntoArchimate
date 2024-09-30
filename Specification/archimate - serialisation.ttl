@@ -118,12 +118,12 @@ construct {
          rdf:_1 ?modelNameTextNode;
          xml:lang "en".
   ?modelNameTextNode rdf:type archiXML:Text;
-         archiXML:fragment ?archimateNameModel.
+         xml:fragment ?archimateNameModel.
   ?modelDocumentation rdf:type archiXML:Documentation;
          rdf:_1 ?documentationTextNode;
          xml:lang "en".
   ?documentationTextNode rdf:type archiXML:Text;
-         archiXML:fragment ?archimateDocumentation.
+         xml:fragment ?archimateDocumentation.
   ?elementsNode rdf:type archiXML:Elements.
   ?relationshipsNode rdf:type archiXML:Relationships.
   ?organizationsNode rdf:type archiXML:Organizations.
@@ -192,7 +192,7 @@ construct {
            rdf:_1 ?elementNameTextNode;
            xml:lang "en".
    ?elementNameTextNode rdf:type archiXML:Text;
-           archiXML:fragment ?archimateName.
+           xml:fragment ?archimateName.
 
 } where {
 
@@ -284,7 +284,7 @@ construct {
            rdf:_1 ?relationshipNameTextNode;
            xml:lang "en".
    ?relationshipNameTextNode rdf:type archiXML:Text;
-           archiXML:fragment ?archimateName.
+           xml:fragment ?archimateName.
   
 } where {
 
