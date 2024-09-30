@@ -1,497 +1,472 @@
 @prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
 @prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix documentType: <https://data.rijksfinancien.nl/dom/model/id/documentType/> .
-@prefix dom: <https://data.rijksfinancien.nl/dom/model/def/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix model: <https://data.rijksfinancien.nl/archimate/id/> .
+@prefix ns1: <https://respec.org/model/def/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix respec: <https://respec.org/model/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix status: <http://purl.org/adms/status/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix void: <http://rdfs.org/ns/void#> .
-@prefix xml1: <http://www.w3.org/XML/1998/namespace#> .
-@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
+@prefix xml1: <http://www.w3.org/XML/model/def/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
-
-model:BasicModel a archimate:Model ;
-    skos:definition "Example of a basic model with two elements and a relationship" ;
-    skos:prefLabel "Basic Model" .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
 
 model:BasicModel-Document a archiXML:Document ;
-    rdf:_1 model:BasicModel-Model ;
-    dom:documentType documentType:archimate .
+    rdf:_1 model:BasicModel-Model .
 
 archimate:ApplicationCollaboration a owl:Class ;
+    dct:identifier "ApplicationCollaboration" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationCollaboration" ;
     skos:definition "An application collaboration in Archimate."@en ;
     skos:prefLabel "application collaboration"@en .
 
 archimate:ApplicationComponent a owl:Class ;
+    dct:identifier "ApplicationComponent" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationComponent" ;
     skos:definition "An application component in Archimate."@en ;
     skos:prefLabel "application component"@en .
 
 archimate:ApplicationEvent a owl:Class ;
+    dct:identifier "ApplicationEvent" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationEvent" ;
     skos:definition "An application event in Archimate."@en ;
     skos:prefLabel "application event"@en .
 
 archimate:ApplicationFunction a owl:Class ;
+    dct:identifier "ApplicationFunction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationFunction" ;
     skos:definition "An application function in Archimate."@en ;
     skos:prefLabel "application function"@en .
 
 archimate:ApplicationInteraction a owl:Class ;
+    dct:identifier "ApplicationInteraction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationInteraction" ;
     skos:definition "An application interaction in Archimate."@en ;
     skos:prefLabel "application interaction"@en .
 
 archimate:ApplicationInterface a owl:Class ;
+    dct:identifier "ApplicationInterface" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationInterface" ;
     skos:definition "An application interface in Archimate."@en ;
     skos:prefLabel "application interface"@en .
 
 archimate:ApplicationProcess a owl:Class ;
+    dct:identifier "ApplicationProcess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationProcess" ;
     skos:definition "An application process in Archimate."@en ;
     skos:prefLabel "application process"@en .
 
 archimate:ApplicationService a owl:Class ;
+    dct:identifier "ApplicationService" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ApplicationService" ;
     skos:definition "An application service in Archimate."@en ;
     skos:prefLabel "application service"@en .
 
 archimate:Artifact a owl:Class ;
+    dct:identifier "Artifact" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Artifact" ;
     skos:definition "An artifact in Archimate."@en ;
     skos:prefLabel "artifact"@en .
 
 archimate:Assessment a owl:Class ;
+    dct:identifier "Assessment" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Assessment" ;
     skos:definition "An assessment in Archimate."@en ;
     skos:prefLabel "assessment"@en .
 
 archimate:BusinessCollaboration a owl:Class ;
+    dct:identifier "BusinessCollaboration" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessCollaboration" ;
     skos:definition "A business collaboration in Archimate."@en ;
     skos:prefLabel "business collaboration"@en .
 
 archimate:BusinessEvent a owl:Class ;
+    dct:identifier "BusinessEvent" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessEvent" ;
     skos:definition "A business event in Archimate."@en ;
     skos:prefLabel "business event"@en .
 
 archimate:BusinessFunction a owl:Class ;
+    dct:identifier "BusinessFunction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessFunction" ;
     skos:definition "A business function in Archimate."@en ;
     skos:prefLabel "business function"@en .
 
 archimate:BusinessInteraction a owl:Class ;
+    dct:identifier "BusinessInteraction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessInteraction" ;
     skos:definition "A business interaction in Archimate."@en ;
     skos:prefLabel "business interaction"@en .
 
 archimate:BusinessInterface a owl:Class ;
+    dct:identifier "BusinessInterface" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessInterface" ;
     skos:definition "A business interface in Archimate."@en ;
     skos:prefLabel "business interface"@en .
 
-archimate:BusinessObject a owl:Class ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessObject" ;
-    skos:definition "A business object in Archimate."@en ;
-    skos:prefLabel "business object"@en .
-
 archimate:Capability a owl:Class ;
+    dct:identifier "Capability" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Capability" ;
     skos:definition "A capability in Archimate."@en ;
     skos:prefLabel "capability"@en .
 
 archimate:CommunicationNetwork a owl:Class ;
+    dct:identifier "CommunicationNetwork" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "CommunicationNetwork" ;
     skos:definition "A communication network in Archimate."@en ;
     skos:prefLabel "communication network"@en .
 
 archimate:Constraint a owl:Class ;
+    dct:identifier "Constraint" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Constraint" ;
     skos:definition "A constraint in Archimate."@en ;
     skos:prefLabel "constraint"@en .
 
 archimate:Contract a owl:Class ;
+    dct:identifier "Contract" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Contract" ;
     skos:definition "A contract in Archimate."@en ;
     skos:prefLabel "contract"@en .
 
 archimate:CourseOfAction a owl:Class ;
+    dct:identifier "CourseOfAction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "CourseOfAction" ;
     skos:definition "A course of action in Archimate."@en ;
     skos:prefLabel "course of action"@en .
 
 archimate:DataObject a owl:Class ;
+    dct:identifier "DataObject" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "DataObject" ;
     skos:definition "A data object in Archimate."@en ;
     skos:prefLabel "data object"@en .
 
 archimate:Deliverable a owl:Class ;
+    dct:identifier "Deliverable" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Deliverable" ;
     skos:definition "A deliverable in Archimate."@en ;
     skos:prefLabel "deliverable"@en .
 
 archimate:Device a owl:Class ;
+    dct:identifier "Device" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Device" ;
     skos:definition "A device in Archimate."@en ;
     skos:prefLabel "device"@en .
 
 archimate:DistributionNetwork a owl:Class ;
+    dct:identifier "DistributionNetwork" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "DistributionNetwork" ;
     skos:definition "A distribution network in Archimate."@en ;
     skos:prefLabel "distribution network"@en .
 
 archimate:Driver a owl:Class ;
+    dct:identifier "Driver" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Driver" ;
     skos:definition "A driver in Archimate."@en ;
     skos:prefLabel "driver"@en .
 
 archimate:Equipment a owl:Class ;
+    dct:identifier "Equipment" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Equipment" ;
     skos:definition "An equipment in Archimate."@en ;
     skos:prefLabel "equipment"@en .
 
 archimate:Facility a owl:Class ;
+    dct:identifier "Facility" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Facility" ;
     skos:definition "A facility in Archimate."@en ;
     skos:prefLabel "facility"@en .
 
 archimate:Gap a owl:Class ;
+    dct:identifier "Gap" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Gap" ;
     skos:definition "A gap in Archimate."@en ;
     skos:prefLabel "gap"@en .
 
 archimate:Goal a owl:Class ;
+    dct:identifier "Goal" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Goal" ;
     skos:definition "A goal in Archimate."@en ;
     skos:prefLabel "goal"@en .
 
 archimate:ImplementationEvent a owl:Class ;
+    dct:identifier "ImplementationEvent" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "ImplementationEvent" ;
     skos:definition "An implementation event in Archimate."@en ;
     skos:prefLabel "implementation event"@en .
 
 archimate:Material a owl:Class ;
+    dct:identifier "Material" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Material" ;
     skos:definition "A material in Archimate."@en ;
     skos:prefLabel "material"@en .
 
 archimate:Meaning a owl:Class ;
+    dct:identifier "Meaning" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Meaning" ;
     skos:definition "A meaning in Archimate."@en ;
     skos:prefLabel "meaning"@en .
 
 archimate:Node a owl:Class ;
+    dct:identifier "Node" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Node" ;
     skos:definition "A node in Archimate."@en ;
     skos:prefLabel "node"@en .
 
 archimate:Outcome a owl:Class ;
+    dct:identifier "Outcome" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Outcome" ;
     skos:definition "An outcome in Archimate."@en ;
     skos:prefLabel "outcome"@en .
 
 archimate:Path a owl:Class ;
+    dct:identifier "Path" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Path" ;
     skos:definition "A path in Archimate."@en ;
     skos:prefLabel "path"@en .
 
 archimate:Plateau a owl:Class ;
+    dct:identifier "Plateau" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Plateau" ;
     skos:definition "A plateau in Archimate."@en ;
     skos:prefLabel "plateau"@en .
 
 archimate:Principle a owl:Class ;
+    dct:identifier "Principle" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Principle" ;
     skos:definition "A principle in Archimate."@en ;
     skos:prefLabel "principle"@en .
 
 archimate:Product a owl:Class ;
+    dct:identifier "Product" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Product" ;
     skos:definition "A product in Archimate."@en ;
     skos:prefLabel "product"@en .
 
 archimate:Representation a owl:Class ;
+    dct:identifier "Representation" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Representation" ;
     skos:definition "A representation in Archimate."@en ;
     skos:prefLabel "representation"@en .
 
 archimate:Requirement a owl:Class ;
+    dct:identifier "Requirement" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Requirement" ;
     skos:definition "A requirement in Archimate."@en ;
     skos:prefLabel "requirement"@en .
 
 archimate:Resource a owl:Class ;
+    dct:identifier "Resource" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Resource" ;
     skos:definition "A resource in Archimate."@en ;
     skos:prefLabel "resource"@en .
 
 archimate:Stakeholder a owl:Class ;
+    dct:identifier "Stakeholder" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Stakeholder" ;
     skos:definition "A stakeholder in Archimate."@en ;
     skos:prefLabel "stakeholder"@en .
 
 archimate:SystemSoftware a owl:Class ;
+    dct:identifier "SystemSoftware" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "SystemSoftware" ;
     skos:definition "A system software in Archimate."@en ;
     skos:prefLabel "system software"@en .
 
 archimate:TechnologyCollaboration a owl:Class ;
+    dct:identifier "TechnologyCollaboration" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyCollaboration" ;
     skos:definition "A technology collaboration in Archimate."@en ;
     skos:prefLabel "technology collaboration"@en .
 
 archimate:TechnologyEvent a owl:Class ;
+    dct:identifier "TechnologyEvent" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyEvent" ;
     skos:definition "A technology event in Archimate."@en ;
     skos:prefLabel "technology event"@en .
 
 archimate:TechnologyFunction a owl:Class ;
+    dct:identifier "TechnologyFunction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyFunction" ;
     skos:definition "A technology function in Archimate."@en ;
     skos:prefLabel "technology function"@en .
 
 archimate:TechnologyInteraction a owl:Class ;
+    dct:identifier "TechnologyInteraction" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyInteraction" ;
     skos:definition "A technology interaction in Archimate."@en ;
     skos:prefLabel "technology interaction"@en .
 
 archimate:TechnologyInterface a owl:Class ;
+    dct:identifier "TechnologyInterface" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyInterface" ;
     skos:definition "A technology interface in Archimate."@en ;
     skos:prefLabel "technology interface"@en .
 
 archimate:TechnologyProcess a owl:Class ;
+    dct:identifier "TechnologyProcess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyProcess" ;
     skos:definition "A technology process in Archimate."@en ;
     skos:prefLabel "technology process"@en .
 
 archimate:TechnologyService a owl:Class ;
+    dct:identifier "TechnologyService" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "TechnologyService" ;
     skos:definition "A technology service in Archimate."@en ;
     skos:prefLabel "technology service"@en .
 
 archimate:Value a owl:Class ;
+    dct:identifier "Value" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "Value" ;
     skos:definition "A value in Archimate."@en ;
     skos:prefLabel "value"@en .
 
 archimate:WorkPackage a owl:Class ;
+    dct:identifier "WorkPackage" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "WorkPackage" ;
     skos:definition "A work package in Archimate."@en ;
     skos:prefLabel "work package"@en .
 
 archimate:aggregation a owl:ObjectProperty ;
+    dct:identifier "Aggregation" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Aggregation" ;
     skos:prefLabel "Aggregation Relationship"@en .
 
-archimate:assignedTo a owl:ObjectProperty ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Assignment" ;
-    skos:prefLabel "Assignment Relationship"@en .
-
-archimate:association a owl:ObjectProperty ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Association" ;
-    skos:prefLabel "Association Relationship"@en .
-
 archimate:composition a owl:ObjectProperty ;
+    dct:identifier "Composition" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Composition" ;
     skos:prefLabel "Composition Relationship"@en .
 
 archimate:flow a owl:ObjectProperty ;
+    dct:identifier "Flow" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Flow" ;
     skos:prefLabel "Flow Relationship"@en .
 
 archimate:influence a owl:ObjectProperty ;
+    dct:identifier "Influence" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Influence" ;
     skos:prefLabel "Influence Relationship"@en .
 
 archimate:property a owl:ObjectProperty ;
+    dct:identifier "Property" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Property" ;
     skos:prefLabel "Property Relationship"@en .
 
 archimate:readAccess a owl:ObjectProperty ;
+    dct:identifier "ReadAccess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:access ;
-    xsi:type "ReadAccess" ;
     skos:prefLabel "Read Access Relationship"@en .
 
 archimate:readWriteAccess a owl:ObjectProperty ;
+    dct:identifier "ReadWriteAccess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:access ;
-    xsi:type "ReadWriteAccess" ;
     skos:prefLabel "Read-Write Access Relationship"@en .
 
 archimate:realization a owl:ObjectProperty ;
+    dct:identifier "Realization" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Realization" ;
     skos:prefLabel "Realization Relationship"@en .
 
 archimate:serving a owl:ObjectProperty ;
+    dct:identifier "Serving" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Serving" ;
     skos:prefLabel "Serving Relationship"@en .
 
 archimate:specialization a owl:ObjectProperty ;
+    dct:identifier "Specialization" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Specialization" ;
     skos:prefLabel "Specialization Relationship"@en .
 
 archimate:triggering a owl:ObjectProperty ;
+    dct:identifier "Triggering" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Triggering" ;
     skos:prefLabel "Triggering Relationship"@en .
 
 archimate:writeAccess a owl:ObjectProperty ;
+    dct:identifier "WriteAccess" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:access ;
-    xsi:type "WriteAccess" ;
     skos:prefLabel "Write Access Relationship"@en .
 
 model:BasicModel-Documentation a archiXML:Documentation ;
     rdf:_1 model:BasicModel-DocumentationText ;
     xml1:lang "en" .
 
-model:BasicModel-DocumentationText a archiXML:TextElement ;
+model:BasicModel-DocumentationText a archiXML:Text ;
     archiXML:fragment "Example of a basic model with two elements and a relationship" .
 
 model:BasicModel-Elements a archiXML:Elements ;
     rdf:_1 model:aBusinessActor-Element ;
-    rdf:_2 model:aBusinessRole-Element .
+    rdf:_2 model:aBusinessObject-Element ;
+    rdf:_3 model:aBusinessRole-Element .
 
 model:BasicModel-Model a archiXML:Model ;
     rdf:_1 model:BasicModel-ModelName ;
@@ -505,13 +480,14 @@ model:BasicModel-Model a archiXML:Model ;
     xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
     xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
     xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    prov:wasDerivedFrom model:BasicModel ;
     archiXML:identifier "Model-1" .
 
 model:BasicModel-ModelName a archiXML:Name ;
     rdf:_1 model:BasicModel-ModelNameText ;
     xml1:lang "en" .
 
-model:BasicModel-ModelNameText a archiXML:TextElement ;
+model:BasicModel-ModelNameText a archiXML:Text ;
     archiXML:fragment "Basic Model" .
 
 model:BasicModel-Organizations a archiXML:Organizations .
@@ -521,14 +497,10 @@ model:BasicModel-Properties a archiXML:Properties .
 model:BasicModel-PropertyDefinitions a archiXML:PropertyDefinitions .
 
 model:BasicModel-Relationships a archiXML:Relationships ;
-    rdf:_1 archimate:assignedTo-Relationship .
+    rdf:_1 model:aRelationship1-Relationship ;
+    rdf:_2 model:aRelationship2-Relationship .
 
 model:BasicModel-Views a archiXML:Views .
-
-model:aBusinessActor a archimate:BusinessActor ;
-    skos:definition "An example of a business actor" ;
-    skos:prefLabel "A business actor" ;
-    archimate:assignedTo model:aBusinessRole .
 
 model:aBusinessActor-Element a archiXML:Element ;
     rdf:_1 model:aBusinessActor-ElementName ;
@@ -540,8 +512,21 @@ model:aBusinessActor-ElementName a archiXML:Name ;
     rdf:_1 model:aBusinessActor-ElementNameText ;
     xml1:lang "en" .
 
-model:aBusinessActor-ElementNameText a archiXML:TextElement ;
+model:aBusinessActor-ElementNameText a archiXML:Text ;
     archiXML:fragment "A business actor" .
+
+model:aBusinessObject-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessObject-ElementName ;
+    xsi:type "BusinessObject" ;
+    prov:wasDerivedFrom model:aBusinessObject ;
+    archiXML:identifier "BusinessObject1" .
+
+model:aBusinessObject-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessObject-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessObject-ElementNameText a archiXML:Text ;
+    archiXML:fragment "A business role" .
 
 model:aBusinessRole-Element a archiXML:Element ;
     rdf:_1 model:aBusinessRole-ElementName ;
@@ -553,20 +538,65 @@ model:aBusinessRole-ElementName a archiXML:Name ;
     rdf:_1 model:aBusinessRole-ElementNameText ;
     xml1:lang "en" .
 
-model:aBusinessRole-ElementNameText a archiXML:TextElement ;
+model:aBusinessRole-ElementNameText a archiXML:Text ;
     archiXML:fragment "A business role" .
 
+model:aRelationship1-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship1-RelationshipName ;
+    xsi:type "Assignment" ;
+    prov:wasDerivedFrom model:aRelationship1 ;
+    archiXML:identifier "Relation_1" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+model:aRelationship1-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship1-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipNameText a archiXML:Text ;
+    archiXML:fragment "Assignment Relationship"@en .
+
+model:aRelationship2 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business object and relationship association" ;
+    skos:prefLabel "a business object - relationship association" ;
+    archimate:from model:aBusinessObject ;
+    archimate:relationship archimate:association ;
+    archimate:to model:aRelationship1 .
+
+model:aRelationship2-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship2-RelationshipName ;
+    xsi:type "Association" ;
+    prov:wasDerivedFrom model:aRelationship2 ;
+    archiXML:identifier "Relation_2" ;
+    archiXML:source "BusinessObject1" ;
+    archiXML:target "Relation_1" .
+
+model:aRelationship2-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship2-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship2-RelationshipNameText a archiXML:Text ;
+    archiXML:fragment "Association Relationship"@en .
+
 archimate:BusinessActor a owl:Class ;
+    dct:identifier "BusinessActor" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessActor" ;
     skos:definition "A business actor in Archimate."@en ;
     skos:prefLabel "business actor"@en .
 
-archimate:BusinessRole a owl:Class ;
+archimate:BusinessObject a owl:Class ;
+    dct:identifier "BusinessObject" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
-    xsi:type "BusinessRole" ;
+    skos:definition "A business object in Archimate."@en ;
+    skos:prefLabel "business object"@en .
+
+archimate:BusinessRole a owl:Class ;
+    dct:identifier "BusinessRole" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Element ;
     skos:definition "A business role in Archimate."@en ;
     skos:prefLabel "business role"@en .
 
@@ -575,29 +605,50 @@ archimate:Model a owl:Class ;
     skos:definition "A model in Archimate."@en ;
     skos:prefLabel "Model"@en .
 
-archimate:assignedTo-Relationship a archiXML:Relationship ;
-    rdf:_1 archimate:assignedTo-Relationship-RelationshipName ;
-    xsi:type "Assignment" ;
-    archiXML:identifier "Relation_1" ;
-    archiXML:source "BusinessActor1" ;
-    archiXML:target "BusinessRole1" .
+archimate:assignedTo a owl:ObjectProperty ;
+    dct:identifier "Assignment" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Assignment Relationship"@en .
 
-archimate:assignedTo-Relationship-RelationshipName a archiXML:Name ;
-    rdf:_1 archimate:assignedTo-Relationship-RelationshipNameText ;
-    xml1:lang "en" .
+archimate:association a owl:ObjectProperty ;
+    dct:identifier "Association" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Association Relationship"@en .
 
-archimate:assignedTo-Relationship-RelationshipNameText a archiXML:TextElement ;
-    archiXML:fragment "Assignment Relationship"@en .
+model:aBusinessActor a archimate:BusinessActor ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business actor" ;
+    skos:prefLabel "A business actor" .
 
-model:aBusinessRole a archimate:BusinessRole ;
+model:aBusinessObject a archimate:BusinessObject ;
+    rdfs:isDefinedBy model:BasicModel ;
     skos:definition "An example of a business role" ;
     skos:prefLabel "A business role" .
 
+model:aBusinessRole a archimate:BusinessRole ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business role" ;
+    skos:prefLabel "A business role" .
+
+model:aRelationship1 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business actor and role assignment" ;
+    skos:prefLabel "a business actor - role assignment" ;
+    archimate:from model:aBusinessActor ;
+    archimate:relationship archimate:assignedTo ;
+    archimate:to model:aBusinessRole .
+
 archimate:access a owl:ObjectProperty ;
+    dct:identifier "Access" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subPropertyOf archimate:relationship ;
-    xsi:type "Access" ;
     skos:prefLabel "Access Relationship"@en .
+
+model:BasicModel a archimate:Model ;
+    skos:definition "Example of a basic model with two elements and a relationship" ;
+    skos:prefLabel "Basic Model" .
 
 archimate:relationship a owl:ObjectProperty ;
     rdfs:domain archimate:Element ;
@@ -612,7 +663,7 @@ archimate:Element a owl:Class ;
 
 archimate: a void:Dataset,
         owl:Ontology,
-        respec:Ontology ;
+        ns1:Ontology ;
     dct:abstract "Abstract of archimate vocabulary"@en ;
     dct:created "2024-02-14"^^xsd:date ;
     dct:creator "Flores Bakker" ;
@@ -639,9 +690,9 @@ This can be represented in RDF using the archimate vocabulary as follows:
 
 """ ;
     foaf:homepage "https://www.example.com/"^^xsd:anyURI ;
-    respec:audience "Audience of archimate vocabulary"@en ;
-    respec:introduction """
+    ns1:audience "Audience of archimate vocabulary"@en ;
+    ns1:introduction """
 Introduction of archimate vocabulary.
 """@en ;
-    respec:objective "Objective of archimate vocabulary"@en .
+    ns1:objective "Objective of archimate vocabulary"@en .
 

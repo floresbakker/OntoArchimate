@@ -23,6 +23,8 @@ model:BasicModel-Model a archiXML:Model ;
     xml:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
     archiXML:identifier "Model-1" .
 
+### Model
+
 model:BasicModel-ModelName a archiXML:Name ;
     rdf:_1 model:BasicModel-ModelNameText ;
     xml:lang "en" .
@@ -37,9 +39,12 @@ model:BasicModel-Documentation a archiXML:Documentation ;
 model:BasicModel-DocumentationText a archiXML:Text ;
     xml:fragment "Example of a basic model with two elements and a relationship" .
 
+### Element
+
 model:BasicModel-Elements a archiXML:Elements ;
     rdf:_1 model:aBusinessActor-Element ;
-    rdf:_2 model:aBusinessRole-Element .
+    rdf:_2 model:aBusinessRole-Element ;
+    rdf:_3 model:aBusinessObject-Element.
 
 model:aBusinessActor-Element a archiXML:Element ;
     rdf:_1 model:aBusinessActor-ElementName ;
@@ -65,18 +70,38 @@ model:aBusinessRole-ElementName a archiXML:Name ;
 model:aBusinessRole-ElementNameText a archiXML:Text ;
     xml:fragment "A business role" .
 
-model:BasicModel-Relationships a archiXML:Relationships;
-    rdf:_1 model:assignmentRelationship.
+model:aBusinessObject-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessObject-ElementName ;
+    xsi:type "BusinessObject" ;
+    archiXML:identifier "BusinessObject1" .
+
+model:aBusinessObject-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessObject-ElementNameText ;
+    xml:lang "en" .
+
+model:aBusinessObject-ElementNameText a archiXML:Text ;
+    xml:fragment "A business object" .
+
+### Relationship
     
-model:assignmentRelationship a archiXML:Relationship;
+model:BasicModel-Relationships a archiXML:Relationships;
+    rdf:_1 model:assignmentRelationship1;
+    rdf:_2 model:assignmentRelationship2.
+    
+model:assignmentRelationship1 a archiXML:Relationship;
     archiXML:identifier "relation-1";
     archiXML:source "BusinessActor1";
     archiXML:target "BusinessRole1";
-    xsi:type "Assignment".
+    xsi:type "Assignment".     
 
-model:assignmentRelationship-Name a archiXML:Name ;
-    rdf:_1 model:aBusinessActor-ElementNameText ;
-    xml:lang "en" .
+model:assignmentRelationship2 a archiXML:Relationship;
+    archiXML:identifier "relation-2";
+    archiXML:source "BusinessActor1";
+    archiXML:target "BusinessRole1";
+    xsi:type "Association". 
+    
 
-model:assignmentRelationship-NameText a archiXML:Text ;
-    xml:fragment "Assignment Relationship" .
+    
+    
+
+    

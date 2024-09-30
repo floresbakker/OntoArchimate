@@ -13,7 +13,7 @@ import os
 current_dir = os.getcwd()
 
 # Set the path to the desired standard directory. 
-directory_path = os.path.abspath(os.path.join(current_dir, '..', '..', '..'))
+directory_path = os.path.abspath(os.path.join(current_dir, '..'))
 
 
 # Function to read a graph (as a string) from a file 
@@ -44,8 +44,41 @@ def iteratePyShacl(vocabulary, serializable_graph):
         debug=False,
         )
       
-        # Write the results to the file
-        writeGraph(serializable_graph)             
+        # Query to know if the document has been fully serialised by testing whether the root has a archimate:fragment property. If it has, the algorithm has reached the final level of the document.
+        resultquery = serializable_graph.query('''
+            
+        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>                                              
+        prefix prov: <http://www.w3.org/ns/prov#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+        ASK 
+        WHERE {
+                      
+            ?modelComponents ?implements ?archimateConcepts.
+            ?archimateConcepts rdfs:isDefinedBy archimate:.
+            
+            FILTER NOT EXISTS {
+            ?modelComponents ?implements ?archimateConcepts.
+            ?archimateConcepts rdfs:isDefinedBy archimate:.
+            
+            MINUS {
+                    ?prov prov:wasDerivedFrom ?modelComponents    
+                }
+               }
+              }
+        ''')   
+
+        # Check whether another iteration is needed. If the archimate root of the document contains a archimate:fragment statement then the serialisation is considered done.
+        for result in resultquery:
+            if result == True:
+                "...not yet fully serialised. Running another SHACL iteration..."
+                writeGraph(serializable_graph)
+                iteratePyShacl(vocabulary, serializable_graph)
+            else: 
+                print ("Done.")
+                writeGraph(serializable_graph)
+               
 
 # Get the Archimate vocabulary and place it in a string
 ontoarchi_vocabulary = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
@@ -76,12 +109,5 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXM
         # Call the shacl engine with the Archimate vocabulary and the document to be serialized
         iteratePyShacl(ontoarchi_serialisation, serializable_graph)
         
-        # Start second iteration to build upon the first run
-        document_graph = readGraphFromFile(directory_path+"/OntoArchimate/Tools/ArchiVoc2ArchiXML/Output/"+filename_stem+"-serialized.ttl")
-        serializable_graph_string = vocabulary + document_graph
-        serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="turtle")
-        iteratePyShacl(ontoarchi_serialisation, serializable_graph)
-       
-        print ("\n...Done")
 
     
