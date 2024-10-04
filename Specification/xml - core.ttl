@@ -60,6 +60,7 @@ prefix xml: <http://www.w3.org/XML/model/def/>
     respec:acknowledgements '''
     This standard has been developed through collaborative efforts and contributions from a diverse community of experts and stakeholders. Their dedication and expertise have been instrumental in bringing this vocabulary to fruition.'''@en;
 
+
     foaf:depiction 'https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg'^^xsd:anyURI;
     foaf:homepage 'https://www.rijksfinancien.nl/'^^xsd:anyURI;
     owl:imports
@@ -355,10 +356,7 @@ shp:SerializableNode
 select $this {
 
   # Select all DOM nodes... 
-  $this a/rdfs:subClassOf* dom:Node.
-  
-  #...in a XML document...
-  $this a/rdfs:subClassOf*/rdfs:isDefinedBy xml:.
+  $this a/rdfs:subClassOf* dom:DocumentTreeNode.
   
   # ...that do not yet have an xml fragment.
   filter not exists { $this xml:fragment []. }
@@ -368,7 +366,7 @@ select $this {
     $this ?member ?child.
     filter(strstarts(str(?member),concat(str(rdf:),'_')))               
     filter not exists { ?child xml:fragment []. }
-    ?child a/rdfs:subClassOf* dom:Node.
+    ?child a/rdfs:subClassOf* dom:DocumentTreeNode.
   }
 }''';
     rdfs:isDefinedBy xml:.

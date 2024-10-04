@@ -65,18 +65,18 @@ This can be represented in RDF using the archimate vocabulary as follows:
     void:uriSpace 'https://data.rijksfinancien.nl/xml/archimate/def/'^^xsd:anyURI.
 
 archimate:Model a owl:Class;
-    skos:definition 'A model in Archimate.'@en;
+    skos:definition 'A collection of concepts of the ArchiMate language structure.'@en;
     skos:prefLabel 'Model'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:Element a owl:Class;
-    skos:definition 'An element in Archimate.'@en;
+    skos:definition 'Base unit in the ArchiMate metamodel. Used to define and describe the constituent parts of Enterprise Architecture and their unique set of characteristics.'@en;
     skos:prefLabel 'element'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:Relationship a owl:Class;
     dct:identifier "Relationship";
-    skos:definition 'A relationship in Archimate.'@en;
+    skos:definition 'A connection between a source and target concept. Classified as structural, dependency, dynamic, or other.'@en;
     skos:prefLabel 'relationship'@en;
     rdfs:isDefinedBy archimate:.    
 
