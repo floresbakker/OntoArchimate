@@ -15,50 +15,40 @@ prefix vann: <http://purl.org/vocab/vann/>
 prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
-### Model
+    ### Model
 
-model:BasicModel 
-    rdf:type archimate:Model;
-    skos:prefLabel "Basic Model";
-    skos:definition "Example of a basic model with two elements and a relationship".
+    model:BasicModel 
+        rdf:type archimate:Model;
+        skos:prefLabel "Basic Model";
+        skos:definition "Example of a basic model with two elements and a relationship".
 
-### Element
+    ### Element
 
-model:aBusinessActor 
-    rdf:type archimate:BusinessActor;
-    skos:prefLabel "A business actor";
-    skos:definition "An example of a business actor";
-    rdfs:isDefinedBy model:BasicModel.
+    model:aBusinessActor 
+        rdf:type archimate:BusinessActor;
+        skos:prefLabel "A business actor";
+        skos:definition "An example of a business actor";
+        rdfs:isDefinedBy model:BasicModel.
 
-model:aBusinessRole 
-    rdf:type archimate:BusinessRole;
-    skos:prefLabel "A business role";
-    skos:definition "An example of a business role";
-    rdfs:isDefinedBy model:BasicModel.
-    
-model:aBusinessObject
-    rdf:type archimate:BusinessObject;
-    skos:prefLabel "A business role";
-    skos:definition "An example of a business role";
-    rdfs:isDefinedBy model:BasicModel.
-   
-### Relationship
+    model:aBusinessRole 
+        rdf:type archimate:BusinessRole;
+        skos:prefLabel "A business role";
+        skos:definition "An example of a business role";
+        rdfs:isDefinedBy model:BasicModel.
+       
+    ### Relationship
 
-model:aRelationship1 
-    rdf:type archimate:Relationship;
-    skos:prefLabel "a business actor - role assignment";
-    skos:definition "An example of a business actor and role assignment";
-    archimate:from model:aBusinessActor;
-    archimate:relationship archimate:assignedTo;
-    archimate:to model:aBusinessRole;
-    rdfs:isDefinedBy model:BasicModel.  
-   
-model:aRelationship2
-    rdf:type archimate:Relationship;
-    skos:prefLabel "a business object - relationship association";
-    skos:definition "An example of a business object and relationship association";
-    archimate:from model:aBusinessObject;
-    archimate:relationship archimate:association;
-    archimate:to model:aRelationship1;
-    rdfs:isDefinedBy model:BasicModel.  
+    model:aRelationship1 
+        rdf:type archimate:Relationship;
+        skos:prefLabel "a business actor - role assignment";
+        skos:definition "An example of a business actor and role assignment";
+        archimate:from model:aBusinessActor;
+        archimate:relationship archimate:assignedTo;
+        archimate:to model:aBusinessRole;
+        rdfs:isDefinedBy model:BasicModel.  
+
+
+
+
+
 

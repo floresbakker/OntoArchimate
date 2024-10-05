@@ -75,9 +75,15 @@ archimate:Element a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:Relationship a owl:Class;
-    dct:identifier "Relationship";
-    skos:definition 'A connection between a source and target concept. Classified as structural, dependency, dynamic, or other.'@en;
+    dct:identifier "relationship";
+    skos:definition 'A connection between a specific source and target concept. Classified as structural, dependency, dynamic, or other.'@en;
     skos:prefLabel 'relationship'@en;
+    rdfs:isDefinedBy archimate:.    
+    
+archimate:RelationshipType a owl:Class;
+    dct:identifier "relationship type";
+    skos:definition 'A type of connection between a source and target concept.'@en;
+    skos:prefLabel 'relationship type'@en;
     rdfs:isDefinedBy archimate:.    
 
 archimate:ApplicationCollaboration a owl:Class;
@@ -474,105 +480,105 @@ archimate:relationship a owl:ObjectProperty;
     rdfs:isDefinedBy archimate:.
 
 archimate:assignedTo a owl:ObjectProperty,
-     archimate:Relationship;
-     rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+     rdfs:subPropertyOf archimate:RelationshipType;
      dct:identifier "Assignment";
      skos:prefLabel 'Assignment Relationship'@en;
      rdfs:isDefinedBy archimate:.
 
 archimate:access a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Access";
     skos:prefLabel 'Access Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:aggregation a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Aggregation";
     skos:prefLabel 'Aggregation Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:association a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Association";
     skos:prefLabel 'Association Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:composition a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Composition";
     skos:prefLabel 'Composition Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:flow a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Flow";
     skos:prefLabel 'Flow Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:influence a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Influence";
     skos:prefLabel 'Influence Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:property a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Property";
     skos:prefLabel 'Property Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:readAccess a owl:ObjectProperty,
-     archimate:Relationship;
+     archimate:RelationshipType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadAccess";
     skos:prefLabel 'Read Access Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:readWriteAccess a owl:ObjectProperty,
-     archimate:Relationship;
+     archimate:RelationshipType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadWriteAccess";
     skos:prefLabel 'Read-Write Access Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:realization a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Realization";
     skos:prefLabel 'Realization Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:serving a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Serving";
     skos:prefLabel 'Serving Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:specialization a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Specialization";
     skos:prefLabel 'Specialization Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:triggering a owl:ObjectProperty,
-     archimate:Relationship;
-    rdfs:subPropertyOf archimate:relationship;
+     archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:RelationshipType;
     dct:identifier "Triggering";
     skos:prefLabel 'Triggering Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:writeAccess a owl:ObjectProperty,
-     archimate:Relationship;
+     archimate:RelationshipType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "WriteAccess";
     skos:prefLabel 'Write Access Relationship'@en;

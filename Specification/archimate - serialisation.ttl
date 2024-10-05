@@ -249,7 +249,7 @@ select $this {
   
     }
 ''';
-    rdfs:isDefinedBy xml:.
+    rdfs:isDefinedBy archimate:.
     
     
 rule:Relationship
@@ -336,7 +336,7 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  # create the archimate-fragment for the archimate-relationship
+  # create the archimate fragment for the archimate element
   
   ?model rdf:_3 $this.
   $this ?rdf_member ?element.
@@ -353,42 +353,113 @@ construct {
 shp:RelationshipConnector
     a sh:NodeShape;
     sh:rule rule:RelationshipConnector;
-    sh:targetClass archiXML:Relationships;
+    sh:target target:Relationships;
     skos:prefLabel 'archimate relationships shape'@en;
     rdfs:isDefinedBy archimate:.
 
+target:Relationships
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all relationships in the model that have to be placed under the parent Relationships.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    
+select ?this
+where {
+  # Select individuals of archiXML:Relationships 
+  ?connector rdf:type archiXML:Relationships.
+  OPTIONAL
+  {select ?unprocessedRelationship where {
+ 
+    ?unprocessedRelationship rdf:type archimate:Relationship .
+    filter not exists {
+      [] prov:wasDerivedFrom ?unprocessedRelationship .
+     }
+    }
+   }
+  bind(if(!bound(?unprocessedRelationship), ?connector, ?unboundDummy) as ?this)
+}
+''';
+    rdfs:isDefinedBy archimate:.
+    
 rule:RelationshipConnector
     a sh:SPARQLRule;
     rdfs:comment 'A rule that connects all individual archimate relationships with the relationships node in an archimate document.'@en;
     skos:prefLabel 'archimate relationship connector rule'@en;
     sh:construct '''
 
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
+prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
   # create the archimate-fragment for the archimate-relationship
   
   $this ?rdf_member ?relationship.
-  ?relationship archiXML:identifier ?identifier.
   
-
 } where {
-  ?relationship rdf:type archiXML:Relationship.
-  BIND(IRI(CONCAT(str(rdf:),"_", str(function:getRelationshipPosition(?relationship)))) as ?rdf_member)  
-  BIND(CONCAT("Relation_",str(function:getRelationshipPosition(?relationship))) as ?identifier)
+  ?relationship rdf:type archiXML:Relationship;
+                prov:wasDerivedFrom ?archimateRelation.    
+  bind(iri(concat(str(rdf:),"_", str(function:getRelationshipPosition(?archimateRelation)))) as ?rdf_member)
   }
 ''';
     rdfs:isDefinedBy archimate:.
 
+shp:RelationshipIdentifier
+    a sh:NodeShape;
+    sh:rule rule:RelationshipIdentifier;
+    sh:target target:RelationshipIdentifier;
+    skos:prefLabel 'Relationship Identifier shape'@en;
+    rdfs:isDefinedBy archimate:.
+
+target:RelationshipIdentifier
+ a sh:SPARQLTarget;
+    rdfs:comment 'Select all relationships in the model that have to be placed under the parent Relationships.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    
+select ?this
+where {
+  
+  $this rdf:type archiXML:Relationship.
+  filter not exists {$this archiXML:identifier []}
+  
+}
+''';
+    rdfs:isDefinedBy archimate:.
+
+rule:RelationshipIdentifier
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate identifier for an archimate relationship'@en;
+    skos:prefLabel 'archimate relationship identifier rule'@en;
+    sh:construct '''
+
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
+prefix prov: <http://www.w3.org/ns/prov#>
+
+construct {
+
+  # create the archimate-fragment for the archimate-relationship
+  
+  $this archiXML:identifier ?identifier .
+  
+
+} where {
+  $this prov:wasDerivedFrom ?archimateRelation.
+  BIND(CONCAT("Relation_",str(function:getRelationshipPosition(?archimateRelation))) as ?identifier)
+  }
+''';
+    rdfs:isDefinedBy archimate:.
 
 shp:ElementIdentifier
     a sh:NodeShape;
@@ -546,7 +617,7 @@ function:getRelationshipPosition
     a sh:SPARQLFunction ;
     rdfs:comment "Returns alphabetical position of an archimate relationship within the set of all relationships." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:relationship ;
         sh:datatype xsd:anyURI ;
         sh:description "The relationship for which the position has to be returned." ;
     ] ;
@@ -564,18 +635,17 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
        SELECT ?result WHERE {
-       {SELECT ?relationship (COUNT(?prevRelationship) + 1 AS ?member)
+       {SELECT $relationship (COUNT(?prevRelationship) + 1 AS ?member)
         WHERE {
-          ?relationship rdf:type archiXML:Relationship.
+          $relationship rdf:type archimate:Relationship.
           OPTIONAL {
-            ?prevRelationship rdf:type archiXML:Relationship.
-            FILTER(str(?prevRelationship) < str(?relationship))
+            ?prevRelationship rdf:type archimate:Relationship.
+            FILTER(str(?prevRelationship) < str($relationship))
           }
         }
-        GROUP BY ?relationship
-        ORDER BY ?relationship
+        GROUP BY $relationship
+        ORDER BY $relationship
         }
-       FILTER (?relationship = $input)
        BIND(?member as ?result)
       }
         """ .

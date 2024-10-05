@@ -125,6 +125,13 @@ archimate:BusinessInterface a owl:Class ;
     skos:definition "A business interface in Archimate."@en ;
     skos:prefLabel "business interface"@en .
 
+archimate:BusinessObject a owl:Class ;
+    dct:identifier "BusinessObject" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Element ;
+    skos:definition "A business object in Archimate."@en ;
+    skos:prefLabel "business object"@en .
+
 archimate:Capability a owl:Class ;
     dct:identifier "Capability" ;
     rdfs:isDefinedBy archimate: ;
@@ -391,6 +398,13 @@ archimate:aggregation a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:RelationshipType ;
     skos:prefLabel "Aggregation Relationship"@en .
 
+archimate:association a owl:ObjectProperty,
+        archimate:RelationshipType ;
+    dct:identifier "Association" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:RelationshipType ;
+    skos:prefLabel "Association Relationship"@en .
+
 archimate:composition a owl:ObjectProperty,
         archimate:RelationshipType ;
     dct:identifier "Composition" ;
@@ -483,8 +497,7 @@ model:BasicModel-DocumentationText a archiXML:Text ;
 
 model:BasicModel-Elements a archiXML:Elements ;
     rdf:_1 model:aBusinessActor-Element ;
-    rdf:_2 model:aBusinessObject-Element ;
-    rdf:_3 model:aBusinessRole-Element .
+    rdf:_2 model:aBusinessRole-Element .
 
 model:BasicModel-Model a archiXML:Model ;
     rdf:_1 model:BasicModel-ModelName ;
@@ -515,8 +528,7 @@ model:BasicModel-Properties a archiXML:Properties .
 model:BasicModel-PropertyDefinitions a archiXML:PropertyDefinitions .
 
 model:BasicModel-Relationships a archiXML:Relationships ;
-    rdf:_1 model:aRelationship1-Relationship ;
-    rdf:_2 model:aRelationship2-Relationship .
+    rdf:_1 model:aRelationship1-Relationship .
 
 model:BasicModel-Views a archiXML:Views .
 
@@ -533,19 +545,6 @@ model:aBusinessActor-ElementName a archiXML:Name ;
 model:aBusinessActor-ElementNameText a archiXML:Text ;
     xml1:fragment "A business actor" .
 
-model:aBusinessObject-Element a archiXML:Element ;
-    rdf:_1 model:aBusinessObject-ElementName ;
-    xsi:type "BusinessObject" ;
-    prov:wasDerivedFrom model:aBusinessObject ;
-    archiXML:identifier "BusinessObject1" .
-
-model:aBusinessObject-ElementName a archiXML:Name ;
-    rdf:_1 model:aBusinessObject-ElementNameText ;
-    xml1:lang "en" .
-
-model:aBusinessObject-ElementNameText a archiXML:Text ;
-    xml1:fragment "A business role" .
-
 model:aBusinessRole-Element a archiXML:Element ;
     rdf:_1 model:aBusinessRole-ElementName ;
     xsi:type "BusinessRole" ;
@@ -558,6 +557,14 @@ model:aBusinessRole-ElementName a archiXML:Name ;
 
 model:aBusinessRole-ElementNameText a archiXML:Text ;
     xml1:fragment "A business role" .
+
+model:aRelationship1 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business actor and role assignment" ;
+    skos:prefLabel "a business actor - role assignment" ;
+    archimate:from model:aBusinessActor ;
+    archimate:relationship archimate:assignedTo ;
+    archimate:to model:aBusinessRole .
 
 model:aRelationship1-Relationship a archiXML:Relationship ;
     rdf:_1 model:aRelationship1-RelationshipName ;
@@ -574,42 +581,12 @@ model:aRelationship1-RelationshipName a archiXML:Name ;
 model:aRelationship1-RelationshipNameText a archiXML:Text ;
     xml1:fragment "Assignment Relationship"@en .
 
-model:aRelationship2 a archimate:Relationship ;
-    rdfs:isDefinedBy model:BasicModel ;
-    skos:definition "An example of a business object and relationship association" ;
-    skos:prefLabel "a business object - relationship association" ;
-    archimate:from model:aBusinessObject ;
-    archimate:relationship archimate:association ;
-    archimate:to model:aRelationship1 .
-
-model:aRelationship2-Relationship a archiXML:Relationship ;
-    rdf:_1 model:aRelationship2-RelationshipName ;
-    xsi:type "Association" ;
-    prov:wasDerivedFrom model:aRelationship2 ;
-    archiXML:identifier "Relation_2" ;
-    archiXML:source "BusinessObject1" ;
-    archiXML:target "Relation_1" .
-
-model:aRelationship2-RelationshipName a archiXML:Name ;
-    rdf:_1 model:aRelationship2-RelationshipNameText ;
-    xml1:lang "en" .
-
-model:aRelationship2-RelationshipNameText a archiXML:Text ;
-    xml1:fragment "Association Relationship"@en .
-
 archimate:BusinessActor a owl:Class ;
     dct:identifier "BusinessActor" ;
     rdfs:isDefinedBy archimate: ;
     rdfs:subClassOf archimate:Element ;
     skos:definition "A business actor in Archimate."@en ;
     skos:prefLabel "business actor"@en .
-
-archimate:BusinessObject a owl:Class ;
-    dct:identifier "BusinessObject" ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subClassOf archimate:Element ;
-    skos:definition "A business object in Archimate."@en ;
-    skos:prefLabel "business object"@en .
 
 archimate:BusinessRole a owl:Class ;
     dct:identifier "BusinessRole" ;
@@ -623,6 +600,12 @@ archimate:Model a owl:Class ;
     skos:definition "A collection of concepts of the ArchiMate language structure."@en ;
     skos:prefLabel "Model"@en .
 
+archimate:Relationship a owl:Class ;
+    dct:identifier "relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A connection between a specific source and target concept. Classified as structural, dependency, dynamic, or other."@en ;
+    skos:prefLabel "relationship"@en .
+
 archimate:assignedTo a owl:ObjectProperty,
         archimate:RelationshipType ;
     dct:identifier "Assignment" ;
@@ -630,41 +613,15 @@ archimate:assignedTo a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:RelationshipType ;
     skos:prefLabel "Assignment Relationship"@en .
 
-archimate:association a owl:ObjectProperty,
-        archimate:RelationshipType ;
-    dct:identifier "Association" ;
-    rdfs:isDefinedBy archimate: ;
-    rdfs:subPropertyOf archimate:RelationshipType ;
-    skos:prefLabel "Association Relationship"@en .
-
 model:aBusinessActor a archimate:BusinessActor ;
     rdfs:isDefinedBy model:BasicModel ;
     skos:definition "An example of a business actor" ;
     skos:prefLabel "A business actor" .
 
-model:aBusinessObject a archimate:BusinessObject ;
-    rdfs:isDefinedBy model:BasicModel ;
-    skos:definition "An example of a business role" ;
-    skos:prefLabel "A business role" .
-
 model:aBusinessRole a archimate:BusinessRole ;
     rdfs:isDefinedBy model:BasicModel ;
     skos:definition "An example of a business role" ;
     skos:prefLabel "A business role" .
-
-model:aRelationship1 a archimate:Relationship ;
-    rdfs:isDefinedBy model:BasicModel ;
-    skos:definition "An example of a business actor and role assignment" ;
-    skos:prefLabel "a business actor - role assignment" ;
-    archimate:from model:aBusinessActor ;
-    archimate:relationship archimate:assignedTo ;
-    archimate:to model:aBusinessRole .
-
-archimate:Relationship a owl:Class ;
-    dct:identifier "relationship" ;
-    rdfs:isDefinedBy archimate: ;
-    skos:definition "A connection between a specific source and target concept. Classified as structural, dependency, dynamic, or other."@en ;
-    skos:prefLabel "relationship"@en .
 
 archimate:access a owl:ObjectProperty,
         archimate:RelationshipType ;

@@ -52,7 +52,7 @@ model:aApplicationComponent
 
 model:aRelationship1 
     rdf:type archimate:Relationship;
-    skos:prefLabel "a business actor - role assignment";
+    skos:prefLabel "a business actor - role assignment relation";
     skos:definition "An example of a business actor and role assignment";
     archimate:from model:aBusinessActor;
     archimate:relationship archimate:assignedTo;
@@ -61,12 +61,21 @@ model:aRelationship1
    
 model:aRelationship2
     rdf:type archimate:Relationship;
-    skos:prefLabel "a business object - relationship association";
+    skos:prefLabel "a business object - relationship association relation";
     skos:definition "An example of a business object and relationship association";
     archimate:from model:aBusinessObject;
     archimate:relationship archimate:association;
     archimate:to model:aRelationship1;
     rdfs:isDefinedBy model:BasicModel.  
+
+model:aRelationship3
+    rdf:type archimate:Relationship;
+    skos:prefLabel "a business role - application component access relation";
+    skos:definition "An example of a business object and relationship association";
+    archimate:from model:aBusinessRole;
+    archimate:relationship archimate:access;
+    archimate:to model:aApplicationComponent;
+    rdfs:isDefinedBy model:BasicModel.      
 
 ### View
 

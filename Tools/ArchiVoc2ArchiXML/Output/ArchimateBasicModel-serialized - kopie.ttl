@@ -20,6 +20,21 @@
 model:BasicModel-Document a archiXML:Document ;
     rdf:_1 model:BasicModel-Model .
 
+model:aRelationship1-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship1-RelationshipName ;
+    xsi:type "Assignment" ;
+    prov:wasDerivedFrom model:aRelationship1 ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+model:aRelationship2 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business object and relationship association" ;
+    skos:prefLabel "a business object - relationship association" ;
+    archimate:from model:aBusinessObject ;
+    archimate:relationship archimate:association ;
+    archimate:to model:aRelationship1 .
+
 archimate:ApplicationCollaboration a owl:Class ;
     dct:identifier "ApplicationCollaboration" ;
     rdfs:isDefinedBy archimate: ;
@@ -514,9 +529,7 @@ model:BasicModel-Properties a archiXML:Properties .
 
 model:BasicModel-PropertyDefinitions a archiXML:PropertyDefinitions .
 
-model:BasicModel-Relationships a archiXML:Relationships ;
-    rdf:_1 model:aRelationship1-Relationship ;
-    rdf:_2 model:aRelationship2-Relationship .
+model:BasicModel-Relationships a archiXML:Relationships .
 
 model:BasicModel-Views a archiXML:Views .
 
@@ -559,43 +572,12 @@ model:aBusinessRole-ElementName a archiXML:Name ;
 model:aBusinessRole-ElementNameText a archiXML:Text ;
     xml1:fragment "A business role" .
 
-model:aRelationship1-Relationship a archiXML:Relationship ;
-    rdf:_1 model:aRelationship1-RelationshipName ;
-    xsi:type "Assignment" ;
-    prov:wasDerivedFrom model:aRelationship1 ;
-    archiXML:identifier "Relation_1" ;
-    archiXML:source "BusinessActor1" ;
-    archiXML:target "BusinessRole1" .
-
 model:aRelationship1-RelationshipName a archiXML:Name ;
     rdf:_1 model:aRelationship1-RelationshipNameText ;
     xml1:lang "en" .
 
 model:aRelationship1-RelationshipNameText a archiXML:Text ;
     xml1:fragment "Assignment Relationship"@en .
-
-model:aRelationship2 a archimate:Relationship ;
-    rdfs:isDefinedBy model:BasicModel ;
-    skos:definition "An example of a business object and relationship association" ;
-    skos:prefLabel "a business object - relationship association" ;
-    archimate:from model:aBusinessObject ;
-    archimate:relationship archimate:association ;
-    archimate:to model:aRelationship1 .
-
-model:aRelationship2-Relationship a archiXML:Relationship ;
-    rdf:_1 model:aRelationship2-RelationshipName ;
-    xsi:type "Association" ;
-    prov:wasDerivedFrom model:aRelationship2 ;
-    archiXML:identifier "Relation_2" ;
-    archiXML:source "BusinessObject1" ;
-    archiXML:target "Relation_1" .
-
-model:aRelationship2-RelationshipName a archiXML:Name ;
-    rdf:_1 model:aRelationship2-RelationshipNameText ;
-    xml1:lang "en" .
-
-model:aRelationship2-RelationshipNameText a archiXML:Text ;
-    xml1:fragment "Association Relationship"@en .
 
 archimate:BusinessActor a owl:Class ;
     dct:identifier "BusinessActor" ;
