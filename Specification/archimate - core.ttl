@@ -43,11 +43,11 @@ Introduction of archimate vocabulary.
     dct:abstract '''Abstract of archimate vocabulary'''@en; 
     skos:example """
 
-An example of an archimate model:
+* An example of an archimate model:
 
 There are three Archimate elements, involving a Business Actor, a Business Role, and a Business Object. There are two relationships. The first relationship is an Assignment from the Business Actor to the Business Role, representing the assignment of a role to the actor. The second relationship is an Association from the Business Object to the Assignment Relationship. This means the Business Object is associated with the business actor's role assignment. For instance, when there is a contract stipulating the conditions of the actor's role assignment.
 
-This can be represented in RDF using the archimate vocabulary as follows:
+* This can be represented in RDF using the archimate vocabulary as follows:
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix model: <https://data.rijksfinancien.nl/archimate/id/>
@@ -115,28 +115,165 @@ model:aRelationship2
     void:uriRegexPattern '^https://data.rijksfinancien.nl/archimate/model/def/';
     void:uriSpace 'https://data.rijksfinancien.nl/xml/archimate/def/'^^xsd:anyURI.
 
+### Language structure 
+
 archimate:Model a owl:Class;
     skos:definition 'A collection of concepts of the ArchiMate language structure.'@en;
     skos:prefLabel 'Model'@en;
     rdfs:isDefinedBy archimate:.
+    
+archimate:Concept a owl:Class;
+    owl:unionOf (archimate:Element archimate:Relationship archimate:RelationshipConnector);
+    skos:definition 'A concept is either an element or a relationship.'@en;
+    skos:prefLabel 'concept'@en;
+    rdfs:isDefinedBy archimate:.    
 
 archimate:Element a owl:Class;
-    skos:definition 'Base unit in the ArchiMate metamodel. Used to define and describe the constituent parts of Enterprise Architecture and their unique set of characteristics.'@en;
+    rdfs:subClassOf archimate:Concept;
+    skos:definition 'Base unit in the ArchiMate metamodel. Used to define and describe the constituent parts of Enterprise Architecture and their unique set of characteristics. An element is either a behavior element, a structure element, a motivation element, or a composite element.'@en;
     skos:prefLabel 'element'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:CoreElement a owl:Class;
+    owl:unionOf (archimate:StructureElement archimate:BehaviorElement) ;
+    skos:definition 'A core element in Archimate.'@en;
+    skos:prefLabel 'core element'@en;
+    rdfs:isDefinedBy archimate:.
+    
+archimate:BehaviorElement a owl:Class;
+    rdfs:subClassOf archimate:Element;
+    skos:definition 'Behavior elements represent the dynamic aspects of the enterprise.'@en;
+    skos:prefLabel 'behavior element'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:ExternalBehaviorElement a owl:Class;
+    rdfs:subClassOf archimate:BehaviorElement;
+    skos:definition 'An external behavior element, called a service, represents an explicitly defined exposed behavior.'@en;
+    skos:prefLabel 'external behavior element'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:InternalBehaviorElement a owl:Class;
+    rdfs:subClassOf archimate:BehaviorElement;
+    skos:definition 'An internal behavior element represents a unit of activity that can be performed by one or more active structure elements.'@en;
+    skos:prefLabel 'internal behavior element'@en;
+    rdfs:isDefinedBy archimate:.    
+
+archimate:Event a owl:Class;
+    rdfs:subClassOf archimate:BehaviorElement;
+    skos:definition 'An event represents a state change.'@en;
+    skos:prefLabel 'event'@en;
+    rdfs:isDefinedBy archimate:.
+    
+archimate:StructureElement a owl:Class;
+    rdfs:subClassOf archimate:Element;
+    skos:definition 'Structure elements represent the structural aspects of the enterprise.'@en;
+    skos:prefLabel 'structure element'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:ActiveStructureElement a owl:Class;
+    rdfs:subClassOf archimate:StructureElement;
+    skos:definition 'Active structure elements are the subjects that can perform behavior.'@en;
+    skos:prefLabel 'active structure element'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:ExternalActiveStructureElement a owl:Class;
+    rdfs:subClassOf archimate:ActiveStructureElement;
+    skos:definition 'An external active structure element, called interface, represents a point of access where one or more services are provided to the environment.'@en;
+    skos:prefLabel 'external active structure element'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:InternalActiveStructureElement a owl:Class;
+    rdfs:subClassOf archimate:ActiveStructureElement;
+    skos:definition 'An internal active structure element represents an entity that is capable of performing behavior.'@en;
+    skos:prefLabel 'internal active structure element'@en;
+    rdfs:isDefinedBy archimate:.    
+        
+archimate:PassiveStructureElement a owl:Class;
+    rdfs:subClassOf archimate:StructureElement;
+    skos:definition 'A passive structure element represents an element on which behavior is performed.'@en;
+    skos:prefLabel 'passive structure element'@en;
+    rdfs:isDefinedBy archimate:.
+        
+archimate:MotivationElement a owl:Class;
+    rdfs:subClassOf archimate:StructureElement;
+    skos:definition 'A motivation element represents the context of or reason behind the architecture of an enterprise.'@en;
+    skos:prefLabel 'passive structure element'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:CompositeElement a owl:Class;
+    rdfs:subClassOf archimate:StructureElement;
+    skos:definition 'An element consisting of other elements from multiple aspects or layers of the language.'@en;
+    skos:prefLabel 'passive structure element'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:Relationship a owl:Class;
+    rdfs:subClassOf archimate:Concept;
     dct:identifier "relationship";
     skos:definition 'A connection between a specific source and target concept. Classified as structural, dependency, dynamic, or other.'@en;
     skos:prefLabel 'relationship'@en;
     rdfs:isDefinedBy archimate:.    
+
+archimate:RelationshipConnector a owl:Class;
+    rdfs:subClassOf archimate:Concept;
+    dct:identifier "relationship connector";
+    skos:definition 'A connection between a specific source and target concept. Classified as structural, dependency, dynamic, or other.'@en;
+    skos:prefLabel 'relationship connector'@en;
+    rdfs:isDefinedBy archimate:.        
     
 archimate:RelationshipType a owl:Class;
-    dct:identifier "relationship type";
     skos:definition 'A type of connection between a source and target concept.'@en;
     skos:prefLabel 'relationship type'@en;
-    rdfs:isDefinedBy archimate:.    
+    rdfs:isDefinedBy archimate:.   
 
+archimate:StructuralRelationship a owl:Class;
+    rdfs:subClassOf archimate:RelationshipType;
+    dct:identifier "structual relationship";
+    skos:definition 'structural relationships represent the "static" coherence within an architecture. They model the static construction or composition of concepts of the same or different types.'@en;
+    skos:prefLabel 'structural relationship'@en;
+    rdfs:isDefinedBy archimate:.      
+
+archimate:DependencyRelationship a owl:Class;
+    rdfs:subClassOf archimate:RelationshipType;
+    dct:identifier "dependency relationship";
+    skos:definition 'dependency relationships model how elements are used to support other elements.'@en;
+    skos:prefLabel 'dependency relationship'@en;
+    rdfs:isDefinedBy archimate:. 
+
+archimate:DynamicRelationship a owl:Class;
+    rdfs:subClassOf archimate:RelationshipType;
+    dct:identifier "dynamic relationship";
+    skos:definition 'dynamic relationships are used to model behavioral dependencies between elements.'@en;
+    skos:prefLabel 'dynamic relationship'@en;
+    rdfs:isDefinedBy archimate:. 
+
+archimate:OtherRelationship a owl:Class;
+    rdfs:subClassOf archimate:RelationshipType;
+    dct:identifier "other relationship";
+    skos:definition 'other relationships are relationships that do not fall in one of the other relationship types.'@en;
+    skos:prefLabel 'other relationship'@en;
+    rdfs:isDefinedBy archimate:. 
+    
+archimate:Attribute a owl:Class;
+    skos:definition 'A property associated with an ArchiMate language element or relationship.'@en;
+    skos:prefLabel 'attribute'@en;
+    rdfs:isDefinedBy archimate:.   
+
+archimate:View a owl:Class;
+    dct:identifier "View";
+    skos:definition 'A representation of a system from the perspective of a related set of concerns.'@en;
+    skos:prefLabel 'archicture view'@en;
+    skos:altLabel 'view';
+    rdfs:isDefinedBy archimate:.
+
+archimate:Viewpoint a owl:Class;
+    dct:identifier "Viewpoint";
+    skos:definition 'A specification of the conventions for a particular kind of architecture view.'@en;
+    skos:prefLabel 'archicture viewpoint'@en;
+    skos:altLabel 'viewpoint';
+    rdfs:isDefinedBy archimate:.    
+    
+### Archimate elements
+    
 archimate:ApplicationCollaboration a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "ApplicationCollaboration";
@@ -205,7 +342,7 @@ archimate:Assessment a owl:Class;
     dct:identifier "Assessment";
     skos:definition 'An assessment in Archimate.'@en;
     skos:prefLabel 'assessment'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archimate:. 
 
 archimate:BusinessActor a owl:Class;
     rdfs:subClassOf archimate:Element;
@@ -270,6 +407,13 @@ archimate:Capability a owl:Class;
     skos:prefLabel 'capability'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:Collaboration a owl:Class;
+    rdfs:subClassOf archimate:InternalActiveStuctureElement;
+    dct:identifier "Collaboration";
+    skos:definition 'A collaboration represents an aggregate of two or more internal active structure elements, working together to perform some collective behavior.'@en;
+    skos:prefLabel 'collaboration'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:CommunicationNetwork a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "CommunicationNetwork";
@@ -283,7 +427,7 @@ archimate:Constraint a owl:Class;
     skos:definition 'A constraint in Archimate.'@en;
     skos:prefLabel 'constraint'@en;
     rdfs:isDefinedBy archimate:.
-
+    
 archimate:Contract a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "Contract";
@@ -347,6 +491,13 @@ archimate:Facility a owl:Class;
     skos:prefLabel 'facility'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:Function a owl:Class;
+    rdfs:subClassOf archimate:InternalBehaviorElement;
+    dct:identifier "Function";
+    skos:definition 'A function represents a collection of behavior based on specific criteria, such as required resources, competencies, or location, and is managed, performed, or implemented as a whole.'@en;
+    skos:prefLabel 'function'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:Gap a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "Gap";
@@ -361,6 +512,13 @@ archimate:Goal a owl:Class;
     skos:prefLabel 'goal'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:Grouping a owl:Class;
+    rdfs:subClassOf archimate:CompositeElement;
+    dct:identifier "Grouping";
+    skos:definition 'The grouping element aggregates or composes concepts that belong together based on some common characteristic.'@en;
+    skos:prefLabel 'grouping'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:ImplementationEvent a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "ImplementationEvent";
@@ -368,6 +526,20 @@ archimate:ImplementationEvent a owl:Class;
     skos:prefLabel 'implementation event'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:Interaction a owl:Class;
+    rdfs:subClassOf archimate:InternalBehaviorElement;
+    dct:identifier "Interaction";
+    skos:definition 'An interaction represents a unit of collective behavior that must be performed by two or more internal active structure elements, either assigned directly or aggregated in a collaboration.'@en;
+    skos:prefLabel 'interaction'@en;
+    rdfs:isDefinedBy archimate:.
+    
+archimate:Location a owl:Class;
+    rdfs:subClassOf archimate:CompositeElement;
+    dct:identifier "Location";
+    skos:definition 'A location represents a conceptual or physical place or position where concepts are located (e.g., structure elements) or performed (e.g., behavior elements).'@en;
+    skos:prefLabel 'location'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:Material a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "Material";
@@ -417,6 +589,13 @@ archimate:Principle a owl:Class;
     skos:prefLabel 'principle'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:Process a owl:Class;
+    rdfs:subClassOf archimate:InternalBehaviorElement;
+    dct:identifier "Process";
+    skos:definition 'A process represents a sequence of behaviors that achieves a specific result.'@en;
+    skos:prefLabel 'process'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:Product a owl:Class;
     rdfs:subClassOf archimate:Element;
     dct:identifier "Product";
@@ -527,61 +706,67 @@ archimate:WorkPackage a owl:Class;
 archimate:relationship a owl:ObjectProperty;
     rdfs:domain archimate:Element;
     rdfs:range archimate:Element;
-    skos:prefLabel 'the relationship attribute'@en;
+    skos:prefLabel 'the relationship property'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:relationshipConnector a owl:ObjectProperty;
+    rdfs:domain archimate:Relationship;
+    rdfs:range archimate:Relationship;
+    skos:prefLabel 'the relationship connector'@en;
+    rdfs:isDefinedBy archimate:.
+    
 archimate:assignedTo a owl:ObjectProperty,
-     archimate:RelationshipType;
-     rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+     rdfs:subPropertyOf archimate:relationship;
      dct:identifier "Assignment";
      skos:prefLabel 'Assignment Relationship'@en;
      rdfs:isDefinedBy archimate:.
 
 archimate:access a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Access";
     skos:prefLabel 'Access Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:aggregation a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Aggregation";
     skos:prefLabel 'Aggregation Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:association a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:DependencyRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Association";
     skos:prefLabel 'Association Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:composition a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Composition";
     skos:prefLabel 'Composition Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:flow a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:DynamicRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Flow";
     skos:prefLabel 'Flow Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:influence a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Influence";
     skos:prefLabel 'Influence Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:property a owl:ObjectProperty,
      archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Property";
     skos:prefLabel 'Property Relationship'@en;
     rdfs:isDefinedBy archimate:.
@@ -601,29 +786,29 @@ archimate:readWriteAccess a owl:ObjectProperty,
     rdfs:isDefinedBy archimate:.
 
 archimate:realization a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Realization";
     skos:prefLabel 'Realization Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:serving a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:StructuralRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Serving";
     skos:prefLabel 'Serving Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:specialization a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:OtherRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Specialization";
     skos:prefLabel 'Specialization Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:triggering a owl:ObjectProperty,
-     archimate:RelationshipType;
-    rdfs:subPropertyOf archimate:RelationshipType;
+     archimate:DynamicRelationship;
+    rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Triggering";
     skos:prefLabel 'Triggering Relationship'@en;
     rdfs:isDefinedBy archimate:.
@@ -634,3 +819,19 @@ archimate:writeAccess a owl:ObjectProperty,
     dct:identifier "WriteAccess";
     skos:prefLabel 'Write Access Relationship'@en;
     rdfs:isDefinedBy archimate:.
+
+archimate:andJunction a owl:ObjectProperty,
+     archimate:RelationshipConnector;
+    rdfs:subPropertyOf archimate:relationshipConnector;
+    dct:identifier "andJunction";
+    skos:prefLabel 'And Junction'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:orJunction a owl:ObjectProperty,
+     archimate:RelationshipConnector;
+    rdfs:subPropertyOf archimate:relationshipConnector;
+    dct:identifier "orJunction";
+    skos:prefLabel 'Or Junction'@en;
+    rdfs:isDefinedBy archimate:.    
+    
+    
