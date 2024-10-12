@@ -110,10 +110,7 @@ construct {
          rdf:_2 ?modelDocumentation;
          rdf:_3 ?elementsNode;
          rdf:_4 ?relationshipsNode;
-         rdf:_5 ?organizationsNode;
-         rdf:_6 ?propertiesNode;
-         rdf:_7 ?propertyDefinitionsNode;
-         rdf:_8 ?viewsNode.
+         rdf:_5 ?viewsNode.
   ?modelNameNode rdf:type archiXML:Name;
          rdf:_1 ?modelNameTextNode;
          xml:lang "en".
@@ -126,9 +123,6 @@ construct {
          xml:fragment ?archimateDocumentation.
   ?elementsNode rdf:type archiXML:Elements.
   ?relationshipsNode rdf:type archiXML:Relationships.
-  ?organizationsNode rdf:type archiXML:Organizations.
-  ?propertiesNode rdf:type archiXML:Properties.
-  ?propertyDefinitionsNode rdf:type archiXML:PropertyDefinitions.
   ?viewsNode rdf:type archiXML:Views.
 
 } where {
@@ -144,9 +138,6 @@ construct {
     BIND(IRI(CONCAT(STR($this),"-DocumentationText")) as ?documentationTextNode)
     BIND(IRI(CONCAT(STR($this),"-Elements")) as ?elementsNode)
     BIND(IRI(CONCAT(STR($this),"-Relationships")) as ?relationshipsNode)
-    BIND(IRI(CONCAT(STR($this),"-Organizations")) as ?organizationsNode)
-    BIND(IRI(CONCAT(STR($this),"-Properties")) as ?propertiesNode)
-    BIND(IRI(CONCAT(STR($this),"-PropertyDefinitions")) as ?propertyDefinitionsNode)
     BIND(IRI(CONCAT(STR($this),"-Views")) as ?viewsNode)
   }
 

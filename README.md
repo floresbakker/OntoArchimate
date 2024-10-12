@@ -20,7 +20,71 @@ With the Archimate Ontology, users can generate, parse, validate, annotate, and 
 
 Let us explore the semantic Archimate vocabulary with examples of Archimate models.
 
-## Example #1: An Archimate model representing a 'Purchasing' application
+## Example #1: Basic Archimate model with three elements and two relationships:
+
+```
+There are three Archimate elements, involving a Business Actor, a Business Role, and a Business Object. There are two relationships. The first relationship is an Assignment from the Business Actor to the Business Role, representing the assignment of a role to the actor. The second relationship is an Association from the Business Object to the Assignment Relationship. This means the Business Object is associated with the business actor's role assignment. For instance, when there is a contract stipulating the conditions of the actor's role assignment.
+```
+
+![Example #1](/Examples/ArchimateExample1.JPG)
+
+This can be represented in RDF using the archimate vocabulary as follows:
+
+```
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix model: <https://data.rijksfinancien.nl/archimate/id/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+### Model
+
+model:BasicModel 
+    rdf:type archimate:Model;
+    skos:prefLabel "Basic Model";
+    skos:definition "Example of a basic model with three elements and two relationships".
+
+### Element
+
+model:aBusinessActor 
+    rdf:type archimate:BusinessActor;
+    skos:prefLabel "A business actor";
+    skos:definition "An example of a business actor";
+    rdfs:isDefinedBy model:BasicModel.
+
+model:aBusinessRole 
+    rdf:type archimate:BusinessRole;
+    skos:prefLabel "A business role";
+    skos:definition "An example of a business role";
+    rdfs:isDefinedBy model:BasicModel.
+    
+model:aBusinessObject
+    rdf:type archimate:BusinessObject;
+    skos:prefLabel "A business role";
+    skos:definition "An example of a business role";
+    rdfs:isDefinedBy model:BasicModel.
+   
+### Relationship
+
+model:aRelationship1 
+    rdf:type archimate:Relationship;
+    skos:prefLabel "a business actor - role assignment";
+    skos:definition "An example of a business actor and role assignment";
+    archimate:from model:aBusinessActor;
+    archimate:relationship archimate:assignedTo;
+    archimate:to model:aBusinessRole;
+    rdfs:isDefinedBy model:BasicModel.  
+   
+model:aRelationship2
+    rdf:type archimate:Relationship;
+    skos:prefLabel "a business object - relationship association";
+    skos:definition "An example of a business object and relationship association";
+    archimate:from model:aBusinessObject;
+    archimate:relationship archimate:association;
+    archimate:to model:aRelationship1;
+    rdfs:isDefinedBy model:BasicModel.  
+```
+
+## Example #2: An Archimate model representing a 'Purchasing' application
 
 ```<?xml version="1.0" encoding="UTF-8"?>
 <archimate:model xmlns="http://www.archimatetool.com/archimate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="OntoArchimate" id="id-377d65038f614b3885cbdf30304d02ae" version="5.0.0">
@@ -37,9 +101,9 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
   </folder>
 </archimate:model>
 ```
-This graphic is rendered in Archie as follows:
+This graphic is rendered in Archi as follows:
 
-![An example of an Archimate-document](/Examples/ArchimateExample.JPG)
+![Example #2](/Examples/ArchimateExample2.JPG)
 
 ## Expressing the Archimate-document in RDF
 
