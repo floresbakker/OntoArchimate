@@ -10,16 +10,16 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix sh: <http://www.w3.org/ns/shacl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix status: <http://purl.org/adms/status/>
-prefix vann: <http://purl.org/vocab/vann/>
-prefix void: <http://rdfs.org/ns/void#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> 
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix vann:      <http://purl.org/vocab/vann/>
+prefix void:      <http://rdfs.org/ns/void#>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xmlns:     <http://www.w3.org/2000/xmlns/model/def/> 
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 prefix graph:     <https://data.rijksfinancien.nl/archimate/graph/>
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix respec:   <https://respec.org/model/def/>
+prefix respec:    <https://respec.org/model/def/>
 prefix rule:      <https://data.rijksfinancien.nl/archimate/model/rule/>
 prefix section:   <https://data.rijksfinancien.nl/archimate/id/section/>
 prefix shp:       <https://data.rijksfinancien.nl/archimate/model/shp/>
@@ -196,7 +196,7 @@ archimate:Relationship a owl:Class;
                                                
                                               [a owl:Restriction ;
                                                owl:onProperty archimate:relation;
-                                               owl:someValuesFrom archimate:RelationshipType]
+                                               owl:someValuesFrom archimate:RelationType]
                                                
                                               [a owl:Restriction ;
                                                owl:onProperty archimate:to;
@@ -327,34 +327,34 @@ archimate:Process a owl:Class;
 
 ### Relationships and Relationship Connectors
 
-archimate:RelationshipType a owl:Class;
+archimate:RelationType a owl:Class;
     skos:definition 'A type of connection between a source and target concept.'@en;
-    skos:prefLabel 'relationship type'@en;
+    skos:prefLabel 'relation type'@en;
     rdfs:isDefinedBy archimate:.   
 
 archimate:StructuralRelationship a owl:Class;
-    rdfs:subClassOf archimate:RelationshipType;
-    dct:identifier "structual relationship";
+    rdfs:subClassOf archimate:RelationType;
+    dct:identifier "structural relationship";
     skos:definition 'structural relationships represent the "static" coherence within an architecture. They model the static construction or composition of concepts of the same or different types.'@en;
     skos:prefLabel 'structural relationship'@en;
     rdfs:isDefinedBy archimate:.      
 
 archimate:DependencyRelationship a owl:Class;
-    rdfs:subClassOf archimate:RelationshipType;
+    rdfs:subClassOf archimate:RelationType;
     dct:identifier "dependency relationship";
     skos:definition 'dependency relationships model how elements are used to support other elements.'@en;
     skos:prefLabel 'dependency relationship'@en;
     rdfs:isDefinedBy archimate:. 
 
 archimate:DynamicRelationship a owl:Class;
-    rdfs:subClassOf archimate:RelationshipType;
+    rdfs:subClassOf archimate:RelationType;
     dct:identifier "dynamic relationship";
     skos:definition 'dynamic relationships are used to model behavioral dependencies between elements.'@en;
     skos:prefLabel 'dynamic relationship'@en;
     rdfs:isDefinedBy archimate:. 
 
 archimate:OtherRelationship a owl:Class;
-    rdfs:subClassOf archimate:RelationshipType;
+    rdfs:subClassOf archimate:RelationType;
     dct:identifier "other relationship";
     skos:definition 'other relationships are relationships that do not fall in one of the other relationship types.'@en;
     skos:prefLabel 'other relationship'@en;
@@ -897,7 +897,7 @@ archimate:WorkPackage a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 
-#### Properties
+### Properties
 
 archimate:relationship a owl:ObjectProperty;
     rdfs:domain archimate:Element;
@@ -961,21 +961,21 @@ archimate:influence a owl:ObjectProperty,
     rdfs:isDefinedBy archimate:.
 
 archimate:property a owl:ObjectProperty,
-     archimate:RelationshipType;
+     archimate:RelationType;
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Property";
     skos:prefLabel 'Property Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:readAccess a owl:ObjectProperty,
-     archimate:RelationshipType;
+     archimate:RelationType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadAccess";
     skos:prefLabel 'Read Access Relationship'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:readWriteAccess a owl:ObjectProperty,
-     archimate:RelationshipType;
+     archimate:RelationType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadWriteAccess";
     skos:prefLabel 'Read-Write Access Relationship'@en;
@@ -1010,7 +1010,7 @@ archimate:triggering a owl:ObjectProperty,
     rdfs:isDefinedBy archimate:.
 
 archimate:writeAccess a owl:ObjectProperty,
-     archimate:RelationshipType;
+     archimate:RelationType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "WriteAccess";
     skos:prefLabel 'Write Access Relationship'@en;
