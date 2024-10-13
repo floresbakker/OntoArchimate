@@ -22,7 +22,7 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
 
 ## Example #1: Basic Archimate model with three elements and two relationships:
 
-*In this example we consider an Archimate model consisting of three Archimate elements...
+In this example we consider an Archimate model consisting of three Archimate elements...
 
 1. a Business Actor
 2. a Business Role
@@ -33,7 +33,7 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
 1. An Assignment Relationship from the Business Actor to the Business Role, representing the assignment of a role to the actor. 
 2. An Association Relationship from the Business Object to the Assignment Relationship. 
 
-Relationship 2 is thus connecting a Business Object with relationship 1.*
+Relationship 2 is thus connecting a Business Object with relationship 1.
 
 ![Example #1](/Examples/ArchimateExample1.JPG)
 
