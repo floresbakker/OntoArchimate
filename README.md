@@ -23,7 +23,7 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
 ## Example #1: Basic Archimate model with three elements and two relationships:
 
 ```
-There are three Archimate elements, involving a Business Actor, a Business Role, and a Business Object. There are two relationships. The first relationship is an Assignment from the Business Actor to the Business Role, representing the assignment of a role to the actor. The second relationship is an Association from the Business Object to the Assignment Relationship. This means the Business Object is associated with the business actor's role assignment. For instance, when there is a contract stipulating the conditions of the actor's role assignment.
+In this example there are three Archimate elements, involving a Business Actor, a Business Role, and a Business Object. There are two relationships. The first relationship is an Assignment from the Business Actor to the Business Role, representing the assignment of a role to the actor. The second relationship is an Association from the Business Object to the Assignment Relationship. This means the Business Object is associated with the business actor's role assignment. For instance, when there is a contract stipulating the conditions of the actor's role assignment.
 ```
 
 ![Example #1](/Examples/ArchimateExample1.JPG)
@@ -84,100 +84,155 @@ model:aRelationship2
     rdfs:isDefinedBy model:BasicModel.  
 ```
 
-## Example #2: An Archimate model representing a 'Purchasing' application
-
-```<?xml version="1.0" encoding="UTF-8"?>
-<archimate:model xmlns="http://www.archimatetool.com/archimate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="OntoArchimate" id="id-377d65038f614b3885cbdf30304d02ae" version="5.0.0">
-  <folder name="Application" id="id-3d6f2fbf1f0743e6904d70cd318eb080" type="application">
-    <element xsi:type="archimate:ApplicationComponent" name="Purchasing" id="id-2dab151425234cebaec68c56edfcdf2b"/>
-  </folder>
- /folder>
-  <folder name="Views" id="id-7e0e0ced065441d1a96e56e667b51fbb" type="diagrams">
-    <element xsi:type="archimate:ArchimateDiagramModel" name="Default View" id="id-7f2d44f14c5f468892a4d46ccc0dde09">
-      <child xsi:type="archimate:DiagramObject" id="id-6254d9d15058420a8dd73b711dadb2e6" archimateElement="id-2dab151425234cebaec68c56edfcdf2b">
-        <bounds x="487" y="251" width="120" height="55"/>
-      </child>
-    </element>
-  </folder>
-</archimate:model>
-```
-This graphic is rendered in Archi as follows:
-
-![Example #2](/Examples/ArchimateExample2.JPG)
-
-## Expressing the Archimate-document in RDF
-
-Now we can represent the very same document in <i>RDF</i> using the Archimate-vocabulary. As it is very cumbersome to do so by hand, a <i>Archimate2RDF</i> tool is available in this repository that will do exactly that for you. For further information on this tool and other neat tools, scroll down this Readme file.
+In turn this archimate model can be generated to a RDF-representation of an XML-document describing the archimate model, using the Archimate - Serialisation vocabulary and archiXML vocabulary, both of which are also offered by this repository. The result of processing the RDF-based archimate model into an RDF-based archiXML vocabulary model, looks like this:
 
 ```
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
 @prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
-@prefix doc: <https://data.rijksfinancien.nl/archimate/doc/id/> .
+@prefix model: <https://data.rijksfinancien.nl/archimate/id/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml1: <http://www.w3.org/XML/1998/namespace#> .
-@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
-@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance#> .
+@prefix xml1: <http://www.w3.org/XML/model/def/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
 
-doc:1 a archimate:Document ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/0/0> .
+model:BasicModel-Document a archiXML:Document ;
+    rdf:_1 model:BasicModel-Model .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/0/0> a archimate:Model ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/00/1> ;
-    rdf:_2 <https://data.rijksfinancien.nl/archimate/doc/id/00/3> ;
-    xmlns:archimate "http://www.archimatetool.com/archimate" ;
+model:BasicModel-Model a archiXML:Model ;
+    rdf:_1 model:BasicModel-ModelName ;
+    rdf:_2 model:BasicModel-Documentation ;
+    rdf:_3 model:BasicModel-Elements ;
+    rdf:_4 model:BasicModel-Relationships ;
     xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
-    xml1:xmlns "http://www.archimatetool.com/archimate" ;
-    archimate:id "id-377d65038f614b3885cbdf30304d02ae" ;
-    archimate:name "OntoArchimate" ;
-    archimate:version "5.0.0" .
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    prov:wasDerivedFrom model:BasicModel ;
+    archiXML:identifier "Model-1" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/1> a archimate:Folder ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/100/1> ;
-    archimate:id "id-3d6f2fbf1f0743e6904d70cd318eb080" ;
-    archimate:name "Application" ;
-    archimate:type "application" .
+model:BasicModel-ModelName a archiXML:Name ;
+    rdf:_1 model:BasicModel-ModelNameText ;
+    xml1:lang "en" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/100/1> a archimate:Element ;
-    xsi:type "archimate:ApplicationComponent" ;
-    archimate:id "id-2dab151425234cebaec68c56edfcdf2b" ;
-    archimate:name "Purchasing" .
+model:BasicModel-ModelNameText a archiXML:Text ;
+    xml1:fragment "Basic Model" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/00/3> a archimate:Folder ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/300/1> ;
-    archimate:id "id-7e0e0ced065441d1a96e56e667b51fbb" ;
-    archimate:name "Views" ;
-    archimate:type "diagrams" .
+model:BasicModel-Documentation a archiXML:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationText ;
+    xml1:lang "en" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/300/1> a archimate:Element ;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/1300/1> ;
-    xsi:type "archimate:ArchimateDiagramModel" ;
-    archimate:id "id-7f2d44f14c5f468892a4d46ccc0dde09" ;
-    archimate:name "Default View" .
+model:BasicModel-DocumentationText a archiXML:Text ;
+    xml1:fragment "Example of a basic model with two elements and a relationship" .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/1300/1> a archimate:Child ;;
-    rdf:_1 <https://data.rijksfinancien.nl/archimate/doc/id/11300/1> ;
-    xsi:type "archimate:DiagramObject" ;
-    archimate:archimateElement "id-2dab151425234cebaec68c56edfcdf2b" ;
-    archimate:id "id-6254d9d15058420a8dd73b711dadb2e6" .
+model:BasicModel-Elements a archiXML:Elements ;
+    rdf:_1 model:aApplicationComponent-Element ;
+    rdf:_2 model:aBusinessActor-Element ;
+    rdf:_3 model:aBusinessObject-Element ;
+    rdf:_4 model:aBusinessRole-Element .
+    
+model:BasicModel-Relationships a archiXML:Relationships ;
+    rdf:_1 model:aRelationship1-Relationship ;
+    rdf:_2 model:aRelationship2-Relationship .
 
-<https://data.rijksfinancien.nl/archimate/doc/id/11300/1> a archimate:Bounds ;
-    archimate:height "55" ;
-    archimate:width "120" ;
-    archimate:x "487" ;
-    archimate:y "251" .
+model:aApplicationComponent-Element a archiXML:Element ;
+    rdf:_1 model:aApplicationComponent-ElementName ;
+    xsi:type "ApplicationComponent" ;
+    prov:wasDerivedFrom model:aApplicationComponent ;
+    archiXML:identifier "ApplicationComponent1" .
 
+model:aApplicationComponent-ElementName a archiXML:Name ;
+    rdf:_1 model:aApplicationComponent-ElementNameText ;
+    xml1:lang "en" .
+
+model:aApplicationComponent-ElementNameText a archiXML:Text ;
+    xml1:fragment "An application component" .
+
+model:aBusinessActor-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    xsi:type "BusinessActor" ;
+    prov:wasDerivedFrom model:aBusinessActor ;
+    archiXML:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessActor-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business actor" .
+
+model:aBusinessObject-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessObject-ElementName ;
+    xsi:type "BusinessObject" ;
+    prov:wasDerivedFrom model:aBusinessObject ;
+    archiXML:identifier "BusinessObject1" .
+
+model:aBusinessObject-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessObject-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessObject-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business role" .
+
+model:aBusinessRole-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    xsi:type "BusinessRole" ;
+    prov:wasDerivedFrom model:aBusinessRole ;
+    archiXML:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessRole-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business role" .
+
+model:aRelationship1-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship1-RelationshipName ;
+    xsi:type "Assignment" ;
+    prov:wasDerivedFrom model:aRelationship1 ;
+    archiXML:identifier "Relation_1" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+model:aRelationship1-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship1-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Assignment Relationship"@en .
+
+model:aRelationship2-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship2-RelationshipName ;
+    xsi:type "Association" ;
+    prov:wasDerivedFrom model:aRelationship2 ;
+    archiXML:identifier "Relation_2" ;
+    archiXML:source "BusinessObject1" ;
+    archiXML:target "Relation_1" .
+
+model:aRelationship2-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship2-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship2-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Association Relationship"@en .
 ```
 
-Make note on how each element in the Archimate-document is identified by a unique identifier, the IRI (Internationalized Resource Identifier). Now we can address each element, or combinations of elements, and say something about them. Either we express meaning (RDF, RDFS, OWL and more), or impose constraints (SHACL) or we can query (SPARQL) them to know more about them.
+The above mentioned archiXML code can then be serialized using the ArchiXML - core vocabulary together with the XML core vocabulary, the latter containing the serialisation algorithm to produce actual XML:
+
+```
+<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" identifier="Model-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd"><name xml:lang="en">Basic Model</name><documentation xml:lang="en">Example of a basic model with two elements and a relationship</documentation><elements><element identifier="ApplicationComponent1" xsi:type="ApplicationComponent"><name xml:lang="en">An application component</name></element><element identifier="BusinessActor1" xsi:type="BusinessActor"><name xml:lang="en">A business actor</name></element><element identifier="BusinessObject1" xsi:type="BusinessObject"><name xml:lang="en">A business role</name></element><element identifier="BusinessRole1" xsi:type="BusinessRole"><name xml:lang="en">A business role</name></element></elements><relationships><relationship identifier="Relation_1" source="BusinessActor1" target="BusinessRole1" xsi:type="Assignment"><name xml:lang="en">Assignment Relationship</name></relationship><relationship identifier="Relation_2" source="BusinessObject1" target="Relation_1" xsi:type="Association"><name xml:lang="en">Association Relationship</name></relationship></relationships></model>
+```
+
+We can also roundtrip from the XML back to archiXML back to the archimate core vocabulary.
 
 
 # Tools and dependencies
 
-This repository comes with two, fairly primitive, Python-based tools to handle Archimate-documents and RDF-representations of Archimate. 
+This repository comes with three, fairly primitive, Python-based tools to handle Archimate-documents and RDF-representations of Archimate. 
 
-1. Archimate2RDF 
-2. RDF2Archimate
-
-
+1. ArchiVoc2ArchiXML
+2. ArchiXML2Archimate
+3. Archimate2ArchiXML
 
 ## Archimate2RDF
 

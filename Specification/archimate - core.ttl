@@ -34,13 +34,23 @@ archimate:
     dct:created '2024-02-14'^^xsd:date;
     dct:creator
       'Flores Bakker';
-    respec:introduction '''
-Introduction of archimate vocabulary.
-'''@en;
-   respec:objective '''Objective of archimate vocabulary'''@en;
+      
+    respec:introduction '''Introduction of archimate vocabulary.'''@en;
+    
+    respec:objective '''Objective of archimate vocabulary'''@en;
+    
+    respec:background '''In the field of enterprise architecture, Archimate plays a crucial role in modeling and analyzing complex systems and architectures. Archimate provides a standardized framework for describing the structure, behavior, and relationships within organizations, facilitating communication and decision-making processes.
+
+However, the representation of Archimate models in traditional formats lacks the semantic richness necessary for interoperability and advanced analysis. The Archimate Ontology addresses this limitation by formalizing Archimate concepts and relationships in RDF format, leveraging semantic web technologies to enhance interoperability, integration, and semantic understanding of Archimate models.
+
+With the Archimate Ontology, users can generate, parse, validate, annotate, and reuse Archimate documents using semantic web compliant technology, unlocking new possibilities for leveraging Archimate models within the wider context of the Semantic Web.'''@en;
+    
     respec:audience '''Audience of archimate vocabulary'''@en;
+    
     dct:description '''Description of archimate vocabulary'''@en;
+    
     dct:abstract '''Abstract of archimate vocabulary'''@en; 
+    
     skos:example """
 
 * An example of an archimate model:
@@ -124,7 +134,7 @@ archimate:Model a owl:Class;
     
 archimate:Concept a owl:Class;
     owl:unionOf (archimate:Element archimate:Relationship archimate:RelationshipConnector);
-    skos:definition 'A concept is either an element or a relationship.'@en;
+    skos:definition 'A concept is either an element or a relationship, or a relationship connector.'@en;
     skos:prefLabel 'concept'@en;
     rdfs:isDefinedBy archimate:.    
 
@@ -132,6 +142,12 @@ archimate:Element a owl:Class;
     rdfs:subClassOf archimate:Concept;
     skos:definition 'Base unit in the ArchiMate metamodel. Used to define and describe the constituent parts of Enterprise Architecture and their unique set of characteristics. An element is either a behavior element, a structure element, a motivation element, or a composite element.'@en;
     skos:prefLabel 'element'@en;
+    rdfs:isDefinedBy archimate:.
+    
+archimate:CoreElement a owl:Class;
+    owl:unionOf (archimate:BusinessLayerElement archimate:ApplicationLayerElement archimate:TechnologyLayerElement);
+    skos:definition 'A structure or behavior element in one of the core layers of the ArchiMate language. These layers are the business layer, application layer and technology layer.'@en;
+    skos:prefLabel 'core element'@en;
     rdfs:isDefinedBy archimate:.
     
 archimate:BehaviorElement a owl:Class;
@@ -423,7 +439,7 @@ archimate:Value a owl:Class;
 
 # Strategy layer
 
-archimate:StrategyLayerElements a owl:Class;
+archimate:StrategyLayerElement a owl:Class;
     owl:unionOf (archimate:CourseOfAction archimate:StrategyBehaviorElement archimate:Resource );
     skos:definition ''@en;
     skos:prefLabel 'strategy layer elements'@en;
@@ -466,7 +482,7 @@ archimate:ValueStream a owl:Class;
 
 # Business layer
 
-archimate:BusinessLayerElements a owl:Class;
+archimate:BusinessLayerElement a owl:Class;
     owl:unionOf (archimate:BusinessInternalActiveStructureElement archimate:BusinessInternalBehaviorElement archimate:BusinessPassiveStructureElement archimate:BusinessEvent archimate:BusinessService archimate:BusinessInterface archimate:Product );
     skos:definition ''@en;
     skos:prefLabel 'business layer elements'@en;
@@ -591,7 +607,7 @@ archimate:Representation a owl:Class;
 
 # Application layer
 
-archimate:ApplicationLayerElements a owl:Class;
+archimate:ApplicationLayerElement a owl:Class;
     owl:unionOf (archimate:ApplicationInternalActiveStructureElement archimate:ApplicationInternalBehaviorElement archimate:ApplicationEvent archimate:ApplicationInterface archimate:ApplicationService archimate:DataObject);
     skos:definition ''@en;
     skos:prefLabel 'application layer elements'@en;
@@ -675,7 +691,7 @@ archimate:DataObject a owl:Class;
 
 # Technology layer
 
-archimate:TechnologyLayerElements a owl:Class;
+archimate:TechnologyLayerElement a owl:Class;
     owl:unionOf (archimate:TechnologyActiveStructureElement archimate:TechnologyInternalBehaviorElement archimate:TechnologyPassiveStructureElement archimate:TechnologyEvent archimate:TechnologyInterface archimate:TechnologyService);
     skos:definition ''@en;
     skos:prefLabel 'technology layer elements'@en;
@@ -827,7 +843,7 @@ archimate:TechnologyService a owl:Class;
 
 # Implementation and Migration layer
 
-archimate:ImplementationMigrationLayerElements a owl:Class;
+archimate:ImplementationMigrationLayerElement a owl:Class;
     owl:unionOf (archimate:ImplementationMigrationInternalBehaviorElement archimate:ImplementationMigrationPassiveStructureElement archimate:Plateau archimate:ImplementationEvent);
     skos:definition ''@en;
     skos:prefLabel 'implementation and migration layer elements'@en;
