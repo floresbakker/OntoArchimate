@@ -22,9 +22,18 @@ Let us explore the semantic Archimate vocabulary with examples of Archimate mode
 
 ## Example #1: Basic Archimate model with three elements and two relationships:
 
-```
-In this example there are three Archimate elements, involving a Business Actor, a Business Role, and a Business Object. There are two relationships. The first relationship is an Assignment from the Business Actor to the Business Role, representing the assignment of a role to the actor. The second relationship is an Association from the Business Object to the Assignment Relationship. This means the Business Object is associated with the business actor's role assignment. For instance, when there is a contract stipulating the conditions of the actor's role assignment.
-```
+*In this example there are three Archimate elements:
+
+1. a Business Actor
+2. a Business Role
+3. a Business Object
+
+There are two relationships:
+
+1. An Assignment Relationship from the Business Actor to the Business Role, representing the assignment of a role to the actor. 
+2. An Association Relationship from the Business Object to the Assignment Relationship. 
+
+Relationship 2 is thus connecting a Business Object with relationship 1.
 
 ![Example #1](/Examples/ArchimateExample1.JPG)
 
@@ -220,10 +229,35 @@ model:aRelationship2-RelationshipNameText a archiXML:Text ;
 The above mentioned archiXML code can then be serialized using the ArchiXML - core vocabulary together with the XML core vocabulary, the latter containing the serialisation algorithm to produce actual XML:
 
 ```
-<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" identifier="Model-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd"><name xml:lang="en">Basic Model</name><documentation xml:lang="en">Example of a basic model with two elements and a relationship</documentation><elements><element identifier="ApplicationComponent1" xsi:type="ApplicationComponent"><name xml:lang="en">An application component</name></element><element identifier="BusinessActor1" xsi:type="BusinessActor"><name xml:lang="en">A business actor</name></element><element identifier="BusinessObject1" xsi:type="BusinessObject"><name xml:lang="en">A business role</name></element><element identifier="BusinessRole1" xsi:type="BusinessRole"><name xml:lang="en">A business role</name></element></elements><relationships><relationship identifier="Relation_1" source="BusinessActor1" target="BusinessRole1" xsi:type="Assignment"><name xml:lang="en">Assignment Relationship</name></relationship><relationship identifier="Relation_2" source="BusinessObject1" target="Relation_1" xsi:type="Association"><name xml:lang="en">Association Relationship</name></relationship></relationships></model>
+<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" identifier="Model-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd">
+    <name xml:lang="en">Basic Model</name>
+    <documentation xml:lang="en">Example of a basic model with two elements and a relationship</documentation>
+    <elements>
+        <element identifier="ApplicationComponent1" xsi:type="ApplicationComponent">
+            <name xml:lang="en">An application component</name>
+        </element>
+        <element identifier="BusinessActor1" xsi:type="BusinessActor">
+            <name xml:lang="en">A business actor</name>
+        </element>
+        <element identifier="BusinessObject1" xsi:type="BusinessObject">
+            <name xml:lang="en">A business role</name>
+        </element>
+        <element identifier="BusinessRole1" xsi:type="BusinessRole">
+            <name xml:lang="en">A business role</name>
+        </element>
+    </elements>
+    <relationships>
+        <relationship identifier="Relation_1" source="BusinessActor1" target="BusinessRole1" xsi:type="Assignment">
+            <name xml:lang="en">Assignment Relationship</name>
+        </relationship>
+        <relationship identifier="Relation_2" source="BusinessObject1" target="Relation_1" xsi:type="Association">
+            <name xml:lang="en">Association Relationship</name>
+        </relationship>
+    </relationships>
+</model>
 ```
 
-We can also roundtrip from the XML back to archiXML back to the archimate core vocabulary.
+We can also roundtrip from the XML back to the RDF-based archiXML back to the RDF-based archimate core vocabulary. This means that one can parse archimate documents made in tools like Archi and then convert them to RDF, provided one uses the open exchange XML-based format for Archimate.
 
 
 # Tools and dependencies
