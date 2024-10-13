@@ -47,7 +47,8 @@ def iteratePyShacl(vocabulary, serializable_graph):
         # Query to know if the document has been fully serialised by testing whether the root has a archimate:fragment property. If it has, the algorithm has reached the final level of the document.
         resultquery = serializable_graph.query('''
             
-        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>                                              
+        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>  
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>                                            
         PREFIX prov: <http://www.w3.org/ns/prov#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

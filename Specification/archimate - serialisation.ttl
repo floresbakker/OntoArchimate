@@ -148,8 +148,28 @@ construct {
   shp:Element
     a sh:NodeShape;
     sh:rule rule:Element;
-    sh:targetClass archimate:Element;
+    sh:target target:Element;
     skos:prefLabel 'element shape'@en;
+    rdfs:isDefinedBy archimate:.
+
+  target:Element
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all elements in the model.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    
+select $this {
+
+  # Select all elements... 
+  $this rdf:type/rdfs:subClassOf* archimate:Element.
+    
+    }
+''';
     rdfs:isDefinedBy archimate:.
 
   rule:Element
@@ -190,7 +210,7 @@ construct {
   # Get the archimate tag of the archimate-element to be serialized.
   $this rdf:type ?archimateElement;
         skos:prefLabel ?archimateName.
-  ?archimateElement rdfs:subClassOf archimate:Element;
+  ?archimateElement rdfs:subClassOf* archimate:Element;
         dct:identifier ?xsiType.
   BIND(IRI(CONCAT(STR($this),"-Element")) as ?element)
   BIND(IRI(CONCAT(STR($this),"-ElementName")) as ?elementNameNode)
