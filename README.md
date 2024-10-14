@@ -1,12 +1,32 @@
-# Specification 'Archimate Ontology'
+# Specification 'OntoArchimate'
 
-This is the repository for the Archimate Ontology, an RDF-based vocabulary for representing Archimate terms and logic. You're welcome to contribute!
+This is the repository for the OntoArchimate ontology, a family of RDF-based vocabularies to represent Archimate terms and logic. You're welcome to contribute!
 
-The Archimate Ontology provides a comprehensive description of the Archimate vocabulary, encompassing the elements and relationships that constitute Archimate documents. Additionally, it includes algorithms for generating, parsing, validating, annotating, and reusing Archimate documents.
+The OntoArchimate familiy of ontologies provides a comprehensive description of the Archimate vocabulary, encompassing the elements and relationships that constitute Archimate documents. Additionally, it includes algorithms for generating, parsing, validating, annotating, and reusing Archimate documents.
+
+The family of OntoArchimate consists of the following three vocabularies:
+
+1. Archimate Core Vocabulary
+2. ArchiXML Serialisation Vocabulary
+3. ArchiXML Core Vocabulary
+
+With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. Finally, we can serialize this to an actual XML document using the XML Core Vocabulary.
+
+![Overview OntoArchimate Objects](/Examples/OntoArchimateObjects.JPG)
+
+OntoArchimate also makes use of another family of vocabularies:
+
+1. DOM Core Vocabulary
+2. XML Core Vocabulary
+3. XMLNS Core Vocabulary
+4. XLINK Core Vocabulary
+5. XSI Core Vocabulary
+
+These five vocabularies are used for generating, parsing, validating, annotating, and reusing XML-based documents.
 
 # Status
 
-Unstable, work in progress. Still trying to understand the subtleties of the Archimate language. From reading blogs it seems that the Archimate language itself still has interoperability issues, meaning that in different applications a architectural design will be shown differently or with errors.
+Unstable, work in progress. 
 
 # Background
 
@@ -18,7 +38,7 @@ With the Archimate Ontology, users can generate, parse, validate, annotate, and 
 
 # Introduction
 
-Let us explore the semantic Archimate vocabulary with examples of Archimate models.
+Let us explore the OntoArchimate family of vocabularies with examples of Archimate models.
 
 ## Example #1: Basic Archimate model with three elements and two relationships:
 

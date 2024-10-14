@@ -1,4 +1,4 @@
-prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix dcm: <http://purl.org/dc/dcmitype/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
@@ -7,6 +7,7 @@ prefix owl: <http://www.w3.org/2002/07/owl#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfa: <http://www.w3.org/ns/rdfa#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix respec:   <https://respec.org/model/def/>
 prefix sh: <http://www.w3.org/ns/shacl#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix status: <http://purl.org/adms/status/>
@@ -17,16 +18,15 @@ prefix xml: <http://www.w3.org/XML/model/def/>
 prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> 
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
-prefix graph:     <https://data.rijksfinancien.nl/archimate/graph/>
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix respec:   <https://respec.org/model/def/>
-prefix rule:      <https://data.rijksfinancien.nl/archimate/model/rule/>
-prefix section:   <https://data.rijksfinancien.nl/archimate/id/section/>
-prefix shp:       <https://data.rijksfinancien.nl/archimate/model/shp/>
-prefix standard:  <https://data.rijksfinancien.nl/archimate/id/standard/>
-prefix target:    <https://data.rijksfinancien.nl/archimate/model/target/>
+prefix archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix graph:     <https://data.rijksfinancien.nl/archixml/graph/>
+prefix rule:      <https://data.rijksfinancien.nl/archixml/model/rule/>
+prefix section:   <https://data.rijksfinancien.nl/archixml/id/section/>
+prefix shp:       <https://data.rijksfinancien.nl/archixml/model/shp/>
+prefix standard:  <https://data.rijksfinancien.nl/archixml/id/standard/>
+prefix target:    <https://data.rijksfinancien.nl/archixml/model/target/>
 
-archimate:
+archiXML:
     a
       owl:Ontology,
       respec:Ontology,
@@ -35,19 +35,110 @@ archimate:
     dct:creator
       'Flores Bakker';
     respec:introduction '''
-Introduction of archimate vocabulary.
+Introduction of archiXML serialisation vocabulary.
 '''@en;
-   respec:objective '''Objective of archimate vocabulary'''@en;
-    respec:audience '''Audience of archimate vocabulary'''@en;
-    dct:description '''Description of archimate vocabulary'''@en;
-    dct:abstract '''Abstract of archimate vocabulary'''@en; 
+   respec:objective '''Objective of archiXML serialisation vocabulary'''@en;
+    respec:audience '''Audience of archiXML serialisation vocabulary'''@en;
+    dct:description '''Description of archiXML serialisation vocabulary'''@en;
+    dct:abstract '''Abstract of archiXML serialisation vocabulary'''@en; 
     skos:example """
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
+@prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
+@prefix model: <https://data.rijksfinancien.nl/archixml/id/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml1: <http://www.w3.org/XML/model/def/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
 
-An example of an archimate model:
+# Model
+
+model:BasicModel-Document a archiXML:Document ;
+    rdf:_1 model:BasicModel-Model .
+
+model:BasicModel-Model a archiXML:Model ;
+    rdf:_1 model:BasicModel-ModelName ;
+    rdf:_2 model:BasicModel-Documentation ;
+    rdf:_3 model:BasicModel-Elements ;
+    rdf:_4 model:BasicModel-Relationships ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    prov:wasDerivedFrom model:BasicModel ;
+    archiXML:identifier "Model-1" .
+
+model:BasicModel-ModelName a archiXML:Name ;
+    rdf:_1 model:BasicModel-ModelNameText ;
+    xml1:lang "en" .
+
+model:BasicModel-ModelNameText a archiXML:Text ;
+    xml1:fragment "Basic Model" .
+    
+model:BasicModel-Documentation a archiXML:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationText ;
+    xml1:lang "en" .
+
+model:BasicModel-DocumentationText a archiXML:Text ;
+    xml1:fragment "Example of a basic model with two elements and two relationships" .
+
+# Elements
+
+model:BasicModel-Elements a archiXML:Elements ;
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessObject-Element ;
+    rdf:_3 model:aBusinessRole-Element .
+
+model:aBusinessActor-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    xsi:type "BusinessActor" ;
+    prov:wasDerivedFrom model:aBusinessActor ;
+    archiXML:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessActor-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business actor" .
+
+model:aBusinessRole-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    xsi:type "BusinessRole" ;
+    prov:wasDerivedFrom model:aBusinessRole ;
+    archiXML:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessRole-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business role" .
+
+# Relationships
+
+model:BasicModel-Relationships a archiXML:Relationships ;
+    rdf:_1 model:aRelationship1-Relationship ;
+    rdf:_2 model:aRelationship2-Relationship .
+
+model:aRelationship1-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship1-RelationshipName ;
+    xsi:type "Assignment" ;
+    prov:wasDerivedFrom model:aRelationship1 ;
+    archiXML:identifier "Relation_1" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+model:aRelationship1-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship1-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Assignment Relationship"@en .
 
 
-
-This can be represented in RDF using the archimate vocabulary as follows:
 
 
 """;
@@ -56,13 +147,13 @@ This can be represented in RDF using the archimate vocabulary as follows:
     dct:publisher <https://www.example.com>;
     dct:status status:UnderDevelopment;
     dct:title 'archimate Core Vocabulary'@en;
-    dct:source <https://www.example.com/archimate-vocabulary>;
+    dct:source <https://www.example.com/archixml-vocabulary>;
     foaf:homepage 'https://www.example.com/'^^xsd:anyURI;
     owl:versionInfo '1.0';
-    vann:preferredNamespacePrefix 'archimate';
-    vann:preferredNamespaceUri 'https://data.rijksfinancien.nl/archimate/model/def/';
-    void:uriRegexPattern '^https://data.rijksfinancien.nl/archimate/model/def/';
-    void:uriSpace 'https://data.rijksfinancien.nl/xml/archimate/def/'^^xsd:anyURI.
+    vann:preferredNamespacePrefix 'archixml';
+    vann:preferredNamespaceUri 'https://data.rijksfinancien.nl/archixml/model/def/';
+    void:uriRegexPattern '^https://data.rijksfinancien.nl/archixml/model/def/';
+    void:uriSpace 'https://data.rijksfinancien.nl/xml/archixml/def/'^^xsd:anyURI.
 
 
 ### Logic
@@ -73,7 +164,7 @@ shp:Document
     sh:rule rule:Document;
     sh:targetClass archimate:Model;
     skos:prefLabel 'document shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 rule:Document
     a sh:SPARQLRule;
@@ -96,7 +187,6 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  # create the archimate-fragment for the archimate-relationship
   ?document rdf:type archiXML:Document;
          rdf:_1 ?model.
   ?model rdf:type archiXML:Model;
@@ -129,9 +219,11 @@ construct {
 
 } where {
 
-  # Get the archimate model
+    # Get the archimate model
     $this  skos:prefLabel ?archimateNameModel;
            skos:definition ?archimateDocumentation.
+           
+    # Create identifiers
     BIND(IRI(CONCAT(STR($this),"-Document")) as ?document)
     BIND(IRI(CONCAT(STR($this),"-Model")) as ?model)
     BIND(IRI(CONCAT(STR($this),"-ModelName")) as ?modelNameNode)
@@ -145,7 +237,7 @@ construct {
   }
 
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 
   shp:Element
@@ -153,7 +245,7 @@ construct {
     sh:rule rule:Element;
     sh:target target:Element;
     skos:prefLabel 'element shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
   target:Element
     a sh:SPARQLTarget;
@@ -173,7 +265,7 @@ select $this {
     
     }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
   rule:Element
     a sh:SPARQLRule;
@@ -221,14 +313,14 @@ construct {
   }
 
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:Relationship
     a sh:NodeShape;
     sh:rule rule:Relationship;
     sh:target target:Relationship;
     skos:prefLabel 'relationship shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 
 target:Relationship
@@ -263,7 +355,7 @@ select $this {
   
     }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
     
     
 rule:Relationship
@@ -322,7 +414,7 @@ construct {
   }
 
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 
 shp:ElementConnector
@@ -330,7 +422,7 @@ shp:ElementConnector
     sh:rule rule:ElementConnector;
     sh:targetClass archiXML:Elements;
     skos:prefLabel 'archimate elements shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 rule:ElementConnector
     a sh:SPARQLRule;
@@ -362,14 +454,14 @@ construct {
   BIND(IRI(CONCAT(REPLACE(STR($this),"-Elements", "-Model"))) as ?model)
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:RelationshipConnector
     a sh:NodeShape;
     sh:rule rule:RelationshipConnector;
     sh:target target:Relationships;
     skos:prefLabel 'archimate relationships shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 target:Relationships
     a sh:SPARQLTarget;
@@ -397,7 +489,7 @@ where {
   bind(if(!bound(?unprocessedRelationship), ?connector, ?unboundDummy) as ?this)
 }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
     
 rule:RelationshipConnector
     a sh:SPARQLRule;
@@ -422,14 +514,14 @@ construct {
   bind(iri(concat(str(rdf:),"_", str(function:getRelationshipPosition(?archimateRelation)))) as ?rdf_member)
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:RelationshipIdentifier
     a sh:NodeShape;
     sh:rule rule:RelationshipIdentifier;
     sh:target target:RelationshipIdentifier;
     skos:prefLabel 'Relationship Identifier shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 target:RelationshipIdentifier
  a sh:SPARQLTarget;
@@ -449,7 +541,7 @@ where {
   
 }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 rule:RelationshipIdentifier
     a sh:SPARQLRule;
@@ -473,14 +565,14 @@ construct {
   BIND(CONCAT("Relation_",str(function:getRelationshipPosition(?archimateRelation))) as ?identifier)
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:ElementIdentifier
     a sh:NodeShape;
     sh:rule rule:ElementIdentifier;
     sh:targetClass archiXML:Element;
     skos:prefLabel 'Element Identifier shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 rule:ElementIdentifier
     a sh:SPARQLRule;
@@ -510,14 +602,14 @@ construct {
   BIND(CONCAT(?xsiType, str(function:getSubElementPosition($this))) as ?identifier)  
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:ModelIdentifier
     a sh:NodeShape;
     sh:rule rule:ModelIdentifier;
     sh:targetClass archiXML:Model;
     skos:prefLabel 'Model Identifier shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 rule:ModelIdentifier
     a sh:SPARQLRule;
@@ -546,14 +638,14 @@ construct {
   BIND(CONCAT("Model-", str(function:getModelPosition($this))) as ?identifier)  
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:View
     a sh:NodeShape;
     sh:rule rule:View;
     sh:target target:View;
     skos:prefLabel 'view shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 
 target:View
@@ -588,7 +680,7 @@ select $this {
    }
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
     
     
 rule:View
@@ -652,7 +744,7 @@ construct {
   ?archiXMLElement prov:wasDerivedFrom ?element;
                    archiXML:identifier ?elementIdentifier.
 
-  # Calculate position of element
+  # Establish position of the element
   BIND(xsd:integer(STRAFTER(STR(?memberElement),CONCAT(STR(rdf:),'_')))+1 as ?index)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?index))) as ?memberNode)
   
@@ -699,27 +791,28 @@ construct {
   BIND(CONCAT(?sourceIdentifierString, ?source) as ?sourceIdentifier)
   BIND(CONCAT(?targetIdentifierString, ?target) as ?targetIdentifier)
   
-  # Calculate position of connection
+  # Establish position of the connection
   BIND(xsd:integer(STRAFTER(STR(?memberRelation),CONCAT(STR(rdf:),'_')))+1 as ?index)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?index))) as ?memberConnection)  
                  
   }
   
-  BIND(IRI(CONCAT(STR($this),"-View"))               as ?view)
-  BIND(IRI(CONCAT(STR($this),"-ViewName"))           as ?viewNameNode)
-  BIND(IRI(CONCAT(STR($this),"-ViewNameText"))       as ?viewNameTextNode)
-  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier))    as ?elementNode)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier)) as ?connectionNode)
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),"-View"))                as ?view)
+  BIND(IRI(CONCAT(STR($this),"-ViewName"))            as ?viewNameNode)
+  BIND(IRI(CONCAT(STR($this),"-ViewNameText"))        as ?viewNameTextNode)
+  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier)) as ?elementNode)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))  as ?connectionNode)
   }
 ''';
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 shp:ViewConnector
     a sh:NodeShape;
     sh:rule rule:ViewConnector;
     sh:targetClass archiXML:Views;
     skos:prefLabel 'archimate view connector shape'@en;
-    rdfs:isDefinedBy archimate:.
+    rdfs:isDefinedBy archiXML:.
 
 rule:ViewConnector
     a sh:SPARQLRule;
@@ -758,7 +851,7 @@ construct {
   
   }
 ''';
-    rdfs:isDefinedBy archimate:.       
+    rdfs:isDefinedBy archiXML:.       
 
 function:getSubElementPosition
     a sh:SPARQLFunction ;

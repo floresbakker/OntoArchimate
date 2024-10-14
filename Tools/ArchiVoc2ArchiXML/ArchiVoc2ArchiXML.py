@@ -82,7 +82,7 @@ def iteratePyShacl(vocabulary, serializable_graph):
 
 # Get the Archimate vocabulary and place it in a string
 ontoarchi_vocabulary = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
-ontoarchi_serialisation = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - serialisation.ttl")
+ontoarchi_serialisation = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archiXML - serialisation.ttl")
 
 vocabulary = ontoarchi_vocabulary 
 
