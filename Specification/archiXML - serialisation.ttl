@@ -199,8 +199,7 @@ construct {
          rdf:_1 ?modelNameNode;
          rdf:_2 ?modelDocumentation;
          rdf:_3 ?elementsNode;
-         rdf:_4 ?relationshipsNode;
-         rdf:_5 ?viewsNode.
+         rdf:_4 ?relationshipsNode.
   ?modelNameNode rdf:type archiXML:Name;
          rdf:_1 ?modelNameTextNode;
          xml:lang "en".
@@ -213,10 +212,7 @@ construct {
          xml:fragment ?archimateDocumentation.
   ?elementsNode rdf:type archiXML:Elements.
   ?relationshipsNode rdf:type archiXML:Relationships.
-  ?viewsNode rdf:type archiXML:Views;
-             rdf:_1 ?diagramsNode.
-  ?diagramsNode rdf:type archiXML:Diagrams.
-
+ 
 } where {
 
     # Get the archimate model
@@ -232,8 +228,7 @@ construct {
     BIND(IRI(CONCAT(STR($this),"-DocumentationText")) as ?documentationTextNode)
     BIND(IRI(CONCAT(STR($this),"-Elements")) as ?elementsNode)
     BIND(IRI(CONCAT(STR($this),"-Relationships")) as ?relationshipsNode)
-    BIND(IRI(CONCAT(STR($this),"-Views")) as ?viewsNode)
-    BIND(IRI(CONCAT(STR($viewsNode),"-Diagrams")) as ?diagramsNode)
+
   }
 
 ''';
@@ -840,7 +835,7 @@ construct {
 shp:ViewConnector
     a sh:NodeShape;
     sh:rule rule:ViewConnector;
-    sh:targetClass archiXML:Views;
+    sh:targetClass archiXML:Document;
     skos:prefLabel 'archimate view connector shape'@en;
     rdfs:isDefinedBy archiXML:.
 
@@ -870,14 +865,20 @@ construct {
 
 } where {
 
-  ?model rdf:_5 $this.
-  $this  rdf:_1 ?diagramNode.
+  $this  rdf:_1 ?model.
+  ?model rdf:_5 ?views.
+  ?views rdf:_1 ?diagramNode.
   
   OPTIONAL{
   ?view rdf:type archiXML:View.}
+  
   BIND(STR(function:getViewPosition(?view)) as ?index)
   BIND(IRI(CONCAT(str(rdf:),"_", ?index)) as ?rdf_member)
   BIND(CONCAT("View_",?index) as ?viewIdentifier)
+  
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),"-Views")) as ?viewsNode)
+  BIND(IRI(CONCAT(STR($viewsNode),"-Diagrams")) as ?diagramsNode)
   
   }
 ''';
