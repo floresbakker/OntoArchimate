@@ -4,13 +4,14 @@ This is the repository for the OntoArchimate ontology, a family of RDF-based voc
 
 The OntoArchimate familiy of ontologies provides a comprehensive description of the Archimate vocabulary, encompassing the elements and relationships that constitute Archimate documents. Additionally, it includes algorithms for generating, parsing, validating, annotating, and reusing Archimate documents.
 
-The family of OntoArchimate consists of the following three vocabularies:
+The family of OntoArchimate consists of the following four vocabularies:
 
 1. Archimate Core Vocabulary
+2. Archimate Serialisation Vocabulary
 2. ArchiXML Serialisation Vocabulary
 3. ArchiXML Core Vocabulary
 
-With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. Finally, we can serialize this to an actual XML document using the XML Core Vocabulary.
+With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. Finally, we can serialize this to an actual XML document using the XML Core Vocabulary. We can also roundtrip this process and start with an XML file, parse it to the ArchiXML vocabulary then serialize it to the Archimate Core Vocabulary, using the Archimate Serialisation Vocabulary.
 
 ![Overview OntoArchimate Objects](/Examples/OntoArchimateObjects.JPG)
 
@@ -372,6 +373,7 @@ This repository comes with three, fairly primitive, Python-based tools to handle
 1. ArchiVoc2ArchiXML
 2. ArchiXML2Archimate
 3. Archimate2ArchiXML
+4. ArchiXML2ArchiVoc
 
 ## Archimate2RDF
 
@@ -440,6 +442,30 @@ python ArchiVoc2ArchiXML.py
 ```
 
 D. Go to the output folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Output and grab your turtle-file(s). 
+
+
+## ArchiXML2ArchiVoc
+
+The tool ArchiXML2ArchiVoc is used to read an RDF-based ArchiXML representation of an Archimate XML file into a graph and then serialize and save this to an RDF-based archimate model, using the Archimate Core vocabulary.
+
+### How to use ArchiXML2ArchiVoc
+
+A. Install all necessary libraries (in this order):
+
+	1. pip install os 
+	2. pip install pyshacl
+	3. pip install rdflib
+
+B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\ArchiXML2ArchiVoc\Input. A Turtle-file should represent an RDF-based ArchiXML model using the ArchiXML-vocabulary from this repository.
+
+C. Run the script in the command prompt by typing: 
+
+```
+python ArchiXML2ArchiVoc.py
+```
+
+D. Go to the output folder in OntoArchimate\Tools\ArchiXML2ArchiVoc\Output and grab your turtle-file(s). 
+
 
 ## Dependencies 
 
