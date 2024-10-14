@@ -8,8 +8,8 @@ The family of OntoArchimate consists of the following four vocabularies:
 
 1. Archimate Core Vocabulary
 2. Archimate Serialisation Vocabulary
-2. ArchiXML Serialisation Vocabulary
 3. ArchiXML Core Vocabulary
+4. ArchiXML Serialisation Vocabulary
 
 With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. Finally, we can serialize this to an actual XML document using the XML Core Vocabulary. We can also roundtrip this process and start with an XML file, parse it to the ArchiXML vocabulary then serialize it to the Archimate Core Vocabulary, using the Archimate Serialisation Vocabulary.
 
@@ -375,27 +375,28 @@ This repository comes with three, fairly primitive, Python-based tools to handle
 3. Archimate2ArchiXML
 4. ArchiXML2ArchiVoc
 
-## Archimate2RDF
 
-The tool Archimate2RDF is used to read Archimate-documents, parse them and then transform them to RDF-based triples. 
+## ArchiVoc2ArchiXML
 
-### How to use Archimate2ArchiXML
+The tool ArchiVoc2ArchiXML is used to read an RDF-based representation of an Archimate model into a graph and then serialize and save this to an RDF-based representation of the XML-based archimate document that contains this model, using the ArchiXML vocabulary.
 
-A. Install all necessary libraries:
+### How to use ArchiVoc2ArchiXML
+
+A. Install all necessary libraries (in this order):
 
 	1. pip install os 
-	2. pip install bs4
+	2. pip install pyshacl
 	3. pip install rdflib
 
-B. Place one or more Archimate-files in the input folder in OntoArchimate\Tools\Archimate2ArchiXML\Input. Only ordinary Archimate-files based on the open exchange XML format can be processed. 
+B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Input. A Turtle-file should represent an RDF-based Archimate-document using the Archimate-vocabulary from this repository.
 
 C. Run the script in the command prompt by typing: 
 
 ```
-python Archimate2ArchiXML.py
+python ArchiVoc2ArchiXML.py
 ```
 
-D. Go to the output folder in OntoArchimate\Tools\Archimate2ArchiXML\Output and grab your Turtle-file(s) (*.ttl). 
+D. Go to the output folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Output and grab your turtle-file(s). 
 
 
 ## ArchiXML2Archimate
@@ -421,27 +422,27 @@ python ArchiXML2Archimate.py
 D. Go to the output folder in OntoArchimate\Tools\ArchiXML2Archimate\Output and grab your Archimate-file(s). Additionally included are Turtle-file(s) (*.ttl) that contain the serialized 'xml:fragment' properties for the very same Archimate-document and the Archimate elements, relationships and views it contains. 
 
 
-## ArchiVoc2ArchiXML
+## Archimate2ArchiXML
 
-The tool ArchiVoc2ArchiXML is used to read an RDF-based representation of an Archimate model into a graph and then serialize and save this to an RDF-based representation of the XML-based archimate document that contains this model, using the ArchiXML vocabulary.
+The tool Archimate2ArchiXML is used to read Archimate-documents, parse them and then transform them to RDF-based triples. 
 
-### How to use ArchiVoc2ArchiXML
+### How to use Archimate2ArchiXML
 
-A. Install all necessary libraries (in this order):
+A. Install all necessary libraries:
 
 	1. pip install os 
-	2. pip install pyshacl
+	2. pip install bs4
 	3. pip install rdflib
 
-B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Input. A Turtle-file should represent an RDF-based Archimate-document using the Archimate-vocabulary from this repository.
+B. Place one or more Archimate-files in the input folder in OntoArchimate\Tools\Archimate2ArchiXML\Input. Only ordinary Archimate-files based on the open exchange XML format can be processed. 
 
 C. Run the script in the command prompt by typing: 
 
 ```
-python ArchiVoc2ArchiXML.py
+python Archimate2ArchiXML.py
 ```
 
-D. Go to the output folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Output and grab your turtle-file(s). 
+D. Go to the output folder in OntoArchimate\Tools\Archimate2ArchiXML\Output and grab your Turtle-file(s) (*.ttl). 
 
 
 ## ArchiXML2ArchiVoc
