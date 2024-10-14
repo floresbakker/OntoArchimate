@@ -293,23 +293,34 @@ construct {
            prov:wasDerivedFrom $this;
            archiXML:identifier ?identifier;
            xsi:type ?xsiType;
-           rdf:_1 ?elementNameNode.
+           rdf:_1 ?elementNameNode;
+           rdf:_2 ?elementDocumentationNode.
   ?elementNameNode rdf:type archiXML:Name;
            rdf:_1 ?elementNameTextNode;
            xml:lang "en".
    ?elementNameTextNode rdf:type archiXML:Text;
            xml:fragment ?archimateName.
+   ?elementDocumentationNode rdf:type archiXML:Documentation;
+           rdf:_1 ?documentationTextNode;
+           xml:lang "en".
+   ?documentationTextNode rdf:type archiXML:Text;
+           xml:fragment ?archimateDocumentation.           
 
 } where {
 
   # Get the archimate tag of the archimate-element to be serialized.
   $this rdf:type ?archimateElement;
-        skos:prefLabel ?archimateName.
+        skos:prefLabel ?archimateName;
+        skos:definition ?archimateDocumentation.
   ?archimateElement rdfs:subClassOf* archimate:Element;
         dct:identifier ?xsiType.
+  
+  # Create IRI's
   BIND(IRI(CONCAT(STR($this),"-Element")) as ?element)
   BIND(IRI(CONCAT(STR($this),"-ElementName")) as ?elementNameNode)
   BIND(IRI(CONCAT(STR($this),"-ElementNameText")) as ?elementNameTextNode)
+  BIND(IRI(CONCAT(STR($this),"-ElementDocumentation")) as ?elementDocumentationNode)
+  BIND(IRI(CONCAT(STR($this),"-DocumentationText")) as ?documentationTextNode)  
   }
 
 ''';
@@ -385,12 +396,18 @@ construct {
            archiXML:source ?source;
            archiXML:target ?target;
            prov:wasDerivedFrom $this;           
-           rdf:_1 ?relationshipNameNode.
+           rdf:_1 ?relationshipNameNode;
+           rdf:_2 ?relationshipDocumentationNode.
    ?relationshipNameNode rdf:type archiXML:Name;
            rdf:_1 ?relationshipNameTextNode;
            xml:lang "en".
    ?relationshipNameTextNode rdf:type archiXML:Text;
            xml:fragment ?archimateName.
+   ?relationshipDocumentationNode rdf:type archiXML:Documentation;
+           rdf:_1 ?documentationTextNode;
+           xml:lang "en".
+   ?documentationTextNode rdf:type archiXML:Text;
+           xml:fragment ?archimateDocumentation.              
   
 } where {
 
@@ -406,11 +423,15 @@ construct {
   
   $this archimate:relationship ?relationshipArchimate.
   ?relationshipArchimate dct:identifier ?xsiType;
-                skos:prefLabel ?archimateName.
-
+                         skos:prefLabel ?archimateName.
+                
+  $this skos:definition ?archimateDocumentation.
+  
   BIND(IRI(CONCAT(STR($this),"-Relationship")) as ?relationship)
   BIND(IRI(CONCAT(STR($this),"-RelationshipName")) as ?relationshipNameNode)
   BIND(IRI(CONCAT(STR($this),"-RelationshipNameText")) as ?relationshipNameTextNode)
+  BIND(IRI(CONCAT(STR($this),"-RelationshipDocumentation")) as ?relationshipDocumentationNode)
+  BIND(IRI(CONCAT(STR($this),"-DocumentationText")) as ?documentationTextNode)    
   }
 
 ''';
@@ -709,6 +730,7 @@ construct {
            archiXML:identifier ?viewIdentifier;
            xsi:type "Diagram";
            rdf:_1 ?viewNameNode;
+           rdf:_2 ?viewDocumentationNode;
            ?memberNode ?elementNode;
            ?memberConnection ?connectionNode;
            prov:wasDerivedFrom $this.                      
@@ -717,6 +739,11 @@ construct {
            xml:lang "en".
    ?viewNameTextNode rdf:type archiXML:Text;
            xml:fragment ?viewName.
+   ?viewDocumentationNode rdf:type archiXML:Documentation;
+           rdf:_1 ?documentationTextNode;
+           xml:lang "en".
+   ?documentationTextNode rdf:type archiXML:Text;
+           xml:fragment ?archimateDocumentation.                 
    ?elementNode rdf:type archiXML:Node;
            archiXML:identifier ?elementNodeIdentifier;
            xsi:type "Element";
@@ -736,7 +763,8 @@ construct {
 } where {
 
   # Get the archimate metadata of the archimate view
-  $this skos:prefLabel ?viewName.
+  $this skos:prefLabel ?viewName;
+        skos:definition ?archimateDocumentation.
   
   {$this ?memberElement ?element.
   ?element rdf:type/rdfs:subClassOf* archimate:Element.
@@ -745,7 +773,7 @@ construct {
                    archiXML:identifier ?elementIdentifier.
 
   # Establish position of the element
-  BIND(xsd:integer(STRAFTER(STR(?memberElement),CONCAT(STR(rdf:),'_')))+1 as ?index)
+  BIND(xsd:integer(STRAFTER(STR(?memberElement),CONCAT(STR(rdf:),'_')))+2 as ?index)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?index))) as ?memberNode)
   
   # Define constants for standard element width and height
@@ -753,7 +781,7 @@ construct {
   BIND(55 AS ?elementHeight)
   
   # Define spacing between elements
-  BIND(150 AS ?xSpacing) # Space between elements on the x-axis
+  BIND(300 AS ?xSpacing) # Space between elements on the x-axis
   BIND(100 AS ?ySpacing) # Space between elements on the y-axis
 
   # Calculate x and y positions for each element
@@ -792,7 +820,7 @@ construct {
   BIND(CONCAT(?targetIdentifierString, ?target) as ?targetIdentifier)
   
   # Establish position of the connection
-  BIND(xsd:integer(STRAFTER(STR(?memberRelation),CONCAT(STR(rdf:),'_')))+1 as ?index)
+  BIND(xsd:integer(STRAFTER(STR(?memberRelation),CONCAT(STR(rdf:),'_')))+2 as ?index)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?index))) as ?memberConnection)  
                  
   }
@@ -803,6 +831,8 @@ construct {
   BIND(IRI(CONCAT(STR($this),"-ViewNameText"))        as ?viewNameTextNode)
   BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier)) as ?elementNode)
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))  as ?connectionNode)
+  BIND(IRI(CONCAT(STR($view),"-Documentation"))       as ?viewDocumentationNode)
+  BIND(IRI(CONCAT(STR($view),"-DocumentationText"))   as ?documentationTextNode)    
   }
 ''';
     rdfs:isDefinedBy archiXML:.

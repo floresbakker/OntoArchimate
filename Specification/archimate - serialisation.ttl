@@ -91,7 +91,7 @@ construct {
   
   ?model rdf:type archimate:Model;
          skos:prefLabel ?modelName;
-         skos:definition ?modelDefinition;
+         skos:definition ?definition;
          rdfs:isDefinedBy ?model.
   
 
@@ -101,16 +101,20 @@ construct {
     $this  rdf:type archiXML:Document;
            ?member ?modelArchiXML.
     ?modelArchiXML rdf:type archiXML:Model;       
-           rdf:_1 ?modelNameNode;
-           rdf:_2 ?modelDocumentationNode.
+           rdf:_1 ?modelNameNode.         
     ?modelNameNode rdf:type archiXML:Name;
                    rdf:_1 ?modelNameTextNode.
     ?modelNameTextNode rdf:type archiXML:Text;
                    xml:fragment ?modelName.
-    ?modelDocumentationNode rdf:type archiXML:Documentation;
-                   rdf:_1 ?modelDocumentationTextNode.
-    ?modelDocumentationTextNode rdf:type archiXML:Text;
-                   xml:fragment ?modelDefinition.
+                   
+    optional {
+    ?modelArchiXML rdf:_2 ?documentationNode.
+    ?documentationNode rdf:type archiXML:Documentation;
+                     rdf:_1 ?documentationTextNode.
+    ?documentationTextNode rdf:type archiXML:Text;
+                         xml:fragment ?definition.}                     
+    
+    # Create IRI's    
     BIND(IRI(CONCAT(STR(?modelArchiXML), "-Archimate")) as ?model)
 
   }
@@ -150,12 +154,12 @@ construct {
   # create the archimate-fragment for the archimate-element to be serialized.
   ?element rdf:type ?elementClass;
            skos:prefLabel ?elementName;
-           skos:definition ?elementDefinition;
+           skos:definition ?definition;
            rdfs:isDefinedBy ?model.
 
 } where {
 
-  # Get the archimate tag of the archimate element to be serialized.
+  # Get the archimate metadata of the archimate element to be serialized.
   
   $this xsi:type ?xsiType;
         rdf:_1 ?elementNameNode.
@@ -163,6 +167,15 @@ construct {
         rdf:_1 ?elementNameTextNode.
   ?elementNameTextNode rdf:type archiXML:Text;
         xml:fragment ?elementName.
+  
+  optional {
+  $this rdf:_2 ?documentationNode.
+  ?documentationNode rdf:type archiXML:Documentation;
+                     rdf:_1 ?documentationTextNode.
+  ?documentationTextNode rdf:type archiXML:Text;
+                         xml:fragment ?definition.}  
+
+  # Create IRI's                         
   BIND(IRI(CONCAT(STR(archimate:), ?xsiType)) as ?elementClass)
   BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?element)
   }
@@ -201,7 +214,7 @@ construct {
   # create the archimate-fragment for the archimate-relationship
   ?relationship rdf:type archimate:Relationship;
            skos:prefLabel ?relationshipName;
-           skos:definition ?relationshipDefinition;
+           skos:definition ?definition;
            archimate:relationship ?relationtype;
            archimate:from ?source;
            archimate:to ?target;
@@ -226,6 +239,14 @@ construct {
   ?targetNode archiXML:identifier ?sourceIdentifier.
   ?relationtype dct:identifier ?xsiType.
   
+  optional {
+  $this rdf:_2 ?documentationNode.
+  ?documentationNode rdf:type archiXML:Documentation;
+                     rdf:_1 ?documentationTextNode.
+  ?documentationTextNode rdf:type archiXML:Text;
+                         xml:fragment ?definition.}    
+  
+  # Create IRI's
   BIND(IRI(CONCAT(STR(?sourceNode),  '-Archimate')) as ?source)
   BIND(IRI(CONCAT(STR(?targetNode),  '-Archimate')) as ?target)
   BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationship)
@@ -267,7 +288,7 @@ construct {
   # create the archimate-fragment for the archimate relationship
   ?view rdf:type archimate:View;
         skos:prefLabel ?viewName;
-        skos:definition ?viewDefinition;
+        skos:definition ?definition;
         ?member ?archimateNode;
         rdfs:isDefinedBy ?model.
              
@@ -281,6 +302,13 @@ construct {
         rdf:_1 ?viewNameTextNode.
   ?viewNameTextNode rdf:type archiXML:Text;
         xml:fragment ?viewName.
+
+  optional {
+  $this rdf:_2 ?documentationNode.
+  ?documentationNode rdf:type archiXML:Documentation;
+                     rdf:_1 ?documentationTextNode.
+  ?documentationTextNode rdf:type archiXML:Text;
+                         xml:fragment ?definition.}          
  
   {$this ?member ?archiXML_Node.
    ?archiXML_Node rdf:type archiXML:Node;
