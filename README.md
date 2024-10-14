@@ -101,9 +101,14 @@ In turn this archimate model can be generated to a RDF-representation of an XML-
 @prefix model: <https://data.rijksfinancien.nl/archimate/id/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xml1: <http://www.w3.org/XML/model/def/> .
 @prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
+
+# Model
 
 model:BasicModel-Document a archiXML:Document ;
     rdf:_1 model:BasicModel-Model .
@@ -113,6 +118,7 @@ model:BasicModel-Model a archiXML:Model ;
     rdf:_2 model:BasicModel-Documentation ;
     rdf:_3 model:BasicModel-Elements ;
     rdf:_4 model:BasicModel-Relationships ;
+    rdf:_5 model:BasicModel-Views ;
     xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
     xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
     xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
@@ -125,36 +131,20 @@ model:BasicModel-ModelName a archiXML:Name ;
 
 model:BasicModel-ModelNameText a archiXML:Text ;
     xml1:fragment "Basic Model" .
-
+    
 model:BasicModel-Documentation a archiXML:Documentation ;
     rdf:_1 model:BasicModel-DocumentationText ;
     xml1:lang "en" .
 
 model:BasicModel-DocumentationText a archiXML:Text ;
-    xml1:fragment "Example of a basic model with two elements and a relationship" .
+    xml1:fragment "Example of a basic model with two elements and two relationships" .
+
+# Elements
 
 model:BasicModel-Elements a archiXML:Elements ;
-    rdf:_1 model:aApplicationComponent-Element ;
-    rdf:_2 model:aBusinessActor-Element ;
-    rdf:_3 model:aBusinessObject-Element ;
-    rdf:_4 model:aBusinessRole-Element .
-    
-model:BasicModel-Relationships a archiXML:Relationships ;
-    rdf:_1 model:aRelationship1-Relationship ;
-    rdf:_2 model:aRelationship2-Relationship .
-
-model:aApplicationComponent-Element a archiXML:Element ;
-    rdf:_1 model:aApplicationComponent-ElementName ;
-    xsi:type "ApplicationComponent" ;
-    prov:wasDerivedFrom model:aApplicationComponent ;
-    archiXML:identifier "ApplicationComponent1" .
-
-model:aApplicationComponent-ElementName a archiXML:Name ;
-    rdf:_1 model:aApplicationComponent-ElementNameText ;
-    xml1:lang "en" .
-
-model:aApplicationComponent-ElementNameText a archiXML:Text ;
-    xml1:fragment "An application component" .
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessObject-Element ;
+    rdf:_3 model:aBusinessRole-Element .
 
 model:aBusinessActor-Element a archiXML:Element ;
     rdf:_1 model:aBusinessActor-ElementName ;
@@ -180,7 +170,7 @@ model:aBusinessObject-ElementName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aBusinessObject-ElementNameText a archiXML:Text ;
-    xml1:fragment "A business role" .
+    xml1:fragment "A business object" .
 
 model:aBusinessRole-Element a archiXML:Element ;
     rdf:_1 model:aBusinessRole-ElementName ;
@@ -194,6 +184,12 @@ model:aBusinessRole-ElementName a archiXML:Name ;
 
 model:aBusinessRole-ElementNameText a archiXML:Text ;
     xml1:fragment "A business role" .
+
+# Relationships
+
+model:BasicModel-Relationships a archiXML:Relationships ;
+    rdf:_1 model:aRelationship1-Relationship ;
+    rdf:_2 model:aRelationship2-Relationship .
 
 model:aRelationship1-Relationship a archiXML:Relationship ;
     rdf:_1 model:aRelationship1-RelationshipName ;
@@ -224,26 +220,99 @@ model:aRelationship2-RelationshipName a archiXML:Name ;
 
 model:aRelationship2-RelationshipNameText a archiXML:Text ;
     xml1:fragment "Association Relationship"@en .
+
+# Views
+
+model:BasicModel-Views a archiXML:Views ;
+    rdf:_1 model:BasicModel-Views-Diagrams .
+
+model:BasicModel-Views-Diagrams a archiXML:Diagrams ;
+    rdf:_1 model:aView-View .
+    
+model:aView a archimate:View ;
+    rdf:_1 model:aBusinessActor ;
+    rdf:_2 model:aBusinessRole ;
+    rdf:_3 model:aBusinessObject ;
+    rdf:_4 model:aRelationship1 ;
+    rdf:_5 model:aRelationship2 ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of an archimate view" ;
+    skos:prefLabel "A view" .
+
+model:aView-View a archiXML:View ;
+    rdf:_1 model:aView-ViewName ;
+    rdf:_2 model:aView-Viewnode_BusinessActor1 ;
+    rdf:_3 model:aView-Viewnode_BusinessRole1 ;
+    rdf:_4 model:aView-Viewnode_BusinessObject1 ;
+    rdf:_5 model:aView-Viewconnection_Relation_1 ;
+    rdf:_6 model:aView-Viewconnection_Relation_2 ;
+    xsi:type "Diagram" ;
+    prov:wasDerivedFrom model:aView ;
+    archiXML:identifier "View_1" .
+
+model:aView-ViewName a archiXML:Name ;
+    rdf:_1 model:aView-ViewNameText ;
+    xml1:lang "en" .
+
+model:aView-ViewNameText a archiXML:Text ;
+    xml1:fragment "A view" .
+
+model:aView-Viewnode_BusinessActor1 a archiXML:Node ;
+    xsi:type "Element" ;
+    archiXML:elementRef "BusinessActor1" ;
+    archiXML:h 55 ;
+    archiXML:identifier "node_BusinessActor1" ;
+    archiXML:w 120 ;
+    archiXML:x 300 ;
+    archiXML:y 0 .
+
+model:aView-Viewnode_BusinessObject1 a archiXML:Node ;
+    xsi:type "Element" ;
+    archiXML:elementRef "BusinessObject1" ;
+    archiXML:h 55 ;
+    archiXML:identifier "node_BusinessObject1" ;
+    archiXML:w 120 ;
+    archiXML:x 600 ;
+    archiXML:y 0 .
+
+model:aView-Viewnode_BusinessRole1 a archiXML:Node ;
+    xsi:type "Element" ;
+    archiXML:elementRef "BusinessRole1" ;
+    archiXML:h 55 ;
+    archiXML:identifier "node_BusinessRole1" ;
+    archiXML:w 120 ;
+    archiXML:x 450 ;
+    archiXML:y 0 .
+    
+model:aView-Viewconnection_Relation_1 a archiXML:Connection ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "connection_Relation_1" ;
+    archiXML:relationshipRef "Relation_1" ;
+    archiXML:source "node_BusinessActor1" ;
+    archiXML:target "node_BusinessRole1" .
+
+model:aView-Viewconnection_Relation_2 a archiXML:Connection ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "connection_Relation_2" ;
+    archiXML:relationshipRef "Relation_2" ;
+    archiXML:source "node_BusinessObject1" ;
+    archiXML:target "connection_Relation_1" .
 ```
 
-The above mentioned archiXML code can then be serialized using the ArchiXML - core vocabulary together with the XML core vocabulary, the latter containing the serialisation algorithm to produce actual XML:
+The above mentioned archiXML code can then be serialized using the ArchiXML - core vocabulary together with the XML core vocabulary, the latter containing the serialisation algorithm to produce an actual XML document:
 
 ```
 <model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" identifier="Model-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd">
     <name xml:lang="en">Basic Model</name>
-    <documentation xml:lang="en">Example of a basic model with two elements and a relationship</documentation>
+    <documentation xml:lang="en">Example of a basic model with two elements and two relationships</documentation>
     <elements>
-        <element identifier="ApplicationComponent1" xsi:type="ApplicationComponent">
-            <name xml:lang="en">An application component</name>
-        </element>
         <element identifier="BusinessActor1" xsi:type="BusinessActor">
             <name xml:lang="en">A business actor</name>
         </element>
         <element identifier="BusinessObject1" xsi:type="BusinessObject">
-            <name xml:lang="en">A business role</name>
-        </element>
-        <element identifier="BusinessRole1" xsi:type="BusinessRole">
-            <name xml:lang="en">A business role</name>
+            <name xml:lang="en">A business object</name></element>
+        <element identifier="BusinessRole1" xsi:type="BusinessRole"><
+            name xml:lang="en">A business role</name>
         </element>
     </elements>
     <relationships>
@@ -254,10 +323,26 @@ The above mentioned archiXML code can then be serialized using the ArchiXML - co
             <name xml:lang="en">Association Relationship</name>
         </relationship>
     </relationships>
+    <views>
+        <diagrams>
+            <view identifier="View_1" xsi:type="Diagram">
+                <name xml:lang="en">A view</name>
+                <node identifier="node_BusinessActor1" elementRef="BusinessActor1" h="55" w="120" y="0" x="300" xsi:type="Element"></node>
+                <node identifier="node_BusinessRole1" elementRef="BusinessRole1" h="55" w="120" y="0" x="450" xsi:type="Element"></node>
+                <node identifier="node_BusinessObject1" elementRef="BusinessObject1" h="55" w="120" y="0" x="600" xsi:type="Element"></node>
+                <connection identifier="connection_Relation_1" relationshipRef="Relation_1" source="node_BusinessActor1" target="node_BusinessRole1" xsi:type="Relationship"></connection>
+                <connection identifier="connection_Relation_2" relationshipRef="Relation_2" source="node_BusinessObject1" target="connection_Relation_1" xsi:type="Relationship"></connection>
+            </view>
+        </diagrams>
+    </views>
 </model>
 ```
 
-We can also roundtrip from the XML back to the RDF-based archiXML back to the RDF-based archimate core vocabulary. This means that one can parse archimate documents made in tools like Archi and then convert them to RDF, provided one uses the open exchange XML-based format for Archimate.
+This XML document can be read into Archimate based tooling and visualised as follows:
+
+![Example #1](/Examples/ArchimateExample1.JPG)
+
+We can also roundtrip from the XML document back to the RDF-based archiXML back to the RDF-based archimate core vocabulary. This means that one can parse archimate documents made in tools like Archi, BizzDesign and the like, and then convert them to RDF, provided one uses the open exchange XML-based format for Archimate.
 
 
 # Tools and dependencies
@@ -272,7 +357,7 @@ This repository comes with three, fairly primitive, Python-based tools to handle
 
 The tool Archimate2RDF is used to read Archimate-documents, parse them and then transform them to RDF-based triples. 
 
-### How to use Archimate2RDF
+### How to use Archimate2ArchiXML
 
 A. Install all necessary libraries:
 
@@ -280,22 +365,22 @@ A. Install all necessary libraries:
 	2. pip install bs4
 	3. pip install rdflib
 
-B. Place one or more Archimate-files in the input folder in OntoArchimate\Tools\Archimate2RDF\Input. Only ordinary Archimate-files can be processed. 
+B. Place one or more Archimate-files in the input folder in OntoArchimate\Tools\Archimate2ArchiXML\Input. Only ordinary Archimate-files based on the open exchange XML format can be processed. 
 
 C. Run the script in the command prompt by typing: 
 
 ```
-python Archimate2RDF.py
+python Archimate2ArchiXML.py
 ```
 
-D. Go to the output folder in OntoArchimate\Tools\Archimate2RDF\Output and grab your Turtle-file(s) (*.ttl). 
+D. Go to the output folder in OntoArchimate\Tools\Archimate2ArchiXML\Output and grab your Turtle-file(s) (*.ttl). 
 
 
-## RDF2Archimate
+## ArchiXML2Archimate
 
-The tool RDF2Archimate is used to read a RDF-based representation of an Archimate-document into a graph and then serialize and save this to an actual Archimate-file. 
+The tool ArchiXML2Archimate is used to read a RDF-based representation of an XML-based Archimate document into a graph and then serialize and save this to an actual XML-based Archimate-file. 
 
-### How to use RDF2Archimate
+### How to use ArchiXML2Archimate
 
 A. Install all necessary libraries (in this order):
 
@@ -303,26 +388,46 @@ A. Install all necessary libraries (in this order):
 	2. pip install pyshacl
 	3. pip install rdflib
 
-NOTE: pyshacl has a dependency with an older RDFlib version. However, for an optimal functioning of the semantic Archimate-vocabulary, the most recent release of RDFlib should be used. Hence, it is advised to first install pyshacl and then RDFlib, so that RDFlib is installed having the latest version. This is currently the least instrusive way of handling the dependency, offering accessibility for those not well versed in Python. 
-
-B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\RDF2Archimate\Input. A Turtle-file should represent a Archimate-document using the Archimate-vocabulary from this repository.
+B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\ArchiXML2Archimate\Input. A Turtle-file should represent an XML-based  Archimate-document using the ArchiXML-vocabulary from this repository.
 
 C. Run the script in the command prompt by typing: 
 
 ```
-python RDF2Archimate.py
+python ArchiXML2Archimate.py
 ```
 
-D. Go to the output folder in OntoArchimate\Tools\RDF2Archimate\Output and grab your Archimate-file(s). Additionally included are Turtle-file(s) (*.ttl) that contain the serialized 'archimate:fragment' properties for the very same Archimate-document and the Archimate-elements it contains. 
+D. Go to the output folder in OntoArchimate\Tools\ArchiXML2Archimate\Output and grab your Archimate-file(s). Additionally included are Turtle-file(s) (*.ttl) that contain the serialized 'xml:fragment' properties for the very same Archimate-document and the Archimate elements, relationships and views it contains. 
 
+
+## ArchiVoc2ArchiXML
+
+The tool ArchiVoc2ArchiXML is used to read an RDF-based representation of an Archimate model into a graph and then serialize and save this to an RDF-based representation of the XML-based archimate document that contains this model, using the ArchiXML vocabulary.
+
+### How to use ArchiVoc2ArchiXML
+
+A. Install all necessary libraries (in this order):
+
+	1. pip install os 
+	2. pip install pyshacl
+	3. pip install rdflib
+
+B. Place one or more Turtle-files (*.ttl) in the input folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Input. A Turtle-file should represent an RDF-based Archimate-document using the Archimate-vocabulary from this repository.
+
+C. Run the script in the command prompt by typing: 
+
+```
+python ArchiVoc2ArchiXML.py
+```
+
+D. Go to the output folder in OntoArchimate\Tools\ArchiVoc2ArchiXML\Output and grab your turtle-file(s). 
 
 ## Dependencies 
 
-Both tools make extensive use of [RDFlib](https://rdflib.readthedocs.io/en/stable/index.html). Rdflib is a Python library used for working with Resource Description Framework (RDF) data. RDF is a widely used framework for representing and processing information on the web. It is a standard model for data interchange on the web, particularly for representing metadata and data about resources available on the internet.
+All tools make extensive use of [RDFlib](https://rdflib.readthedocs.io/en/stable/index.html). Rdflib is a Python library used for working with Resource Description Framework (RDF) data. RDF is a widely used framework for representing and processing information on the web. It is a standard model for data interchange on the web, particularly for representing metadata and data about resources available on the internet.
 
 Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples.
 
-The RDF2Archimate tool additionally makes use of [PyShacl](https://github.com/RDFLib/pySHACL). PySHACL is a complete open-source implementation of the SHACL W3C specification, with broad use in the community as well. 
+Two out of three tools additionally makes use of [PyShacl](https://github.com/RDFLib/pySHACL). PySHACL is a complete open-source implementation of the SHACL W3C specification, with broad use in the community as well. 
 
 # Acknowledgements
 
