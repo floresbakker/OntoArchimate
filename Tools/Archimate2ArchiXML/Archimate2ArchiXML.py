@@ -82,10 +82,10 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiX
         g.bind("xlink", xlink)
         g.bind("xsi", xsi)
 
-        # fill graph with html vocabulary
+        # fill graph with archiXML vocabulary
         xml_graph = Graph().parse(directory_path+"/OntoArchimate/Specification/archiXML - core.ttl" , format="ttl")
 
-        # string for query to establish IRI of a 'tag' HTML node
+        # string for query to establish IRI of a 'tag' XML node
         tagquerystring = '''
             
         prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -109,7 +109,7 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiX
                 # establish unique id for the XML tag node
                 node_id = generate_node_id(node)
                 
-                # establish IRI for the tag class based on the HTML vocabulary
+                # establish IRI for the tag class based on the XML vocabulary
                 tag_result = xml_graph.query(tagquerystring, initBindings={"tag" : Literal(node.name)})
                 for row in tag_result:
                     tag_IRI = row.node_IRI
@@ -164,7 +164,7 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiX
                 for child in node.children:
                     member_count = member_count + 1 # count the number of direct children, so that we can establish the sequence of appearance of the children within the parent node, through the 'rdf:_x' property between parent and child.
                     
-                    # if the child is an html tag node get its unique identifier based on sourceline and sourcepos
+                    # if the child is an xml tag node get its unique identifier based on sourceline and sourcepos
                     if isinstance(child, Tag):
                       if child.name == None  :
                           childname = ""
@@ -173,7 +173,7 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiX
                       child_id = generate_node_id(child)
                       g.add((doc[node_id], rdf["_" + str(member_count)], doc[child_id]))
                       
-                    # if the child is an text node, create a unique identifier based on sourceline and sourcepos of its parent and the sequence position of the child within the parent, as the html-parser does not have sourceline and sourcepos available as attributes for text nodes.
+                    # if the child is an text node, create a unique identifier based on sourceline and sourcepos of its parent and the sequence position of the child within the parent, as the xml-parser does not have sourceline and sourcepos available as attributes for text nodes.
                     elif isinstance(child, NavigableString):
                       if child.name == None  :
                             childname = "Text"
@@ -187,7 +187,7 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiX
                       # write to graph that the child node is of type Text
                       g.add((doc[child_id], RDF.type, archiXML["Text"]))
                       
-                      # empty content (of type None) in html needs to be converted to empty string
+                      # empty content (of type None) in xml needs to be converted to empty string
                       if node.string == None: 
                           text_fragment = "" 
                       else:

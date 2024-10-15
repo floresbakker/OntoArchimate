@@ -55,26 +55,24 @@ example_archimate_code = readStringFromFile(directory_path + "/OntoArchimate/Exa
 
 
 def generate_element_id(element):
-    # generate an identifier for an element in the xml
-    parent_string = ""
-    for parent in element.parents:
-        parent_sibling_count = 0
-        for parent_sibling in parent.previous_siblings:    
-            parent_sibling_count = parent_sibling_count + 1
-        horizontal_parental_index = parent_sibling_count
-        if parent.name:
-            parent_string = parent_string + str(horizontal_parental_index)
-        else:
-            parent_string = parent_string + "0"
-        
-    count_sibling = 0
-    for sibling in element.previous_siblings:    
-        count_sibling = count_sibling + 1
-    horizontal_index = count_sibling
-    
-    element_id = f"{parent_string}/{horizontal_index}" 
-    
-    return element_id.replace("[document]/","")
+    # Base case: If there's no parent, return an empty string (root-level element)
+    if element.parent is None:
+        return "1"
+
+    # Initialize the sibling index for the current element
+    sibling_index = 1
+    # Count previous siblings (including text and non-element nodes)
+    for sibling in element.previous_siblings:
+        sibling_index += 1
+
+    # Recursive call: Get the parent's ID
+    parent_id = generate_element_id(element.parent)
+
+    # If the parent ID is not empty, append the current element's sibling index
+    if parent_id:
+        return f"{parent_id}.{sibling_index}"
+    else:
+        return str(sibling_index)  # This happens at the root level
 
 def iteratePyShacl(shaclgraph, serializable_graph):
         

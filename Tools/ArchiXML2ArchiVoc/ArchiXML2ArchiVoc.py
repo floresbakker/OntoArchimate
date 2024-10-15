@@ -48,10 +48,9 @@ def iteratePyShacl(vocabulary, serializable_graph):
                
 
 # Get the Archimate vocabulary and place it in a string
-ontoarchi_vocabulary = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
-ontoarchi_serialisation = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - serialisation.ttl")
+vocabulary = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
+serialisation = readGraphFromFile(directory_path + "/OntoArchimate/Specification/archimate - serialisation.ttl")
 
-vocabulary = ontoarchi_vocabulary 
 
 # loop through any turtle files in the input directory
 for filename in os.listdir(directory_path+"/OntoArchimate/Tools/ArchiXML2ArchiVoc/Input"):
@@ -74,7 +73,7 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/ArchiXML2ArchiVo
         print ("\nTransforming archiXML model to an archimate model as contained in document '" + filename + "'...")
 
         # Call the shacl engine with the Archimate vocabulary and the document to be serialized
-        iteratePyShacl(ontoarchi_serialisation, serializable_graph)
+        iteratePyShacl(serialisation, serializable_graph)
         
 
     

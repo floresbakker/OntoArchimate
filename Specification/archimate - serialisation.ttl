@@ -101,16 +101,16 @@ construct {
     $this  rdf:type archiXML:Document;
            ?member ?modelArchiXML.
     ?modelArchiXML rdf:type archiXML:Model;       
-           rdf:_1 ?modelNameNode.         
+           ?memberName ?modelNameNode.         
     ?modelNameNode rdf:type archiXML:Name;
                    rdf:_1 ?modelNameTextNode.
     ?modelNameTextNode rdf:type archiXML:Text;
                    xml:fragment ?modelName.
                    
     optional {
-    ?modelArchiXML rdf:_2 ?documentationNode.
+    ?modelArchiXML ?memberDoc ?documentationNode.
     ?documentationNode rdf:type archiXML:Documentation;
-                     rdf:_1 ?documentationTextNode.
+                       rdf:_1 ?documentationTextNode.
     ?documentationTextNode rdf:type archiXML:Text;
                          xml:fragment ?definition.}                     
     
@@ -162,14 +162,14 @@ construct {
   # Get the archimate metadata of the archimate element to be serialized.
   
   $this xsi:type ?xsiType;
-        rdf:_1 ?elementNameNode.
+        ?memberName ?elementNameNode.
   ?elementNameNode rdf:type archiXML:Name;
         rdf:_1 ?elementNameTextNode.
   ?elementNameTextNode rdf:type archiXML:Text;
         xml:fragment ?elementName.
   
   optional {
-  $this rdf:_2 ?documentationNode.
+  $this ?memberDoc ?documentationNode.
   ?documentationNode rdf:type archiXML:Documentation;
                      rdf:_1 ?documentationTextNode.
   ?documentationTextNode rdf:type archiXML:Text;
@@ -224,12 +224,14 @@ construct {
 
   # Get the archimate metadata of the archiXML relationship
  
-  $this rdf:type archiXML:Relationship;
-        rdf:_1 ?relationshipNameNode.
+  $this rdf:type archiXML:Relationship.
+  
+  optional{
+  $this ?memberName ?relationshipNameNode.
   ?relationshipNameNode rdf:type archiXML:Name;
         rdf:_1 ?relationshipNameTextNode.
   ?relationshipNameTextNode rdf:type archiXML:Text;
-        xml:fragment ?relationshipName.
+        xml:fragment ?relationshipName.}
  
   $this archiXML:target ?targetIdentifier;
         archiXML:source ?sourceIdentifier;
@@ -239,8 +241,8 @@ construct {
   ?targetNode archiXML:identifier ?sourceIdentifier.
   ?relationtype dct:identifier ?xsiType.
   
-  optional {
-  $this rdf:_2 ?documentationNode.
+  optional{
+  $this ?memberDoc ?documentationNode.
   ?documentationNode rdf:type archiXML:Documentation;
                      rdf:_1 ?documentationTextNode.
   ?documentationTextNode rdf:type archiXML:Text;
@@ -249,7 +251,7 @@ construct {
   # Create IRI's
   BIND(IRI(CONCAT(STR(?sourceNode),  '-Archimate')) as ?source)
   BIND(IRI(CONCAT(STR(?targetNode),  '-Archimate')) as ?target)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationship)
+  BIND(IRI(CONCAT(STR($this),        '-Archimate')) as ?relationship)
   }
 
 ''';
@@ -297,14 +299,14 @@ construct {
   # Get the archimate metadata of the archiXML relationship
  
   $this rdf:type archiXML:View;
-        rdf:_1 ?viewNameNode.
+        ?memberView ?viewNameNode.
   ?viewNameNode rdf:type archiXML:Name;
         rdf:_1 ?viewNameTextNode.
   ?viewNameTextNode rdf:type archiXML:Text;
         xml:fragment ?viewName.
 
   optional {
-  $this rdf:_2 ?documentationNode.
+  $this ?memberDoc ?documentationNode.
   ?documentationNode rdf:type archiXML:Documentation;
                      rdf:_1 ?documentationTextNode.
   ?documentationTextNode rdf:type archiXML:Text;
@@ -326,6 +328,7 @@ construct {
    
    BIND(IRI(CONCAT(STR(?archiXML_Relationship),  '-Archimate')) as ?archimateNode)}
    
+   BIND(IRI(CONCAT(STR($this), '-Archimate')) as ?view)
   }
 ''';
     rdfs:isDefinedBy archimate:.
