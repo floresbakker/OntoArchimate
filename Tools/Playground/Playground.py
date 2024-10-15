@@ -43,12 +43,13 @@ dom_vocabulary          = readStringFromFile(directory_path + "/OntoArchimate/Sp
 xml_vocabulary          = readStringFromFile(directory_path + "/OntoArchimate/Specification/xml - core.ttl")
 xmlns_vocabulary        = readStringFromFile(directory_path + "/OntoArchimate/Specification/xmlns - core.ttl")
 xlink_vocabulary        = readStringFromFile(directory_path + "/OntoArchimate/Specification/xlink - core.ttl")
+xsi_vocabulary          = readStringFromFile(directory_path + "/OntoArchimate/Specification/xsi - core.ttl")
 archimate_vocabulary    = readStringFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
 archiXML_vocabulary     = readStringFromFile(directory_path + "/OntoArchimate/Specification/archiXML - core.ttl")
 archimate_serialisation = readStringFromFile(directory_path + "/OntoArchimate/Specification/archimate - serialisation.ttl")
 archiXML_serialisation  = readStringFromFile(directory_path + "/OntoArchimate/Specification/archiXML - serialisation.ttl")
 
-vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + archiXML_vocabulary + '\n'
+vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archiXML_vocabulary + '\n'
 example_rdf_code = readStringFromFile(directory_path + "/OntoArchimate/Examples/ArchiXMLBasicModel.ttl")
 example_archimate_code = readStringFromFile(directory_path + "/OntoArchimate/Examples/ArchimateBasicModel.xml")
 
@@ -161,6 +162,7 @@ def convert_to_rdf():
         g.bind("xml", xml)
         g.bind("xmlns", xmlns)
         g.bind("xlink", xlink)
+        g.bind("xsi", xsi)        
 
         # fill graph with archiXML vocabulary
         xml_graph = Graph().parse(directory_path+"/OntoArchimate/Specification/archiXML - core.ttl" , format="ttl")
@@ -219,6 +221,8 @@ def convert_to_rdf():
                             namespace_uri = xlink
                         elif namespace == 'xmlns':
                             namespace_uri = xmlns
+                        elif namespace == 'xsi':
+                            namespace_uri = xsi                            
                         elif namespace == 'archimate':
                             namespace_uri = archimate
                         else:
@@ -263,7 +267,7 @@ def convert_to_rdf():
                       g.add((doc[element_id], rdf["_" + str(member_count)], doc[child_id]))  
                       
                       # write to graph that the child element is of type TextElement
-                      g.add((doc[child_id], RDF.type, archimate["Text"]))
+                      g.add((doc[child_id], RDF.type, archiXML["Text"]))
                       
                       # empty content (of type None) in html needs to be converted to empty string
                       if element.string == None: 
