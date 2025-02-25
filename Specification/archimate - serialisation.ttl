@@ -560,14 +560,14 @@ construct {
 ''';
     rdfs:isDefinedBy archimate:.        
 
-shp:ViewConnector
+shp:ViewComponentConnector
     a sh:NodeShape;
-    sh:rule rule:ViewConnector;
-    sh:target target:ViewConnector;
-    skos:prefLabel 'view connector shape'@en;
+    sh:rule rule:ViewComponenConnector;
+    sh:target target:ViewComponenConnector;
+    skos:prefLabel 'view component connector shape'@en;
     rdfs:isDefinedBy archimate:.
 
-target:ViewConnector
+target:ViewComponentConnector
     a sh:SPARQLTarget;
     rdfs:comment 'Select all nodes and connections that have to be connected to the archimate view.'@en;
     sh:select '''
@@ -596,10 +596,10 @@ select $this {
 ''';
     rdfs:isDefinedBy archiXML:.
     
-rule:ViewConnector
+rule:ViewComponentConnector
     a sh:SPARQLRule;
     rdfs:comment 'A rule that creates a connection between nodes and connections on the one hand and the archimate view on the other hand.'@en;
-    skos:prefLabel 'archimate view connectorrule'@en;
+    skos:prefLabel 'archimate view component connector rule'@en;
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -615,20 +615,20 @@ construct {
              
 } where {
   
-  {select ?archimate_parent $this (count(?prevIndex) as ?newIndex) 
+  {select ?archimate_parent $this ((count(?prevIndex)+1) as ?newIndex) 
    where {
 
       $this prov:wasDerivedFrom ?archiXML_component.
       ?archiXML_parent ?member ?archiXML_component. 
-      filter(strstarts(?member, 'rdf:_'))
+      filter(strstarts(str(?member), concat(str(rdf:), '_')))
       ?archimate_parent prov:wasDerivedFrom ?archiXML_parent.
-      bind(strafter(?member, 'rdf:_') as ?currentIndex)
+      bind(strafter(str(?member), concat(str(rdf:), '_')) as ?currentIndex)
       
       values ?archiXML_Class { archiXML:Node archiXML:Connection}
       optional {
               ?prevComponent rdf:type ?archiXML_Class.
               ?archiXML_parent ?prevMember ?prevComponent.
-              bind(strafter(?prevMember, 'rdf:_') as ?prevIndex)
+              bind(strafter(str(?prevMember), concat(str(rdf:), '_')) as ?prevIndex)
               filter(?prevIndex < ?currentIndex)
             } 
     }  group by ?archimate_parent $this
