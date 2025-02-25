@@ -38,8 +38,8 @@ model:aBusinessRole
     
 model:aBusinessObject
     rdf:type archimate:BusinessObject;
-    skos:prefLabel "A business role";
-    skos:definition "An example of a business role";
+    skos:prefLabel "A business object";
+    skos:definition "An example of a business object";
     rdfs:isDefinedBy model:BasicModel.
    
 ### Relationship

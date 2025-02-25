@@ -89,8 +89,8 @@ model:aBusinessRole
     
 model:aBusinessObject
     rdf:type archimate:BusinessObject;
-    skos:prefLabel "A business role";
-    skos:definition "An example of a business role";
+    skos:prefLabel "A business object";
+    skos:definition "An example of a business object";
     rdfs:isDefinedBy model:BasicModel.
    
 ### Relationship
@@ -472,10 +472,10 @@ D. Go to the output folder in OntoArchimate\Tools\ArchiXML2ArchiVoc\Output and g
 
 All tools make extensive use of [RDFlib](https://rdflib.readthedocs.io/en/stable/index.html). Rdflib is a Python library used for working with Resource Description Framework (RDF) data. RDF is a widely used framework for representing and processing information on the web. It is a standard model for data interchange on the web, particularly for representing metadata and data about resources available on the internet.
 
-Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples.
+Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples. From experience, the RDFlib library unfortunately does not always guarantee a good performance; for instance, the archiXML to archiVoc script sometimes takes very long to finish ( > 1 hour), whereas the same SHACL shapes and the same data are run within 40 seconds on a commerical SHACL engine. It is good to have this in mind when running it locally.
 
 Two out of three tools additionally makes use of [PyShacl](https://github.com/RDFLib/pySHACL). PySHACL is a complete open-source implementation of the SHACL W3C specification, with broad use in the community as well. 
 
 # Acknowledgements
 
-We would like to thank Iwan Aucamp @RDFlib for his unrelenting support and accomplishments regarding the open source triple store and related services, as well as Ashley Sommer @PyShacl for his work on the important open source implementation of a SHACL engine. 
+We would like to thank Iwan Aucamp @RDFlib for his unrelenting support and accomplishments regarding the open source triple store and related services, as well as Ashley Sommer @RDFlib & @PyShacl for his work on the important open source implementation of a SHACL engine. 

@@ -295,7 +295,7 @@ model:aBusinessActor-ElementNameText a archiXML:Text ;
     xml1:fragment "A business actor" .
 
 model:aBusinessObject-DocumentationText a archiXML:Text ;
-    xml1:fragment "An example of a business role" .
+    xml1:fragment "An example of a business object" .
 
 model:aBusinessObject-Element a archiXML:Element ;
     rdf:_1 model:aBusinessObject-ElementName ;
@@ -313,7 +313,7 @@ model:aBusinessObject-ElementName a archiXML:Name ;
     xml1:lang "en" .
 
 model:aBusinessObject-ElementNameText a archiXML:Text ;
-    xml1:fragment "A business role" .
+    xml1:fragment "A business object" .
 
 model:aBusinessRole-DocumentationText a archiXML:Text ;
     xml1:fragment "An example of a business role" .
@@ -858,8 +858,8 @@ model:aBusinessActor a archimate:BusinessActor ;
 
 model:aBusinessObject a archimate:BusinessObject ;
     rdfs:isDefinedBy model:BasicModel ;
-    skos:definition "An example of a business role" ;
-    skos:prefLabel "A business role" .
+    skos:definition "An example of a business object" ;
+    skos:prefLabel "A business object" .
 
 model:aBusinessRole a archimate:BusinessRole ;
     rdfs:isDefinedBy model:BasicModel ;
@@ -1110,8 +1110,8 @@ model:aBusinessRole
     
 model:aBusinessObject
     rdf:type archimate:BusinessObject;
-    skos:prefLabel "A business role";
-    skos:definition "An example of a business role";
+    skos:prefLabel "A business object";
+    skos:definition "An example of a business object";
     rdfs:isDefinedBy model:BasicModel.
    
 ### Relationship
