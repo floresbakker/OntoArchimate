@@ -92,7 +92,8 @@ construct {
   ?model rdf:type archimate:Model;
          skos:prefLabel ?modelName;
          skos:definition ?definition;
-         rdfs:isDefinedBy ?model.
+         rdfs:isDefinedBy ?model;
+         prov:wasDerivedFrom $this.
   
 
 } where {
@@ -112,7 +113,7 @@ construct {
     ?documentationNode rdf:type archiXML:Documentation;
                        rdf:_1 ?documentationTextNode.
     ?documentationTextNode rdf:type archiXML:Text;
-                         xml:fragment ?definition.}                     
+                         xml:fragment ?definition.}
     
     # Create IRI's    
     BIND(IRI(CONCAT(STR(?modelArchiXML), "-Archimate")) as ?model)
@@ -155,7 +156,8 @@ construct {
   ?element rdf:type ?elementClass;
            skos:prefLabel ?elementName;
            skos:definition ?definition;
-           rdfs:isDefinedBy ?model.
+           rdfs:isDefinedBy ?model;
+           prov:wasDerivedFrom $this.
 
 } where {
 
@@ -167,6 +169,13 @@ construct {
         rdf:_1 ?elementNameTextNode.
   ?elementNameTextNode rdf:type archiXML:Text;
         xml:fragment ?elementName.
+
+  ?elementsNode ?member $this.
+  ?documentModel ?modelMember ?elementsNode.
+  ?document ?docMember ?documentModel.
+  ?model prov:wasDerivedFrom ?document.
+
+
   
   optional {
   $this ?memberDoc ?documentationNode.
@@ -218,7 +227,8 @@ construct {
            archimate:relationship ?relationtype;
            archimate:from ?source;
            archimate:to ?target;
-           rdfs:isDefinedBy ?model.
+           rdfs:isDefinedBy ?model;
+           prov:wasDerivedFrom $this.
   
 } where {
 
@@ -226,6 +236,11 @@ construct {
  
   $this rdf:type archiXML:Relationship.
   
+  ?relationshipsNode ?member $this.
+  ?documentModel ?modelMember ?relationshipsNode.
+  ?document ?docMember ?documentModel.
+  ?model prov:wasDerivedFrom ?document.
+
   optional{
   $this ?memberName ?relationshipNameNode.
   ?relationshipNameNode rdf:type archiXML:Name;
@@ -252,11 +267,138 @@ construct {
   BIND(IRI(CONCAT(STR(?sourceNode),  '-Archimate')) as ?source)
   BIND(IRI(CONCAT(STR(?targetNode),  '-Archimate')) as ?target)
   BIND(IRI(CONCAT(STR($this),        '-Archimate')) as ?relationship)
+  
   }
 
 ''';
+    rdfs:isDefinedBy archimate:.
+
+shp:RelationshipLabel
+    a sh:NodeShape;
+    sh:rule rule:RelationshipLabel;
+    sh:target target:RelationshipLabel;
+    skos:prefLabel 'relationship label shape'@en;
+    rdfs:isDefinedBy archimate:.   
+
+target:RelationshipLabel
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all elements in the model.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+select $this {
+
+  # Select all relationships without a prefLabel.
+  $this rdf:type archimate:Relationship.
+  filter not exists {
+    $this skos:prefLabel []
+    }    
+  }
+''';
     rdfs:isDefinedBy archiXML:.
 
+rule:RelationshipLabel
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates a label and definitions for an archimate relationship.'@en;
+    skos:prefLabel 'archimate relationship label rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+construct {
+
+  # create the archimate-fragment for the archimate-relationship
+  $this skos:prefLabel ?label.
+  
+} where {
+
+  # Get the archimate metadata of the archiXML relationship
+ 
+  $this rdf:type archimate:Relationship;
+        archimate:relationship ?relationtype;
+        archimate:from ?source;
+        archimate:to ?target.
+        
+  ?relationtype skos:prefLabel ?relationshipName.
+  ?source skos:prefLabel ?sourceLabel.
+  ?target skos:prefLabel ?targetLabel.
+  
+  bind(concat(?relationshipName, ' (', ?sourceLabel, ' - ', ?targetLabel, ')') as ?label)
+  
+  }
+
+''';
+    rdfs:isDefinedBy archimate:.
+
+
+shp:RelationshipDefinition
+    a sh:NodeShape;
+    sh:rule rule:RelationshipDefinition;
+    sh:target target:RelationshipDefinition;
+    skos:prefLabel 'relationship definition shape'@en;
+    rdfs:isDefinedBy archimate:.   
+
+target:RelationshipDefinition
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all relationships in the model without a skos definition.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+select $this {
+
+  # Select all relationships without a prefLabel.
+  $this rdf:type archimate:Relationship.
+  filter not exists {
+    $this skos:definition []
+    }
+  }
+''';
+    rdfs:isDefinedBy archiXML:.
+
+rule:RelationshipDefinition
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates a definition for an archimate relationship.'@en;
+    skos:prefLabel 'archimate relationship definition rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+construct {
+
+  # create the archimate-fragment for the archimate-relationship
+  $this skos:definition ?definition.
+  
+} where {
+
+  # Get the archimate metadata of the archiXML relationship
+ 
+  $this rdf:type archimate:Relationship;
+        archimate:relationship ?relationtype;
+        archimate:from ?source;
+        archimate:to ?target.
+        
+  ?relationtype skos:prefLabel ?relationshipName.
+  ?source skos:prefLabel ?sourceLabel.
+  ?target skos:prefLabel ?targetLabel.
+  
+  bind(concat(?relationshipName, ' from "', ?sourceLabel, '" to "', ?targetLabel, '"') as ?definition)
+  
+  }
+
+''';
+    rdfs:isDefinedBy archimate:.
 
 shp:View
     a sh:NodeShape;
@@ -292,7 +434,8 @@ construct {
         skos:prefLabel ?viewName;
         skos:definition ?definition;
         ?member ?archimateNode;
-        rdfs:isDefinedBy ?model.
+        rdfs:isDefinedBy ?model;
+        prov:wasDerivedFrom $this.        
              
 } where {
 
@@ -304,6 +447,12 @@ construct {
         rdf:_1 ?viewNameTextNode.
   ?viewNameTextNode rdf:type archiXML:Text;
         xml:fragment ?viewName.
+
+  ?viewsNode ?memberViews $this.
+  ?documentModel ?modelMember ?viewsNode.
+  ?document ?docMember ?documentModel.
+  ?model prov:wasDerivedFrom ?document.
+
 
   optional {
   $this ?memberDoc ?documentationNode.

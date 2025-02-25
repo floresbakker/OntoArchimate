@@ -194,7 +194,7 @@ for filename in os.listdir(directory_path+"/OntoArchimate/Tools/Archimate2ArchiX
                           text_fragment = node.string
                       
                       # write string content of the text node to the graph
-                      g.add((doc[child_id], archiXML["fragment"], Literal(text_fragment)))
+                      g.add((doc[child_id], xml["fragment"], Literal(text_fragment)))
 
         # write the resulting graph to file
         g.serialize(destination=directory_path+"/OntoArchimate/Tools/Archimate2ArchiXML/Output/" + filename_stem + "-parsed.ttl", format="turtle")

@@ -252,7 +252,7 @@ prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    
+
 select $this {
 
   # Select all elements... 
@@ -489,20 +489,17 @@ prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     
-select ?this
+select $this
 where {
-  # Select individuals of archiXML:Relationships 
-  ?connector rdf:type archiXML:Relationships.
-  OPTIONAL
-  {select ?unprocessedRelationship where {
- 
-    ?unprocessedRelationship rdf:type archimate:Relationship .
+  # Select individuals of archiXML:Relationships
+  $this rdf:type archiXML:Relationships.
+  {
     filter not exists {
-      [] prov:wasDerivedFrom ?unprocessedRelationship .
-     }
+      ?unprocessedRelationship rdf:type archimate:Relationship.
+      $this ?member ?unprocessedRelationship .
+      filter(strstarts(?member, 'rdf:_'))
     }
-   }
-  bind(if(!bound(?unprocessedRelationship), ?connector, ?unboundDummy) as ?this)
+  }
 }
 ''';
     rdfs:isDefinedBy archiXML:.
@@ -526,7 +523,7 @@ construct {
   
 } where {
   ?relationship rdf:type archiXML:Relationship;
-                prov:wasDerivedFrom ?archimateRelation.    
+                prov:wasDerivedFrom ?archimateRelation.
   bind(iri(concat(str(rdf:),"_", str(function:getRelationshipPosition(?archimateRelation)))) as ?rdf_member)
   }
 ''';
@@ -549,7 +546,7 @@ prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     
-select ?this
+select $this
 where {
   
   $this rdf:type archiXML:Relationship.
@@ -673,7 +670,8 @@ prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
 select $this {
 
   # Select all views... 
@@ -1073,4 +1071,4 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
        FILTER (?view = $input)
        BIND(?member as ?result)
       }
-        """ .    
+        """ .
