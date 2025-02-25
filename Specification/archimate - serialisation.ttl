@@ -433,7 +433,6 @@ construct {
   ?view rdf:type archimate:View;
         skos:prefLabel ?viewName;
         skos:definition ?definition;
-        ?member ?archimateNode;
         rdfs:isDefinedBy ?model;
         prov:wasDerivedFrom $this.        
              
@@ -448,11 +447,11 @@ construct {
   ?viewNameTextNode rdf:type archiXML:Text;
         xml:fragment ?viewName.
 
-  ?viewsNode ?memberViews $this.
+  ?diagramNode ?memberViews $this.
+  ?viewsNode ?memberDiagram ?diagramNode.
   ?documentModel ?modelMember ?viewsNode.
   ?document ?docMember ?documentModel.
   ?model prov:wasDerivedFrom ?document.
-
 
   optional {
   $this ?memberDoc ?documentationNode.
@@ -460,25 +459,182 @@ construct {
                      rdf:_1 ?documentationTextNode.
   ?documentationTextNode rdf:type archiXML:Text;
                          xml:fragment ?definition.}          
- 
-  {$this ?member ?archiXML_Node.
-   ?archiXML_Node rdf:type archiXML:Node;
-                  archiXML:elementRef ?identifier.
-   ?archiXML_Element archiXML:identifier ?identifier.
-   
-   BIND(IRI(CONCAT(STR(?archiXML_Element),  '-Archimate')) as ?archimateNode)}
-   
-   UNION
-   
-  {$this ?member ?archiXML_Connection.
-   ?archiXML_Connection rdf:type archiXML:Connection;
-                        archiXML:relationshipRef ?identifier.
-   ?archiXML_Relationship archiXML:identifier ?identifier.
-   
-   BIND(IRI(CONCAT(STR(?archiXML_Relationship),  '-Archimate')) as ?archimateNode)}
    
    BIND(IRI(CONCAT(STR($this), '-Archimate')) as ?view)
   }
 ''';
     rdfs:isDefinedBy archimate:.
+    
 
+shp:NodeDepiction
+    a sh:NodeShape;
+    sh:rule rule:NodeDepiction;
+    sh:targetClass archiXML:Node;
+    skos:prefLabel 'node depiction shape'@en;
+    rdfs:isDefinedBy archimate:.
+       
+rule:NodeDepiction
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate depiction node as part of an archimate view.'@en;
+    skos:prefLabel 'archimate node depiction rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+construct {
+
+  # create the depiction of an archimate element
+  ?elementDepiction rdf:type archimate:ViewNode;
+        skos:prefLabel ?depictionLabel;
+        foaf:depicts ?archimate_Element;
+        rdfs:isDefinedBy ?model;
+        prov:wasDerivedFrom $this.        
+             
+} where {
+  
+  $this archiXML:elementRef ?identifier.
+  ?archiXML_Element archiXML:identifier ?identifier.
+  ?archimate_Element prov:wasDerivedFrom ?archiXML_Element;
+                     rdfs:isDefinedBy ?model;
+                     skos:prefLabel ?elementLabel.
+  BIND(CONCAT('A depiction of ',?elementLabel) as ?depictionLabel)                      
+   
+  BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?elementDepiction)
+   
+  }
+''';
+    rdfs:isDefinedBy archimate:.
+    
+
+
+shp:ConnectionDepiction
+    a sh:NodeShape;
+    sh:rule rule:ConnectionDepiction;
+    sh:targetClass archiXML:Connection;
+    skos:prefLabel 'connection depiction shape'@en;
+    rdfs:isDefinedBy archimate:.
+       
+rule:ConnectionDepiction
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate depiction connection as part of an archimate view.'@en;
+    skos:prefLabel 'archimate connection depiction rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+construct {
+
+  # create the depiction of an archimate relationship
+  ?relationshipDepiction rdf:type archimate:Connection;
+        skos:prefLabel ?depictionLabel;
+        foaf:depicts ?archimate_Relationship;
+        rdfs:isDefinedBy ?model;
+        prov:wasDerivedFrom $this.        
+             
+} where {
+  
+  $this archiXML:relationshipRef ?identifier.
+  ?archiXML_Relationship archiXML:identifier ?identifier.
+  ?archimate_Relationship prov:wasDerivedFrom ?archiXML_Relationship;
+                     rdfs:isDefinedBy ?model;
+                     skos:prefLabel ?relationshipLabel.
+  BIND(CONCAT('A depiction of ',?relationshipLabel) as ?depictionLabel)                      
+   
+  BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationshipDepiction)
+   
+  }
+''';
+    rdfs:isDefinedBy archimate:.        
+
+shp:ViewConnector
+    a sh:NodeShape;
+    sh:rule rule:ViewConnector;
+    sh:target target:ViewConnector;
+    skos:prefLabel 'view connector shape'@en;
+    rdfs:isDefinedBy archimate:.
+
+target:ViewConnector
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all nodes and connections that have to be connected to the archimate view.'@en;
+    sh:select '''
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+select $this {
+
+  # Select all relationships without a prefLabel.
+ {$this rdf:type archimate:ViewNode.
+   filter not exists {
+    [] ?member $this
+    filter(strstarts(?member, 'rdf:_'))
+    }    
+ }
+ UNION
+ {$this rdf:type archimate:Connection.
+   filter not exists {
+    [] ?member $this
+    filter(strstarts(?member, 'rdf:_'))
+    }    
+  }
+ }
+''';
+    rdfs:isDefinedBy archiXML:.
+    
+rule:ViewConnector
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates a connection between nodes and connections on the one hand and the archimate view on the other hand.'@en;
+    skos:prefLabel 'archimate view connectorrule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+
+construct {
+
+  # connect the parent with the children
+  ?archimate_parent ?indexMember $this.       
+             
+} where {
+  
+  {select ?archimate_parent $this (count(?prevIndex) as ?newIndex) 
+   where {
+
+      $this prov:wasDerivedFrom ?archiXML_component.
+      ?archiXML_parent ?member ?archiXML_component. 
+      filter(strstarts(?member, 'rdf:_'))
+      ?archimate_parent prov:wasDerivedFrom ?archiXML_parent.
+      bind(strafter(?member, 'rdf:_') as ?currentIndex)
+      
+      values ?archiXML_Class { archiXML:Node archiXML:Connection}
+      optional {
+              ?prevComponent rdf:type ?archiXML_Class.
+              ?archiXML_parent ?prevMember ?prevComponent.
+              bind(strafter(?prevMember, 'rdf:_') as ?prevIndex)
+              filter(?prevIndex < ?currentIndex)
+            } 
+    }  group by ?archimate_parent $this
+   }
+   bind(iri(concat(str(rdf:), '_', str(?newIndex))) as ?indexMember)
+   }
+
+''';
+    rdfs:isDefinedBy archimate:.    
