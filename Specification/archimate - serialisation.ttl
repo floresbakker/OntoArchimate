@@ -562,8 +562,8 @@ construct {
 
 shp:ViewComponentConnector
     a sh:NodeShape;
-    sh:rule rule:ViewComponenConnector;
-    sh:target target:ViewComponenConnector;
+    sh:rule rule:ViewComponentConnector;
+    sh:target target:ViewComponentConnector;
     skos:prefLabel 'view component connector shape'@en;
     rdfs:isDefinedBy archimate:.
 
