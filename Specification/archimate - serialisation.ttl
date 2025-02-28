@@ -578,18 +578,16 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
 select $this {
 
-  # Select all relationships without a prefLabel.
+  # Select all relationships without a member relation.
  {$this rdf:type archimate:ViewNode.
    filter not exists {
-    [] ?member $this
-    filter(strstarts(?member, 'rdf:_'))
+    [] archimate:contains $this
     }    
  }
  UNION
  {$this rdf:type archimate:Connection.
    filter not exists {
-    [] ?member $this
-    filter(strstarts(?member, 'rdf:_'))
+    [] archimate:contains $this
     }    
   }
  }
@@ -611,29 +609,15 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 construct {
 
   # connect the parent with the children
-  ?archimate_parent ?indexMember $this.       
+  ?view archimate:contains $this.       
              
 } where {
-  
-  {select ?archimate_parent $this ((count(?prevIndex)+1) as ?newIndex) 
-   where {
 
-      $this prov:wasDerivedFrom ?archiXML_component.
-      ?archiXML_parent ?member ?archiXML_component. 
-      filter(strstarts(str(?member), concat(str(rdf:), '_')))
-      ?archimate_parent prov:wasDerivedFrom ?archiXML_parent.
-      bind(strafter(str(?member), concat(str(rdf:), '_')) as ?currentIndex)
-      
-      values ?archiXML_Class { archiXML:Node archiXML:Connection}
-      optional {
-              ?prevComponent rdf:type ?archiXML_Class.
-              ?archiXML_parent ?prevMember ?prevComponent.
-              bind(strafter(str(?prevMember), concat(str(rdf:), '_')) as ?prevIndex)
-              filter(?prevIndex < ?currentIndex)
-            } 
-    }  group by ?archimate_parent $this
-   }
-   bind(iri(concat(str(rdf:), '_', str(?newIndex))) as ?indexMember)
+  $this prov:wasDerivedFrom ?archiXML_component.
+  ?archiXML_view ?member ?archiXML_component. 
+  filter(strstarts(str(?member), concat(str(rdf:), '_')))
+  ?view prov:wasDerivedFrom ?archiXML_view. 
+
    }
 
 ''';

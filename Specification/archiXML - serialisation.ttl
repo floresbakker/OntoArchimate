@@ -683,16 +683,24 @@ select $this {
         prov:wasDerivedFrom $this.
     }
   
-  # ...but whose elements already have been processed.
+  # ...but whose nodes and connections already have been processed.
   
-  minus
-  {$this ?member ?concept.
-  filter(strstarts(str(?member),concat(str(rdf:),'_')))
-  ?concept rdf:type/rdfs:subClassOf* archimate:Concept.
-  filter not exists
-  {[] prov:wasDerivedFrom ?concept}
-   }
+  filter not exists {
+  ?viewNode rdf:type archimate:ViewNode.
+  
+      filter not exists {
+      ?viewNode prov:wasDerivedFrom [].
+      }
   }
+  
+  filter not exists {
+  ?connection rdf:type archimate:Connection.
+  
+      filter not exists {
+      ?connection prov:wasDerivedFrom [].
+  }  
+ }
+}
 ''';
     rdfs:isDefinedBy archiXML:.
     
@@ -756,17 +764,30 @@ construct {
 } where {
 
   # Get the archimate metadata of the archimate view
-  $this skos:prefLabel ?viewName;
-        skos:definition ?archimateDocumentation.
+  {$this skos:prefLabel ?viewName;
+         skos:definition ?archimateDocumentation.
   
-  {$this ?memberElement ?element.
+  $this archimate:contains ?element.
   ?element rdf:type/rdfs:subClassOf* archimate:Element.
   
   ?archiXMLElement prov:wasDerivedFrom ?element;
                    archiXML:identifier ?elementIdentifier.
 
-  # Establish position of the element
-  BIND(xsd:integer(STRAFTER(STR(?memberElement),CONCAT(STR(rdf:),'_')))+2 as ?index)
+  # Establish position of the element  
+  {select ?element ((count(?prevIndex)+1) as ?indexBase)
+   where{
+    $this archimate:contains ?element.
+    ?element rdf:type/rdfs:subClassOf* archimate:Element.
+    bind(str(?element) as ?index)
+    optional {
+              ?prevElement rdf:type/rdfs:subClassOf* archimate:Element.
+              bind(str(?prevIndex) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             } 
+     } group by ?element
+  }
+  # Establish instance of rdfs:member for the node.
+  BIND(xsd:integer(STRAFTER(STR(?indexBase),CONCAT(STR(rdf:),'_')))+2 as ?index)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?index))) as ?memberNode)
   
   # Define constants for standard element width and height
@@ -791,7 +812,7 @@ construct {
   }
   
   UNION
-  {$this ?memberRelation ?relationship.
+  {$this archimate:contains ?relationship.
   ?relationship rdf:type/rdfs:subClassOf* archimate:Relationship.
   
   ?archiXMLRelationship prov:wasDerivedFrom ?relationship;
@@ -804,7 +825,20 @@ construct {
 
   ?archiXMLElementTarget archiXML:identifier ?target;
                    rdf:type ?classTarget. 
-                   
+  
+  # Establish position of the relationship 
+  {select ?relationship ((count(?prevIndex)+1) as ?indexBase)
+   where{
+    $this archimate:contains ?relationship.
+    ?relationship rdf:type/rdfs:subClassOf* archimate:Relationship.
+    bind(str(?relationship) as ?index)
+    optional {
+              ?prevElement rdf:type/rdfs:subClassOf* archimate:Relationship.
+              bind(str(?prevIndex) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             } 
+     } group by ?relationship
+  }                 
   # Set unique identifiers
   BIND(CONCAT("connection_",STR(?relationIdentifier)) as ?connectionIdentifier)    
   BIND(IF(?classSource = archiXML:Element, "node_", if(?classSource = archiXML:Relationship, "connection_", ?unboundDummy)) as ?sourceIdentifierString)
@@ -812,8 +846,8 @@ construct {
   BIND(CONCAT(?sourceIdentifierString, ?source) as ?sourceIdentifier)
   BIND(CONCAT(?targetIdentifierString, ?target) as ?targetIdentifier)
   
-  # Establish position of the connection
-  BIND(xsd:integer(STRAFTER(STR(?memberRelation),CONCAT(STR(rdf:),'_')))+2 as ?index)
+  # Establish instance of rdfs:member for the connection.
+  BIND(xsd:integer(STRAFTER(STR(?indexBase),CONCAT(STR(rdf:),'_')))+2 as ?index)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?index))) as ?memberConnection)  
                  
   }
