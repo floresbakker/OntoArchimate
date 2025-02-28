@@ -226,7 +226,7 @@ archimate:Attribute a owl:Class;
 archimate:View a owl:Class;
     dct:identifier "View";
     skos:definition 'A representation of a system from the perspective of a related set of concerns.'@en;
-    skos:prefLabel 'archicture view'@en;
+    skos:prefLabel 'architecture view'@en;
     skos:altLabel 'view';
     rdfs:isDefinedBy archimate:.
 
