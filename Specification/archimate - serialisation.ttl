@@ -546,26 +546,27 @@ target:ViewComponentConnector
     a sh:SPARQLTarget;
     rdfs:comment 'Select all nodes and connections that have to be connected to the archimate view.'@en;
     sh:select '''
-prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
 select $this {
 
   # Select all relationships without a member relation.
  {$this rdf:type archimate:ViewNode.
    filter not exists {
-    [] archimate:contains $this
+    ?view rdf:type archimate:View;
+          archimate:contains $this.
     }
  }
  UNION
  {$this rdf:type archimate:Connection.
    filter not exists {
-    [] archimate:contains $this
+    ?view rdf:type archimate:View;
+          archimate:contains $this.
     }    
   }
- }
+}
 ''';
     rdfs:isDefinedBy archiXML:.
     
@@ -575,11 +576,11 @@ rule:ViewComponentConnector
     skos:prefLabel 'archimate view component connector rule'@en;
     sh:construct '''
 
+prefix : <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
 
 construct {
 
@@ -589,11 +590,11 @@ construct {
 } where {
 
   $this prov:wasDerivedFrom ?archiXML_component.
-  ?archiXML_view ?member ?archiXML_component. 
-  filter(strstarts(str(?member), concat(str(rdf:), '_')))
-  ?view prov:wasDerivedFrom ?archiXML_view. 
-
-   }
+  ?archiXML_view rdf:type archiXML:View;
+         (:|!:)* ?archiXML_component.
+  ?view rdf:type archimate:View;
+        prov:wasDerivedFrom ?archiXML_view. 
+  }
 
 ''';
     rdfs:isDefinedBy archimate:.
