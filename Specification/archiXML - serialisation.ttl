@@ -197,7 +197,8 @@ construct {
          rdf:_1 ?modelNameNode;
          rdf:_2 ?modelDocumentation;
          rdf:_3 ?elementsNode;
-         rdf:_4 ?relationshipsNode.
+         rdf:_4 ?relationshipsNode;
+         rdf:_5 ?viewsNode.         
   ?modelNameNode rdf:type archiXML:Name;
          rdf:_1 ?modelNameTextNode;
          xml:lang "en".
@@ -210,6 +211,9 @@ construct {
          xml:fragment ?archimateDocumentation.
   ?elementsNode rdf:type archiXML:Elements.
   ?relationshipsNode rdf:type archiXML:Relationships.
+  ?viewsNode rdf:type archiXML:Views;
+         rdf:_1 ?diagramsNode.  
+  ?diagramsNode rdf:type archiXML:Diagrams.
  
 } where {
 
@@ -226,6 +230,8 @@ construct {
     BIND(IRI(CONCAT(STR($this),"-DocumentationText")) as ?documentationTextNode)
     BIND(IRI(CONCAT(STR($this),"-Elements")) as ?elementsNode)
     BIND(IRI(CONCAT(STR($this),"-Relationships")) as ?relationshipsNode)
+    BIND(IRI(CONCAT(STR($this),"-Views")) as ?viewsNode)
+    BIND(IRI(CONCAT(STR($this),"-Diagrams")) as ?diagramsNode) 
 
   }
 
@@ -453,10 +459,8 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 construct {
 
-  ?model rdf:_3 $this.
   $this ?rdf_member ?element.
   
-
 } where {
   ?element rdf:type archiXML:Element.
   BIND(IRI(CONCAT(str(rdf:),"_", str(function:getElementPosition(?element)))) as ?rdf_member)  
@@ -842,7 +846,7 @@ shp:ViewConnector
 
 rule:ViewConnector
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that connects all archimate views with the views and diagrams nodes in an archimate document.'@en;
+    rdfs:comment 'A rule that connects all archimate views with the diagrams nodes in an archimate document.'@en;
     skos:prefLabel 'archimate view connector rule'@en;
     sh:construct '''
 
@@ -852,7 +856,7 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 construct {
 
-  ?diagramNode ?rdf_member ?view.
+  ?diagrams ?rdf_member ?view.
   ?view archiXML:identifier ?viewIdentifier.
   
 
@@ -860,7 +864,7 @@ construct {
 
   $this  rdf:_1 ?model.
   ?model rdf:_5 ?views.
-  ?views rdf:_1 ?diagramNode.
+  ?views rdf:_1 ?diagrams.
   
   OPTIONAL{
   ?view rdf:type archiXML:View.}
@@ -868,10 +872,6 @@ construct {
   BIND(STR(function:getViewPosition(?view)) as ?index)
   BIND(IRI(CONCAT(str(rdf:),"_", ?index)) as ?rdf_member)
   BIND(CONCAT("View_",?index) as ?viewIdentifier)
-  
-  # Create IRI's
-  BIND(IRI(CONCAT(STR($this),"-Views")) as ?viewsNode)
-  BIND(IRI(CONCAT(STR($viewsNode),"-Diagrams")) as ?diagramsNode)
   
   }
 ''';
