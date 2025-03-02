@@ -169,7 +169,8 @@ archimate:MotivationElement a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:CompositeElement a owl:Class;
-    rdfs:subClassOf [owl:unionOf ( [a owl:Restriction;
+    rdfs:subClassOf archimate:Element;
+    owl:equivalentClass [owl:unionOf ( [a owl:Restriction;
                                     owl:onProperty [owl:inverse archimate:to];
                                     owl:minQualifiedCardinality  "2"^^xsd:nonNegativeInteger;
                                     owl:onClass [a owl:Restriction;
@@ -556,7 +557,7 @@ archimate:BusinessInteraction a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:BusinessInterface a owl:Class;
-    rdfs:subClassOf archimate:Interface;
+    rdfs:subClassOf archimate:ExternalActiveStructureElement;
     dct:identifier "BusinessInterface";
     skos:definition 'A business interface in Archimate represents a point of access where business services are made available to the environment.'@en;
     skos:prefLabel 'business interface'@en;
@@ -661,7 +662,7 @@ archimate:ApplicationInteraction a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:ApplicationInterface a owl:Class;
-    rdfs:subClassOf archimate:Interface;
+    rdfs:subClassOf archimate:ExternalActiveStructureElement;
     dct:identifier "ApplicationInterface";
     skos:definition 'An application interface in Archimate represents a point of access where application services are made available to a user, another application component, or a node.'@en;
     skos:prefLabel 'application interface'@en;
@@ -675,7 +676,7 @@ archimate:ApplicationProcess a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:ApplicationService a owl:Class;
-    rdfs:subClassOf archimate:Service;
+    rdfs:subClassOf archimate:ExternalBehaviorElement;
     dct:identifier "ApplicationService";
     skos:definition 'An application service in Archimate represents an explicitly defined exposed application behavior.'@en;
     skos:prefLabel 'application service'@en;
@@ -820,7 +821,7 @@ archimate:TechnologyInteraction a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:TechnologyInterface a owl:Class;
-    rdfs:subClassOf archimate:Interface;
+    rdfs:subClassOf archimate:ExternalActiveStructureElement;
     dct:identifier "TechnologyInterface";
     skos:definition 'A technology interface in Archimate represents a point of access where technology services offered by a technology internal active structure can be accessed.'@en;
     skos:prefLabel 'technology interface'@en;
@@ -834,7 +835,7 @@ archimate:TechnologyProcess a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 archimate:TechnologyService a owl:Class;
-    rdfs:subClassOf archimate:Service;
+    rdfs:subClassOf archimate:ExternalBehaviorElement;
     dct:identifier "TechnologyService";
     skos:definition 'A technology service in Archimate represents an explicitly defined exposed technology behavior.'@en;
     skos:prefLabel 'technology service'@en;
@@ -1028,6 +1029,4 @@ archimate:orJunction a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationshipConnector;
     dct:identifier "orJunction";
     skos:prefLabel 'Or Junction'@en;
-    rdfs:isDefinedBy archimate:.    
-    
-    
+    rdfs:isDefinedBy archimate:.

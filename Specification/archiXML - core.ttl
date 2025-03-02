@@ -102,7 +102,7 @@ archiXML:Document
     rdfs:subClassOf xml:Document;
     dct:conformsTo archiXML:;
     skos:definition 'An archimate document consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<element>’, and an end tag, such as ‘</element>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The ArchiXML Core Vocabulary defines a set of elements that can be used in an archimate document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document.'@en;
-    skos:prefLabel 'archimate document'@en;
+    skos:prefLabel 'archimate XML document'@en;
     rdfs:isDefinedBy archiXML:.
 
 archiXML:DomElement
