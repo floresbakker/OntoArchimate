@@ -322,7 +322,7 @@ archiXML:Attribute
 
   archiXML:LineColor
     a owl:Class;
-    xml:tag 'linecolor';
+    xml:tag 'lineColor';
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The linecolor element'@en;
     skos:prefLabel 'the linecolor element'@en;
@@ -330,7 +330,7 @@ archiXML:Attribute
 
   archiXML:FillColor
     a owl:Class;
-    xml:tag 'fillcolor';
+    xml:tag 'fillColor';
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The fillcolor element'@en;
     skos:prefLabel 'the fillcolor element'@en;
@@ -434,6 +434,8 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the a attribute'@en;
+    skos:definition "Represents the alpha (transparency) component of a color in the RGBA color model."@en ;
+    skos:note "The value conforms to the XML Schema datatype xs:unsignedByte, ranging from 0 to 255."@en ;
     rdfs:isDefinedBy archiXML:.
 
   archiXML:b
@@ -444,6 +446,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the b attribute'@en;
+    skos:definition "Represents the blue component of a color in the RGB color model. The value is an integer between 0 and 255."@en;    
     rdfs:isDefinedBy archiXML:.
 
   archiXML:g
@@ -454,6 +457,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the g attribute'@en;
+    skos:definition "Represents the green component of a color in the RGB color model. The value is an integer between 0 and 255."@en;    
     rdfs:isDefinedBy archiXML:.
 
   archiXML:h
@@ -464,6 +468,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the h attribute'@en;
+    skos:definition 'The height (associated with y) attribute from the top side to the bottom side of the bounding box of a concept.'@en;
     rdfs:isDefinedBy archiXML:.
 
   archiXML:name
@@ -484,6 +489,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the r attribute'@en;
+    skos:definition "Represents the red component of a color in the RGB color model. The value is an integer between 0 and 255."@en;    
     rdfs:isDefinedBy archiXML:.
 
   archiXML:size
@@ -524,6 +530,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the w attribute'@en;
+    skos:definition 'The width (associated with x) attribute from the Left side to the right side of the bounding box of a concept.'@en;
     rdfs:isDefinedBy archiXML:.
 
   archiXML:y
@@ -534,6 +541,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the y attribute'@en;
+    skos:definition 'The y (towards the bottom, associated with height) attribute from the Top,Left (i.e. 0,0) corner of the diagram to the Top, Left corner of the bounding box of the concept.'@enl;
     rdfs:isDefinedBy archiXML:.
 
   archiXML:x
@@ -544,6 +552,7 @@ archiXML:Attribute
     rdfs:range xsd:string;
     rdfs:subPropertyOf xml:attribute;
     skos:prefLabel 'the x attribute'@en;
+    skos:definition 'The x (towards the right, associated with width) attribute from the Top,Left (i.e. 0,0) corner of the diagram to the Top, Left corner of the bounding box of the concept.'@en;
     rdfs:isDefinedBy archiXML:.
 
   archiXML:width

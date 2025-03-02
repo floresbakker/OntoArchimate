@@ -715,11 +715,50 @@ construct {
            archiXML:y ?y ;
            archiXML:w ?w ;
            archiXML:h ?h ;
-           dct:references ?archiXMLElement.
+           dct:references ?archiXMLElement;
+           rdf:_1 ?nodeStyleIRI.
+   ?nodeStyleIRI rdf:type archiXML:Style;
+           rdf:_1 ?fillColorIRI;
+           rdf:_2 ?lineColorIRI;
+           rdf:_3 ?fontIRI.
+   ?fillColorIRI rdf:type archiXML:FillColor;
+           archiXML:a ?fillColorA ;
+           archiXML:b ?fillColorB ;
+           archiXML:g ?fillColorG ;
+           archiXML:r ?fillColorR .
+   ?lineColorIRI rdf:type archiXML:LineColor;
+           archiXML:a ?lineColorA ;
+           archiXML:b ?lineColorB ;
+           archiXML:g ?lineColorG ;
+           archiXML:r ?lineColorR .
+   ?fontIRI rdf:type archiXML:Font;
+           archiXML:name ?fontName;
+           archiXML:size ?fontSize;
+           rdf:_1 ?fontColorIRI.
+   ?fontColorIRI rdf:type archiXML:Color;
+           archiXML:b ?fontColorB ;
+           archiXML:g ?fontColorG ;
+           archiXML:r ?fontColorR .            
    ?connectionNode rdf:type archiXML:Connection;
            xsi:type "Relationship";
            archiXML:relationshipRef ?relationIdentifier;
-           dct:references ?archiXMLRelationship.
+           dct:references ?archiXMLRelationship ;
+           rdf:_1 ?connectionStyle.
+   ?connectionStyle rdf:type archiXML:Style;
+           rdf:_1 ?connectionLineColorIRI;
+           rdf:_2 ?connectionFontIRI.
+   ?connectionLineColorIRI rdf:type archiXML:LineColor;
+           archiXML:b ?connectionLineColorB ;
+           archiXML:g ?connectionLineColorG ;
+           archiXML:r ?connectionLineColorR .
+   ?connectionFontIRI rdf:type archiXML:Font;
+           archiXML:name ?connectionFontName;
+           archiXML:size ?connectionFontSize;
+           rdf:_1 ?connectionFontColorIRI.
+   ?connectionFontColorIRI rdf:type archiXML:Color;
+           archiXML:b ?connectionFontColorB ;
+           archiXML:g ?connectionFontColorG ;
+           archiXML:r ?connectionFontColorR .            
 
 } where {
 
@@ -758,30 +797,71 @@ construct {
   # - Take into account the name & documentation nodes (hence offset of +2). 
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexMember+3))) as ?memberNode)
   
-  # Define constants for standard element width and height
-  BIND(120 AS ?elementWidth)
-  BIND(55 AS ?elementHeight)
-  
-  # Define spacing between elements
-  BIND(300 AS ?xSpacing) # Space between elements on the x-axis
-  BIND(100 AS ?ySpacing) # Space between elements on the y-axis
+  ?depiction 
+    archimate:horizontal ?x;
+    archimate:vertical   ?y;
+    archimate:height     ?h;     
+    archimate:width      ?w.
+    
+  optional {
+  ?depiction
+    archimate:fillColor  ?fillColor;
+    archimate:lineColor  ?lineColor;
+    archimate:font       ?font.
+    
+  ?fillColor rdf:type archimate:Color;
+    archimate:red   ?fillColorR;
+    archimate:green ?fillColorG;
+    archimate:blue  ?fillColorB;
+    archimate:alpha ?fillColorA. 
 
-  # Calculate x and y positions for each element
-  BIND(xsd:integer(?indexMember * ?xSpacing) AS ?x)
-  BIND(xsd:integer(FLOOR(?indexMember / 10) * ?ySpacing) AS ?y) # Adjust y to create rows every 10 elements
+  ?lineColor rdf:type archimate:Color;
+    archimate:red   ?lineColorR;
+    archimate:green ?lineColorG;
+    archimate:blue  ?lineColorB;
+    archimate:alpha ?lineColorA. 
 
-  # Set standard width and height
-  BIND(?elementWidth AS ?w)
-  BIND(?elementHeight AS ?h)
-  
+  ?font rdf:type archimate:Font;
+    archimate:fontName  ?fontName;
+    archimate:fontSize  ?fontSize;
+    archimate:fontColor ?fontColor.
+
+  ?fontColor rdf:type archimate:Color;
+    archimate:red   ?fontColorR;
+    archimate:green ?fontColorG;
+    archimate:blue  ?fontColorB.
+  }
   # Set unique identifier
   BIND(CONCAT("Node_",STR(?elementIdentifier)) as ?elementNodeIdentifier)
 
   }
 
   UNION
+  
   {$this archimate:contains ?depiction.
   ?depiction foaf:depicts ?relationship.
+  
+  optional {
+  ?depiction
+    archimate:lineColor  ?connectionLineColor;
+    archimate:font       ?connectionFont.
+
+  ?connectionLineColor rdf:type archimate:Color;
+    archimate:red   ?connectionLineColorR;
+    archimate:green ?connectionLineColorG;
+    archimate:blue  ?connectionLineColorB. 
+
+  ?connectionFont rdf:type archimate:Font;
+    archimate:fontName  ?connectionFontName;
+    archimate:fontSize  ?connectionFontSize;
+    archimate:fontColor ?connectionFontColor.
+
+  ?connectionFontColor rdf:type archimate:Color;
+    archimate:red   ?connectionFontColorR;
+    archimate:green ?connectionFontColorG;
+    archimate:blue  ?connectionFontColorB.
+  }
+  
   ?relationship rdf:type/rdfs:subClassOf* archimate:Relationship.
   
   ?archiXMLRelationship prov:wasDerivedFrom ?relationship;
@@ -840,7 +920,16 @@ construct {
   BIND(IRI(CONCAT(STR($this),"-ViewName"))            as ?viewNameNode)
   BIND(IRI(CONCAT(STR($this),"-ViewNameText"))        as ?viewNameTextNode)
   BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier)) as ?elementNode)
+  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier, "-nodestyle")) as ?nodeStyleIRI)
+  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier, "-fillcolor")) as ?fillColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier, "-linecolor")) as ?lineColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier, "-font")) as ?fontIRI)    
+  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier, "-fontcolor")) as ?fontColorIRI)    
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))  as ?connectionNode)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-nodestyle")) as ?connectionStyle)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-linecolor")) as ?connectionLineColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-font")) as ?connectionFontIRI)    
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-fontcolor")) as ?connectionFontColorIRI)  
   BIND(IRI(CONCAT(STR($view),"-Documentation"))       as ?viewDocumentationNode)
   BIND(IRI(CONCAT(STR($view),"-DocumentationText"))   as ?documentationTextNode)    
   }
