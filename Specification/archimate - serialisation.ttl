@@ -583,31 +583,42 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 construct {
 
   # create the depiction of an archimate relationship
-  ?relationshipDepiction rdf:type archimate:Connection;
-        skos:prefLabel ?depictionLabel;
-        foaf:depicts ?archimate_Relationship;
-        rdfs:isDefinedBy ?model;
-        prov:wasDerivedFrom $this;
-        archimate:lineColor  ?lineColorIRI;
-        archimate:font       ?fontIRI.
   
-  ?lineColorIRI rdf:type archimate:Color;
+  ?relationshipDepiction 
+    rdf:type archimate:Connection;
+    skos:prefLabel ?depictionLabel;
+    foaf:depicts ?archimate_Relationship;
+    rdfs:isDefinedBy ?model;
+    prov:wasDerivedFrom $this;
+    archimate:lineColor  ?lineColorIRI;
+    archimate:font       ?fontIRI;
+    archimate:bendPoint  ?bendPointIRI.
+  
+  ?lineColorIRI 
+    rdf:type archimate:Color;
     archimate:red   ?lineColorR;
     archimate:green ?lineColorG;
     archimate:blue  ?lineColorB;
     rdfs:isDefinedBy ?model. 
 
-  ?fontIRI rdf:type archimate:Font;
+  ?fontIRI 
+    rdf:type archimate:Font;
     archimate:fontName ?fontName;
     archimate:fontSize ?fontSize;
     archimate:fontColor ?fontColorIRI;
     rdfs:isDefinedBy ?model.
 
-  ?fontColorIRI rdf:type archimate:Color;
+  ?fontColorIRI 
+    rdf:type archimate:Color;
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB;
-    rdfs:isDefinedBy ?model.            
+    rdfs:isDefinedBy ?model.
+
+  ?bendPointIRI 
+    rdf:type archimate:BendPoint;
+    archimate:horizontal ?x;
+    archimate:vertical ?y.
 
 } where {
   
@@ -620,7 +631,7 @@ construct {
   BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationshipDepiction)
   
   optional {
-  $this ?member ?style.
+  $this      ?member ?style.
   ?style     rdf:type archiXML:Style;
              ?styleLineColorMember ?lineColor;
              ?styleFontMember      ?font.
@@ -635,12 +646,20 @@ construct {
   ?fontColor rdf:type archiXML:Color;             
              archiXML:r ?fontColorR;
              archiXML:g ?fontColorG;             
-             archiXML:b ?fontColorB.  
+             archiXML:b ?fontColorB.
   }
 
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_LineColor')) as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_Font'))      as ?fontIRI)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_FontColor')) as ?fontColorIRI)  
+  optional {
+  $this      ?memberBendPoint ?bendPoint.
+  ?bendPoint rdf:type archiXML:BendPoint;
+             archiXML:x ?x;
+             archiXML:y ?y.
+  }
+
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_LineColor'))            as ?lineColorIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_Font'))                 as ?fontIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_FontColor'))            as ?fontColorIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_BendPoint', ?x,'-',?y)) as ?bendPointIRI)
 
   }
 ''';

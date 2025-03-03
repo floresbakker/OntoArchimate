@@ -344,6 +344,14 @@ archiXML:Attribute
     skos:prefLabel 'the font element'@en;
     rdfs:isDefinedBy archiXML:.
 
+  archiXML:BendPoint
+    a owl:Class;
+    xml:tag 'bendpoint';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The bendpoint element'@en;
+    skos:prefLabel 'the bendpoint element'@en;
+    rdfs:isDefinedBy archiXML:.    
+
 ### Properties: Archimate attributes
 
   archiXML:id
