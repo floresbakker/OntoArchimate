@@ -236,6 +236,24 @@ archimate:Viewpoint a owl:Class;
     skos:definition 'A specification of the conventions for a particular kind of architecture view.'@en;
     skos:prefLabel 'archicture viewpoint'@en;
     skos:altLabel 'viewpoint';
+    rdfs:isDefinedBy archimate:.
+
+archimate:Label a owl:Class;
+    dct:identifier "Label";
+    skos:definition 'A representation of a label in a view.'@en;
+    skos:prefLabel 'label'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:Line a owl:Class;
+    dct:identifier "Line";
+    skos:definition 'A representation of a visual line in a view.'@en;
+    skos:prefLabel 'line'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:Container a owl:Class;
+    dct:identifier "Container";
+    skos:definition 'A representation of a visual container in a view.'@en;
+    skos:prefLabel 'container'@en;
     rdfs:isDefinedBy archimate:.    
     
 ### Archimate generic metamodel
@@ -531,7 +549,7 @@ archimate:BusinessRole a owl:Class;
 archimate:BusinessCollaboration a owl:Class;
     rdfs:subClassOf archimate:InternalActiveStructureElement;
     dct:identifier "BusinessCollaboration";
-    skos:definition 'A business collaboration in Archimate represents an aggregate of two or more business internal active structure elements that work together to peform collective behavior.'@en;
+    skos:definition 'A business collaboration in Archimate represents an aggregate of two or more business internal active structure elements that work together to perform collective behavior.'@en;
     skos:prefLabel 'business collaboration'@en;
     rdfs:isDefinedBy archimate:.
 

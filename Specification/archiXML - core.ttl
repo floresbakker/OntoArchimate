@@ -350,7 +350,23 @@ archiXML:Attribute
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The bendpoint element'@en;
     skos:prefLabel 'the bendpoint element'@en;
-    rdfs:isDefinedBy archiXML:.    
+    rdfs:isDefinedBy archiXML:.  
+
+  archiXML:Container
+    a owl:Class;
+    xml:tag 'container';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The container element'@en;
+    skos:prefLabel 'the container element'@en;
+    rdfs:isDefinedBy archiXML:. 
+
+  archiXML:Line
+    a owl:Class;
+    xml:tag 'line';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The line element'@en;
+    skos:prefLabel 'the line element'@en;
+    rdfs:isDefinedBy archiXML:.      
 
 ### Properties: Archimate attributes
 
@@ -590,4 +606,3 @@ archiXML:Attribute
     skos:definition 'Property that links the xml fragment that is represented by an element within a XML-based archimate document to that element.'@en;
     skos:prefLabel 'fragment property'@en;
     rdfs:isDefinedBy archiXML:.
-
