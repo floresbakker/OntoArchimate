@@ -441,9 +441,33 @@ construct {
 shp:ElementConnector
     a sh:NodeShape;
     sh:rule rule:ElementConnector;
-    sh:targetClass archiXML:Elements;
+    sh:target target:ElementConnector;
     skos:prefLabel 'archimate elements shape'@en;
     rdfs:isDefinedBy archiXML:.
+
+target:ElementConnector
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select the elements node in the document that is not yet connected to element nodes.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    
+select $this
+where {
+  # Select individuals of archiXML:Elements
+  $this rdf:type archiXML:Elements.
+  {
+    filter not exists {
+      ?unprocessedElement rdf:type archimate:Element.
+      $this ?member ?unprocessedElement .
+      filter(strstarts(str(?member), concat(str(rdf:), '_')))
+    }
+  }
+}
+''';
+    rdfs:isDefinedBy archiXML:.    
 
 rule:ElementConnector
     a sh:SPARQLRule;
@@ -478,7 +502,7 @@ shp:RelationshipConnector
 
 target:Relationships
     a sh:SPARQLTarget;
-    rdfs:comment 'Select all relationships in the model that have to be placed under the parent Relationships.'@en;
+    rdfs:comment 'Select the relationships node in the document that is not yet connected to relationship nodes.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -532,7 +556,7 @@ shp:RelationshipIdentifier
 
 target:RelationshipIdentifier
  a sh:SPARQLTarget;
-    rdfs:comment 'Select all relationships in the model that have to be placed under the parent Relationships.'@en;
+    rdfs:comment 'Select all relationships in the model that are lacking an identifier.'@en;
     sh:select '''
 
 prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
@@ -573,10 +597,28 @@ construct {
 shp:ElementIdentifier
     a sh:NodeShape;
     sh:rule rule:ElementIdentifier;
-    sh:targetClass archiXML:Element;
+    sh:target target:ElementIdentifier;
     skos:prefLabel 'Element Identifier shape'@en;
     rdfs:isDefinedBy archiXML:.
 
+target:ElementIdentifier
+ a sh:SPARQLTarget;
+    rdfs:comment 'Select all elements in the model that are lacking an identifier.'@en;
+    sh:select '''
+
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    
+select $this
+where {
+  
+  $this rdf:type archiXML:Element.
+  filter not exists {$this archiXML:identifier []}
+  
+}
+''';
+    rdfs:isDefinedBy archiXML:.
+    
 rule:ElementIdentifier
     a sh:SPARQLRule;
     rdfs:comment 'A rule that creates an identifier in the XML document for an archixml element'@en;
@@ -773,16 +815,21 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select $this {
 
-  # Select all view nodes... 
-  $this rdf:type archimate:ViewNode.
-    
+  # Select all potential archiXML nodes... 
+  
+  {$this rdf:type archimate:ViewNode.}
+  UNION 
+  {$this rdf:type archimate:Container.}
+  UNION
+  {$this rdf:type archimate:Note.}
+  
   # ...that are not processed yet
   filter not exists { 
-    ?archiXML_view rdf:type archiXML:Node ;
+    ?archiXML_node rdf:type archiXML:Node ;
                    prov:wasDerivedFrom $this.
   }
 
-  # ...but only if the depicted archimate element is already processed
+  # ...but only if the potential depicted archimate element is already processed
   filter not exists {
   $this foaf:depicts ?element.
    filter not exists {
@@ -868,19 +915,36 @@ construct {
     # Establish the unique sequence number of a container across the model
     {select $this ((count(?prevIndex)+1) as ?indexContainer)
    where {
-    filter not exists {$this foaf:depicts []}  
+    $this rdf:type archimate:Container.
     bind(str($this) as ?index)
     optional {
-              ?prevContainer rdf:type archimate:ViewNode.
-              filter not exists {?prevContainer foaf:depicts []}
+              ?prevContainer rdf:type archimate:Container.
               bind(str(?prevContainer) as ?prevIndex)
               filter(?prevIndex < ?index)
              } 
      } group by $this
   }
-  BIND(CONCAT("Container", STR(?indexContainer)) as ?containerIdentifier)
+  bind(concat("Container", str(?indexContainer)) as ?containerIdentifier)
   bind("Container" as ?xsiType)
   }
+
+  # A view node can be a note, get the metadata for this
+  optional {
+    # Establish the unique sequence number of a note across the model
+    {select $this ((count(?prevIndex)+1) as ?indexNote)
+   where {
+    $this rdf:type archimate:Note.   
+    bind(str($this) as ?index)
+    optional {
+              ?prevNote rdf:type archimate:Note.
+              bind(str(?prevNote) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             } 
+     } group by $this
+  }
+  bind(concat("Label", str(?indexNote)) as ?labelIdentifier)
+  bind("Label" as ?xsiType)
+  }  
   
   optional {
   $this
@@ -919,7 +983,7 @@ construct {
     archimate:blue  ?fontColorB.
   }
   # Set unique identifier
-  BIND(CONCAT("Node_",COALESCE(STR(?elementIdentifier), ?containerIdentifier)) as ?nodeIdentifier)
+  BIND(CONCAT("Node_",COALESCE(STR(?elementIdentifier), ?containerIdentifier, ?labelIdentifier)) as ?nodeIdentifier)
 
   }
 
@@ -1090,24 +1154,13 @@ construct {
   {select ?archimateView $this ((count(?prevIndex)) as ?indexRelationship)
    where {
     ?archimateView archimate:contains $this.
-    $this rdf:type archimate:Connection.
     bind(str($this) as ?index)
     optional {
               ?archimateView archimate:contains ?prevDepiction.
-              ?prevDepiction rdf:type archimate:Connection.
               bind(str(?prevDepiction) as ?prevIndex)
               filter(?prevIndex < ?index)
              } 
      } group by ?archimateView $this
-  }
-  # Establish the element index 
-  {select ?archimateView (count(?element) as ?indexElement)
-   where {
-    ?archimateView rdf:type archimate:View;
-                   archimate:contains ?depiction.
-    ?depiction foaf:depicts ?element.
-    ?element rdf:type/rdfs:subClassOf* archimate:Element.
-    } group by ?archimateView
   }
   
   # Establish the bendpoint index, if present
@@ -1136,9 +1189,8 @@ construct {
   
   # Establish instance of rdfs:member for the connection and bendpoint. 
   # - Take into account that the indexRelationship starts with 0 and needs an offset of +1
-  # - Take into account all the element nodes before the relationships (hence the ?indexElement)
   # - Take into account the name & documentation nodes (hence offset of +2).  
-  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexRelationship + ?indexElement + 3))) as ?memberConnection)
+  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexRelationship + 3))) as ?memberConnection)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexBendPoint +2))) as ?memberBendPoint)
   
   # Create IRI's
@@ -1174,12 +1226,15 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select $this {
 
-  # Select all archixml nodes... 
-  $this rdf:type archiXML:Node.
+  # Select all archixml nodes for which a parent exists but who are not connected yet.
+  $this rdf:type archiXML:Node;
+        prov:wasDerivedFrom ?viewNode. 
+  ?parent archimate:contains ?viewNode.
+  ?parentNode prov:wasDerivedFrom ?parent.
     
   # ...that are not processed yet
   filter not exists { 
-    [] ?member $this.
+    ?parentNode ?member $this.
     filter(strstarts(str(?member), concat(str(rdf:), '_')))
   }
 }
@@ -1207,19 +1262,14 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-   ?parentNode ?memberNode ?elementNode.        
+  ?parentNode ?memberNode $this.        
 
 } where {
 
-  # Get the archimate metadata of the archimate view
-  {
+  # Get the parent node
   $this prov:wasDerivedFrom ?viewNode. 
-  ?viewNode foaf:depicts ?element.
-  ?archimateView rdf:type archimate:View;
-                  archimate:contains+ ?viewNode.        
-  ?element rdf:type/rdfs:subClassOf* archimate:Element.
-  ?archiXMLElement prov:wasDerivedFrom ?element;
-                   archiXML:identifier ?elementIdentifier.
+  ?parent archimate:contains ?viewNode.
+  ?parentNode prov:wasDerivedFrom ?parent.
 
   # Establish position of the element within the parent
   {select ?parent ?viewNode ((count(?prevIndex)) as ?indexMember)
@@ -1228,35 +1278,18 @@ construct {
     bind(str(?viewNode) as ?index)
     optional {
               ?parent archimate:contains ?prevDepiction.   
-              ?prevDepiction rdf:type archimate:ViewNode.
               bind(str(?prevDepiction) as ?prevIndex)
               filter(?prevIndex < ?index)
              } 
      } group by ?parent ?viewNode
   }
   
-  # Establish the parent in case this is a view node itself
-  OPTIONAL {
-  ?parent rdf:type archimate:ViewNode;
-          archimate:contains ?viewNode.
-  ?archiXMLParentElement prov:wasDerivedFrom ?parent.
-  }
-  
   # Establish instance of rdfs:member for the node.
   # Take into account that the indexMember starts with 0 and hence needs an offset of +1
   # Take into account the name & documentation nodes (hence offset of +2). 
   # Together this makes 3 as a total offset.
-  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexMember+3))) as ?memberNode)
   
-  # Set unique identifier
-  BIND(CONCAT("Node_",STR(?elementIdentifier)) as ?elementNodeIdentifier)
-
-  }
-
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View"))                                   as ?view)
-  BIND(COALESCE(?archiXMLParentElement, IRI(CONCAT(STR(?archimateView),"-View"))) as ?parentNode)
-  BIND(IRI(CONCAT(STR(?view),?elementNodeIdentifier))                             as ?elementNode)
+  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexMember+3))) as ?memberNode)
  
   }
 ''';
@@ -1408,16 +1441,83 @@ construct {
 ''';
     rdfs:isDefinedBy archiXML:.
 
-shp:ViewComponentIdentifier
+shp:NodeIdentifier
     a sh:NodeShape;
-    sh:rule rule:ViewComponentIdentifier;
-    sh:target target:ViewComponentIdentifier;
-    skos:prefLabel 'archimate view component identifier shape'@en;
+    sh:rule rule:NodeIdentifier;
+    sh:target target:NodeIdentifier;
+    skos:prefLabel 'archimate node identifier shape'@en;
     rdfs:isDefinedBy archiXML:.
 
-target:ViewComponentIdentifier
+target:NodeIdentifier
     a sh:SPARQLTarget;
     rdfs:comment 'Select the views of which the nodes and connections have to get an identifier.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+select $this {
+
+  # Select the archixml node
+  $this rdf:type archiXML:Node;
+        prov:wasDerivedFrom ?viewNode.
+  ?view archimate:contains+ ?viewNode;
+        rdf:type archimate:View.
+   ?archiXMLView prov:wasDerivedFrom ?view;
+        rdf:type archiXML:View.        
+   filter not exists { $this archiXML:identifier [].}
+    }
+''';
+    rdfs:isDefinedBy archiXML:.
+    
+rule:NodeIdentifier
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an identifier for nodes and connections within a archixml view.'@en;
+    skos:prefLabel 'archimate node identifier rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+construct {
+
+  $this archiXML:identifier $nodeIdentifier.
+
+} where {
+
+  $this prov:wasDerivedFrom ?viewNode.
+  ?view archimate:contains+ ?viewNode;
+        rdf:type archimate:View.
+  ?archiXMLView prov:wasDerivedFrom ?view;
+        archiXML:identifier ?viewIdentifier;
+        rdf:type archiXML:View.       
+        
+  $this rdf:type archiXML:Node;
+              dct:references ?archiXMLElement.
+  ?archiXMLElement archiXML:identifier ?identifier.
+  BIND("Node_" as ?key)
+  
+  # Set unique identifier
+  BIND(CONCAT(?key,STR(?viewIdentifier),"_",STR(?identifier)) as $nodeIdentifier) 
+  }
+''';
+    rdfs:isDefinedBy archiXML:.
+
+shp:ConnectionIdentifier
+    a sh:NodeShape;
+    sh:rule rule:ConnectionIdentifier;
+    sh:target target:ConnectionIdentifier;
+    skos:prefLabel 'archimate connection identifier shape'@en;
+    rdfs:isDefinedBy archiXML:.
+
+target:ConnectionIdentifier
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select the views of which the connections have to get an identifier.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -1434,7 +1534,7 @@ select $this {
 ''';
     rdfs:isDefinedBy archiXML:.
     
-rule:ViewComponentIdentifier
+rule:ConnectionIdentifier
     a sh:SPARQLRule;
     rdfs:comment 'A rule that creates an identifier for nodes and connections within a archixml view.'@en;
     skos:prefLabel 'archimate node identifier rule'@en;
@@ -1452,19 +1552,6 @@ construct {
 
 } where {
 
-  {
-  $this archiXML:identifier ?viewIdentifier;
-        ?member ?component.
-        
-  ?component rdf:type archiXML:Node;
-              dct:references ?archiXMLElement.
-  ?archiXMLElement archiXML:identifier ?identifier.
-  BIND("Node_" as ?key)
-  }
-  
-  UNION
-  
-  {
   $this archiXML:identifier ?viewIdentifier;
         ?member ?component.
   ?component rdf:type archiXML:Connection;
@@ -1484,7 +1571,6 @@ construct {
   BIND(CONCAT(?sourceIdentifierString, ?viewIdentifier, "_",?source) as ?sourceIdentifier)
   BIND(CONCAT(?targetIdentifierString, ?viewIdentifier, "_",?target) as ?targetIdentifier)                   
   BIND("Connection_" as ?key)
-  }
   
   # Set unique identifier
   BIND(CONCAT(?key,STR(?viewIdentifier),"_",STR(?identifier)) as ?componentIdentifier) 

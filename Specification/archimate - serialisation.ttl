@@ -657,7 +657,7 @@ prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 construct {
 
   # create the archimate view node
-  ?viewNode rdf:type archimate:ViewNode;
+  ?viewNode rdf:type archimate:Container;
         skos:prefLabel ?nodeLabel;
         rdfs:comment 'A container within an archimate view node.';
         prov:wasDerivedFrom $this;
@@ -803,7 +803,7 @@ prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 construct {
 
   # create the archimate view node
-  ?viewNode rdf:type archimate:ViewNode;
+  ?viewNode rdf:type archimate:Note;
         skos:prefLabel ?nodeLabel;
         rdfs:comment 'A label within an archimate view node.';
         prov:wasDerivedFrom $this;
@@ -1025,6 +1025,18 @@ select $this {
     }
  }
  UNION
+  {$this rdf:type archimate:Container.
+   filter not exists {
+    ?parent archimate:contains $this.
+    }
+ }
+ UNION
+  {$this rdf:type archimate:Note.
+   filter not exists {
+    ?parent archimate:contains $this.
+    }
+ }
+ UNION
  {$this rdf:type archimate:Connection.
    filter not exists {
     ?parent archimate:contains $this.
@@ -1052,26 +1064,25 @@ construct {
 
 } where {
 
+  # Get the parent for the viewnodes and connections in case the corresponding parent in archixml is a view.
   {$this 
     prov:wasDerivedFrom ?archiXML_component.
   ?archiXML_parent 
     rdf:type archiXML:View;
     ?member ?archiXML_component.
   filter(strstarts(str(?member), concat(str(rdf:), '_')))         
-  ?parent 
-    rdf:type archimate:View;
-    prov:wasDerivedFrom ?archiXML_parent. 
+  ?parent prov:wasDerivedFrom ?archiXML_parent. 
   }
   UNION
+  
+  # Get the parent for the viewnodes and connections in case the corresponding parent in archixml is a node.
   {$this 
     prov:wasDerivedFrom ?archiXML_component.
   ?archiXML_parent 
         rdf:type archiXML:Node;
         ?member ?archiXML_component.
   filter(strstarts(str(?member), concat(str(rdf:), '_')))         
-  ?parent 
-        rdf:type archimate:ViewNode;
-        prov:wasDerivedFrom ?archiXML_parent. 
+  ?parent prov:wasDerivedFrom ?archiXML_parent. 
   }
 }
 ''';
@@ -1079,8 +1090,8 @@ construct {
     
 shp:ModelLinker
     a sh:NodeShape;
-    #sh:rule rule:ModelLinker;
-    #sh:target target:ModelLinker;
+    sh:rule rule:ModelLinker;
+    sh:target target:ModelLinker;
     skos:prefLabel 'Model Linker shape'@en;
     rdfs:isDefinedBy archimate:.
 
