@@ -237,8 +237,8 @@ construct {
         archiXML:source ?sourceIdentifier;
         xsi:type ?xsiType.
    
-  ?sourceNode archiXML:identifier ?targetIdentifier.
-  ?targetNode archiXML:identifier ?sourceIdentifier.
+  ?sourceNode archiXML:identifier ?sourceIdentifier.
+  ?targetNode archiXML:identifier ?targetIdentifier.
   ?relationtype dct:identifier ?xsiType.
   
   optional{
@@ -898,10 +898,37 @@ construct {
 shp:ConnectionDepiction
     a sh:NodeShape;
     sh:rule rule:ConnectionDepiction;
-    sh:targetClass archiXML:Connection;
+    sh:target target:ConnectionDepiction;
     skos:prefLabel 'connection depiction shape'@en;
     rdfs:isDefinedBy archimate:.
 
+target:ConnectionDepiction
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all connections in the XML document that have to be processed into a archimate connection belonging to an archimate view.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+select $this {
+
+  # Select all archiXML connections...
+  $this rdf:type archiXML:Connection.
+
+  # ...that have not been processed yet
+  filter not exists {
+  ?relationshipDepiction rdf:type archimate:Connection;
+                         prov:wasDerivedFrom $this.
+  }
+}
+''';
+    rdfs:isDefinedBy archiXML:.
+    
 rule:ConnectionDepiction
     a sh:SPARQLRule;
     rdfs:comment 'A rule that creates an archimate depiction connection as part of an archimate view.'@en;
@@ -924,17 +951,17 @@ construct {
     rdf:type archimate:Connection;
     skos:prefLabel ?depictionLabel;
     foaf:depicts ?archimate_Relationship;
-    rdfs:isDefinedBy ?model;
-    prov:wasDerivedFrom $this;
     archimate:lineColor  ?lineColorIRI;
     archimate:font       ?fontIRI;
-    archimate:bendPoint  ?bendPointIRI.
+    prov:wasDerivedFrom $this;
+    rdfs:isDefinedBy ?model.    
   
   ?lineColorIRI 
     rdf:type archimate:Color;
     archimate:red   ?lineColorR;
     archimate:green ?lineColorG;
     archimate:blue  ?lineColorB;
+    prov:wasDerivedFrom ?lineColor;    
     rdfs:isDefinedBy ?model. 
 
   ?fontIRI 
@@ -942,6 +969,7 @@ construct {
     archimate:fontName  ?fontName;
     archimate:fontSize  ?fontSize;
     archimate:fontColor ?fontColorIRI;
+    prov:wasDerivedFrom ?font;    
     rdfs:isDefinedBy ?model.
 
   ?fontColorIRI 
@@ -949,20 +977,29 @@ construct {
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB;
+    prov:wasDerivedFrom ?fontColor;    
     rdfs:isDefinedBy ?model.
 
-  ?bendPointIRI 
-    rdf:type archimate:BendPoint;
+  ?bendPointListItem
+    rdf:type rdf:List;
+    skos:prefLabel 'List of bendpoints';
+    skos:definition 'List of bendpoints for an archimate view';
+    rdf:first ?bendPointIRI.
+    
+  ?bendPointIRI
+    rdf:type archimate:BendPoint;    
     archimate:horizontal ?x;
-    archimate:vertical ?y.
+    archimate:vertical   ?y;
+    prov:wasDerivedFrom ?bendPoint;
+    rdfs:isDefinedBy ?model.    
 
 } where {
   
   $this archiXML:relationshipRef ?identifier.
   ?archiXML_Relationship archiXML:identifier ?identifier.
   ?archimate_Relationship prov:wasDerivedFrom ?archiXML_Relationship;
-                     rdfs:isDefinedBy ?model;
-                     skos:prefLabel ?relationshipLabel.
+                          rdfs:isDefinedBy ?model;
+                          skos:prefLabel ?relationshipLabel.
   BIND(CONCAT('A depiction of ',?relationshipLabel) as ?depictionLabel)
   BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationshipDepiction)
   
@@ -995,11 +1032,138 @@ construct {
   BIND(IRI(CONCAT(STR($this),  '-Archimate_LineColor'))            as ?lineColorIRI)
   BIND(IRI(CONCAT(STR($this),  '-Archimate_Font'))                 as ?fontIRI)
   BIND(IRI(CONCAT(STR($this),  '-Archimate_FontColor'))            as ?fontColorIRI)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_BendPoint', ?x,'-',?y)) as ?bendPointIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_BendPoint', '-',?x,'-',?y)) as ?bendPointIRI)
+  BIND(BNODE() as ?bendPointListItem)
 
   }
 ''';
     rdfs:isDefinedBy archimate:.
+    
+shp:BendPointListCreator
+    a sh:NodeShape;
+    sh:rule rule:BendPointListCreator;
+    sh:target target:BendPointListCreator;
+    skos:prefLabel 'bend point list creator shape'@en;
+    rdfs:isDefinedBy archimate:.
+
+target:BendPointListCreator
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all bendpoints in the generated archimate model that have to be processed into a archimate bend point list belonging to an archimate connection.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+select $this {
+
+  # Select all archimate bendpoints...
+  $this rdf:type archimate:BendPoint.
+  ?list rdf:first $this.
+  
+  # ...that have not been processed yet
+  filter not exists {
+  ?list rdf:rest [].
+  }
+}
+''';
+    rdfs:isDefinedBy archiXML:.
+    
+rule:BendPointListCreator
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an list of bendpoints for a connection as part of an archimate view.'@en;
+    skos:prefLabel 'archimate bendpoint list creator rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+construct {
+  
+  ?archimateConnection 
+    archimate:bendPoint ?firstListItem.
+  
+  ?bendPointListItem
+    rdf:rest ?restList.
+}    
+
+where {    
+  # Get bendpoint and connection metadata
+  ?bendPointListItem rdf:first $this.
+  $this prov:wasDerivedFrom ?archiXMLBendPoint.
+  ?connection ?member ?archiXMLBendPoint.
+  ?archimateConnection prov:wasDerivedFrom ?connection.
+  filter(strstarts(str(?member), concat(str(rdf:), '_')))  
+  
+  # Establish the bendpoint index
+  {select ?connection $this ((count(?prevIndex)+1) as ?indexBendPoint)
+   where {
+    $this rdf:type archimate:BendPoint;
+          prov:wasDerivedFrom ?archiXMLBendPoint.
+    ?connection ?member ?archiXMLBendPoint.
+    filter(strstarts(str(?member), concat(str(rdf:), '_')))
+    bind(xsd:integer(strafter(str(?member), concat(str(rdf:),'_'))) as ?index)
+    optional {
+              ?bendPoint rdf:type archimate:BendPoint;
+                         prov:wasDerivedFrom ?prevBendPoint.              
+              ?connection ?prevMember ?prevBendPoint.
+              filter(strstarts(str(?prevMember), concat(str(rdf:), '_')))
+              bind(xsd:integer(strafter(str(?prevMember), concat(str(rdf:),'_'))) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             }
+     } group by ?connection $this 
+   }
+
+  # Establish the bendpoint index for the next bendpoint
+  optional{
+  {select ?connection ?nextBendPoint ((count(?prevIndex)+1) as ?indexOtherBendPoint)
+   where {
+    ?nextBendPoint rdf:type archimate:BendPoint;
+          prov:wasDerivedFrom ?archiXMLBendPoint.
+    ?connection ?member ?archiXMLBendPoint.
+    filter(strstarts(str(?member), concat(str(rdf:), '_')))
+    bind(xsd:integer(strafter(str(?member), concat(str(rdf:),'_'))) as ?index)
+    optional {
+              ?bendPoint rdf:type archimate:BendPoint;
+                         prov:wasDerivedFrom ?prevBendPoint.              
+              ?connection ?prevMember ?prevBendPoint.
+              filter(strstarts(str(?prevMember), concat(str(rdf:), '_')))
+              bind(xsd:integer(strafter(str(?prevMember), concat(str(rdf:),'_'))) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             }
+     } group by ?connection ?nextBendPoint
+   }  
+
+  filter(?indexOtherBendPoint = ?indexBendPoint + 1)
+  ?nextBendPointListItem rdf:first ?nextBendPoint.
+  }
+  
+  # Establish the total bendpoint count as an indicator of the end of the list
+  {select ?connection ((count(?archiXMLBendPoint)) as ?totalBendPoints)
+   where {
+    ?connection ?member ?archiXMLBendPoint.
+    ?archiXMLBendPoint rdf:type archiXML:BendPoint.
+    filter(strstarts(str(?member), concat(str(rdf:), '_')))
+    } group by ?connection
+  }
+  
+  BIND(IF(?indexBendPoint = 1, ?bendPointListItem, ?unboundDummy) as ?firstListItem)
+  BIND(IF(?indexBendPoint = ?totalBendPoints, rdf:nil, ?nextBendPointListItem) as ?restList)
+
+  }
+''';
+    rdfs:isDefinedBy archimate:.
+    
 
 shp:ViewComponentConnector
     a sh:NodeShape;

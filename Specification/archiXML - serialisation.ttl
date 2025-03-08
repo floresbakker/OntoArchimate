@@ -355,7 +355,7 @@ select $this {
         prov:wasDerivedFrom $this.
     }
   
-  # ...but whose from and to elements have been processed yet.
+  # ...but whose from and to elements have been processed already.
   
   $this archimate:from ?elementFrom.
   ?archiXMLElementSource prov:wasDerivedFrom ?elementFrom;
@@ -458,12 +458,10 @@ select $this
 where {
   # Select individuals of archiXML:Elements
   $this rdf:type archiXML:Elements.
-  {
-    filter not exists {
-      ?unprocessedElement rdf:type archimate:Element.
+  filter not exists {
       $this ?member ?unprocessedElement .
+      ?unprocessedElement rdf:type archiXML:Element.      
       filter(strstarts(str(?member), concat(str(rdf:), '_')))
-    }
   }
 }
 ''';
@@ -513,12 +511,10 @@ select $this
 where {
   # Select individuals of archiXML:Relationships
   $this rdf:type archiXML:Relationships.
-  {
-    filter not exists {
-      ?unprocessedRelationship rdf:type archimate:Relationship.
+  filter not exists {
       $this ?member ?unprocessedRelationship .
+      ?unprocessedRelationship rdf:type archiXML:Relationship.
       filter(strstarts(str(?member), concat(str(rdf:), '_')))
-    }
   }
 }
 ''';
@@ -988,7 +984,7 @@ construct {
   }
 
   # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View"))                            as ?view)
+  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                            as ?view)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
@@ -1071,6 +1067,7 @@ construct {
            xsi:type "Relationship";
            archiXML:relationshipRef ?relationIdentifier;
            dct:references ?archiXMLRelationship ;
+           prov:wasDerivedFrom $this;
            rdf:_1 ?connectionStyle;
            ?memberBendPoint ?connectionBendPointIRI.
            
@@ -1130,7 +1127,9 @@ construct {
   
   optional {
   $this 
-     archimate:bendPoint ?bendPoint.
+     archimate:bendPoint ?bendPointList.     
+  ?bendPointList rdf:rest*/rdf:first ?bendPoint.
+  
   ?bendPoint 
      rdf:type archimate:BendPoint;
      archimate:horizontal ?x;
@@ -1162,24 +1161,28 @@ construct {
              } 
      } group by ?archimateView $this
   }
+
+  # Establish the node index 
+  {select ?archimateView (count(?node) as ?indexNode)
+   where {
+    ?archimateView rdf:type archimate:View;
+                   archimate:contains ?node.
+    ?node rdf:type ?nodeClass.
+    filter (?nodeClass in (archimate:ViewNode, archimate:Container, archimate:Note))
+    } group by ?archimateView
+  }
   
   # Establish the bendpoint index, if present
   optional {
-  {select $this ?bendPoint ((count(?prevIndex)) as ?indexBendPoint)
-   where {
-    $this rdf:type archimate:Connection;
-          archimate:bendPoint ?bendPoint.
-    bind(str(?bendPoint) as ?index)
-    optional {
-              $this rdf:type archimate:Connection;
-                    archimate:bendPoint ?prevBendPoint.              
-              bind(str(?prevBendPoint) as ?prevIndex)
-              filter(?prevIndex < ?index)
-             } 
-     } group by $this ?bendPoint
+  {select ?bendPointList ?bendPoint (count(?sublist) as ?indexBendPoint) {
+   $this rdf:type archimate:Connection;
+         archimate:bendPoint ?bendPointList.
+   ?bendPointList rdf:rest* ?sublist.
+   ?sublist rdf:rest*/rdf:first ?bendPoint.
+    } group by ?bendPointList ?bendPoint
    }
   }
-  
+    
   # Set unique identifiers
   BIND(CONCAT("Connection_",STR(?relationIdentifier)) as ?connectionIdentifier)    
   BIND(IF(?classSource = archiXML:Element, "Node_", if(?classSource = archiXML:Relationship, "Connection_", ?unboundDummy)) as ?sourceIdentifierString)
@@ -1190,16 +1193,17 @@ construct {
   # Establish instance of rdfs:member for the connection and bendpoint. 
   # - Take into account that the indexRelationship starts with 0 and needs an offset of +1
   # - Take into account the name & documentation nodes (hence offset of +2).  
-  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexRelationship + 3))) as ?memberConnection)
+  # - Take into account that viewnodes, containers and notes take precedence over relationships (hence offset of + ?indexNode)
+  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexRelationship + 3 + ?indexNode))) as ?memberConnection)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexBendPoint +2))) as ?memberBendPoint)
   
   # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View"))       as ?view)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))  as ?connectionNode)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-nodestyle")) as ?connectionStyle)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-linecolor")) as ?connectionLineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-font")) as ?connectionFontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-fontcolor")) as ?connectionFontColorIRI)
+  BIND(IRI(CONCAT(STR(?archimateView),"-View"))                                             as ?view)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))                                        as ?connectionNode)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-nodestyle"))                          as ?connectionStyle)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-linecolor"))                          as ?connectionLineColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-font"))                               as ?connectionFontIRI)    
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-fontcolor"))                          as ?connectionFontColorIRI)
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-bendpoint-", str(?indexBendPoint+1))) as ?connectionBendPointIRI)
  
   }
@@ -1243,7 +1247,7 @@ select $this {
 
 rule:NodeConnector
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that connects a view node in the XML document with its parent node or archimate view.'@en;
+    rdfs:comment 'A rule that connects a node in the XML document with its parent node or archimate view.'@en;
     skos:prefLabel 'archimate node connector rule'@en;
     sh:construct '''
 
@@ -1267,21 +1271,23 @@ construct {
 } where {
 
   # Get the parent node
-  $this prov:wasDerivedFrom ?viewNode. 
-  ?parent archimate:contains ?viewNode.
+  $this prov:wasDerivedFrom ?node. 
+  ?parent archimate:contains ?node.
   ?parentNode prov:wasDerivedFrom ?parent.
 
   # Establish position of the element within the parent
-  {select ?parent ?viewNode ((count(?prevIndex)) as ?indexMember)
+  {select ?parent ?node ((count(?prevIndex)) as ?indexMember)
    where{
-    ?parent archimate:contains ?viewNode.
-    bind(str(?viewNode) as ?index)
+    ?parent archimate:contains ?node.
+    bind(str(?node) as ?index)
     optional {
-              ?parent archimate:contains ?prevDepiction.   
-              bind(str(?prevDepiction) as ?prevIndex)
+              ?parent archimate:contains ?prevNode.
+              ?prevNode rdf:type ?prevNodeClass.
+              filter (?prevNodeClass in (archimate:ViewNode, archimate:Container, archimate:Note))
+              bind(str(?prevNode) as ?prevIndex)
               filter(?prevIndex < ?index)
              } 
-     } group by ?parent ?viewNode
+     } group by ?parent ?node
   }
   
   # Establish instance of rdfs:member for the node.
@@ -1450,7 +1456,7 @@ shp:NodeIdentifier
 
 target:NodeIdentifier
     a sh:SPARQLTarget;
-    rdfs:comment 'Select the views of which the nodes and connections have to get an identifier.'@en;
+    rdfs:comment 'Select the archixml nodes that have to get an identifier.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -1462,8 +1468,8 @@ select $this {
 
   # Select the archixml node
   $this rdf:type archiXML:Node;
-        prov:wasDerivedFrom ?viewNode.
-  ?view archimate:contains+ ?viewNode;
+        prov:wasDerivedFrom ?node.
+  ?view archimate:contains+ ?node;
         rdf:type archimate:View.
    ?archiXMLView prov:wasDerivedFrom ?view;
         rdf:type archiXML:View.        
@@ -1483,27 +1489,48 @@ prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  $this archiXML:identifier $nodeIdentifier.
+  $this archiXML:identifier ?nodeIdentifier.
 
 } where {
 
-  $this prov:wasDerivedFrom ?viewNode.
-  ?view archimate:contains+ ?viewNode;
+  $this rdf:type archiXML:Node;
+        prov:wasDerivedFrom ?node.
+  ?view archimate:contains+ ?node;
         rdf:type archimate:View.
   ?archiXMLView prov:wasDerivedFrom ?view;
         archiXML:identifier ?viewIdentifier;
         rdf:type archiXML:View.       
-        
-  $this rdf:type archiXML:Node;
-              dct:references ?archiXMLElement.
+
+  optional {
+  $this dct:references ?archiXMLElement.
   ?archiXMLElement archiXML:identifier ?identifier.
-  BIND("Node_" as ?key)
+  }
   
+  # Establish the unique sequence number of a container or note across the model
+  optional {
+    {select $this ?xsiType ((count(?prevIndex)+1) as ?indexNode)
+   where {
+    $this xsi:type ?xsiType;
+          prov:wasDerivedFrom ?node.
+    bind(str(?node) as ?index)
+    optional {
+              ?prevThis xsi:type ?xsiType;
+              prov:wasDerivedFrom ?prevNode.
+              bind(str(?prevNode) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             } 
+     } group by $this ?xsiType
+  }
+  bind(concat(?xsiType, str(?indexNode)) as ?identifier)
+  }
+  
+  BIND("Node_" as ?key)
   # Set unique identifier
-  BIND(CONCAT(?key,STR(?viewIdentifier),"_",STR(?identifier)) as $nodeIdentifier) 
+  BIND(CONCAT(?key,STR(?viewIdentifier),"_",STR(?identifier)) as ?nodeIdentifier) 
   }
 ''';
     rdfs:isDefinedBy archiXML:.
