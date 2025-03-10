@@ -61,17 +61,24 @@ Relationship 2 is thus connecting a Business Object with relationship 1.
 This can be represented in RDF using the archimate vocabulary as follows:
 
 ```
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix model: <https://data.rijksfinancien.nl/archimate/id/>
+# Generic prefixes
+prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+# Specific prefixes
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix model: <https://data.rijksfinancien.nl/archimate/model/id/>
+prefix view: <https://data.rijksfinancien.nl/archimate/view/id/>
 
 ### Model
 
 model:BasicModel 
     rdf:type archimate:Model;
     skos:prefLabel "Basic Model";
-    skos:definition "Example of a basic model with three elements and two relationships".
+    skos:definition "Example of a basic model with three elements and two relationships";
+    rdfs:isDefinedBy model:BasicModel.
 
 ### Element
 
@@ -97,7 +104,7 @@ model:aBusinessObject
 
 model:aRelationship1 
     rdf:type archimate:Relationship;
-    skos:prefLabel "a business actor - role assignment";
+    skos:prefLabel "A business actor - role assignment";
     skos:definition "An example of a business actor and role assignment";
     archimate:from model:aBusinessActor;
     archimate:relationship archimate:assignedTo;
@@ -106,11 +113,71 @@ model:aRelationship1
    
 model:aRelationship2
     rdf:type archimate:Relationship;
-    skos:prefLabel "a business object - relationship association";
+    skos:prefLabel "A business object - relationship association";
     skos:definition "An example of a business object and relationship association";
     archimate:from model:aBusinessObject;
     archimate:relationship archimate:association;
     archimate:to model:aRelationship1;
+    rdfs:isDefinedBy model:BasicModel.  
+
+### View
+
+view:aView 
+    rdf:type archimate:View ;
+    skos:prefLabel"An example of a view" ;
+    skos:definition "An archimate view containing a depiction of three elements and two relationships" ;
+    archimate:contains view:aBusinessActor,
+                       view:aBusinessRole,
+                       view:aBusinessObject,
+                       view:aRelationship1,
+                       view:aRelationship2 ;
+    rdfs:isDefinedBy model:BasicModel.
+
+view:aBusinessActor 
+    rdf:type archimate:ViewNode;
+    skos:prefLabel "A depiction of a business actor";
+    skos:definition "An example of a depiction of a business actor.";
+    foaf:depicts model:aBusinessActor; 
+    archimate:horizontal 400;
+    archimate:vertical   280;
+    archimate:height      55;     
+    archimate:width      120;
+    rdfs:isDefinedBy model:BasicModel.       
+    
+view:aBusinessRole 
+    rdf:type archimate:ViewNode;
+    skos:prefLabel "A depiction of a business role";
+    skos:definition "An example of a depiction of a business role.";
+    foaf:depicts model:aBusinessRole;
+    archimate:horizontal 700;
+    archimate:vertical   280;
+    archimate:height      55;     
+    archimate:width      120;
+    rdfs:isDefinedBy model:BasicModel. 
+
+view:aBusinessObject 
+    rdf:type archimate:ViewNode;
+    skos:prefLabel "A depiction of a business object";
+    skos:definition "An example of a depiction of a business object";
+    foaf:depicts model:aBusinessObject; 
+    archimate:horizontal 550;
+    archimate:vertical   450;
+    archimate:height      55;     
+    archimate:width      120;  
+    rdfs:isDefinedBy model:BasicModel.     
+
+view:aRelationship1 
+    rdf:type archimate:Connection;
+    skos:prefLabel "A depiction of relationship 1: a business actor - role assignment relation";
+    skos:definition "An example of a depiction of relationship 1: a business actor - role assignment relation.";
+    foaf:depicts model:aRelationship1 ;
+    rdfs:isDefinedBy model:BasicModel. 
+
+view:aRelationship2 
+    rdf:type archimate:Connection;
+    skos:prefLabel "A depiction of relationship 2: a business actor - role assignment relation";
+    skos:definition "An example of a depiction of relationship 2: a business object - relationship association.";
+    foaf:depicts model:aRelationship2 ;
     rdfs:isDefinedBy model:BasicModel.  
 ```
 
@@ -158,7 +225,7 @@ model:BasicModel-Documentation a archiXML:Documentation ;
     xml1:lang "en" .
 
 model:BasicModel-DocumentationText a archiXML:Text ;
-    xml1:fragment "Example of a basic model with two elements and two relationships" .
+    xml1:fragment "Example of a basic model with three elements and two relationships" .
 
 # Elements
 
@@ -284,8 +351,8 @@ model:aView-Viewnode_BusinessActor1 a archiXML:Node ;
     archiXML:h 55 ;
     archiXML:identifier "node_BusinessActor1" ;
     archiXML:w 120 ;
-    archiXML:x 300 ;
-    archiXML:y 0 .
+    archiXML:x 400 ;
+    archiXML:y 280 .
 
 model:aView-Viewnode_BusinessObject1 a archiXML:Node ;
     xsi:type "Element" ;
@@ -293,8 +360,8 @@ model:aView-Viewnode_BusinessObject1 a archiXML:Node ;
     archiXML:h 55 ;
     archiXML:identifier "node_BusinessObject1" ;
     archiXML:w 120 ;
-    archiXML:x 600 ;
-    archiXML:y 0 .
+    archiXML:x 550 ;
+    archiXML:y 450 .
 
 model:aView-Viewnode_BusinessRole1 a archiXML:Node ;
     xsi:type "Element" ;
@@ -302,8 +369,8 @@ model:aView-Viewnode_BusinessRole1 a archiXML:Node ;
     archiXML:h 55 ;
     archiXML:identifier "node_BusinessRole1" ;
     archiXML:w 120 ;
-    archiXML:x 450 ;
-    archiXML:y 0 .
+    archiXML:x 700 ;
+    archiXML:y 280 .
     
 model:aView-Viewconnection_Relation_1 a archiXML:Connection ;
     xsi:type "Relationship" ;
@@ -325,15 +392,16 @@ The above mentioned archiXML code can then be serialized using the ArchiXML - co
 ```
 <model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" identifier="Model-1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd">
     <name xml:lang="en">Basic Model</name>
-    <documentation xml:lang="en">Example of a basic model with two elements and two relationships</documentation>
+    <documentation xml:lang="en">Example of a basic model with three elements and two relationships</documentation>
     <elements>
         <element identifier="BusinessActor1" xsi:type="BusinessActor">
             <name xml:lang="en">A business actor</name>
         </element>
         <element identifier="BusinessObject1" xsi:type="BusinessObject">
-            <name xml:lang="en">A business object</name></element>
-        <element identifier="BusinessRole1" xsi:type="BusinessRole"><
-            name xml:lang="en">A business role</name>
+            <name xml:lang="en">A business object</name>
+        </element>
+        <element identifier="BusinessRole1" xsi:type="BusinessRole">
+            <name xml:lang="en">A business role</name>
         </element>
     </elements>
     <relationships>
@@ -348,9 +416,9 @@ The above mentioned archiXML code can then be serialized using the ArchiXML - co
         <diagrams>
             <view identifier="View_1" xsi:type="Diagram">
                 <name xml:lang="en">A view</name>
-                <node identifier="node_BusinessActor1" elementRef="BusinessActor1" h="55" w="120" y="0" x="300" xsi:type="Element"></node>
-                <node identifier="node_BusinessRole1" elementRef="BusinessRole1" h="55" w="120" y="0" x="450" xsi:type="Element"></node>
-                <node identifier="node_BusinessObject1" elementRef="BusinessObject1" h="55" w="120" y="0" x="600" xsi:type="Element"></node>
+                <node identifier="node_BusinessActor1" elementRef="BusinessActor1" h="55" w="120" y="280" x="400" xsi:type="Element"></node>
+                <node identifier="node_BusinessRole1" elementRef="BusinessRole1" h="55" w="120" y="280" x="700" xsi:type="Element"></node>
+                <node identifier="node_BusinessObject1" elementRef="BusinessObject1" h="55" w="120" y="450" x="550" xsi:type="Element"></node>
                 <connection identifier="connection_Relation_1" relationshipRef="Relation_1" source="node_BusinessActor1" target="node_BusinessRole1" xsi:type="Relationship"></connection>
                 <connection identifier="connection_Relation_2" relationshipRef="Relation_2" source="node_BusinessObject1" target="connection_Relation_1" xsi:type="Relationship"></connection>
             </view>
@@ -472,7 +540,7 @@ D. Go to the output folder in OntoArchimate\Tools\ArchiXML2ArchiVoc\Output and g
 
 All tools make extensive use of [RDFlib](https://rdflib.readthedocs.io/en/stable/index.html). Rdflib is a Python library used for working with Resource Description Framework (RDF) data. RDF is a widely used framework for representing and processing information on the web. It is a standard model for data interchange on the web, particularly for representing metadata and data about resources available on the internet.
 
-Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples. From experience, the RDFlib library unfortunately does not always guarantee a good performance; for instance, the archiXML to archiVoc script sometimes takes very long to finish ( > 1 hour), whereas the same SHACL shapes and the same data are run within 40 seconds on a commerical SHACL engine. It is good to have this in mind when running it locally.
+Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples. From experience, the RDFlib library unfortunately does not always guarantee a good performance; some of the scripts sometimes may take very long to finish ( > 1 hour), whereas the same SHACL shapes and the same data are run within 40 seconds on a commerical SHACL engine. It is good to have this in mind when running it locally. Also, RDFlib is improved constantly, so upgrading may help from time to time.
 
 Two out of three tools additionally makes use of [PyShacl](https://github.com/RDFLib/pySHACL). PySHACL is a complete open-source implementation of the SHACL W3C specification, with broad use in the community as well. 
 

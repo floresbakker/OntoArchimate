@@ -458,6 +458,7 @@ select $this
 where {
   # Select individuals of archiXML:Elements
   $this rdf:type archiXML:Elements.
+  ?unprocessedElement rdf:type archiXML:Element.
   filter not exists {
       $this ?member ?unprocessedElement .
       ?unprocessedElement rdf:type archiXML:Element.      
@@ -511,6 +512,7 @@ select $this
 where {
   # Select individuals of archiXML:Relationships
   $this rdf:type archiXML:Relationships.
+  ?unprocessedRelationship rdf:type archiXML:Relationship.
   filter not exists {
       $this ?member ?unprocessedRelationship .
       ?unprocessedRelationship rdf:type archiXML:Relationship.

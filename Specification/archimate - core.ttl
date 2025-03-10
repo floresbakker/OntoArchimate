@@ -217,7 +217,7 @@ archimate:RelationshipConnector a owl:Class;
     skos:altLabel 'junction'@en;
     rdfs:isDefinedBy archimate:.        
 
-### Other 
+### Other Archimate model
     
 archimate:Attribute a owl:Class;
     skos:definition 'A property associated with an ArchiMate language element or relationship.'@en;
@@ -238,24 +238,62 @@ archimate:Viewpoint a owl:Class;
     skos:altLabel 'viewpoint';
     rdfs:isDefinedBy archimate:.
 
-archimate:Label a owl:Class;
-    dct:identifier "Label";
-    skos:definition 'A representation of a label in a view.'@en;
-    skos:prefLabel 'label'@en;
+### Archimate view
+
+archimate:ViewNode a owl:Class;
+    dct:identifier "Viewnode";
+    skos:definition 'A component within an archimate view depicting an ArchiMate element.'@en;
+    skos:prefLabel 'view node'@en;
+    rdfs:isDefinedBy archimate:.
+    
+archimate:Note a owl:Class;
+    dct:identifier "Note";
+    skos:definition 'A representation of text in an architecture view.'@en;
+    skos:prefLabel 'note'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:Line a owl:Class;
     dct:identifier "Line";
-    skos:definition 'A representation of a visual line in a view.'@en;
+    skos:definition 'A representation of a visual line in an architecture view.'@en;
     skos:prefLabel 'line'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:Connection a owl:Class;
+    dct:identifier "Connection";
+    skos:definition 'A representation of a relationship in an architecture view.'@en;
+    skos:prefLabel 'connection'@en;
+    rdfs:isDefinedBy archimate:.  
+
 archimate:Container a owl:Class;
     dct:identifier "Container";
-    skos:definition 'A representation of a visual container in a view.'@en;
+    skos:definition 'A representation of a visual container in an architecture view.'@en;
     skos:prefLabel 'container'@en;
-    rdfs:isDefinedBy archimate:.    
+    rdfs:isDefinedBy archimate:.
+
+archimate:BendPoint a owl:Class;
+    dct:identifier "BendPoint";
+    skos:definition 'A location where a line changes direction in an architecture view.'@en;
+    skos:prefLabel 'bendpoint'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:Style a owl:Class;
+    dct:identifier "Style";
+    skos:definition 'A visual style of an architecture view.'@en;
+    skos:prefLabel 'style'@en;
+    rdfs:isDefinedBy archimate:.
     
+archimate:Color a owl:Class;
+    dct:identifier "Color";
+    skos:definition 'A color within an architecture view.'@en;
+    skos:prefLabel 'color'@en;
+    rdfs:isDefinedBy archimate:. 
+
+archimate:Font a owl:Class;
+    dct:identifier "Font";
+    skos:definition 'A font within an architecture view.'@en;
+    skos:prefLabel 'font'@en;
+    rdfs:isDefinedBy archimate:.     
+
 ### Archimate generic metamodel
 
 archimate:ActiveStructureElement a owl:Class;
@@ -916,7 +954,7 @@ archimate:WorkPackage a owl:Class;
     rdfs:isDefinedBy archimate:.
 
 
-### Properties
+### Properties - archimate model
 
 archimate:relationship a owl:ObjectProperty;
     rdfs:domain archimate:Element;
@@ -1048,3 +1086,103 @@ archimate:orJunction a owl:ObjectProperty,
     dct:identifier "orJunction";
     skos:prefLabel 'Or Junction'@en;
     rdfs:isDefinedBy archimate:.
+
+### Properties - archimate view
+
+archimate:horizontal a owl:DatatypeProperty;
+    dct:identifier "horizontal";
+    skos:prefLabel 'horizontal'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
+    rdfs:range xsd:integer   ; 
+    rdfs:isDefinedBy archimate:.
+    
+archimate:vertical a owl:DatatypeProperty;
+    dct:identifier "vertical";
+    skos:prefLabel 'vertical'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
+    rdfs:range xsd:integer  ;  
+    rdfs:isDefinedBy archimate:.
+
+archimate:height a owl:DatatypeProperty;
+    dct:identifier "height";
+    skos:prefLabel 'height'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
+    rdfs:range xsd:integer  ;  
+    rdfs:isDefinedBy archimate:.
+
+archimate:width a owl:DatatypeProperty;
+    dct:identifier "width";
+    skos:prefLabel 'width'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
+    rdfs:range xsd:integer   ; 
+    rdfs:isDefinedBy archimate:.    
+    
+archimate:fillColor a owl:ObjectProperty;
+    dct:identifier "fillColor";
+    skos:prefLabel 'Fill color'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:Note archimate:Container)];
+    rdfs:range archimate:Color;    
+    rdfs:isDefinedBy archimate:.
+
+archimate:lineColor a owl:ObjectProperty;
+    dct:identifier "lineColor";
+    skos:prefLabel 'Line color'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:Note archimate:Container)];
+    rdfs:range archimate:Color;    
+    rdfs:isDefinedBy archimate:.    
+
+archimate:font a owl:ObjectProperty;
+    dct:identifier "font";
+    skos:prefLabel 'Font'@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:Note archimate:Container)];
+    rdfs:range archimate:Font;    
+    rdfs:isDefinedBy archimate:. 
+
+archimate:red  a owl:DatatypeProperty;
+    dct:identifier "red";
+    skos:prefLabel 'red'@en;
+    rdfs:domain archimate:Color;
+    rdfs:range xsd:integer ;   
+    rdfs:isDefinedBy archimate:.
+
+archimate:green  a owl:DatatypeProperty;
+    dct:identifier "green";
+    skos:prefLabel 'green'@en;
+    rdfs:domain archimate:Color;
+    rdfs:range xsd:integer ;   
+    rdfs:isDefinedBy archimate:.
+
+archimate:blue  a owl:DatatypeProperty;
+    dct:identifier "blue";
+    skos:prefLabel 'blue'@en;
+    rdfs:domain archimate:Color;
+    rdfs:range xsd:integer ;   
+    rdfs:isDefinedBy archimate:.    
+
+archimate:alpha  a owl:DatatypeProperty;
+    dct:identifier "alpha";
+    skos:prefLabel 'alpha'@en;
+    rdfs:domain archimate:Color;
+    rdfs:range xsd:integer ;   
+    rdfs:isDefinedBy archimate:.
+
+archimate:fontName  a owl:DatatypeProperty;
+    dct:identifier "fontName";
+    skos:prefLabel 'fontName'@en;
+    rdfs:domain archimate:Font;
+    rdfs:range xsd:string ;   
+    rdfs:isDefinedBy archimate:.
+
+archimate:fontSize  a owl:DatatypeProperty;
+    dct:identifier "fontSize";
+    skos:prefLabel 'fontSize'@en;
+    rdfs:domain archimate:Font;
+    rdfs:range xsd:integer ;   
+    rdfs:isDefinedBy archimate:.
+    
+archimate:fontColor a owl:ObjectProperty;
+    dct:identifier "font";
+    skos:prefLabel 'Font'@en;
+    rdfs:domain archimate:Font;
+    rdfs:range archimate:Color;    
+    rdfs:isDefinedBy archimate:.     
