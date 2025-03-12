@@ -116,7 +116,7 @@ construct {
   }
 
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
 
 
   shp:Element
@@ -152,7 +152,6 @@ construct {
 } where {
 
   # Get the archimate metadata of the archimate element to be serialized.
-  
   $this xsi:type ?xsiType;
         ?memberName ?elementNameNode.
   ?elementNameNode rdf:type archiXML:Name;
@@ -164,7 +163,8 @@ construct {
   ?documentModel ?modelMember ?elementsNode.
   ?document ?docMember ?documentModel.
   ?model prov:wasDerivedFrom ?document.
-
+  
+  # Get any documentation, if present
   optional {
   $this ?memberDoc ?documentationNode.
   ?documentationNode rdf:type archiXML:Documentation;
@@ -179,7 +179,7 @@ construct {
   }
 
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
 
 shp:Relationship
     a sh:NodeShape;
@@ -212,6 +212,8 @@ construct {
            archimate:relationship ?relationtype;
            archimate:from ?source;
            archimate:to ?target;
+           archimate:accessType ?accessType;           
+           archimate:strength ?influenceStrength;
            rdfs:isDefinedBy ?model;
            prov:wasDerivedFrom $this.
 
@@ -236,17 +238,26 @@ construct {
   $this archiXML:target ?targetIdentifier;
         archiXML:source ?sourceIdentifier;
         xsi:type ?xsiType.
-   
+
   ?sourceNode archiXML:identifier ?sourceIdentifier.
   ?targetNode archiXML:identifier ?targetIdentifier.
   ?relationtype dct:identifier ?xsiType.
+  
+  optional{
+  $this archiXML:accessType ?accessType.
+  }
+  
+  optional{
+  $this archiXML:modifier ?influenceStrength.
+  }
   
   optional{
   $this ?memberDoc ?documentationNode.
   ?documentationNode rdf:type archiXML:Documentation;
                      rdf:_1 ?documentationTextNode.
   ?documentationTextNode rdf:type archiXML:Text;
-                         xml:fragment ?definition.}                       
+                         xml:fragment ?definition.
+  }                       
 
   # Create IRI's
   BIND(IRI(CONCAT(STR(?sourceNode),  '-Archimate')) as ?source)
@@ -283,7 +294,7 @@ select $this {
     }    
   }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
 
 rule:RelationshipLabel
     a sh:SPARQLRule;
@@ -346,7 +357,7 @@ select $this {
     }
   }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
 
 rule:RelationshipDefinition
     a sh:SPARQLRule;
@@ -486,7 +497,7 @@ select $this {
   }
 }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
     
 rule:ViewNodeCreatorElement
     a sh:SPARQLRule;
@@ -508,7 +519,7 @@ construct {
 
   # create the archimate view node
   ?viewNode rdf:type archimate:ViewNode;
-        skos:prefLabel ?nodeLabel;
+        skos:prefLabel ?label;
         foaf:depicts ?archimate_Element;
         rdfs:isDefinedBy ?model;
         prov:wasDerivedFrom $this;
@@ -560,7 +571,7 @@ construct {
       ?archiXML_Element archiXML:identifier ?identifier.
       ?archimate_Element prov:wasDerivedFrom ?archiXML_Element;
                          rdfs:isDefinedBy ?model;
-                         skos:prefLabel ?elementLabel.  
+                         skos:prefLabel ?label.  
 
   # Style is optional                    
   optional {
@@ -588,9 +599,6 @@ construct {
              archiXML:g ?fontColorG;             
              archiXML:b ?fontColorB.  
   }          
-
-  # Establish a node label
-  BIND(CONCAT('A depiction of ',?elementLabel) as ?nodeLabel)
   
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),  '-Archimate'))           as ?viewNode)
@@ -636,7 +644,7 @@ select $this {
   }
 }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
     
 rule:ViewNodeCreatorContainer
     a sh:SPARQLRule;
@@ -658,8 +666,8 @@ construct {
 
   # create the archimate view node
   ?viewNode rdf:type archimate:Container;
-        skos:prefLabel ?nodeLabel;
-        rdfs:comment 'A container within an archimate view node.';
+        skos:prefLabel ?label;
+        rdfs:comment ?comment;
         prov:wasDerivedFrom $this;
         archimate:horizontal ?x;
         archimate:vertical   ?y;
@@ -701,12 +709,12 @@ construct {
   
   # Get required label of the container.
     $this 
-      ?memberLabel ?label.
+      ?memberLabel ?labelNode.
     filter(strstarts(str(?memberLabel), concat(str(rdf:), '_')))
-    ?label rdf:type archiXML:Label;
-           rdf:_1 ?labelTextNode.
+    ?labelNode rdf:type archiXML:Label;
+               rdf:_1 ?labelTextNode.
     ?labelTextNode rdf:type archiXML:Text;
-                   xml:fragment ?otherLabel. 
+                   xml:fragment ?label. 
 
   # Style is optional.                  
   optional {
@@ -735,8 +743,8 @@ construct {
              archiXML:b ?fontColorB.  
   }          
 
-  # Establish a node label
-  BIND(CONCAT('Container: ',?otherLabel) as ?nodeLabel)
+  # Establish a comment
+  BIND(CONCAT('Container: ',?label) as ?comment)
 
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),  '-Archimate'))           as ?viewNode)
@@ -771,10 +779,16 @@ prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 select $this {
 
-  # Select all archiXML nodes describing an container.
+  # Select all archiXML nodes describing a label...
   $this rdf:type archiXML:Node;
         xsi:type "Label".
-  
+
+  # ...a label and not a view reference...
+  filter not exists {
+    $this ?memberRef ?viewRef.
+    ?viewRef archiXML:ref [].
+  }
+
   # ...that have not been processed yet
   filter not exists {
   ?viewNode rdf:type archimate:ViewNode;
@@ -782,7 +796,7 @@ select $this {
   }
 }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
     
 rule:ViewNodeCreatorLabel
     a sh:SPARQLRule;
@@ -804,8 +818,8 @@ construct {
 
   # create the archimate view node
   ?viewNode rdf:type archimate:Note;
-        skos:prefLabel ?nodeLabel;
-        rdfs:comment 'A label within an archimate view node.';
+        skos:prefLabel ?label;
+        rdfs:comment ?comment;
         prov:wasDerivedFrom $this;
         archimate:horizontal ?x;
         archimate:vertical   ?y;
@@ -847,12 +861,12 @@ construct {
   
   # Get required label of the label node.
   $this 
-      ?memberLabel ?label.
+      ?memberLabel ?labelNode.
   filter(strstarts(str(?memberLabel), concat(str(rdf:), '_')))
-  ?label rdf:type archiXML:Label;
-         rdf:_1 ?labelTextNode.
+  ?labelNode rdf:type archiXML:Label;
+             rdf:_1 ?labelTextNode.
   ?labelTextNode rdf:type archiXML:Text;
-                 xml:fragment ?otherLabel. 
+                 xml:fragment ?label. 
 
   # Style is optional                    
   optional {
@@ -881,8 +895,8 @@ construct {
              archiXML:b ?fontColorB.  
   }
 
-  # Establish a node label
-  BIND(CONCAT('Label: ',?otherLabel) as ?nodeLabel)  
+  # Establish a comment
+  BIND(CONCAT('Label: ',?label) as ?comment)  
 
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),  '-Archimate'))           as ?viewNode)
@@ -891,6 +905,161 @@ construct {
   BIND(IRI(CONCAT(STR($this),  '-Archimate_Font'))      as ?fontIRI)
   BIND(IRI(CONCAT(STR($this),  '-Archimate_FontColor')) as ?fontColorIRI)
 
+  }
+''';
+    rdfs:isDefinedBy archimate:.
+
+shp:ViewReferenceCreator
+    a sh:NodeShape;
+    sh:rule rule:ViewReferenceCreator;
+    sh:target target:ViewReferenceCreator;
+    skos:prefLabel 'view reference creator shape'@en;
+    rdfs:isDefinedBy archimate:.
+
+target:ViewReferenceCreator
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all label nodes in the XML document that have to be processed into a view reference belonging to an archimate model.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+select $this {
+
+  # Select all archiXML nodes describing a view reference...
+  $this rdf:type archiXML:Node;
+        xsi:type "Label";
+        ?memberRef ?viewRef.
+  ?viewRef archiXML:ref [].
+    
+  # ...that have not been processed yet
+  filter not exists {
+  ?viewReference rdf:type archimate:ViewReference;
+                 prov:wasDerivedFrom $this.
+  }
+}
+''';
+    rdfs:isDefinedBy archimate:. 
+    
+rule:ViewReferenceCreator
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archimate view reference of a label as part of an archimate view.'@en;
+    skos:prefLabel 'archimate view reference creator label rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+
+  # create the archimate view node
+  ?viewReferenceIRI rdf:type archimate:ViewReference;
+        skos:prefLabel ?label;
+        rdfs:comment ?comment;
+        foaf:depicts ?view;
+        prov:wasDerivedFrom $this;
+        archimate:horizontal ?x;
+        archimate:vertical   ?y;
+        archimate:height     ?h;
+        archimate:width      ?w;
+        archimate:fillColor  ?fillColorIRI;
+        archimate:lineColor  ?lineColorIRI;
+        archimate:font       ?fontIRI.
+  
+  ?fillColorIRI rdf:type archimate:Color;
+    archimate:red   ?fillColorR;
+    archimate:green ?fillColorG;
+    archimate:blue  ?fillColorB;
+    archimate:alpha ?fillColorA.
+
+  ?lineColorIRI rdf:type archimate:Color;
+    archimate:red   ?lineColorR;
+    archimate:green ?lineColorG;
+    archimate:blue  ?lineColorB;
+    archimate:alpha ?lineColorA. 
+
+  ?fontIRI rdf:type archimate:Font;
+    archimate:fontName  ?fontName;
+    archimate:fontSize  ?fontSize;
+    archimate:fontColor ?fontColorIRI.
+
+  ?fontColorIRI rdf:type archimate:Color;
+    archimate:red   ?fontColorR;
+    archimate:green ?fontColorG;
+    archimate:blue  ?fontColorB.     
+
+} where {
+  
+  # In a view, each node is expected to have coordinates.
+  $this archiXML:x ?x;
+        archiXML:y ?y;
+        archiXML:h ?h;
+        archiXML:w ?w.
+  
+  # Get required label of the label node.
+  $this ?memberLabel ?labelNode.
+  filter(strstarts(str(?memberLabel), concat(str(rdf:), '_')))
+  ?labelNode rdf:type archiXML:Label;
+             rdf:_1 ?labelTextNode.
+  ?labelTextNode rdf:type archiXML:Text;
+                 xml:fragment ?label. 
+
+  # Get the referenced view 
+  $this ?memberReference ?viewRef.
+  filter(strstarts(str(?memberReference), concat(str(rdf:), '_')))
+  ?viewRef archiXML:ref ?viewIdentifier.
+  ?archiXML_view archiXML:identifier ?viewIdentifier.
+  ?view prov:wasDerivedFrom ?archiXML_view.
+  
+  # Style is optional                    
+  optional {
+  $this ?memberStyle ?style.
+  ?style     rdf:type archiXML:Style;
+             ?styleFillColorMember ?fillColor;
+             ?styleLineColorMember ?lineColor;
+             ?styleFontMember      ?font.
+  ?fillColor rdf:type archiXML:FillColor;
+             archiXML:r ?fillColorR;
+             archiXML:g ?fillColorG;             
+             archiXML:b ?fillColorB;
+             archiXML:a ?fillColorA.
+  ?lineColor rdf:type archiXML:LineColor;
+             archiXML:r ?lineColorR;
+             archiXML:g ?lineColorG;             
+             archiXML:b ?lineColorB;
+             archiXML:a ?lineColorA.             
+  ?font      rdf:type archiXML:Font;
+             archiXML:name ?fontName;
+             archiXML:size ?fontSize;
+             ?fontMember   ?fontColor.
+  ?fontColor rdf:type archiXML:Color;             
+             archiXML:r ?fontColorR;
+             archiXML:g ?fontColorG;             
+             archiXML:b ?fontColorB.  
+  }
+
+  # Establish a comment
+  BIND(CONCAT('View reference: ',?label) as ?comment)  
+
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),  '-Archimate'))               as ?viewNode)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_FillColor'))     as ?fillColorIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_LineColor'))     as ?lineColorIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_Font'))          as ?fontIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_FontColor'))     as ?fontColorIRI)
+  BIND(IRI(CONCAT(STR($this),  '-Archimate_ViewReference')) as ?viewReferenceIRI)
   }
 ''';
     rdfs:isDefinedBy archimate:.
@@ -927,7 +1096,7 @@ select $this {
   }
 }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
     
 rule:ConnectionDepiction
     a sh:SPARQLRule;
@@ -949,7 +1118,7 @@ construct {
   
   ?relationshipDepiction 
     rdf:type archimate:Connection;
-    skos:prefLabel ?depictionLabel;
+    skos:prefLabel ?label;
     foaf:depicts ?archimate_Relationship;
     archimate:lineColor  ?lineColorIRI;
     archimate:font       ?fontIRI;
@@ -999,8 +1168,7 @@ construct {
   ?archiXML_Relationship archiXML:identifier ?identifier.
   ?archimate_Relationship prov:wasDerivedFrom ?archiXML_Relationship;
                           rdfs:isDefinedBy ?model;
-                          skos:prefLabel ?relationshipLabel.
-  BIND(CONCAT('A depiction of ',?relationshipLabel) as ?depictionLabel)
+                          skos:prefLabel ?label.
   BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationshipDepiction)
   
   optional {
@@ -1071,7 +1239,7 @@ select $this {
   }
 }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
     
 rule:BendPointListCreator
     a sh:SPARQLRule;
@@ -1174,10 +1342,12 @@ shp:ViewComponentConnector
 
 target:ViewComponentConnector
     a sh:SPARQLTarget;
-    rdfs:comment 'Select all nodes and connections that have to be connected to the archimate view.'@en;
+    rdfs:comment 'Select all nodes, connections, notes, labels and view references that have to be connected to the archimate view.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select $this {
@@ -1206,9 +1376,15 @@ select $this {
     ?parent archimate:contains $this.
     }    
   }
+  UNION
+ {$this rdf:type archimate:ViewReference.
+   filter not exists {
+    ?parent archimate:contains $this.
+    }    
+  }
 }
 ''';
-    rdfs:isDefinedBy archiXML:.
+    rdfs:isDefinedBy archimate:. 
     
 rule:ViewComponentConnector
     a sh:SPARQLRule;
@@ -1237,6 +1413,7 @@ construct {
   filter(strstarts(str(?member), concat(str(rdf:), '_')))         
   ?parent prov:wasDerivedFrom ?archiXML_parent. 
   }
+  
   UNION
   
   # Get the parent for the viewnodes and connections in case the corresponding parent in archixml is a node.

@@ -217,12 +217,7 @@ archimate:RelationshipConnector a owl:Class;
     skos:altLabel 'junction'@en;
     rdfs:isDefinedBy archimate:.        
 
-### Other Archimate model
-    
-archimate:Attribute a owl:Class;
-    skos:definition 'A property associated with an ArchiMate language element or relationship.'@en;
-    skos:prefLabel 'attribute'@en;
-    rdfs:isDefinedBy archimate:.   
+### Archimate view
 
 archimate:View a owl:Class;
     dct:identifier "View";
@@ -237,13 +232,17 @@ archimate:Viewpoint a owl:Class;
     skos:prefLabel 'archicture viewpoint'@en;
     skos:altLabel 'viewpoint';
     rdfs:isDefinedBy archimate:.
-
-### Archimate view
-
+    
 archimate:ViewNode a owl:Class;
     dct:identifier "Viewnode";
     skos:definition 'A component within an archimate view depicting an ArchiMate element.'@en;
     skos:prefLabel 'view node'@en;
+    rdfs:isDefinedBy archimate:.
+    
+archimate:ViewReference a owl:Class;
+    dct:identifier "Viewreference";
+    skos:definition 'A representation of a system from the perspective of a related set of concerns.'@en;
+    skos:prefLabel 'architecture view reference'@en;
     rdfs:isDefinedBy archimate:.
     
 archimate:Note a owl:Class;
@@ -294,6 +293,13 @@ archimate:Font a owl:Class;
     skos:prefLabel 'font'@en;
     rdfs:isDefinedBy archimate:.     
 
+### Other Archimate model
+    
+archimate:Attribute a owl:Class;
+    skos:definition 'A property associated with an ArchiMate language element or relationship.'@en;
+    skos:prefLabel 'attribute'@en;
+    rdfs:isDefinedBy archimate:.   
+    
 ### Archimate generic metamodel
 
 archimate:ActiveStructureElement a owl:Class;
@@ -1087,6 +1093,16 @@ archimate:orJunction a owl:ObjectProperty,
     skos:prefLabel 'Or Junction'@en;
     rdfs:isDefinedBy archimate:.
 
+archimate:accessType a owl:DatatypeProperty;
+    dct:identifier "Access type";
+    skos:prefLabel 'Access type'@en;
+    rdfs:isDefinedBy archimate:.
+
+archimate:strength a owl:DatatypeProperty;
+    dct:identifier "Strength";
+    skos:prefLabel 'Strength'@en;
+    rdfs:isDefinedBy archimate:.
+
 ### Properties - archimate view
 
 archimate:horizontal a owl:DatatypeProperty;
@@ -1185,4 +1201,4 @@ archimate:fontColor a owl:ObjectProperty;
     skos:prefLabel 'Font'@en;
     rdfs:domain archimate:Font;
     rdfs:range archimate:Color;    
-    rdfs:isDefinedBy archimate:.     
+    rdfs:isDefinedBy archimate:.

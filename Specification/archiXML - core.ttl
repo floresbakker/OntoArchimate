@@ -368,6 +368,14 @@ archiXML:Attribute
     skos:prefLabel 'the line element'@en;
     rdfs:isDefinedBy archiXML:.      
 
+  archiXML:ViewRef
+    a owl:Class;
+    xml:tag 'viewRef';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The viewref element'@en;
+    skos:prefLabel 'the viewref element'@en;
+    rdfs:isDefinedBy archiXML:.  
+
 ### Properties: Archimate attributes
 
   archiXML:id
@@ -440,6 +448,36 @@ archiXML:Attribute
     skos:prefLabel 'the elementRef attribute'@en;
     rdfs:isDefinedBy archiXML:.
 
+  archiXML:ref
+    a owl:DatatypeProperty, 
+    archiXML:Attribute;
+    xml:key 'ref';
+    rdfs:domain xml:DomElement;
+    rdfs:range xsd:string;
+    rdfs:subPropertyOf xml:attribute;
+    skos:prefLabel 'the ref attribute'@en;
+    rdfs:isDefinedBy archiXML:.
+
+  archiXML:accessType
+    a owl:DatatypeProperty, 
+    archiXML:Attribute;
+    xml:key 'accessType';
+    rdfs:domain xml:DomElement;
+    rdfs:range xsd:string;
+    rdfs:subPropertyOf xml:attribute;
+    skos:prefLabel 'the accessType attribute'@en;
+    rdfs:isDefinedBy archiXML:.
+
+  archiXML:modifier
+    a owl:DatatypeProperty, 
+    archiXML:Attribute;
+    xml:key 'modifier';
+    rdfs:domain xml:DomElement;
+    rdfs:range xsd:string;
+    rdfs:subPropertyOf xml:attribute;
+    skos:prefLabel 'the modifier attribute'@en;
+    rdfs:isDefinedBy archiXML:.
+    
   archiXML:archimateElement
     a owl:DatatypeProperty, 
     archiXML:Attribute;
