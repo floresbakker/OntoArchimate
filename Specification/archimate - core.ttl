@@ -1,15 +1,15 @@
-prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/>
-prefix dcm: <http://purl.org/dc/dcmitype/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix function: <https://data.rijksfinancien.nl/archimate/model/function/>
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfa: <http://www.w3.org/ns/rdfa#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix sh: <http://www.w3.org/ns/shacl#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix status: <http://purl.org/adms/status/>
+prefix archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+prefix dcm:       <http://purl.org/dc/dcmitype/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archimate/model/function/>
+prefix owl:       <http://www.w3.org/2002/07/owl#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:      <http://www.w3.org/ns/rdfa#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh:        <http://www.w3.org/ns/shacl#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix status:    <http://purl.org/adms/status/>
 prefix vann:      <http://purl.org/vocab/vann/>
 prefix void:      <http://rdfs.org/ns/void#>
 prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
@@ -35,21 +35,33 @@ archimate:
     dct:creator
       'Flores Bakker';
       
-    respec:introduction '''Introduction of archimate vocabulary.'''@en;
-    
-    respec:objective '''Objective of archimate vocabulary'''@en;
-    
-    respec:background '''In the field of enterprise architecture, Archimate plays a crucial role in modeling and analyzing complex systems and architectures. Archimate provides a standardized framework for describing the structure, behavior, and relationships within organizations, facilitating communication and decision-making processes.
+    respec:introduction '''OntoArchimate is a family of RDF-based vocabularies designed to represent and transform Archimate enterprise architecture models using semantic web technologies. It consists of four interconnected ontologies, each serving a distinct purpose:
 
-However, the representation of Archimate models in traditional formats lacks the semantic richness necessary for interoperability and advanced analysis. The Archimate Ontology addresses this limitation by formalizing Archimate concepts and relationships in RDF format, leveraging semantic web technologies to enhance interoperability, integration, and semantic understanding of Archimate models.
+* Archimate Ontology (OWL): Represents pure Archimate concepts and relationships in RDF, mirroring the structure of enterprise models.
+* Archimate Serialization Ontology (SHACL): Defines rules for converting RDF-based representations of Archimate XML documents into Archimate models.
+* ArchiXML Ontology (OWL): Models the structure of Archimate XML documents in RDF, preserving the document-centric view.
+* ArchiXML Serialization Ontology (SHACL): Specifies how to serialize Archimate models (modeled in RDF) into RDF-based XML representations.
 
-With the Archimate Ontology, users can generate, parse, validate, annotate, and reuse Archimate documents using semantic web compliant technology, unlocking new possibilities for leveraging Archimate models within the wider context of the Semantic Web.'''@en;
+These ontologies work together to bridge the gap between Archimate's XML formats and RDF models, supporting bi-directional transformations between the two.'''@en;
     
-    respec:audience '''Audience of archimate vocabulary'''@en;
+    respec:objective '''The primary goal of OntoArchimate is to facilitate the parsing, annotation, validation, reuse, and generation of Archimate models using RDF technologies. By aligning Archimate concepts with the semantic web stack, OntoArchimate allows for seamless querying via SPARQL, reasoning with OWL, and integration with other RDF datasets.'''@en;
+    
+    respec:background '''Archimate is a standardized modeling language for enterprise architectures, encompassing business processes, organizational structures, information flows, and technical infrastructure. While Archimate tools often use XML or proprietary formats, the need for semantic, linked data representations is growing. OntoArchimate addresses this by enabling:
+
+* Transformation of Archimate XML to RDF: Using the Archimate serialization ontology.
+* Generation of Archimate XML from RDF: Using the ArchiXML serialization ontology.
+* Semantic querying and reasoning: By aligning Archimate models with the RDF and OWL ecosystems.'''@en;
+    
+    respec:audience '''OntoArchimate is intended for:
+
+* Enterprise architects seeking to integrate their models with linked data.
+* Semantic web researchers interested in combining enterprise modeling with RDF.
+* Tool developers aiming to build RDF-based parsers, validators, or visualizers for Archimate.
+* Data scientists exploring enterprise data representations in a semantic format.'''@en;
     
     dct:description '''Description of archimate vocabulary'''@en;
     
-    dct:abstract '''Abstract of archimate vocabulary'''@en; 
+    dct:abstract '''OntoArchimate is an RDF-based vocabulary suite for representing and working with Archimate models, supporting concepts such as elements, relationships, and views. It enables the semantic parsing, validation, and generation of Archimate documents, allowing integration with the linked data ecosystem. OntoArchimate ensures interoperability by leveraging RDF, OWL, SHACL and SPARQL, fostering the reuse and combination of enterprise architecture data across domains. OntoArchimate consists of four interconnected ontologies, each serving a distinct purpose. The Archimate Ontology as such is part of OntoArchimate and represents pure Archimate concepts and relationships in RDF, mirroring the structure of enterprise models.'''@en; 
     
     skos:example """
 
@@ -59,17 +71,24 @@ There are three Archimate elements, involving a Business Actor, a Business Role,
 
 * This can be represented in RDF using the archimate vocabulary as follows:
 
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix model: <https://data.rijksfinancien.nl/archimate/id/>
+# Generic prefixes
+prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+# Specific prefixes
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix model: <https://data.rijksfinancien.nl/archimate/model/id/>
+prefix view: <https://data.rijksfinancien.nl/archimate/view/id/>
 
 ### Model
 
 model:BasicModel 
     rdf:type archimate:Model;
     skos:prefLabel "Basic Model";
-    skos:definition "Example of a basic model with three elements and two relationships".
+    skos:definition "Example of a basic model with three elements and two relationships";
+    rdfs:isDefinedBy model:BasicModel.
 
 ### Element
 
@@ -95,7 +114,7 @@ model:aBusinessObject
 
 model:aRelationship1 
     rdf:type archimate:Relationship;
-    skos:prefLabel "a business actor - role assignment";
+    skos:prefLabel "A business actor - role assignment";
     skos:definition "An example of a business actor and role assignment";
     archimate:from model:aBusinessActor;
     archimate:relationship archimate:assignedTo;
@@ -104,11 +123,71 @@ model:aRelationship1
    
 model:aRelationship2
     rdf:type archimate:Relationship;
-    skos:prefLabel "a business object - relationship association";
+    skos:prefLabel "A business object - relationship association";
     skos:definition "An example of a business object and relationship association";
     archimate:from model:aBusinessObject;
     archimate:relationship archimate:association;
     archimate:to model:aRelationship1;
+    rdfs:isDefinedBy model:BasicModel.  
+
+### View
+
+view:aView 
+    rdf:type archimate:View ;
+    skos:prefLabel"An example of a view" ;
+    skos:definition "An archimate view containing a depiction of three elements and two relationships" ;
+    archimate:contains view:aBusinessActor,
+                       view:aBusinessRole,
+                       view:aBusinessObject,
+                       view:aRelationship1,
+                       view:aRelationship2 ;
+    rdfs:isDefinedBy model:BasicModel.
+
+view:aBusinessActor 
+    rdf:type archimate:ViewNode;
+    skos:prefLabel "A depiction of a business actor";
+    skos:definition "An example of a depiction of a business actor.";
+    foaf:depicts model:aBusinessActor; 
+    archimate:horizontal 400;
+    archimate:vertical   280;
+    archimate:height      55;     
+    archimate:width      120;
+    rdfs:isDefinedBy model:BasicModel.       
+    
+view:aBusinessRole 
+    rdf:type archimate:ViewNode;
+    skos:prefLabel "A depiction of a business role";
+    skos:definition "An example of a depiction of a business role.";
+    foaf:depicts model:aBusinessRole;
+    archimate:horizontal 700;
+    archimate:vertical   280;
+    archimate:height      55;     
+    archimate:width      120;
+    rdfs:isDefinedBy model:BasicModel. 
+
+view:aBusinessObject 
+    rdf:type archimate:ViewNode;
+    skos:prefLabel "A depiction of a business object";
+    skos:definition "An example of a depiction of a business object";
+    foaf:depicts model:aBusinessObject; 
+    archimate:horizontal 550;
+    archimate:vertical   450;
+    archimate:height      55;     
+    archimate:width      120;  
+    rdfs:isDefinedBy model:BasicModel.     
+
+view:aRelationship1 
+    rdf:type archimate:Connection;
+    skos:prefLabel "A depiction of relationship 1: a business actor - role assignment relation";
+    skos:definition "An example of a depiction of relationship 1: a business actor - role assignment relation.";
+    foaf:depicts model:aRelationship1 ;
+    rdfs:isDefinedBy model:BasicModel. 
+
+view:aRelationship2 
+    rdf:type archimate:Connection;
+    skos:prefLabel "A depiction of relationship 2: a business actor - role assignment relation";
+    skos:definition "An example of a depiction of relationship 2: a business object - relationship association.";
+    foaf:depicts model:aRelationship2 ;
     rdfs:isDefinedBy model:BasicModel.  
 
 """;
