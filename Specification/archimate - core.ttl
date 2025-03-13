@@ -235,13 +235,13 @@ archimate:Viewpoint a owl:Class;
     
 archimate:ViewNode a owl:Class;
     dct:identifier "Viewnode";
-    skos:definition 'A component within an archimate view depicting an ArchiMate element.'@en;
+    skos:definition 'A view node in Archimate represents a component within an view depicting an ArchiMate element.'@en;
     skos:prefLabel 'view node'@en;
     rdfs:isDefinedBy archimate:.
     
 archimate:ViewReference a owl:Class;
     dct:identifier "Viewreference";
-    skos:definition 'A representation of a system from the perspective of a related set of concerns.'@en;
+    skos:definition 'A view reference in Archimate represents the visual display of an another view within a view.'@en;
     skos:prefLabel 'architecture view reference'@en;
     rdfs:isDefinedBy archimate:.
     
@@ -966,12 +966,14 @@ archimate:relationship a owl:ObjectProperty;
     rdfs:domain archimate:Element;
     rdfs:range archimate:Element;
     skos:prefLabel 'the relationship property'@en;
+    skos:definition 'A generic metaproperty representing all relationships in Archimate'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:relationshipConnector a owl:ObjectProperty;
     rdfs:domain archimate:Relationship;
     rdfs:range archimate:Relationship;
     skos:prefLabel 'the relationship connector'@en;
+    skos:definition 'A relationship connector in Archimate is used to connect relationships of the same type.'@en;    
     rdfs:isDefinedBy archimate:.
     
 archimate:assignedTo a owl:ObjectProperty,
@@ -979,6 +981,7 @@ archimate:assignedTo a owl:ObjectProperty,
      rdfs:subPropertyOf archimate:relationship;
      dct:identifier "Assignment";
      skos:prefLabel 'Assignment Relationship'@en;
+     skos:definition 'An assignment relationship in Archimate represents the allocation of responsibility, performance of behavior, storage, or execution.'@en;
      rdfs:isDefinedBy archimate:.
 
 archimate:access a owl:ObjectProperty,
@@ -986,6 +989,7 @@ archimate:access a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Access";
     skos:prefLabel 'Access Relationship'@en;
+    skos:definition 'An access relationship in Archimate represents the ability of behavior and active structure elements to observe or act upon passive structure elements.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:aggregation a owl:ObjectProperty,
@@ -993,6 +997,7 @@ archimate:aggregation a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Aggregation";
     skos:prefLabel 'Aggregation Relationship'@en;
+    skos:definition 'An aggregation relationship in Archimate represents that an element combines one or more other concepts.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:association a owl:ObjectProperty,
@@ -1000,6 +1005,7 @@ archimate:association a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Association";
     skos:prefLabel 'Association Relationship'@en;
+    skos:definition 'An association relationship in Archimate represents an unspecified relationship, or one that is not represented by another ArchiMate relationship.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:composition a owl:ObjectProperty,
@@ -1007,6 +1013,7 @@ archimate:composition a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Composition";
     skos:prefLabel 'Composition Relationship'@en;
+    skos:definition 'A composition relationship in Archimate represents that an element consists of one or more other concepts.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:flow a owl:ObjectProperty,
@@ -1014,6 +1021,7 @@ archimate:flow a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Flow";
     skos:prefLabel 'Flow Relationship'@en;
+    skos:definition 'A flow relationship in Archimate represents transfer from one element to another.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:influence a owl:ObjectProperty,
@@ -1021,13 +1029,7 @@ archimate:influence a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Influence";
     skos:prefLabel 'Influence Relationship'@en;
-    rdfs:isDefinedBy archimate:.
-
-archimate:property a owl:ObjectProperty,
-     archimate:RelationType;
-    rdfs:subPropertyOf archimate:relationship;
-    dct:identifier "Property";
-    skos:prefLabel 'Property Relationship'@en;
+    skos:definition 'An influence relationship in Archimate represents that an element affects the implementation or achievement of some motivation element.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:readAccess a owl:ObjectProperty,
@@ -1035,6 +1037,7 @@ archimate:readAccess a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadAccess";
     skos:prefLabel 'Read Access Relationship'@en;
+    skos:definition 'A read access relationship in Archimate represents the ability of behavior and active structure elements to observe upon passive structure elements.'@en; 
     rdfs:isDefinedBy archimate:.
 
 archimate:readWriteAccess a owl:ObjectProperty,
@@ -1042,6 +1045,7 @@ archimate:readWriteAccess a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadWriteAccess";
     skos:prefLabel 'Read-Write Access Relationship'@en;
+    skos:definition 'A read/write access relationship in Archimate represents the ability of behavior and active structure elements to observe and act upon passive structure elements.'@en;    
     rdfs:isDefinedBy archimate:.
 
 archimate:realization a owl:ObjectProperty,
@@ -1049,6 +1053,7 @@ archimate:realization a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Realization";
     skos:prefLabel 'Realization Relationship'@en;
+    skos:definition 'A realization relationship in Archimate represents that an element plays a critical role in the creation, achievement, sustenance, or operation of a more abstract element.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:serving a owl:ObjectProperty,
@@ -1056,6 +1061,7 @@ archimate:serving a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Serving";
     skos:prefLabel 'Serving Relationship'@en;
+    skos:definition 'A serving relationship in Archimate represents that an element provides its functionality to another element.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:specialization a owl:ObjectProperty,
@@ -1063,6 +1069,7 @@ archimate:specialization a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Specialization";
     skos:prefLabel 'Specialization Relationship'@en;
+    skos:definition 'A specialization relationship in Archimate represents that an element is a particular kind of another element.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:triggering a owl:ObjectProperty,
@@ -1070,13 +1077,15 @@ archimate:triggering a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationship;
     dct:identifier "Triggering";
     skos:prefLabel 'Triggering Relationship'@en;
+    skos:definition 'A triggering relationship in Archimate represents a temporal or causal relationship between elements.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:writeAccess a owl:ObjectProperty,
      archimate:RelationType;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "WriteAccess";
-    skos:prefLabel 'Write Access Relationship'@en;
+    skos:prefLabel 'Write Access Relationship'@en;    
+    skos:definition 'A write access relationship in Archimate represents the ability of behavior and active structure elements to act upon passive structure elements.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:andJunction a owl:ObjectProperty,
@@ -1084,6 +1093,7 @@ archimate:andJunction a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationshipConnector;
     dct:identifier "andJunction";
     skos:prefLabel 'And Junction'@en;
+    skos:definition 'An and junction relationship in Archimate is used to model converging paths where all incoming relationships must be satisfied for the outgoing relationship to occur.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:orJunction a owl:ObjectProperty,
@@ -1091,16 +1101,19 @@ archimate:orJunction a owl:ObjectProperty,
     rdfs:subPropertyOf archimate:relationshipConnector;
     dct:identifier "orJunction";
     skos:prefLabel 'Or Junction'@en;
+    skos:definition 'An or junction relationship in Archimate is used to model converging paths where any one of the incoming relationships can trigger the outgoing relationship.'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:accessType a owl:DatatypeProperty;
     dct:identifier "Access type";
     skos:prefLabel 'Access type'@en;
+    skos:definition "An access type in Archimate specifies the type of access a relationship grants, such as read, write, read/write or access."@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:strength a owl:DatatypeProperty;
     dct:identifier "Strength";
     skos:prefLabel 'Strength'@en;
+    skos:definition "A strength attribute in Archimate indicates the sign and/or strength of the influence."@en;
     rdfs:isDefinedBy archimate:.
 
 ### Properties - archimate view
@@ -1108,97 +1121,111 @@ archimate:strength a owl:DatatypeProperty;
 archimate:horizontal a owl:DatatypeProperty;
     dct:identifier "horizontal";
     skos:prefLabel 'horizontal'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
-    rdfs:range xsd:integer   ; 
+    skos:definition "Defines the horizontal position of an element within a view, measured in integer units."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:ViewReference archimate:Note archimate:Container)];
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
     
 archimate:vertical a owl:DatatypeProperty;
     dct:identifier "vertical";
     skos:prefLabel 'vertical'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
-    rdfs:range xsd:integer  ;  
+    skos:definition "Defines the vertical position of an element within a view, measured in integer units."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:ViewReference  archimate:Note archimate:Container)];
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
 
 archimate:height a owl:DatatypeProperty;
     dct:identifier "height";
     skos:prefLabel 'height'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
-    rdfs:range xsd:integer  ;  
+    skos:definition "Specifies the height of an element within a view, measured in integer units."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:ViewReference archimate:Note archimate:Container)];
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
 
 archimate:width a owl:DatatypeProperty;
     dct:identifier "width";
     skos:prefLabel 'width'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:BendPoint archimate:Note archimate:Container)];
-    rdfs:range xsd:integer   ; 
-    rdfs:isDefinedBy archimate:.    
+    skos:definition "Specifies the width of an element within a view, measured in integer units."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:ViewReference archimate:Note archimate:Container)];
+    rdfs:range xsd:integer;
+    rdfs:isDefinedBy archimate:.
     
 archimate:fillColor a owl:ObjectProperty;
     dct:identifier "fillColor";
     skos:prefLabel 'Fill color'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:Note archimate:Container)];
-    rdfs:range archimate:Color;    
+    skos:definition "Indicates the fill color of an element, linking to a Color instance that defines the RGB and alpha values."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:ViewReference archimate:Note archimate:Container)];
+    rdfs:range archimate:Color;
     rdfs:isDefinedBy archimate:.
 
 archimate:lineColor a owl:ObjectProperty;
     dct:identifier "lineColor";
     skos:prefLabel 'Line color'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:Note archimate:Container)];
-    rdfs:range archimate:Color;    
-    rdfs:isDefinedBy archimate:.    
+    skos:definition "Indicates the color of the outline or border of an element, linking to a Color instance."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:ViewReference archimate:Note archimate:Container)];
+    rdfs:range archimate:Color;
+    rdfs:isDefinedBy archimate:.
 
 archimate:font a owl:ObjectProperty;
     dct:identifier "font";
     skos:prefLabel 'Font'@en;
-    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:Note archimate:Container)];
-    rdfs:range archimate:Font;    
-    rdfs:isDefinedBy archimate:. 
+    skos:definition "Links an element to a Font instance, specifying the font style, size, and color."@en;
+    rdfs:domain [owl:unionOf (archimate:Style archimate:ViewNode archimate:Connection archimate:ViewReference archimate:Note archimate:Container)];
+    rdfs:range archimate:Font;
+    rdfs:isDefinedBy archimate:.
 
-archimate:red  a owl:DatatypeProperty;
+archimate:red a owl:DatatypeProperty;
     dct:identifier "red";
     skos:prefLabel 'red'@en;
+    skos:definition "Specifies the red component of an RGB color, ranging from 0 to 255."@en;
     rdfs:domain archimate:Color;
-    rdfs:range xsd:integer ;   
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
 
-archimate:green  a owl:DatatypeProperty;
+archimate:green a owl:DatatypeProperty;
     dct:identifier "green";
     skos:prefLabel 'green'@en;
+    skos:definition "Specifies the green component of an RGB color, ranging from 0 to 255."@en;
     rdfs:domain archimate:Color;
-    rdfs:range xsd:integer ;   
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
 
-archimate:blue  a owl:DatatypeProperty;
+archimate:blue a owl:DatatypeProperty;
     dct:identifier "blue";
     skos:prefLabel 'blue'@en;
+    skos:definition "Specifies the blue component of an RGB color, ranging from 0 to 255."@en;
     rdfs:domain archimate:Color;
-    rdfs:range xsd:integer ;   
-    rdfs:isDefinedBy archimate:.    
+    rdfs:range xsd:integer;
+    rdfs:isDefinedBy archimate:.
 
-archimate:alpha  a owl:DatatypeProperty;
+archimate:alpha a owl:DatatypeProperty;
     dct:identifier "alpha";
     skos:prefLabel 'alpha'@en;
+    skos:definition "Specifies the alpha (transparency) component of a color, ranging from 0 (completely transparent) to 255 (completely opaque)."@en;
     rdfs:domain archimate:Color;
-    rdfs:range xsd:integer ;   
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
 
-archimate:fontName  a owl:DatatypeProperty;
+archimate:fontName a owl:DatatypeProperty;
     dct:identifier "fontName";
     skos:prefLabel 'fontName'@en;
+    skos:definition "Specifies the name of the font used, such as 'Arial' or 'Times New Roman'."@en;
     rdfs:domain archimate:Font;
-    rdfs:range xsd:string ;   
+    rdfs:range xsd:string;
     rdfs:isDefinedBy archimate:.
 
-archimate:fontSize  a owl:DatatypeProperty;
+archimate:fontSize a owl:DatatypeProperty;
     dct:identifier "fontSize";
     skos:prefLabel 'fontSize'@en;
+    skos:definition "Defines the size of the font in integer units, typically in points (pt)."@en;
     rdfs:domain archimate:Font;
-    rdfs:range xsd:integer ;   
+    rdfs:range xsd:integer;
     rdfs:isDefinedBy archimate:.
-    
+
 archimate:fontColor a owl:ObjectProperty;
-    dct:identifier "font";
-    skos:prefLabel 'Font'@en;
+    dct:identifier "fontColor";
+    skos:prefLabel 'FontColor'@en;
+    skos:definition "Links a Font instance to a Color instance, specifying the font's color."@en;
     rdfs:domain archimate:Font;
-    rdfs:range archimate:Color;    
+    rdfs:range archimate:Color;
     rdfs:isDefinedBy archimate:.
