@@ -214,7 +214,7 @@ view:aRelationship2
     dct:license 'https://creativecommons.org/licenses/by/4.0/'^^xsd:anyURI;
     dct:publisher <https://www.example.com>;
     dct:status status:UnderDevelopment;
-    dct:title 'archimate Core Vocabulary'@en;
+    dct:title 'Archimate Core Vocabulary'@en;
     dct:source <https://www.example.com/archimate-vocabulary>;
     foaf:homepage 'https://www.example.com/'^^xsd:anyURI;
     owl:versionInfo '1.0';
@@ -231,7 +231,6 @@ archimate:Model a owl:Class;
     rdfs:isDefinedBy archimate:.
     
 archimate:Concept a owl:Class;
-    owl:unionOf (archimate:Element archimate:Relationship archimate:RelationshipConnector);
     skos:definition 'A concept is either an element or a relationship, or a relationship connector.'@en;
     skos:prefLabel 'concept'@en;
     rdfs:isDefinedBy archimate:.    
@@ -1046,8 +1045,8 @@ archimate:Font a owl:Class;
 ### Properties - Archimate relationship
 
 archimate:relationship a owl:ObjectProperty;
-    rdfs:domain archimate:Element;
-    rdfs:range archimate:Element;
+    rdfs:domain [owl:unionOf (archimate:Element archimate:Relationship archimate:RelationshipConnector)];
+    rdfs:range  [owl:unionOf (archimate:Element archimate:Relationship archimate:RelationshipConnector)];
     skos:prefLabel 'the relationship property'@en;
     skos:definition 'A generic metaproperty representing all relationships in Archimate'@en;
     rdfs:isDefinedBy archimate:.
