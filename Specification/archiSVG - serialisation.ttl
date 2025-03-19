@@ -249,6 +249,7 @@ prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
 
 select $this {
 
@@ -268,8 +269,8 @@ select $this {
 
 rule:NodeCreator
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an archixml node in the XML document based on an archimate view node.'@en;
-    skos:prefLabel 'archixml node creator rule'@en;
+    rdfs:comment 'A rule that creates an archisvg node in the XML document based on an archimate view node.'@en;
+    skos:prefLabel 'archisvg node creator rule'@en;
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -281,44 +282,46 @@ prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
 prefix xml: <http://www.w3.org/XML/model/def/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
              
-   ?elementNode rdf:type archiSVG:Node;
-           xsi:type ?xsiType;
-           archiSVG:elementRef ?elementIdentifier;
-           archiSVG:x ?x ;
-           archiSVG:y ?y ;
-           archiSVG:w ?w ;
-           archiSVG:h ?h ;
-           prov:wasDerivedFrom $this;
-           dct:references ?archiSVGElement;
-           rdf:_1 ?nodeStyleIRI.
-   ?nodeStyleIRI rdf:type archiSVG:Style;
-           rdf:_1 ?fillColorIRI;
-           rdf:_2 ?lineColorIRI;
-           rdf:_3 ?fontIRI.
-   ?fillColorIRI rdf:type archiSVG:FillColor;
-           archiSVG:a ?fillColorA ;
-           archiSVG:b ?fillColorB ;
-           archiSVG:g ?fillColorG ;
-           archiSVG:r ?fillColorR .
-   ?lineColorIRI rdf:type archiSVG:LineColor;
-           archiSVG:a ?lineColorA ;
-           archiSVG:b ?lineColorB ;
-           archiSVG:g ?lineColorG ;
-           archiSVG:r ?lineColorR .
-   ?fontIRI rdf:type archiSVG:Font;
-           archiSVG:name ?fontName;
-           archiSVG:size ?fontSize;
-           rdf:_1 ?fontColorIRI.
-   ?fontColorIRI rdf:type archiSVG:Color;
-           archiSVG:b ?fontColorB ;
-           archiSVG:g ?fontColorG ;
-           archiSVG:r ?fontColorR .               
+    ?elementNode 
+          rdf:type svg:G;
+          rdf:_1 ?box;
+          rdf:_2 ?icon;
+          rdf:_3 ?text;
+          prov:wasDerivedFrom $this;
+          foaf:depicts ?element.
+           
+    ?box 
+          rdf:type ?boxClass;           
+          svg:x      ?horizontal ;
+          svg:y      ?vertical ;
+          svg:height ?heigth ;
+          svg:width  ?width ; 
+          svg:fill   ?fillColor ;
+          svg:stroke ?lineColor .
+   
+    ?icon 
+          rdf:type svg:G;
+          ?iconMember ?iconPart.
+          
+    ?iconPart 
+          rdf:type ?iconPartClass, archiSVG:IconPart.
+  
+    ?text rdf:type svg:TextElement ;
+          svg:font-family ?fontName ;
+          svg:font-size   ?fontSize ;
+          svg:x           ?textdx ;
+          svg:y           ?textdy ;
+          rdf:_1          ?textFragment .
+          
+    ?textFragment rdf:type svg:Text;
+          xml:fragment ?elementName.
 
 } where {
 
@@ -328,66 +331,110 @@ construct {
   
   # A view node depicts an element, get the metadata for this.
   $this foaf:depicts ?element.
-  ?element rdf:type/rdfs:subClassOf* archimate:Element.
+  ?element rdf:type ?archimateClass;
+           skos:prefLabel ?elementName.
+  ?archimateClass rdfs:subClassOf* archimate:Element.
   ?archiSVGElement prov:wasDerivedFrom ?element;
-                   archiSVG:identifier ?elementIdentifier. 
-  bind("Element" as ?xsiType)
+                   archiSVG:identifier ?elementIdentifier.
   
+  ?svgTemplate rdf:type svg:G;
+               foaf:depicts ?archimateClass;
+               rdf:_1 ?boxTemplate;
+               rdf:_2 ?iconTemplate;
+               rdf:_3 ?textTemplate.
+
+  ?boxTemplate rdf:type ?boxClass;                             
+               svg:height ?defaultHeight ;
+               svg:width  ?defaultWidth ; 
+               svg:fill   ?defaultFillColor ;
+               svg:stroke ?defaultStrokeColor .
+
+  ?iconTemplate rdf:type svg:G;
+               ?iconMember ?iconTemplatePart.
+
+  ?iconTemplatePart rdf:type ?iconPartClass.
+    
+  ?textTemplate rdf:type svg:TextElement;
+                svg:font-family ?defaultFontName ;
+                svg:font-size ?defaultFontSize ;
+                archiSVG:dx ?textdx;
+                archiSVG:dy ?textdy.
+    
+  $this
+    archimate:horizontal ?horizontal;
+    archimate:vertical   ?vertical.
+    
   optional {
   $this
-    archimate:horizontal ?x;
-    archimate:vertical   ?y;
-    archimate:height     ?h;     
-    archimate:width      ?w.
+    archimate:height     ?heightElement;     
+    archimate:width      ?widthElement.
   }
   
   optional {
   $this
-    archimate:fillColor  ?fillColor;
-    archimate:lineColor  ?lineColor;
-    archimate:font       ?font.
+    archimate:fillColor  ?fillColorIRI;
+    archimate:lineColor  ?lineColorIRI;
+    archimate:font       ?fontIRI.
     
-  ?fillColor rdf:type archimate:Color;
+  ?fillColorIRI rdf:type archimate:Color;
     archimate:red   ?fillColorR;
     archimate:green ?fillColorG;
     archimate:blue  ?fillColorB;
     archimate:alpha ?fillColorA. 
 
-  ?lineColor rdf:type archimate:Color;
+  bind(concat("rgb(", ?fillColorR, "," ,?fillColorG, "," ,?fillColorB, ")") as ?fillColorElement)
+
+  ?lineColorIRI rdf:type archimate:Color;
     archimate:red   ?lineColorR;
     archimate:green ?lineColorG;
     archimate:blue  ?lineColorB;
     archimate:alpha ?lineColorA. 
+  
+  bind(concat("rgb(", ?lineColorR, "," ,?lineColorG, "," ,?lineColorB, ")") as ?lineColorElement)
 
-  ?font rdf:type archimate:Font;
-    archimate:fontName  ?fontName;
-    archimate:fontSize  ?fontSize;
-    archimate:fontColor ?fontColor.
+  ?fontIRI rdf:type archimate:Font;
+    archimate:fontName  ?fontNameElement;
+    archimate:fontSize  ?fontSizeElement;
+    archimate:fontColor ?fontColorIRI.
 
-  ?fontColor rdf:type archimate:Color;
+  ?fontColorIRI rdf:type archimate:Color;
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB.
+
+  bind(concat("rgb(", ?fontColorR, "," ,?fontColorG, "," ,?fontColorB, ")") as ?fontColorElement)    
   }
+  
+  BIND(COALESCE(?heightElement,    ?defaultHeight,    "55")       as ?height)
+  BIND(COALESCE(?widthElement,     ?defaultWidth,     "144"       as ?width)    
+  BIND(COALESCE(?fillColorElement, ?defaultFillColor, "none")     as ?fillColor)
+  BIND(COALESCE(?lineColorElement, ?defaultLineColor, "none")     as ?lineColor)
+  BIND(COALESCE(?fontColorElement, ?defaultFontColor, "none")     as ?fontColor)
+  BIND(COALESCE(?fontNameElement,  ?defaultFontName,  "Segoe UI") as ?fontName)
+  BIND(COALESCE(?fontSizeElement,  ?defaultSizeName,  "9")        as ?fontSize)  
+  
+  BIND(xsd:integer(?horizontal) + xsd:integer(?textdx) as ?textX)
+  BIND(xsd:integer(?vertical)   + xsd:integer(?textdy) as ?textY)  
+  
   # Set unique identifier
   BIND(CONCAT("Node_",STR(?elementIdentifier)) as ?nodeIdentifier)
 
   # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)  
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
- 
-  }
+  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                  as ?view)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                    as ?elementNode)  
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier,"-Box"))             as ?box)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier,"-Icon"))            as ?icon)  
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier,"-IconPart"))        as ?iconPart)   
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier,"-Text"))            as ?text) 
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier,"-TextFragment"))    as ?textFragment)   
+
+}
 ''';
     rdfs:isDefinedBy archiSVG:.
 
 shp:ContainerCreator
     a sh:NodeShape;
-    sh:rule rule:ContainerCreator;
+    #sh:rule rule:ContainerCreator;
     sh:target target:ContainerCreator;
     skos:prefLabel 'container creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -559,7 +606,7 @@ construct {
 
 shp:LabelCreator
     a sh:NodeShape;
-    sh:rule rule:LabelCreator;
+    #sh:rule rule:LabelCreator;
     sh:target target:LabelCreator;
     skos:prefLabel 'label creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -732,7 +779,7 @@ construct {
 
 shp:ViewReferenceCreator
     a sh:NodeShape;
-    sh:rule rule:ViewReferenceCreator;
+    #sh:rule rule:ViewReferenceCreator;
     sh:target target:ViewReferenceCreator;
     skos:prefLabel 'view reference creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -913,7 +960,7 @@ construct {
 
 shp:ConnectionCreator
     a sh:NodeShape;
-    sh:rule rule:ConnectionCreator;
+    #sh:rule rule:ConnectionCreator;
     sh:target target:ConnectionCreator;
     skos:prefLabel 'connection creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -1127,7 +1174,7 @@ construct {
 
 shp:NodeConnector
     a sh:NodeShape;
-    sh:rule rule:NodeConnector;
+    #sh:rule rule:NodeConnector;
     sh:target target:NodeConnector;
     skos:prefLabel 'node connector shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -1219,7 +1266,7 @@ construct {
 
 shp:DiagramsConnector
     a sh:NodeShape;
-    sh:rule rule:DiagramsConnector;
+    #sh:rule rule:DiagramsConnector;
     sh:target target:DiagramsConnector;
     skos:prefLabel 'archixml diagrams connector shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -1362,41 +1409,38 @@ construct {
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-shp:NodeIdentifier
+shp:IconPartAttribute
     a sh:NodeShape;
-    sh:rule rule:NodeIdentifier;
-    sh:target target:NodeIdentifier;
-    skos:prefLabel 'archimate node identifier shape'@en;
+    sh:rule rule:IconPartAttribute;
+    sh:target target:IconPartAttribute;
+    skos:prefLabel 'archisvg icon part attribute shape'@en;
     rdfs:isDefinedBy archiSVG:.
 
-target:NodeIdentifier
+target:IconPartAttribute
     a sh:SPARQLTarget;
-    rdfs:comment 'Select the archixml nodes that have to get an identifier.'@en;
+    rdfs:comment 'Select the archisvg icon parts that have to get enriched with attributes.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select $this {
 
   # Select the archixml node
-  $this rdf:type archiSVG:Node;
-        prov:wasDerivedFrom ?node.
-  ?view archimate:contains+ ?node;
-        rdf:type archimate:View.
-   ?archiSVGView prov:wasDerivedFrom ?view;
-        rdf:type archiSVG:View.        
-   filter not exists { $this archiSVG:identifier [].}
-    }
+  $this rdf:type archiSVG:IconPart.
+  filter not exists { 
+   $this prov:wasDerivedFrom [].
+   }
+}
 ''';
     rdfs:isDefinedBy archiSVG:.
     
-rule:NodeIdentifier
+rule:IconPartAttribute
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an identifier for nodes and connections within a archixml view.'@en;
-    skos:prefLabel 'archimate node identifier rule'@en;
+    rdfs:comment 'A rule that adds attributes to an icon part in archiSVG.'@en;
+    skos:prefLabel 'icon part attribute rule'@en;
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -1450,75 +1494,7 @@ construct {
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-shp:ConnectionIdentifier
-    a sh:NodeShape;
-    sh:rule rule:ConnectionIdentifier;
-    sh:target target:ConnectionIdentifier;
-    skos:prefLabel 'archimate connection identifier shape'@en;
-    rdfs:isDefinedBy archiSVG:.
 
-target:ConnectionIdentifier
-    a sh:SPARQLTarget;
-    rdfs:comment 'Select the views of which the connections have to get an identifier.'@en;
-    sh:select '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
-select $this {
-
-  # Select the archixml view
-  $this rdf:type archiSVG:View;
-        archiSVG:identifier [].
-    }
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-rule:ConnectionIdentifier
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an identifier for nodes and connections within a archixml view.'@en;
-    skos:prefLabel 'archimate node identifier rule'@en;
-    sh:construct '''
-
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
-construct {
-
-  ?component archiSVG:identifier ?componentIdentifier;
-             archiSVG:source ?sourceIdentifier;
-             archiSVG:target ?targetIdentifier.
-
-} where {
-
-  $this archiSVG:identifier ?viewIdentifier;
-        ?member ?component.
-  ?component rdf:type archiSVG:Connection;
-              dct:references ?archiSVGRelationship.
-  ?archiSVGRelationship archiSVG:identifier ?identifier;
-                        archiSVG:source ?source;
-                        archiSVG:target ?target.
-  
-  ?archiSVGElementSource archiSVG:identifier ?source;
-                   rdf:type ?classSource.
-
-  ?archiSVGElementTarget archiSVG:identifier ?target;
-                   rdf:type ?classTarget. 
-
-  BIND(IF(?classSource = archiSVG:Element, "Node_", if(?classSource = archiSVG:Relationship, "Connection_", ?unboundDummy)) as ?sourceIdentifierString)
-  BIND(IF(?classTarget = archiSVG:Element, "Node_", if(?classTarget = archiSVG:Relationship, "Connection_", ?unboundDummy)) as ?targetIdentifierString)
-  BIND(CONCAT(?sourceIdentifierString, ?viewIdentifier, "_",?source) as ?sourceIdentifier)
-  BIND(CONCAT(?targetIdentifierString, ?viewIdentifier, "_",?target) as ?targetIdentifier)                   
-  BIND("Connection_" as ?key)
-  
-  # Set unique identifier
-  BIND(CONCAT(?key,STR(?viewIdentifier),"_",STR(?identifier)) as ?componentIdentifier) 
-  }
-''';
-    rdfs:isDefinedBy archiSVG:.
 
 function:getSubElementPosition
     a sh:SPARQLFunction ;
