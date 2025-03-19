@@ -227,7 +227,7 @@ view:aRelationship2
 
 archimate:Model a owl:Class;
     skos:definition 'A collection of concepts of the ArchiMate language structure.'@en;
-    skos:prefLabel 'Model'@en;
+    skos:prefLabel 'model'@en;
     rdfs:isDefinedBy archimate:.
     
 archimate:Concept a owl:Class;
