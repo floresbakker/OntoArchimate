@@ -119,7 +119,7 @@ archiSVG:ApplicationComponentIcon a svg:G;
     rdf:_2 archiSVG:ApplicationComponentIconPart2;
     rdf:_3 archiSVG:ApplicationComponentIconPart3.
     
-archiSVG:ApplicationComponentIconPart1 a svg:Rect ;
+archiSVG:ApplicationComponentIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "10" ;
     svg:stroke "black" ;
@@ -130,7 +130,7 @@ archiSVG:ApplicationComponentIconPart1 a svg:Rect ;
     svg:x "160" ;
     svg:y "155" .
 
-archiSVG:ApplicationComponentIconPart2 a svg:Rect ;
+archiSVG:ApplicationComponentIconPart2 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "1.5" ;
     svg:stroke "black" ;
@@ -141,7 +141,7 @@ archiSVG:ApplicationComponentIconPart2 a svg:Rect ;
     svg:x "157" ;
     svg:y "157" .
 
-archiSVG:ApplicationComponentIconPart3 a svg:Rect ;
+archiSVG:ApplicationComponentIconPart3 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "1.5" ;
     svg:stroke "black" ;
@@ -186,7 +186,7 @@ archiSVG:ApplicationCollaborationIcon a svg:G;
     rdf:_1 archiSVG:ApplicationCollaborationIconPart1;
     rdf:_2 archiSVG:ApplicationCollaborationIconPart2.
     
-archiSVG:ApplicationCollaborationIconPart1 a svg:Circle ;
+archiSVG:ApplicationCollaborationIconPart1 a svg:Circle, archiSVG:Template ;
     svg:cx "340" ;
     svg:cy "335" ;
     archiSVG:dx "125";
@@ -196,7 +196,7 @@ archiSVG:ApplicationCollaborationIconPart1 a svg:Circle ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
-archiSVG:ApplicationCollaborationIconPart2 a svg:Circle ;
+archiSVG:ApplicationCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
     svg:cx "345" ;
     svg:cy "335" ;
     archiSVG:dx "130";
@@ -240,7 +240,7 @@ archiSVG:DataObjectIcon a svg:G;
     rdf:_1 archiSVG:DataObjectIconPart1;
     rdf:_2 archiSVG:DataObjectIconPart2.
     
-archiSVG:DataObjectIconPart1 a svg:Rect ;
+archiSVG:DataObjectIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "10" ;
     svg:stroke "black" ;
@@ -251,7 +251,7 @@ archiSVG:DataObjectIconPart1 a svg:Rect ;
     archiSVG:dx "115";
     archiSVG:dy "5";     .
 
-archiSVG:DataObjectIconPart2 a svg:Rect ;
+archiSVG:DataObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "3" ;
     svg:stroke "black" ;
@@ -297,7 +297,7 @@ archiSVG:ApplicationServiceIcon a svg:G;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:ApplicationServiceIconPart1.
     
-archiSVG:ApplicationServiceIconPart1 a svg:Rect ;
+archiSVG:ApplicationServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "10" ;
     svg:rx "5" ;
@@ -352,7 +352,7 @@ archiSVG:BusinessObjectIcon a svg:G;
     rdf:_1 archiSVG:BusinessObjectIconPart1;
     rdf:_2 archiSVG:BusinessObjectIconPart2.
     
-archiSVG:BusinessObjectIconPart1 a svg:Rect ;
+archiSVG:BusinessObjectIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "10" ;
     svg:stroke "black" ;
@@ -363,7 +363,7 @@ archiSVG:BusinessObjectIconPart1 a svg:Rect ;
     archiSVG:dx "115";
     archiSVG:dy "5" .
 
-archiSVG:BusinessObjectIconPart2 a svg:Rect ;
+archiSVG:BusinessObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "3" ;
     svg:stroke "black" ;
@@ -409,7 +409,7 @@ archiSVG:BusinessServiceIcon a svg:G;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:BusinessServiceIconPart1.
     
-archiSVG:BusinessServiceIconPart1 a svg:Rect ;
+archiSVG:BusinessServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "10" ;
     svg:rx "5" ;
@@ -458,7 +458,7 @@ archiSVG:BusinessProcessIcon a svg:G;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:BusinessProcessIconPart1.
     
-archiSVG:BusinessProcessIconPart1 a svg:Polyline ;
+archiSVG:BusinessProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:fill "none" ;
     svg:points "1025,333 1035,333 1035,330 1041,335.5 1035,341 1035,338 1025,338 1025,333" ;
     archiSVG:dpoints archiSVG:BusinessProcessIconPart1DPoints;
@@ -544,7 +544,7 @@ archiSVG:BusinessActorIcon a svg:G;
     rdf:_4 archiSVG:BusinessActorIconPart4;
     rdf:_5 archiSVG:BusinessActorIconPart5.
     
-archiSVG:BusinessActorIconPart1 a svg:Circle ;
+archiSVG:BusinessActorIconPart1 a svg:Circle, archiSVG:Template ;
     svg:cx "1030" ;
     svg:cy "160" ;
     svg:fill "none" ;
@@ -554,7 +554,7 @@ archiSVG:BusinessActorIconPart1 a svg:Circle ;
     archiSVG:dx "130";
     archiSVG:dy "10" .
 
-archiSVG:BusinessActorIconPart2 a svg:Line ;
+archiSVG:BusinessActorIconPart2 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
@@ -567,7 +567,7 @@ archiSVG:BusinessActorIconPart2 a svg:Line ;
     archiSVG:dx2 "125";
     archiSVG:dy2 "17" .
 
-archiSVG:BusinessActorIconPart3 a svg:Line ;
+archiSVG:BusinessActorIconPart3 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
@@ -580,7 +580,7 @@ archiSVG:BusinessActorIconPart3 a svg:Line ;
     archiSVG:dx2 "130";
     archiSVG:dy2 "22" .
 
-archiSVG:BusinessActorIconPart4 a svg:Line ;
+archiSVG:BusinessActorIconPart4 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
@@ -593,7 +593,7 @@ archiSVG:BusinessActorIconPart4 a svg:Line ;
     archiSVG:dx2 "125";
     archiSVG:dy2 "27" .
 
-archiSVG:BusinessActorIconPart5 a svg:Line ;
+archiSVG:BusinessActorIconPart5 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
