@@ -13,7 +13,7 @@ prefix section:  <https://data.rijksfinancien.nl/archixml/id/section/>
 prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix standard: <https://data.rijksfinancien.nl/archixml/id/standard/>
 prefix status:   <http://purl.org/adms/status/>
-prefix svg:       <http://www.w3.org/SVG/model/def/> 
+prefix svg:      <http://www.w3.org/SVG/model/def/> 
 prefix vann:     <http://purl.org/vocab/vann/>
 prefix void:     <http://rdfs.org/ns/void#>
 prefix xsd:      <http://www.w3.org/2001/XMLSchema#>
@@ -65,10 +65,10 @@ The ArchiSVG ontology is designed to represent the visual elements and relations
     dct:source <https://www.opengroup.org/xsd/archimate/>;
     foaf:homepage 'https://www.opengroup.org/xsd/archimate/';
     owl:versionInfo '1.0';
-    vann:preferredNamespacePrefix 'archiXML';
-    vann:preferredNamespaceUri 'https://data.rijksfinancien.nl/archixml/model/def/';
-    void:uriRegexPattern '^https://data.rijksfinancien.nl/archixml/model/def/';
-    void:uriSpace 'https://data.rijksfinancien.nl/xml/archixml/def/'^^xsd:anyURI.
+    vann:preferredNamespacePrefix 'archiSVG';
+    vann:preferredNamespaceUri 'https://data.rijksfinancien.nl/archisvg/model/def/';
+    void:uriRegexPattern '^https://data.rijksfinancien.nl/archisvg/model/def/';
+    void:uriSpace 'https://data.rijksfinancien.nl/xml/archisvg/def/'^^xsd:anyURI.
 
   standard:archimate
     a dct:Standard;
@@ -77,10 +77,10 @@ The ArchiSVG ontology is designed to represent the visual elements and relations
     skos:prefLabel 'The ArchiMate® Enterprise Architecture Modeling Language'@en.
 
 
-archiSVG:document a svg:Document ;
+archiSVG:document a svg:Document  , archiSVG:Template ;
     rdf:_1 archiSVG:svg.
 
-archiSVG:svg a svg:Svg ;
+archiSVG:svg a svg:Svg  , archiSVG:Template ;
     xml:xmlns "http://www.w3.org/2000/svg";
     svg:height  "600";
     svg:width  "1200";
@@ -89,7 +89,7 @@ archiSVG:svg a svg:Svg ;
 
 ### Application Layer
     
-archiSVG:ApplicationLayer a svg:G;    
+archiSVG:ApplicationLayer a svg:G , archiSVG:Template ;
     rdf:_1 archiSVG:ApplicationComponent;
     rdf:_2 archiSVG:ApplicationCollaboration;
     rdf:_3 archiSVG:DataObject;
@@ -97,14 +97,14 @@ archiSVG:ApplicationLayer a svg:G;
 
 # Application Component
 
-archiSVG:ApplicationComponent a svg:G;
+archiSVG:ApplicationComponent a svg:G , archiSVG:Template ;
     foaf:depicts archimate:ApplicationComponent;
     skos:prefLabel "SVG depiction of an application component in Archimate";
     rdf:_1 archiSVG:ApplicationComponentBox;
     rdf:_2 archiSVG:ApplicationComponentIcon;
     rdf:_3 archiSVG:ApplicationComponentText.
 
-archiSVG:ApplicationComponentBox a svg:Rect ;
+archiSVG:ApplicationComponentBox a svg:Rect  , archiSVG:Template ;
     skos:prefLabel "Application Component";
     svg:fill "rgb(181,255,255)" ;
     svg:height "55" ;
@@ -113,7 +113,7 @@ archiSVG:ApplicationComponentBox a svg:Rect ;
     svg:x "35" ;
     svg:y "150" .
 
-archiSVG:ApplicationComponentIcon a svg:G;
+archiSVG:ApplicationComponentIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application component in Archimate";
     rdf:_1 archiSVG:ApplicationComponentIconPart1;
     rdf:_2 archiSVG:ApplicationComponentIconPart2;
@@ -125,117 +125,103 @@ archiSVG:ApplicationComponentIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "12.5" ;
-    archiSVG:dx "125";
-    archiSVG:dy "5";
-    svg:x "160" ;
-    svg:y "155" .
+    svg:x "125" ;
+    svg:y "5" .
 
 archiSVG:ApplicationComponentIconPart2 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "1.5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:width "5" ;
-    archiSVG:dx "122";
-    archiSVG:dy "7";    
-    svg:x "157" ;
-    svg:y "157" .
+    svg:width "5" ;  
+    svg:x "122" ;
+    svg:y "7" .
 
 archiSVG:ApplicationComponentIconPart3 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
     svg:height "1.5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:width "5" ;
-    archiSVG:dx "122";
-    archiSVG:dy "10";    
-    svg:x "157" ;
-    svg:y "160" .
+    svg:width "5" ;    
+    svg:x "122" ;
+    svg:y "10" .
 
-archiSVG:ApplicationComponentText a svg:TextElement ;
+archiSVG:ApplicationComponentText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:ApplicationComponentTextFragment ;
     svg:font-family "Segoe UI" ;
-    svg:font-size "9" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15";       
-    svg:x "85" ;
-    svg:y "165" .
+    svg:font-size "9" ;    
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:ApplicationComponentTextFragment a svg:Text ;
+archiSVG:ApplicationComponentTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Application component" .
 
 # Application Collaboration
 
-archiSVG:ApplicationCollaboration a svg:G;
+archiSVG:ApplicationCollaboration a svg:G , archiSVG:Template ;
     foaf:depicts archimate:ApplicationCollaboration;
     skos:prefLabel "SVG depiction of an application collaboration in Archimate";
     rdf:_1 archiSVG:ApplicationCollaborationBox;
     rdf:_2 archiSVG:ApplicationCollaborationIcon;
     rdf:_3 archiSVG:ApplicationCollaborationText.
 
-archiSVG:ApplicationCollaborationBox a svg:Rect ;
+archiSVG:ApplicationCollaborationBox a svg:Rect , archiSVG:Template ;
     svg:fill "rgb(181,255,255)" ;
     svg:height "55" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "215" ;
-    svg:y "325" .
+    svg:x "0" ;
+    svg:y "0" .
 
-archiSVG:ApplicationCollaborationIcon a svg:G;
+archiSVG:ApplicationCollaborationIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application collaboration in Archimate";
     rdf:_1 archiSVG:ApplicationCollaborationIconPart1;
     rdf:_2 archiSVG:ApplicationCollaborationIconPart2.
     
 archiSVG:ApplicationCollaborationIconPart1 a svg:Circle, archiSVG:Template ;
-    svg:cx "340" ;
-    svg:cy "335" ;
-    archiSVG:dx "125";
-    archiSVG:dy "10";
+    svg:cx "125" ;
+    svg:cy "10" ;
     svg:fill "none" ;
     svg:r "5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
 archiSVG:ApplicationCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
-    svg:cx "345" ;
-    svg:cy "335" ;
-    archiSVG:dx "130";
-    archiSVG:dy "10";    
+    svg:cx "130" ;
+    svg:cy "10" ; 
     svg:fill "none" ;
     svg:r "5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
-archiSVG:ApplicationCollaborationText a svg:TextElement ;
+archiSVG:ApplicationCollaborationText a svg:TextElement , archiSVG:Template ;
     rdf:_1 archiSVG:ApplicationCollaborationTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "265" ;
-    svg:y "340" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15".
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:ApplicationCollaborationTextFragment a svg:Text ;
+archiSVG:ApplicationCollaborationTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Application Collaboration" .    
 
 # Data object
     
-archiSVG:DataObject a svg:G;
+archiSVG:DataObject a svg:G , archiSVG:Template ;
     foaf:depicts archimate:DataObject;
     skos:prefLabel "SVG depiction of a data object in Archimate";
     rdf:_1 archiSVG:DataObjectBox;
     rdf:_2 archiSVG:DataObjectIcon;
     rdf:_3 archiSVG:DataObjectText.
 
-archiSVG:DataObjectBox a svg:Rect ;
+archiSVG:DataObjectBox a svg:Rect  , archiSVG:Template ;
     svg:fill "rgb(181,255,255)" ;
     svg:height "55" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "450" ;
-    svg:y "450" .
+    svg:x "0" ;
+    svg:y "0" .
 
-archiSVG:DataObjectIcon a svg:G;
+archiSVG:DataObjectIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:DataObjectIconPart1;
     rdf:_2 archiSVG:DataObjectIconPart2.
@@ -246,10 +232,8 @@ archiSVG:DataObjectIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
-    svg:x "565" ;
-    svg:y "455";
-    archiSVG:dx "115";
-    archiSVG:dy "5";     .
+    svg:x "115" ;
+    svg:y "5". 
 
 archiSVG:DataObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
@@ -257,41 +241,37 @@ archiSVG:DataObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
-    svg:x "565" ;
-    svg:y "455";
-    archiSVG:dx "115";
-    archiSVG:dy "5" .
+    svg:x "115" ;
+    svg:y "5".
 
-archiSVG:DataObjectText a svg:TextElement ;
+archiSVG:DataObjectText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:DataObjectTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "500" ;
-    svg:y "465";
-    archiSVG:dx "50";
-    archiSVG:dy "15".
+    svg:x "50" ;
+    svg:y "15".
 
-archiSVG:DataObjectTextFragment a svg:Text ;
+archiSVG:DataObjectTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Data Object" .
 
 # Application Service
 
-archiSVG:ApplicationService a svg:G;
+archiSVG:ApplicationService a svg:G , archiSVG:Template ;
     foaf:depicts archimate:ApplicationService;
     skos:prefLabel "SVG depiction of a data object in Archimate";
     rdf:_1 archiSVG:ApplicationServiceBox;
     rdf:_2 archiSVG:ApplicationServiceIcon;
     rdf:_3 archiSVG:ApplicationServiceText.
 
-archiSVG:ApplicationServiceBox a svg:Rect ;
+archiSVG:ApplicationServiceBox a svg:Rect  , archiSVG:Template ;
     svg:fill "rgb(181,255,255)" ;
     svg:height "55" ;
     svg:rx "15" ;
     svg:ry "15" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "450" ;
-    svg:y "325" .
+    svg:x "0" ;
+    svg:y "0" .
 
 archiSVG:ApplicationServiceIcon a svg:G;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
@@ -305,26 +285,22 @@ archiSVG:ApplicationServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
-    svg:x "565" ;
-    svg:y "330";
-    archiSVG:dx "115";
-    archiSVG:dy "5" .
+    svg:x "115" ;
+    svg:y "5".
     
-archiSVG:ApplicationServiceText a svg:TextElement ;
+archiSVG:ApplicationServiceText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:ApplicationServiceTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "500" ;
-    svg:y "340" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15" .
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:ApplicationServiceTextFragment a svg:Text ;
+archiSVG:ApplicationServiceTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Application Service" .
     
 ### Business layer 
 
-archiSVG:BusinessLayer a svg:G;    
+archiSVG:BusinessLayer a svg:G , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessObject;
     rdf:_2 archiSVG:BusinessService;
     rdf:_3 archiSVG:BusinessProcess;
@@ -332,22 +308,22 @@ archiSVG:BusinessLayer a svg:G;
     
 # Business Object
 
-archiSVG:BusinessObject a svg:G;
+archiSVG:BusinessObject a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessObject;
     skos:prefLabel "SVG depiction of a data object in Archimate";
     rdf:_1 archiSVG:BusinessObjectBox;
     rdf:_2 archiSVG:BusinessObjectIcon;
     rdf:_3 archiSVG:BusinessObjectText.
 
-archiSVG:BusinessObjectBox a svg:Rect ;
+archiSVG:BusinessObjectBox a svg:Rect  , archiSVG:Template ;
     svg:fill "rgb(255,255,181)" ;
     svg:height "55" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "650" ;
-    svg:y "450" .
+    svg:x "0" ;
+    svg:y "0" .
 
-archiSVG:BusinessObjectIcon a svg:G;
+archiSVG:BusinessObjectIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:BusinessObjectIconPart1;
     rdf:_2 archiSVG:BusinessObjectIconPart2.
@@ -358,10 +334,8 @@ archiSVG:BusinessObjectIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
-    svg:x "765" ;
-    svg:y "455" ;
-    archiSVG:dx "115";
-    archiSVG:dy "5" .
+    svg:x "115" ;
+    svg:y "5" .
 
 archiSVG:BusinessObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
@@ -369,43 +343,39 @@ archiSVG:BusinessObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
-    svg:x "765" ;
-    svg:y "455" ;
-    archiSVG:dx "115";
-    archiSVG:dy "5" . 
+    svg:x "115" ;
+    svg:y "5" . 
     
-archiSVG:BusinessObjectText a svg:TextElement ;
+archiSVG:BusinessObjectText a svg:TextElement , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessObjectTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "700" ;
-    svg:y "465" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15" .
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:BusinessObjectTextFragment a svg:Text ;
+archiSVG:BusinessObjectTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Business Object" .
     
 # Business service
 
-archiSVG:BusinessService a svg:G;
+archiSVG:BusinessService a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessService;
     skos:prefLabel "SVG depiction of a data object in Archimate";
     rdf:_1 archiSVG:BusinessServiceBox;
     rdf:_2 archiSVG:BusinessServiceIcon;
     rdf:_3 archiSVG:BusinessServiceText.
 
-archiSVG:BusinessServiceBox a svg:Rect ;
+archiSVG:BusinessServiceBox a svg:Rect  , archiSVG:Template ;
     svg:fill "rgb(255,255,181)" ;
     svg:height "55" ;
     svg:rx "15" ;
     svg:ry "15" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "650" ;
-    svg:y "325" .
+    svg:x "0" ;
+    svg:y "0" .
 
-archiSVG:BusinessServiceIcon a svg:G;
+archiSVG:BusinessServiceIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:BusinessServiceIconPart1.
     
@@ -417,126 +387,77 @@ archiSVG:BusinessServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
-    svg:x "765" ;
-    svg:y "330" ;
-    archiSVG:dx "115";
-    archiSVG:dy "5" .
+    svg:x "115" ;
+    svg:y "5" .
     
-archiSVG:BusinessServiceText a svg:TextElement ;
+archiSVG:BusinessServiceText a svg:TextElement , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessServiceTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "700" ;
-    svg:y "340" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15" .
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:BusinessServiceTextFragment a svg:Text ;
+archiSVG:BusinessServiceTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Business Service" .
     
 # Business Process
 
-archiSVG:BusinessProcess a svg:G;
+archiSVG:BusinessProcess a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessProcess;
     skos:prefLabel "SVG depiction of a data object in Archimate";
     rdf:_1 archiSVG:BusinessProcessBox;
     rdf:_2 archiSVG:BusinessProcessIcon;
     rdf:_3 archiSVG:BusinessProcessText.
 
-archiSVG:BusinessProcessBox a svg:Rect ;
+archiSVG:BusinessProcessBox a svg:Rect , archiSVG:Template ;
     svg:fill "rgb(255,255,181)" ;
     svg:height "55" ;
     svg:rx "15" ;
     svg:ry "15" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "900" ;
-    svg:y "325" .
+    svg:x "0" ;
+    svg:y "0" .
 
-archiSVG:BusinessProcessIcon a svg:G;
+archiSVG:BusinessProcessIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:BusinessProcessIconPart1.
     
 archiSVG:BusinessProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:fill "none" ;
-    svg:points "1025,333 1035,333 1035,330 1041,335.5 1035,341 1035,338 1025,338 1025,333" ;
-    archiSVG:dpoints archiSVG:BusinessProcessIconPart1DPoints;
+    svg:points "125,8 135,8 135,5 141,10.5, 135,16 135,13 125,13 125,8" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
-
-archiSVG:BusinessProcessIconPart1DPoints a archiSVG:DPoints;
-    rdf:_1 archiSVG:BusinessProcessIconPart1DPoint1;
-    rdf:_2 archiSVG:BusinessProcessIconPart1DPoint2;
-    rdf:_3 archiSVG:BusinessProcessIconPart1DPoint3;
-    rdf:_4 archiSVG:BusinessProcessIconPart1DPoint4;
-    rdf:_5 archiSVG:BusinessProcessIconPart1DPoint5;
-    rdf:_6 archiSVG:BusinessProcessIconPart1DPoint6;
-    rdf:_7 archiSVG:BusinessProcessIconPart1DPoint7;
-    rdf:_8 archiSVG:BusinessProcessIconPart1DPoint8.
-
-archiSVG:BusinessProcessIconPart1DPoint1 a archiSVG:DPoint;
-    archiSVG:dx "125";
-    archiSVG:dy "8" .
-
-archiSVG:BusinessProcessIconPart1DPoint2 a archiSVG:DPoint;
-    archiSVG:dx "135";
-    archiSVG:dy "8" .
-
-archiSVG:BusinessProcessIconPart1DPoint3 a archiSVG:DPoint;
-    archiSVG:dx "135";
-    archiSVG:dy "5" .
-
-archiSVG:BusinessProcessIconPart1DPoint4 a archiSVG:DPoint;
-    archiSVG:dx "141";
-    archiSVG:dy "10.5" .
-
-archiSVG:BusinessProcessIconPart1DPoint5 a archiSVG:DPoint;
-    archiSVG:dx "135";
-    archiSVG:dy "16" .
-
-archiSVG:BusinessProcessIconPart1DPoint6 a archiSVG:DPoint;
-    archiSVG:dx "135";
-    archiSVG:dy "13" .
-
-archiSVG:BusinessProcessIconPart1DPoint7 a archiSVG:DPoint;
-    archiSVG:dx "125";
-    archiSVG:dy "13" .
-
-archiSVG:BusinessProcessIconPart1DPoint8 a archiSVG:DPoint;
-    archiSVG:dx "125";
-    archiSVG:dy "8" .    
  
-archiSVG:BusinessProcessText a svg:TextElement ;
+archiSVG:BusinessProcessText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessProcessTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "950" ;
-    svg:y "340" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15" .
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:BusinessProcessTextFragment a svg:Text ;
+archiSVG:BusinessProcessTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Business Process" .
 
 # Business Actor
 
-archiSVG:BusinessActor a svg:G;
+archiSVG:BusinessActor a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessActor;
     skos:prefLabel "SVG depiction of a data object in Archimate";
     rdf:_1 archiSVG:BusinessActorBox;
     rdf:_2 archiSVG:BusinessActorIcon;
     rdf:_3 archiSVG:BusinessActorText.
 
-archiSVG:BusinessActorBox a svg:Rect ;
+archiSVG:BusinessActorBox a svg:Rect  , archiSVG:Template ;
     svg:fill "rgb(255,255,181)" ;
     svg:height "55" ;
     svg:stroke "black" ;
     svg:width "144" ;
-    svg:x "900" ;
-    svg:y "150" .
+    svg:x "0" ;
+    svg:y "0" .
 
-archiSVG:BusinessActorIcon a svg:G;
+archiSVG:BusinessActorIcon a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:BusinessActorIconPart1;
     rdf:_2 archiSVG:BusinessActorIconPart2;
@@ -545,77 +466,57 @@ archiSVG:BusinessActorIcon a svg:G;
     rdf:_5 archiSVG:BusinessActorIconPart5.
     
 archiSVG:BusinessActorIconPart1 a svg:Circle, archiSVG:Template ;
-    svg:cx "1030" ;
-    svg:cy "160" ;
+    svg:cx "130" ;
+    svg:cy "10" ;
     svg:fill "none" ;
     svg:r "4" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" ;
-    archiSVG:dx "130";
-    archiSVG:dy "10" .
+    svg:stroke-width "0.5" .
 
 archiSVG:BusinessActorIconPart2 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:x1 "1035" ;
-    svg:x2 "1025" ;
-    svg:y1 "167" ;
-    svg:y2 "167" ;
-    archiSVG:dx1 "135";
-    archiSVG:dy1 "17" ;
-    archiSVG:dx2 "125";
-    archiSVG:dy2 "17" .
+    svg:x1 "135" ;
+    svg:x2 "125" ;
+    svg:y1 "17" ;
+    svg:y2 "17" .
 
 archiSVG:BusinessActorIconPart3 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:x1 "1030" ;
-    svg:x2 "1030" ;
-    svg:y1 "165" ;
-    svg:y2 "172" ;
-    archiSVG:dx1 "130";
-    archiSVG:dy1 "15" ;
-    archiSVG:dx2 "130";
-    archiSVG:dy2 "22" .
+    svg:x1 "130" ;
+    svg:x2 "130" ;
+    svg:y1 "15" ;
+    svg:y2 "22" .
 
 archiSVG:BusinessActorIconPart4 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:x1 "1030" ;
-    svg:x2 "1025" ;
-    svg:y1 "172" ;
-    svg:y2 "177" ;
-    archiSVG:dx1 "130";
-    archiSVG:dy1 "22" ;
-    archiSVG:dx2 "125";
-    archiSVG:dy2 "27" .
+    svg:x1 "130" ;
+    svg:x2 "125" ;
+    svg:y1 "22" ;
+    svg:y2 "27" .
 
 archiSVG:BusinessActorIconPart5 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:x1 "1030" ;
-    svg:x2 "1035" ;
-    svg:y1 "172" ;
-    svg:y2 "177" ;
-    archiSVG:dx1 "130";
-    archiSVG:dy1 "22" ;
-    archiSVG:dx2 "135";
-    archiSVG:dy2 "27" .
+    svg:x1 "130" ;
+    svg:x2 "135" ;
+    svg:y1 "22" ;
+    svg:y2 "27" .
     
-archiSVG:BusinessActorText a svg:TextElement ;
+archiSVG:BusinessActorText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessActorTextFragment ;
     svg:font-family "Segoe UI" ;
     svg:font-size "9" ;
-    svg:x "950" ;
-    svg:y "165" ;
-    archiSVG:dx "50";
-    archiSVG:dy "15" .
+    svg:x "50" ;
+    svg:y "15" .
 
-archiSVG:BusinessActorTextFragment a svg:Text ;
+archiSVG:BusinessActorTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Business Actor" .
 
 

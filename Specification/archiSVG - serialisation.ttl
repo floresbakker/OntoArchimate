@@ -318,19 +318,21 @@ construct {
    
     ?icon 
           rdf:type svg:G;
-          prov:wasDerivedFrom ?iconTemplate;
           archiSVG:offsetX ?horizontal;
           archiSVG:offsetY ?vertical;
+          prov:wasDerivedFrom ?iconTemplate;
           ?iconMember ?iconPart.
           
     ?iconPart 
-          rdf:type ?iconPartClass, archiSVG:IconPart.
+          rdf:type ?iconPartClass, archiSVG:IconPart;
+          prov:wasDerivedFrom ?iconTemplatePart.
   
     ?text rdf:type svg:TextElement ;
           svg:font-family ?fontName ;
           svg:font-size   ?fontSize ;
-          svg:x           ?textdx ;
-          svg:y           ?textdy ;
+          svg:x           ?textX ;
+          svg:y           ?textY ;
+          svg:transform   ?translate;          
           rdf:_1          ?textFragment .
           
     ?textFragment rdf:type svg:Text;
@@ -338,35 +340,6 @@ construct {
 
 } where {
   
-  # A view node depicts an element, get the metadata for this.
-  $this foaf:depicts ?element.
-  ?element rdf:type ?archimateClass;
-           skos:prefLabel ?elementName.
-  ?archimateClass rdfs:subClassOf* archimate:Element.
-  
-  ?svgTemplate rdf:type svg:G;
-               foaf:depicts ?archimateClass;
-               rdf:_1 ?boxTemplate;
-               rdf:_2 ?iconTemplate;
-               rdf:_3 ?textTemplate.
-
-  ?boxTemplate rdf:type ?boxClass;                             
-               svg:height ?defaultHeight ;
-               svg:width  ?defaultWidth ; 
-               svg:fill   ?defaultFillColor ;
-               svg:stroke ?defaultLineColor .
-
-  ?iconTemplate rdf:type svg:G;
-               ?iconMember ?iconTemplatePart.
-
-  ?iconTemplatePart rdf:type ?iconPartClass.
-    
-  ?textTemplate rdf:type svg:TextElement;
-                svg:font-family ?defaultFontName ;
-                svg:font-size   ?defaultFontSize ;
-                archiSVG:dx     ?textdx;
-                archiSVG:dy     ?textdy.
-    
   $this
     archimate:horizontal ?horizontal;
     archimate:vertical   ?vertical.
@@ -412,28 +385,57 @@ construct {
   bind(concat("rgb(", ?fontColorR, "," ,?fontColorG, "," ,?fontColorB, ")") as ?fontColorElement)    
   }
   
-  BIND(COALESCE(?heightElement,    ?defaultHeight,    "55")       as ?height)
-  BIND(COALESCE(?widthElement,     ?defaultWidth,     "144")      as ?width)    
-  BIND(COALESCE(?fillColorElement, ?defaultFillColor, "none")     as ?fillColor)
-  BIND(COALESCE(?lineColorElement, ?defaultLineColor, "none")     as ?lineColor)
-  BIND(COALESCE(?fontColorElement, ?defaultFontColor, "none")     as ?fontColor)
-  BIND(COALESCE(?fontNameElement,  ?defaultFontName,  "Segoe UI") as ?fontName)
-  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize,  "9")        as ?fontSize)  
+  BIND(COALESCE(?heightElement,    ?defaultHeight)        as ?height)
+  BIND(COALESCE(?widthElement,     ?defaultWidth)         as ?width)    
+  BIND(COALESCE(?fillColorElement, ?defaultFillColor)     as ?fillColor)
+  BIND(COALESCE(?lineColorElement, ?defaultLineColor)     as ?lineColor)
+  BIND(COALESCE(?fontColorElement, ?defaultFontColor)     as ?fontColor)
+  BIND(COALESCE(?fontNameElement,  ?defaultFontName)      as ?fontName)
+  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize)      as ?fontSize)  
   
-  BIND(xsd:integer(?horizontal) + xsd:integer(?textdx) as ?textX)
-  BIND(xsd:integer(?vertical)   + xsd:integer(?textdy) as ?textY)  
+  BIND(CONCAT('translate(', str(?horizontal), ',', str(?vertical), ')') as ?translate)
   
+  # A view node depicts an element, get the metadata for this.
+  $this foaf:depicts ?element.
+  ?element rdf:type ?archimateClass;
+           skos:prefLabel ?elementName.
+  ?archimateClass rdfs:subClassOf* archimate:Element.
+  
+  ?svgTemplate rdf:type svg:G, archiSVG:Template;
+               foaf:depicts ?archimateClass;
+               rdf:_1 ?boxTemplate;
+               rdf:_2 ?iconTemplate;
+               rdf:_3 ?textTemplate.
+
+  ?boxTemplate rdf:type ?boxClass, archiSVG:Template;                             
+               svg:height ?defaultHeight ;
+               svg:width  ?defaultWidth ; 
+               svg:fill   ?defaultFillColor ;
+               svg:stroke ?defaultLineColor .
+  ?boxClass rdfs:subClassOf* svg:Element.               
+
+  ?iconTemplate rdf:type svg:G, archiSVG:Template;
+               ?iconMember ?iconTemplatePart.
+
+  ?iconTemplatePart rdf:type ?iconPartClass, archiSVG:Template.
+  ?iconPartClass rdfs:subClassOf* svg:Element.
+    
+  ?textTemplate rdf:type svg:TextElement, archiSVG:Template;
+                svg:font-family ?defaultFontName ;
+                svg:font-size   ?defaultFontSize ;
+                svg:x           ?textX;
+                svg:y           ?textY.    
+
   # Set unique identifier icon part
   BIND(str(strafter(str(?iconMember), concat(str(rdf:), '_'))) as ?iconPartIdentifier)
 
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),"-SVGElement"))                                    as ?elementNode)
   BIND(IRI(CONCAT(STR($this),"-SVGElement","-Box"))                             as ?box)
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Icon"))                            as ?icon)  
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-IconPart", ?iconPartIdentifier))   as ?iconPart)   
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Text"))                            as ?text) 
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-TextFragment"))                    as ?textFragment)   
-
+  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Icon"))                            as ?icon)
+  BIND(IRI(CONCAT(STR($this),"-SVGElement","-IconPart", ?iconPartIdentifier))   as ?iconPart)
+  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Text"))                            as ?text)
+  BIND(IRI(CONCAT(STR($this),"-SVGElement","-TextFragment"))                    as ?textFragment)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -1231,14 +1233,16 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  ?parentNode ?memberNode $this.        
+  ?elements ?memberNode $this.        
 
 } where {
 
   # Get the parent node
   $this prov:wasDerivedFrom ?node. 
   ?parent archimate:contains ?node.
-  ?parentNode prov:wasDerivedFrom ?parent.
+  ?documentNode prov:wasDerivedFrom ?parent;
+                rdf:_1 ?svg.
+  ?svg rdf:_1 ?elements.              
 
   # Establish position of the element within the parent
   {select ?parent ?node ((count(?prevIndex)) as ?indexMember)
@@ -1432,7 +1436,7 @@ prefix svg:         <http://www.w3.org/SVG/model/def/>
 select $this {
 
   # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:IconPart, svg:PolyLine.
+  $this rdf:type archiSVG:IconPart, svg:Polyline.
   filter not exists { 
    $this prov:wasDerivedFrom rule:IconPartPolyLine.
    }
@@ -1468,20 +1472,18 @@ construct {
   
   ?icon ?member $this; 
         archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY;
-        prov:wasDerivedFrom ?template.
-  
-  ?template ?member ?templatePolyLine.
+        archiSVG:offsetY ?offsetY.
         
-  ?templatePolyLine 
-            rdf:type svg:PolyLine, archiSVG:Template;
+  $this prov:wasDerivedFrom ?template.
+        
+  ?template
+            rdf:type svg:Polyline, archiSVG:Template;
             svg:fill ?fill;
             svg:stroke ?lineColor;
             svg:stroke-width ?lineSize;
             svg:points ?bendPoints.
            
-  bind(concat('"translate(', str(?offsetX), ',', str(?offsetY), ')"') as ?translate)
-      
+  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -1536,8 +1538,8 @@ construct {
   $this svg:fill ?fill;
         svg:width  ?width;
         svg:height ?height;
-        svg:x ?offsetX;
-        svg:y ?offsetY;
+        svg:x ?horizontal;
+        svg:y ?vertical;
         svg:rx ?rx ;
         svg:ry ?ry ;
         svg:transform ?translate;        
@@ -1549,15 +1551,16 @@ construct {
 
   ?icon ?member $this; 
         archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY;
-        prov:wasDerivedFrom ?template.
+        archiSVG:offsetY ?offsetY.
   
-  ?template ?member ?templateRect.
+  $this prov:wasDerivedFrom ?template.
         
-  ?templateRect
+  ?template
             rdf:type svg:Rect, archiSVG:Template;
             svg:fill ?fill;
             svg:stroke ?lineColor;
+            svg:x ?horizontal;
+            svg:y ?vertical;
             svg:width ?width;
             svg:height ?height.
 
@@ -1570,7 +1573,7 @@ construct {
   ?template svg:stroke-width ?lineSize;
   }
   
-  bind(concat('"translate(', str(?offsetX), ',', str(?offsetY), ')"') as ?translate)
+  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -1636,11 +1639,11 @@ construct {
 
   ?icon ?member $this; 
         archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY;
-        prov:wasDerivedFrom ?template.
+        archiSVG:offsetY ?offsetY.
   
-  ?template ?member ?templateCircle.
-  ?templateCircle
+  $this prov:wasDerivedFrom ?template.
+        
+  ?template
             rdf:type svg:Circle, archiSVG:Template;
             svg:fill ?fill;
             svg:stroke ?lineColor;
@@ -1649,7 +1652,7 @@ construct {
             svg:cy ?vertical ;
             svg:r  ?radius .    
 
-  bind(concat('"translate(', str(?offsetX), ',', str(?offsetY), ')"') as ?translate)           
+  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)          
 }
 ''';
     rdfs:isDefinedBy archiSVG:.    
@@ -1715,12 +1718,11 @@ construct {
   
   ?icon ?member $this; 
         archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY;
-        prov:wasDerivedFrom ?template.
-  
-  ?template ?member ?templateLine.
+        archiSVG:offsetY ?offsetY.
+
+  $this prov:wasDerivedFrom ?template.
         
-  ?templateLine 
+  ?template        
             rdf:type svg:Line, archiSVG:Template;
             svg:fill ?fill;
             svg:stroke ?lineColor;
@@ -1730,7 +1732,7 @@ construct {
             svg:x2 ?horizontal2;
             svg:y2 ?vertical2.
             
-  bind(concat('"translate(', str(?offsetX), ',', str(?offsetY), ')"') as ?translate)          
+  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)          
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
