@@ -142,14 +142,14 @@ archiSVG:ApplicationComponentIconPart3 a svg:Rect , archiSVG:Template ;
     svg:height "1.5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:width "5" ;    
+    svg:width "5" ;
     svg:x "122" ;
     svg:y "10" .
 
 archiSVG:ApplicationComponentText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:ApplicationComponentTextFragment ;
     svg:font-family "Segoe UI" ;
-    svg:font-size "9" ;    
+    svg:font-size "9" ;
     svg:x "50" ;
     svg:y "15" .
 
@@ -202,7 +202,7 @@ archiSVG:ApplicationCollaborationText a svg:TextElement , archiSVG:Template ;
     svg:y "15" .
 
 archiSVG:ApplicationCollaborationTextFragment a svg:Text  , archiSVG:Template ;
-    xml:fragment "Application Collaboration" .    
+    xml:fragment "Application Collaboration" .
 
 # Data object
     
@@ -273,7 +273,7 @@ archiSVG:ApplicationServiceBox a svg:Rect  , archiSVG:Template ;
     svg:x "0" ;
     svg:y "0" .
 
-archiSVG:ApplicationServiceIcon a svg:G;
+archiSVG:ApplicationServiceIcon a svg:G, archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
     rdf:_1 archiSVG:ApplicationServiceIconPart1.
     
@@ -429,7 +429,7 @@ archiSVG:BusinessProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:points "125,8 135,8 135,5 141,10.5, 135,16 135,13 125,13 125,8" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
- 
+
 archiSVG:BusinessProcessText a svg:TextElement  , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessProcessTextFragment ;
     svg:font-family "Segoe UI" ;
@@ -519,4 +519,130 @@ archiSVG:BusinessActorText a svg:TextElement  , archiSVG:Template ;
 archiSVG:BusinessActorTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Business Actor" .
 
+### Relationship
 
+# Aggregate
+archiSVG:Aggegrate a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship Aggregate";
+    foaf:depicts archimate:aggregation;
+    rdf:_1 archiSVG:AggregateTail;
+    rdf:_2 archiSVG:AggregateLine;
+    rdf:_3 archiSVG:AggregateHead.
+
+archiSVG:AggregateTail a svg:G, archiSVG:Template;
+    skos:prefLabel 'dummy SVG element'.
+
+archiSVG:AggregateLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+archiSVG:AggregateHead a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    # 0,0 10,-5 20,0 10,5 0,0 (rotate)
+    svg:points "0,0 -5,10 0,20 5,10, 0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+    
+# Access: Read/Write
+archiSVG:ReadWrite a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship Access: Read/Write";
+    foaf:depicts archimate:readWriteAccess;
+    rdf:_1 archiSVG:ReadWriteTail;
+    rdf:_2 archiSVG:ReadWriteLine;
+    rdf:_3 archiSVG:ReadWriteHead.
+    
+archiSVG:ReadWriteTail a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0 4,8 0,0 -4,8"; 
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+archiSVG:ReadWriteLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" ;
+    svg:stroke-dasharray "4".
+
+archiSVG:ReadWriteHead a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0 4,8 0,0 -4,8" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+# Serving
+archiSVG:Serving a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship Serving";
+    foaf:depicts archimate:serving;
+    rdf:_1 archiSVG:ServingTail;
+    rdf:_2 archiSVG:ServingLine;
+    rdf:_3 archiSVG:ServingHead.
+
+archiSVG:ServingTail a svg:G, archiSVG:Template;
+    skos:prefLabel 'dummy SVG element'.
+    
+archiSVG:ServingLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+archiSVG:ServingHead a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0 4,8 0,0 -4,8" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+# Realization
+archiSVG:Realization a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship Realization";
+    foaf:depicts archimate:realization;
+    rdf:_1 archiSVG:RealizationTail;
+    rdf:_2 archiSVG:RealizationLine;
+    rdf:_3 archiSVG:RealizationHead.
+
+archiSVG:RealizationTail a svg:G, archiSVG:Template;
+    skos:prefLabel 'dummy SVG element'.
+    
+archiSVG:RealizationLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+archiSVG:RealizationHead a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0 -5,0 0,10 5,0, 0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+# Assignment
+archiSVG:Assignment a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship Assignment";
+    foaf:depicts archimate:assignedTo;
+    rdf:_1 archiSVG:AssignmentTail;
+    rdf:_2 archiSVG:AssignmentLine;
+    rdf:_3 archiSVG:AssignmentHead.
+
+archiSVG:AssignmentTail a svg:Circle, archiSVG:Template ;
+    svg:cx "0" ;
+    svg:cy "0" ;
+    svg:fill "none" ;
+    svg:r "4" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:AssignmentLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+archiSVG:AssignmentHead a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0 4,8 -4,8 0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" ;
+    svg:fill "black".

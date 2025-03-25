@@ -1115,7 +1115,7 @@ archimate:influence a owl:ObjectProperty,
     rdfs:isDefinedBy archimate:.
 
 archimate:readAccess a owl:ObjectProperty,
-     archimate:RelationType;
+     archimate:StructuralRelationship;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadAccess";
     skos:prefLabel 'Read Access Relationship'@en;
@@ -1123,7 +1123,7 @@ archimate:readAccess a owl:ObjectProperty,
     rdfs:isDefinedBy archimate:.
 
 archimate:readWriteAccess a owl:ObjectProperty,
-     archimate:RelationType;
+     archimate:StructuralRelationship;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "ReadWriteAccess";
     skos:prefLabel 'Read-Write Access Relationship'@en;
@@ -1163,7 +1163,7 @@ archimate:triggering a owl:ObjectProperty,
     rdfs:isDefinedBy archimate:.
 
 archimate:writeAccess a owl:ObjectProperty,
-     archimate:RelationType;
+     archimate:StructuralRelationship;
     rdfs:subPropertyOf archimate:access;
     dct:identifier "WriteAccess";
     skos:prefLabel 'Write Access Relationship'@en;    

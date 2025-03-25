@@ -1,22 +1,22 @@
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix dcm: <http://purl.org/dc/dcmitype/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix owl: <http://www.w3.org/2002/07/owl#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfa: <http://www.w3.org/ns/rdfa#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix respec:   <https://respec.org/model/def/>
-prefix sh: <http://www.w3.org/ns/shacl#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix status: <http://purl.org/adms/status/>
-prefix svg: <http://www.w3.org/SVG/model/def/>
-prefix vann: <http://purl.org/vocab/vann/>
-prefix void: <http://rdfs.org/ns/void#>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> 
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix dcm:       <http://purl.org/dc/dcmitype/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix owl:       <http://www.w3.org/2002/07/owl#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:      <http://www.w3.org/ns/rdfa#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix respec:    <https://respec.org/model/def/>
+prefix sh:        <http://www.w3.org/ns/shacl#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix status:    <http://purl.org/adms/status/>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix vann:      <http://purl.org/vocab/vann/>
+prefix void:      <http://rdfs.org/ns/void#>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xmlns:     <http://www.w3.org/2000/xmlns/model/def/> 
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
 prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
@@ -139,9 +139,6 @@ model:aRelationship1-RelationshipName a archiSVG:Name ;
 model:aRelationship1-RelationshipNameText a archiSVG:Text ;
     xml1:fragment "Assignment Relationship"@en .
 
-
-
-
 """;
     dct:language 'iso639-1:en';
     dct:license 'https://creativecommons.org/licenses/by/4.0/'^^xsd:anyURI;
@@ -210,7 +207,7 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  ?view  rdf:type svg:Document;        
+  ?view  rdf:type svg:Document;
          skos:prefLabel ?label;
          skos:definition ?definition;
          rdf:_1 ?svg;
@@ -218,7 +215,7 @@ construct {
   ?svg   rdf:type svg:Svg;
          xml:xmlns "http://www.w3.org/2000/svg" ;
          rdf:_1 ?elements;
-         rdf:_2 ?relationships.         
+         rdf:_2 ?relationships.
   ?elements rdf:type svg:G;
          dct:subject "Elements";
          skos:prefLabel "Archimate elements".
@@ -231,12 +228,12 @@ construct {
   # Get the archimate metadata of the archimate view
   $this skos:prefLabel ?label;
         skos:definition ?definition.
-        
+
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),"-View"))                as ?view)
   BIND(IRI(CONCAT(STR($this),"-SVG"))                 as ?svg)
   BIND(IRI(CONCAT(STR($this),"-Elements"))            as ?elements)
-  BIND(IRI(CONCAT(STR($this),"-Relationships"))       as ?relationships)  
+  BIND(IRI(CONCAT(STR($this),"-Relationships"))       as ?relationships)
 
   }
 ''';
@@ -298,41 +295,42 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
-             
+
     ?elementNode 
           rdf:type svg:G, archiSVG:Element;
+          skos:prefLabel ?elementName;
           rdf:_1 ?box;
           rdf:_2 ?icon;
           rdf:_3 ?text;
           prov:wasDerivedFrom $this;
           foaf:depicts ?element.
-           
+
     ?box 
-          rdf:type ?boxClass;           
+          rdf:type ?boxClass;
           svg:x      ?horizontal ;
           svg:y      ?vertical ;
           svg:height ?height ;
           svg:width  ?width ; 
           svg:fill   ?fillColor ;
           svg:stroke ?lineColor .
-   
+
     ?icon 
           rdf:type svg:G;
           archiSVG:offsetX ?horizontal;
           archiSVG:offsetY ?vertical;
           prov:wasDerivedFrom ?iconTemplate;
           ?iconMember ?iconPart.
-          
+
     ?iconPart 
-          rdf:type ?iconPartClass, archiSVG:IconPart;
+          rdf:type ?iconPartClass, archiSVG:ElementIconPart;
           prov:wasDerivedFrom ?iconTemplatePart.
-  
+
     ?text rdf:type svg:TextElement ;
           svg:font-family ?fontName ;
           svg:font-size   ?fontSize ;
           svg:x           ?textX ;
           svg:y           ?textY ;
-          svg:transform   ?translate;          
+          svg:transform   ?translate;
           rdf:_1          ?textFragment .
           
     ?textFragment rdf:type svg:Text;
@@ -346,7 +344,7 @@ construct {
     
   optional {
   $this
-    archimate:height     ?heightElement;     
+    archimate:height     ?heightElement; 
     archimate:width      ?widthElement.
   }
   
@@ -382,16 +380,16 @@ construct {
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB.
 
-  bind(concat("rgb(", ?fontColorR, "," ,?fontColorG, "," ,?fontColorB, ")") as ?fontColorElement)    
+  bind(concat("rgb(", ?fontColorR, "," ,?fontColorG, "," ,?fontColorB, ")") as ?fontColorElement)
   }
   
   BIND(COALESCE(?heightElement,    ?defaultHeight)        as ?height)
-  BIND(COALESCE(?widthElement,     ?defaultWidth)         as ?width)    
+  BIND(COALESCE(?widthElement,     ?defaultWidth)         as ?width)
   BIND(COALESCE(?fillColorElement, ?defaultFillColor)     as ?fillColor)
   BIND(COALESCE(?lineColorElement, ?defaultLineColor)     as ?lineColor)
   BIND(COALESCE(?fontColorElement, ?defaultFontColor)     as ?fontColor)
   BIND(COALESCE(?fontNameElement,  ?defaultFontName)      as ?fontName)
-  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize)      as ?fontSize)  
+  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize)      as ?fontSize)
   
   BIND(CONCAT('translate(', str(?horizontal), ',', str(?vertical), ')') as ?translate)
   
@@ -407,12 +405,12 @@ construct {
                rdf:_2 ?iconTemplate;
                rdf:_3 ?textTemplate.
 
-  ?boxTemplate rdf:type ?boxClass, archiSVG:Template;                             
+  ?boxTemplate rdf:type ?boxClass, archiSVG:Template;
                svg:height ?defaultHeight ;
                svg:width  ?defaultWidth ; 
                svg:fill   ?defaultFillColor ;
                svg:stroke ?defaultLineColor .
-  ?boxClass rdfs:subClassOf* svg:Element.               
+  ?boxClass rdfs:subClassOf* svg:Element.
 
   ?iconTemplate rdf:type svg:G, archiSVG:Template;
                ?iconMember ?iconTemplatePart.
@@ -424,18 +422,18 @@ construct {
                 svg:font-family ?defaultFontName ;
                 svg:font-size   ?defaultFontSize ;
                 svg:x           ?textX;
-                svg:y           ?textY.    
+                svg:y           ?textY.
 
   # Set unique identifier icon part
   BIND(str(strafter(str(?iconMember), concat(str(rdf:), '_'))) as ?iconPartIdentifier)
 
   # Create IRI's
-  BIND(IRI(CONCAT(STR($this),"-SVGElement"))                                    as ?elementNode)
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Box"))                             as ?box)
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Icon"))                            as ?icon)
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-IconPart", ?iconPartIdentifier))   as ?iconPart)
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-Text"))                            as ?text)
-  BIND(IRI(CONCAT(STR($this),"-SVGElement","-TextFragment"))                    as ?textFragment)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Element"))                                    as ?elementNode)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Box"))                             as ?box)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Icon"))                            as ?icon)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-IconPart", ?iconPartIdentifier))   as ?iconPart)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Text"))                            as ?text)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-TextFragment"))                    as ?textFragment)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -494,7 +492,7 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
-             
+
    ?elementNode rdf:type archiSVG:Node;
            xsi:type ?xsiType;
            archiSVG:x ?x ;
@@ -529,14 +527,14 @@ construct {
    ?fontColorIRI rdf:type archiSVG:Color;
            archiSVG:b ?fontColorB ;
            archiSVG:g ?fontColorG ;
-           archiSVG:r ?fontColorR .               
+           archiSVG:r ?fontColorR .
 
 } where {
 
   # Get the archimate metadata of the archimate view
   ?archimateView rdf:type archimate:View;
                   archimate:contains* $this.
-  
+
   # Establish the unique sequence number of a container across the model
   {select $this ((count(?prevIndex)+1) as ?indexContainer)
    where {
@@ -562,16 +560,16 @@ construct {
   $this
     archimate:horizontal ?x;
     archimate:vertical   ?y;
-    archimate:height     ?h;     
+    archimate:height     ?h;
     archimate:width      ?w.
   }
-  
+
   optional {
   $this
     archimate:fillColor  ?fillColor;
     archimate:lineColor  ?lineColor;
     archimate:font       ?font.
-    
+
   ?fillColor rdf:type archimate:Color;
     archimate:red   ?fillColorR;
     archimate:green ?fillColorG;
@@ -601,13 +599,13 @@ construct {
   BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
- 
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)
+
   }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -701,7 +699,7 @@ construct {
    ?fontColorIRI rdf:type archiSVG:Color;
            archiSVG:b ?fontColorB ;
            archiSVG:g ?fontColorG ;
-           archiSVG:r ?fontColorR .               
+           archiSVG:r ?fontColorR .
 
 } where {
 
@@ -713,7 +711,7 @@ construct {
   # Establish the unique sequence number of a note across the model
   {select $this ((count(?prevIndex)+1) as ?indexNote)
    where {
-    $this rdf:type archimate:Note.   
+    $this rdf:type archimate:Note.
     bind(str($this) as ?index)
     optional {
               ?prevNote rdf:type archimate:Note.
@@ -735,7 +733,7 @@ construct {
   $this
     archimate:horizontal ?x;
     archimate:vertical   ?y;
-    archimate:height     ?h;     
+    archimate:height     ?h;
     archimate:width      ?w.
   }
   
@@ -774,12 +772,12 @@ construct {
   BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)
  
   }
 ''';
@@ -826,20 +824,20 @@ rule:ViewReferenceCreator
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
-             
+
    ?elementNode rdf:type archiSVG:Node;
            xsi:type ?xsiType;
            archiSVG:x ?x ;
@@ -877,7 +875,7 @@ construct {
            archiSVG:g ?fontColorG ;
            archiSVG:r ?fontColorR . 
    ?viewRefIRI rdf:type archiSVG:ViewRef;
-           archiSVG:ref ?viewIdentifier.    
+           archiSVG:ref ?viewIdentifier.
 
 } where {
 
@@ -954,13 +952,13 @@ construct {
   BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI) 
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-viewref"))                 as ?viewRefIRI)   
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-viewref"))                 as ?viewRefIRI)
  
   }
 ''';
@@ -968,7 +966,7 @@ construct {
 
 shp:ConnectionCreator
     a sh:NodeShape;
-    #sh:rule rule:ConnectionCreator;
+    sh:rule rule:ConnectionCreator;
     sh:target target:ConnectionCreator;
     skos:prefLabel 'connection creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -995,12 +993,13 @@ select $this {
                    prov:wasDerivedFrom $this.
   }
 
-  # ...but only if the depicted archimate element is already processed
+  # ...but only if all the archimate view nodes in the view are already processed
   filter not exists {
-  ?archimateView archimate:contains $this.
-  $this foaf:depicts ?relationship.
+  ?archimateView archimate:contains $this;
+                 archimate:contains ?viewnodes.
+  ?viewnodes rdf:type archimate:ViewNode.
    filter not exists {
-      [] prov:wasDerivedFrom ?relationship.
+      ?viewnodes prov:wasDerivedFrom [].
     }
   }
 }
@@ -1016,167 +1015,99 @@ rule:ConnectionCreator
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix svg: <http://www.w3.org/SVG/model/def/>
 
 construct {
 
-   ?view 
-           ?memberConnection ?connectionNode.
-   
-   ?connectionNode 
-           rdf:type archiSVG:Connection;
-           xsi:type "Relationship";
-           archiSVG:relationshipRef ?relationIdentifier;
-           dct:references ?archiSVGRelationship ;
-           prov:wasDerivedFrom $this;
-           rdf:_1 ?connectionStyle;
-           ?memberBendPoint ?connectionBendPointIRI.
-           
-   ?connectionStyle 
-           rdf:type archiSVG:Style;
-           rdf:_1 ?connectionLineColorIRI;
-           rdf:_2 ?connectionFontIRI.
-           
-   ?connectionLineColorIRI 
-           rdf:type archiSVG:LineColor;
-           archiSVG:b ?connectionLineColorB ;
-           archiSVG:g ?connectionLineColorG ;
-           archiSVG:r ?connectionLineColorR .
-           
-   ?connectionFontIRI 
-           rdf:type archiSVG:Font;
-           archiSVG:name ?connectionFontName;
-           archiSVG:size ?connectionFontSize;
-           rdf:_1 ?connectionFontColorIRI.
-           
-   ?connectionFontColorIRI 
-           rdf:type archiSVG:Color;
-           archiSVG:b ?connectionFontColorB ;
-           archiSVG:g ?connectionFontColorG ;
-           archiSVG:r ?connectionFontColorR . 
-           
-   ?connectionBendPointIRI 
-          rdf:type archiSVG:BendPoint;
-          archiSVG:x ?x;
-          archiSVG:y ?y.           
+    ?connection
+          rdf:type svg:G, archiSVG:Connection;
+          skos:prefLabel ?relationshipName;
+          rdf:_1 ?connectionPart1;
+          rdf:_2 ?connectionPart2;
+          rdf:_3 ?connectionPart3;
+          archiSVG:fromX ?fromX ;
+          archiSVG:fromY ?fromY ;
+          archiSVG:fromW ?fromW ;
+          archiSVG:fromH ?fromH ;
+          archiSVG:toX ?toX ;
+          archiSVG:toY ?toY ;
+          archiSVG:toW ?toW ;
+          archiSVG:toH ?toH ;
+          prov:wasDerivedFrom $this;
+          foaf:depicts ?relationship.
 
-} where {
+    ?connectionPart1 
+          rdf:type ?template1Class, archiSVG:ConnectionTail;
+          prov:wasDerivedFrom ?iconTemplate1.
+
+    ?connectionPart2
+          rdf:type svg:Polyline, archiSVG:ConnectionLine;
+          prov:wasDerivedFrom ?iconTemplate2.
+
+    ?connectionPart3 
+          rdf:type svg:Polyline, archiSVG:ConnectionHead;
+          prov:wasDerivedFrom ?iconTemplate3.
+
+}
+  where {
 
   ?archimateView archimate:contains $this.
   $this foaf:depicts ?relationship.
-  
-  optional {
-  $this
-    archimate:lineColor  ?connectionLineColor;
-    archimate:font       ?connectionFont.
+  ?relationship rdf:type archimate:Relationship;
+                archimate:from ?fromArchimateElement;
+                archimate:relationship ?relationType;
+                archimate:to ?toArchimateElement;
+                skos:prefLabel ?relationshipName.
+  ?relationType rdf:type/rdfs:subClassOf+ archimate:RelationType.
 
-  ?connectionLineColor rdf:type archimate:Color;
-    archimate:red   ?connectionLineColorR;
-    archimate:green ?connectionLineColorG;
-    archimate:blue  ?connectionLineColorB. 
+  ?archimateView archimate:contains ?source, ?target.
+  ?source foaf:depicts ?fromArchimateElement.
+  ?target foaf:depicts ?toArchimateElement.
 
-  ?connectionFont rdf:type archimate:Font;
-    archimate:fontName  ?connectionFontName;
-    archimate:fontSize  ?connectionFontSize;
-    archimate:fontColor ?connectionFontColor.
+?source
+    archimate:horizontal ?fromX;
+    archimate:vertical   ?fromY.
 
-  ?connectionFontColor rdf:type archimate:Color;
-    archimate:red   ?connectionFontColorR;
-    archimate:green ?connectionFontColorG;
-    archimate:blue  ?connectionFontColorB.
-  }
-  
-  optional {
-  $this 
-     archimate:bendPoint ?bendPointList.     
-  ?bendPointList rdf:rest*/rdf:first ?bendPoint.
-  
-  ?bendPoint 
-     rdf:type archimate:BendPoint;
-     archimate:horizontal ?x;
-     archimate:vertical   ?y.
-  }
-  
-  ?relationship rdf:type/rdfs:subClassOf* archimate:Relationship.
-  
-  ?archiSVGRelationship prov:wasDerivedFrom ?relationship;
-                   archiSVG:identifier ?relationIdentifier;
-                   archiSVG:source ?source;
-                   archiSVG:target ?target.
-  
-  ?archiSVGElementSource archiSVG:identifier ?source;
-                   rdf:type ?classSource.
-
-  ?archiSVGElementTarget archiSVG:identifier ?target;
-                   rdf:type ?classTarget. 
-  
-  # Establish position of the relationship 
-  {select ?archimateView $this ((count(?prevIndex)) as ?indexRelationship)
-   where {
-    ?archimateView archimate:contains $this.
-    bind(str($this) as ?index)
-    optional {
-              ?archimateView archimate:contains ?prevDepiction.
-              bind(str(?prevDepiction) as ?prevIndex)
-              filter(?prevIndex < ?index)
-             } 
-     } group by ?archimateView $this
+optional {
+  ?source
+    archimate:height     ?fromH;
+    archimate:width      ?fromW.
   }
 
-  # Establish the node index 
-  {select ?archimateView (count(?node) as ?indexNode)
-   where {
-    ?archimateView rdf:type archimate:View;
-                   archimate:contains ?node.
-    ?node rdf:type ?nodeClass.
-    filter (?nodeClass in (archimate:ViewNode, archimate:Container, archimate:Note, archimate:ViewReference))
-    } group by ?archimateView
-  }
-  
-  # Establish the bendpoint index, if present
-  optional {
-  {select ?bendPointList ?bendPoint (count(?sublist) as ?indexBendPoint) {
-   $this rdf:type archimate:Connection;
-         archimate:bendPoint ?bendPointList.
-   ?bendPointList rdf:rest* ?sublist.
-   ?sublist rdf:rest*/rdf:first ?bendPoint.
-    } group by ?bendPointList ?bendPoint
-   }
-  }
+?target
+    archimate:horizontal ?toX;
+    archimate:vertical   ?toY.
     
-  # Set unique identifiers
-  BIND(CONCAT("Connection_",STR(?relationIdentifier)) as ?connectionIdentifier)    
-  BIND(IF(?classSource = archiSVG:Element, "Node_", if(?classSource = archiSVG:Relationship, "Connection_", ?unboundDummy)) as ?sourceIdentifierString)
-  BIND(IF(?classTarget = archiSVG:Element, "Node_", if(?classTarget = archiSVG:Relationship, "Connection_", ?unboundDummy)) as ?targetIdentifierString)
-  BIND(CONCAT(?sourceIdentifierString, ?source) as ?sourceIdentifier)
-  BIND(CONCAT(?targetIdentifierString, ?target) as ?targetIdentifier)
-  
-  # Establish instance of rdfs:member for the connection and bendpoint. 
-  # - Take into account that the indexRelationship starts with 0 and needs an offset of +1
-  # - Take into account the name & documentation nodes (hence offset of +2).  
-  # - Take into account that viewnodes, containers and notes take precedence over relationships (hence offset of + ?indexNode)
-  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexRelationship + 3 + ?indexNode))) as ?memberConnection)
-  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexBendPoint +2))) as ?memberBendPoint)
-  
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View"))                                             as ?view)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))                                        as ?connectionNode)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-nodestyle"))                          as ?connectionStyle)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-linecolor"))                          as ?connectionLineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-font"))                               as ?connectionFontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-fontcolor"))                          as ?connectionFontColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-bendpoint-", str(?indexBendPoint+1))) as ?connectionBendPointIRI)
- 
+
+optional {
+  ?target
+    archimate:height     ?toH;
+    archimate:width      ?toW.
+
   }
+
+  # Get the template SVG for the relationship.
+  ?svgTemplate rdf:type svg:G, archiSVG:Template;
+               foaf:depicts ?relationType;
+               rdf:_1 ?iconTemplate1;
+               rdf:_2 ?iconTemplate2;
+               rdf:_3 ?iconTemplate3.
+
+  ?iconTemplate1 rdf:type ?template1Class, archiSVG:Template.
+  ?template1Class rdfs:subClassOf* svg:Element.
+
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship"))                 as ?connection)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-1"))            as ?connectionPart1)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-2"))            as ?connectionPart2)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-3"))            as ?connectionPart3)
+
+}
 ''';
     rdfs:isDefinedBy archiSVG:.
 
@@ -1219,21 +1150,21 @@ rule:NodeConnector
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  ?elements ?memberNode $this.        
+  ?elements ?memberNode $this.
 
 } where {
 
@@ -1242,7 +1173,7 @@ construct {
   ?parent archimate:contains ?node.
   ?documentNode prov:wasDerivedFrom ?parent;
                 rdf:_1 ?svg.
-  ?svg rdf:_1 ?elements.              
+  ?svg rdf:_1 ?elements.
 
   # Establish position of the element within the parent
   {select ?parent ?node ((count(?prevIndex)) as ?indexMember)
@@ -1268,148 +1199,89 @@ construct {
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-
-shp:DiagramsConnector
+shp:ConnectionConnector
     a sh:NodeShape;
-    #sh:rule rule:DiagramsConnector;
-    sh:target target:DiagramsConnector;
-    skos:prefLabel 'archixml diagrams connector shape'@en;
+    sh:rule rule:ConnectionConnector;
+    sh:target target:ConnectionConnector;
+    skos:prefLabel 'connection connector shape'@en;
     rdfs:isDefinedBy archiSVG:.
 
-target:DiagramsConnector
+target:ConnectionConnector
     a sh:SPARQLTarget;
-    rdfs:comment 'Select the view in an archixml document that is not connected to the diagrams node.'@en;
+    rdfs:comment 'Select all archisvg connections in the model.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 select $this {
 
-  # Select the archiSVG view...
-  $this rdf:type archiSVG:View .
-  
-  #...but only if the view is not yet connected .
-  filter not exists { 
-    $this rdf:type archiSVG:View .
-    ?diagrams ?member $this.
-    filter(strstarts(str(?member), concat(str(rdf:), '_')))
-    ?diagrams rdf:type archiSVG:Diagrams.
-  }
+  # Select all archisvg connections that are not connected yet.
+  $this rdf:type archiSVG:Connection;
 
-  #...and if all archimate views are processed into archiSVG views
+  # ...that are not processed yet
   filter not exists { 
-  ?someArchimateView rdf:type archimate:View.
-    filter not exists {
-    ?someArchiXMLView rdf:type archiSVG:View ;
-                      prov:wasDerivedFrom ?someArchimateView.
-    }
+    ?parentNode ?member $this.
+    filter(strstarts(str(?member), concat(str(rdf:), '_')))
   }
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
-    
-rule:DiagramsConnector
+
+rule:ConnectionConnector
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that connects a view with the diagrams node in an archixml document.'@en;
-    skos:prefLabel 'archixml diagrams connector rule'@en;
+    rdfs:comment 'A rule that connects a connection in the XML document with its parent node.'@en;
+    skos:prefLabel 'archimate connection connector rule'@en;
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix xml: <http://www.w3.org/XML/model/def/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  ?archixmlDiagrams ?rdf_member $this.
-  
+  ?connections ?memberConnection $this.
+
 } where {
 
-  $this prov:wasDerivedFrom ?archimateView.
-  ?archimateView rdf:type archimate:View;
-                 rdfs:isDefinedBy ?archimateModel.
-  ?archimateModel rdf:type archimate:Model.                 
-  ?archixmlDocument rdf:type archiSVG:Document;
-                    prov:wasDerivedFrom ?archimateModel;
-                    rdf:_1 ?archixmlModel.
-  ?archixmlModel rdf:type archiSVG:Model;
-                 rdf:_5 ?archixmlViews.
-  ?archixmlViews rdf:type archiSVG:Views;
-                 rdf:_1 ?archixmlDiagrams.
-  ?archixmlDiagrams rdf:type archiSVG:Diagrams.                 
-  
-  BIND(STR(function:getViewPosition($this)) as ?index)
-  BIND(IRI(CONCAT(str(rdf:),"_", ?index)) as ?rdf_member)
-  
-  }
-''';
-    rdfs:isDefinedBy archiSVG:.
+  # Get the parent node
+  $this prov:wasDerivedFrom ?connection.
+  ?parent archimate:contains ?connection.
+  ?documentNode prov:wasDerivedFrom ?parent;
+                rdf:_1 ?svg.
+  ?svg rdf:_2 ?connections.
 
-shp:ViewIdentifier
-    a sh:NodeShape;
-    sh:rule rule:ViewIdentifier;
-    sh:target target:ViewIdentifier;
-    skos:prefLabel 'archimate view identifier shape'@en;
-    rdfs:isDefinedBy archiSVG:.
-
-target:ViewIdentifier
-    a sh:SPARQLTarget;
-    rdfs:comment 'Select the view in an archixml document that has no identifier.'@en;
-    sh:select '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
-select $this {
-
-  # Select the archiSVG view...
-  $this rdf:type archiSVG:View .
-  
-  #...but only if the view does not have an identifier.
-  filter not exists { 
-    $this archiSVG:identifier [].
+  # Establish position of the connection within the parent
+  {select ?parent ?connection ((count(?prevIndex)) as ?indexMember)
+   where{
+    ?parent archimate:contains ?connection.
+    bind(str(?connection) as ?index)
+    optional {
+              ?parent archimate:contains ?prevConnection.
+              ?prevConnection rdf:type archimate:Connection.
+              bind(str(?prevConnection) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             } 
+     } group by ?parent ?connection
   }
   
-  #...and if all archimate views are processed into archiSVG views
-  filter not exists { 
-  ?someArchimateView rdf:type archimate:View.
-    filter not exists {
-    ?someArchiXMLView rdf:type archiSVG:View ;
-                      prov:wasDerivedFrom ?someArchimateView.
-    }
-  }
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-rule:ViewIdentifier
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates an identifier for a view in an archixml document.'@en;
-    skos:prefLabel 'archixml view identifier rule'@en;
-    sh:construct '''
-
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
-
-construct {
-
-  $this archiSVG:identifier ?viewIdentifier.
+  # Establish instance of rdfs:member for the connection.
+  # Take into account that the indexMember starts with 0 and hence needs an offset of +1
   
-} where {                 
-  
-  BIND(STR(function:getViewPosition($this)) as ?index)
-  BIND(IRI(CONCAT(str(rdf:),"_", ?index)) as ?rdf_member)
-  BIND(CONCAT("View_",?index) as ?viewIdentifier)
-  
+  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexMember+1))) as ?memberConnection)
+ 
   }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -1431,12 +1303,12 @@ prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
 prefix prov:      <http://www.w3.org/ns/prov#>
 prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
+prefix svg:       <http://www.w3.org/SVG/model/def/> 
 
 select $this {
 
   # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:IconPart, svg:Polyline.
+  $this rdf:type archiSVG:ElementIconPart, svg:Polyline.
   filter not exists { 
    $this prov:wasDerivedFrom rule:IconPartPolyLine.
    }
@@ -1505,12 +1377,12 @@ prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
 prefix prov:      <http://www.w3.org/ns/prov#>
 prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
+prefix svg:       <http://www.w3.org/SVG/model/def/> 
 
 select $this {
 
   # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:IconPart, svg:Rect.
+  $this rdf:type archiSVG:ElementIconPart, svg:Rect.
   filter not exists { 
    $this prov:wasDerivedFrom rule:IconPartRect.
    }
@@ -1542,7 +1414,7 @@ construct {
         svg:y ?vertical;
         svg:rx ?rx ;
         svg:ry ?ry ;
-        svg:transform ?translate;        
+        svg:transform ?translate;
         svg:stroke ?lineColor ;
         svg:stroke-width ?lineSize ;
         prov:wasDerivedFrom rule:IconPartRect.
@@ -1601,7 +1473,7 @@ prefix svg:       <http://www.w3.org/SVG/model/def/>
 select $this {
 
   # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:IconPart, svg:Circle.
+  $this rdf:type archiSVG:ElementIconPart, svg:Circle.
   filter not exists { 
    $this prov:wasDerivedFrom rule:IconPartCircle.
    }
@@ -1630,7 +1502,7 @@ construct {
         svg:cx ?horizontal;
         svg:cy ?vertical;
         svg:r  ?radius ;
-        svg:transform ?translate;        
+        svg:transform ?translate;
         svg:stroke ?lineColor ;
         svg:stroke-width ?lineSize ;
         prov:wasDerivedFrom rule:IconPartCircle.
@@ -1640,9 +1512,9 @@ construct {
   ?icon ?member $this; 
         archiSVG:offsetX ?offsetX;
         archiSVG:offsetY ?offsetY.
-  
+
   $this prov:wasDerivedFrom ?template.
-        
+
   ?template
             rdf:type svg:Circle, archiSVG:Template;
             svg:fill ?fill;
@@ -1650,12 +1522,12 @@ construct {
             svg:stroke-width ?lineSize;
             svg:cx ?horizontal ;
             svg:cy ?vertical ;
-            svg:r  ?radius .    
+            svg:r  ?radius .
 
-  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)          
+  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
 }
 ''';
-    rdfs:isDefinedBy archiSVG:.    
+    rdfs:isDefinedBy archiSVG:.
 
 shp:IconPartLine
     a sh:NodeShape;
@@ -1679,7 +1551,7 @@ prefix svg:       <http://www.w3.org/SVG/model/def/>
 select $this {
 
   # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:IconPart, svg:Line.
+  $this rdf:type archiSVG:ElementIconPart, svg:Line.
   filter not exists { 
    $this prov:wasDerivedFrom rule:IconPartLine.
    }
@@ -1709,7 +1581,7 @@ construct {
         svg:y1 ?vertical1;
         svg:x2 ?horizontal2;
         svg:y2 ?vertical2;
-        svg:transform ?translate;        
+        svg:transform ?translate;
         svg:stroke ?lineColor ;
         svg:stroke-width ?lineSize ;
         prov:wasDerivedFrom rule:IconPartLine.
@@ -1721,8 +1593,8 @@ construct {
         archiSVG:offsetY ?offsetY.
 
   $this prov:wasDerivedFrom ?template.
-        
-  ?template        
+
+  ?template
             rdf:type svg:Line, archiSVG:Template;
             svg:fill ?fill;
             svg:stroke ?lineColor;
@@ -1731,11 +1603,416 @@ construct {
             svg:y1 ?vertical1;
             svg:x2 ?horizontal2;
             svg:y2 ?vertical2.
-            
-  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)          
+
+  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
+
+shp:ConnectionLine
+    a sh:NodeShape;
+    sh:rule rule:ConnectionLine;
+    sh:target target:ConnectionLine;
+    skos:prefLabel 'archisvg connection line shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:ConnectionLine
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select the archisvg connection line that has to get enriched with attributes.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:       <http://www.w3.org/SVG/model/def/> 
+
+select $this {
+
+  # Select the archiSVG connection line that needs to be processed
+  $this rdf:type archiSVG:ConnectionLine, svg:Polyline.
+  filter not exists { 
+   $this prov:wasDerivedFrom rule:ConnectionLine.
+   }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+    
+rule:ConnectionLine
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that adds attributes to an connection line in archiSVG.'@en;
+    skos:prefLabel 'connection line rule'@en;
+    sh:construct '''
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:        <http://www.w3.org/ns/prov#>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:         <http://www.w3.org/SVG/model/def/> 
+
+construct {
+
+  $this svg:points ?bendPoints;
+        svg:transform ?translate;
+        svg:transform ?rotate;
+        svg:stroke ?lineColor;
+        svg:stroke-width ?lineSize;
+        prov:wasDerivedFrom rule:ConnectionLine.
+
+} where {
+
+  ?connection ?member $this.
+
+  $this prov:wasDerivedFrom ?template.
+
+  ?template
+            rdf:type svg:Polyline, archiSVG:Template;
+            svg:fill ?fill;
+            svg:stroke ?lineColor;
+            svg:stroke-width ?lineSize.
+ bind(function:getBendPoints($this) as ?bendPoints)
+
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+shp:ConnectionHead
+    a sh:NodeShape;
+    sh:rule rule:ConnectionHead;
+    sh:target target:ConnectionHead;
+    skos:prefLabel 'archisvg connection head shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:ConnectionHead
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select the archisvg connection head that has to get enriched with attributes.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:       <http://www.w3.org/SVG/model/def/> 
+
+select $this {
+
+  # Select the archiSVG connection line that needs to be processed
+  $this rdf:type archiSVG:ConnectionHead, svg:Polyline.
+  filter not exists { 
+   $this prov:wasDerivedFrom rule:ConnectionHead.
+   }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+    
+rule:ConnectionHead
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that adds attributes to an connection head in archiSVG.'@en;
+    skos:prefLabel 'connection head rule'@en;
+    sh:construct '''
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:        <http://www.w3.org/ns/prov#>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:         <http://www.w3.org/SVG/model/def/> 
+
+construct {
+
+  $this svg:points ?bendPoints;
+        svg:transform ?translate;
+        svg:transform ?rotate;
+        prov:wasDerivedFrom rule:ConnectionHead.
+
+} where {
+
+  ?connection ?member $this.
+
+  $this prov:wasDerivedFrom ?template.
+
+  ?template
+            rdf:type svg:Polyline, archiSVG:Template;
+            svg:fill ?fill;
+            svg:stroke ?lineColor;
+            svg:stroke-width ?lineSize.
+ bind(function:getBendPoints($this) as ?bendPoints)
+
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+
+shp:ConnectionTailCircle
+    a sh:NodeShape;
+    sh:rule rule:ConnectionTailCircle;
+    sh:target target:ConnectionTailCircle;
+    skos:prefLabel 'archisvg connection tail circle shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:ConnectionTailCircle
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select the archisvg connection tail circle that has to get enriched with attributes.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:       <http://www.w3.org/SVG/model/def/> 
+
+select $this {
+
+  # Select the archiSVG connection line that needs to be processed
+  $this rdf:type archiSVG:ConnectionTail, svg:Circle.
+  filter not exists { 
+   $this prov:wasDerivedFrom rule:ConnectionTailCircle.
+   }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+    
+rule:ConnectionTailCircle
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that adds attributes to a connection tail circle in archiSVG.'@en;
+    skos:prefLabel 'connection tail circle rule'@en;
+    sh:construct '''
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:        <http://www.w3.org/ns/prov#>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:         <http://www.w3.org/SVG/model/def/> 
+
+construct {
+
+  $this 
+        svg:cx ?cx ;
+        svg:cy ?cy ;
+        svg:fill ?fill;
+        svg:r ?r ;
+        svg:stroke ?lineColor;
+        svg:stroke-width ?lineSize;
+        svg:transform ?translate;
+        svg:transform ?rotate;
+        prov:wasDerivedFrom rule:ConnectionTailCircle.
+
+} where {
+
+  ?connection ?member $this.
+
+  $this prov:wasDerivedFrom ?template.
+
+  ?template
+            rdf:type svg:Circle, archiSVG:Template;
+            svg:fill ?fill;
+            svg:stroke ?lineColor;
+            svg:stroke-width ?lineSize;
+            svg:cx ?cx ;
+            svg:cy ?cy ;
+            svg:fill ?fill ;
+            svg:r ?r .
+
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+shp:ConnectionTailPolyline
+    a sh:NodeShape;
+    sh:rule rule:ConnectionTailPolyline;
+    sh:target target:ConnectionTailPolyline;
+    skos:prefLabel 'archisvg connection tail polyline shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:ConnectionTailPolyline
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select the archisvg connection tail polyline that has to get enriched with attributes.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:       <http://www.w3.org/SVG/model/def/> 
+
+select $this {
+
+  # Select the archiSVG connection line that needs to be processed
+  $this rdf:type archiSVG:ConnectionTail, svg:Polyline.
+  filter not exists { 
+   $this prov:wasDerivedFrom rule:ConnectionTailPolyline.
+   }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+rule:ConnectionTailPolyline
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that adds attributes to a connection tail polyline in archiSVG.'@en;
+    skos:prefLabel 'connection tail polyline rule'@en;
+    sh:construct '''
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:        <http://www.w3.org/ns/prov#>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix svg:         <http://www.w3.org/SVG/model/def/> 
+
+construct {
+
+  $this svg:points ?bendPoints;
+        svg:transform ?translate;
+        svg:transform ?rotate;
+        svg:fill ?fill;
+        svg:stroke ?lineColor;
+        svg:stroke-width ?lineSize;
+        prov:wasDerivedFrom rule:ConnectionTailPolyline.
+
+} where {
+
+  ?connection ?member $this.
+
+  $this prov:wasDerivedFrom ?template.
+
+  ?template
+            rdf:type svg:Polyline, archiSVG:Template;
+            svg:fill ?fill;
+            svg:stroke ?lineColor;
+            svg:stroke-width ?lineSize.
+ bind(function:getBendPoints($this) as ?bendPoints)
+
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+function:getBendPoints
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the bendpoints for a connection line in an archimate view." ;
+    sh:parameter [
+        sh:path function:input ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element for which the bendpoints coordinates have to be returned." ;
+    ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg:         <http://www.w3.org/SVG/model/def/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select ?result where {
+  optional
+
+  {
+    ?connection
+      rdf:type svg:G,
+        archiSVG:Connection;
+      rdf:_2 $input;
+      archiSVG:fromX ?fromX_string ;
+      archiSVG:fromY ?fromY_string ;
+      archiSVG:fromW ?fromW_string ;
+      archiSVG:fromH ?fromH_string ;
+      archiSVG:toX ?toX_string ;
+      archiSVG:toY ?toY_string ;
+      archiSVG:toW ?toW_string ;
+      archiSVG:toH ?toH_string .
+
+    bind(xsd:integer(?fromX_string) as ?fromX)
+    bind(xsd:integer(?fromY_string) as ?fromY)
+    bind(xsd:integer(?fromW_string) as ?fromW)
+    bind(xsd:integer(?fromH_string) as ?fromH)
+    bind(xsd:integer(?toX_string) as ?toX)
+    bind(xsd:integer(?toY_string) as ?toY)
+    bind(xsd:integer(?toW_string) as ?toW)
+    bind(xsd:integer(?toH_string) as ?toH)
+    
+    # 1. Diagonal line
+    # Quadrant 1: diagonal line when [a] left of [b] and [a] above [b]       
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?fromX + ?fromW),     ?unboundDummy) as ?startX1a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?fromY + ?fromH),     ?unboundDummy) as ?startY1a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?toX),                ?unboundDummy) as ?endX1a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?toY),                ?unboundDummy) as ?endY1a)
+
+    # Quadrant 2: diagonal line when [a] right of [b] and [a] above [b]
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?fromX),              ?unboundDummy) as ?startX1b)
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?fromY + ?fromH),     ?unboundDummy) as ?startY1b)
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?toX+?toW),           ?unboundDummy) as ?endX1b)
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?toY),                ?unboundDummy) as ?endY1b)
+
+    # Quadrant 3: diagonal line when [a] right of [b] and [a] below [b]
+    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?fromX),                  ?unboundDummy) as ?startX1c)
+    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?fromY),                  ?unboundDummy) as ?startY1c)
+    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?toX+?toW),               ?unboundDummy) as ?endX1c)
+    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?toY+?toH),               ?unboundDummy) as ?endY1c)
+
+    # Quadrant 4: diagonal line when [a] left of [b] and [a] below [b] 
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?fromX + ?fromW),       ?unboundDummy) as ?startX1d)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?fromY),                ?unboundDummy) as ?startY1d)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?toX),                  ?unboundDummy) as ?endX1d)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?toY+?toH),             ?unboundDummy) as ?endY1d)
+
+    # 2. Horizontal line
+    # Quadrant 1: horizontal line when [a] left of [b] and [a] above [b] but overlapping      
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?fromX + ?fromW),                    ?unboundDummy) as ?startX2a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2), ?unboundDummy) as ?startY2a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toX),                               ?unboundDummy) as ?endX2a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2), ?unboundDummy) as ?endY2a)
+
+    # Quadrant 2: horizontal line when [a] right of [b] and [a] above [b] but overlapping
+    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?fromX),                               ?unboundDummy) as ?startX2b)
+    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2),   ?unboundDummy) as ?startY2b)
+    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toX + ?toW),                          ?unboundDummy) as ?endX2b)
+    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2),   ?unboundDummy) as ?endY2b)
+
+    # Quadrant 3: horizontal line when [a] left of [b] and [a] below [b] but overlapping  
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromX + ?fromW),                    ?unboundDummy) as ?startX2c)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2), ?unboundDummy) as ?startY2c)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?toX),                               ?unboundDummy) as ?endX2c)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2), ?unboundDummy) as ?endY2c)
+
+    # Quadrant 4: horizontal line when [a] right of [b] and [a] below [b] but overlapping 
+    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromX),                               ?unboundDummy) as ?startX2d)
+    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2),   ?unboundDummy) as ?startY2d)
+    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?toX + ?toW),                          ?unboundDummy) as ?endX2d)
+    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2),   ?unboundDummy) as ?endY2d)
+
+    # 3. Vertical line
+    # Quadrant 1: vertical line when [a] left of [b] and [a] above [b] but overlapping      
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?startX3a)
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?fromY + ?fromH),                                                        ?unboundDummy) as ?startY3a)
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?endX3a)
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?toY),                                                                   ?unboundDummy) as ?endY3a)
+
+    # Quadrant 2: vertical line when [a] right of [b] and [a] above [b] but overlapping
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                      ?unboundDummy) as ?startX3b)
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?fromY + ?fromH),                                                         ?unboundDummy) as ?startY3b)
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                      ?unboundDummy) as ?endX3b)
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?toY),                                                                    ?unboundDummy) as ?endY3b)
+
+    # Quadrant 3: vertical line when [a] left of [b] and [a] below [b] but overlapping
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?startX3c)
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?fromY + ?fromH),                                                        ?unboundDummy) as ?startY3c)
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?endX3c)
+    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?toY),                                                                   ?unboundDummy) as ?endY3c)
+
+    # Quadrant 4: vertical line when [a] right of [b] and [a] below [b] but overlapping 
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                ?unboundDummy) as ?startX3d)
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?fromY),                                                            ?unboundDummy) as ?startY3d)
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                ?unboundDummy) as ?endX3d)
+    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?toY + ?toH),                                                       ?unboundDummy) as ?endY3d)
+  }
+
+  bind(concat(str(coalesce(?startX1a,?startX1b,?startX1c,?startX1d,?startX2a,?startX2b,?startX2c,?startX2d,?startX3a,?startX3b,?startX3c,?startX3d,"")), ',', str(coalesce(?startY1a,?startY1b,?startY1c,?startY1d,?startY2a,?startY2b,?startY2c,?startY2d,?startY3a,?startY3b,?startY3c,?startY3d,"")), ' ', str(coalesce(?endX1a,?endX1b,?endX1c,?endX1d,?endX2a,?endX2b,?endX2c,?endX2d,?endX3a,?endX3b,?endX3c,?endX3d, "")), ',', str(coalesce(?endY1a,?endY1b,?endY1c,?endY1d,?endY2a,?endY2b,?endY2c,?endY2d,?endY3a,?endY3b,?endY3c,?endY3d,""))) as ?result)
+}
+""" .
     
 function:getSubElementPosition
     a sh:SPARQLFunction ;
