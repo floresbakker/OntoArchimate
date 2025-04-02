@@ -1771,6 +1771,7 @@ svg:markerHeight
     skos:definition "Specifies the height of the marker."@en;
     skos:prefLabel 'the markerHeight attribute'@en;
     rdfs:isDefinedBy svg:.
+
 svg:markerUnits
     a owl:DatatypeProperty,
       svg:Attribute;

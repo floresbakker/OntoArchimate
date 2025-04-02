@@ -208,14 +208,19 @@ prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 construct {
 
   ?view  rdf:type svg:Document;
-         skos:prefLabel ?label;
-         skos:definition ?definition;
+         skos:prefLabel ?svgLabel;
+         skos:definition ?svgDefinition;
          rdf:_1 ?svg;
          prov:wasDerivedFrom $this.
   ?svg   rdf:type svg:Svg;
          xml:xmlns "http://www.w3.org/2000/svg" ;
-         rdf:_1 ?elements;
-         rdf:_2 ?relationships.
+         rdf:_1 ?definitions;
+         rdf:_2 ?elements;
+         rdf:_3 ?relationships;
+         svg:width "10000";
+         svg:height "1000".
+  ?definitions rdf:type svg:Defs;
+         dct:subject "Definitions".
   ?elements rdf:type svg:G;
          dct:subject "Elements";
          skos:prefLabel "Archimate elements".
@@ -226,18 +231,138 @@ construct {
 } where {
 
   # Get the archimate metadata of the archimate view
+  optional{
   $this skos:prefLabel ?label;
         skos:definition ?definition.
-
+  }
+  
+  bind(coalesce(?label, 'A view') as ?svgLabel)
+  bind(coalesce(?definition, 'A view in an archimate model.') as ?svgDefinition)
+  
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),"-View"))                as ?view)
   BIND(IRI(CONCAT(STR($this),"-SVG"))                 as ?svg)
+  BIND(IRI(CONCAT(STR($this),"-Definitions"))         as ?definitions)  
   BIND(IRI(CONCAT(STR($this),"-Elements"))            as ?elements)
   BIND(IRI(CONCAT(STR($this),"-Relationships"))       as ?relationships)
 
   }
 ''';
     rdfs:isDefinedBy archiSVG:.
+
+shp:Definitions
+    a sh:NodeShape;
+    sh:rule rule:Definitions;
+    sh:target target:Definitions;
+    skos:prefLabel 'definitions shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:Definitions
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all definitions in the archisvg template.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
+
+select $this {
+
+  # Select all definitions... 
+  $this rdf:type svg:Defs;
+      dct:subject "Definitions".
+    
+  # ...that are not processed yet
+  filter not exists { 
+  $this ?member ?definition.
+  ?definition rdf:type svg:Marker.
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+rule:Definitions
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates SVG definitions.'@en;
+    skos:prefLabel 'SVG definitions rule'@en;
+    sh:construct '''
+
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:      <http://purl.org/dc/terms/>
+prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:     <http://www.w3.org/ns/prov#>
+prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:     <http://www.w3.org/2004/02/skos/core#>
+prefix svg:      <http://www.w3.org/SVG/model/def/>
+prefix xml:      <http://www.w3.org/XML/model/def/>
+prefix xsi:      <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+
+  $this      ?member ?definition.
+  
+  ?definition rdf:type svg:Marker;
+              svg:id ?id;
+              svg:markerWidth ?markerWidth;
+              svg:markerHeight ?markerHeight;
+              svg:refX ?refX;
+              svg:refY ?refY;
+              svg:orient ?orient;
+              svg:markerUnits ?markerUnits;
+              ?memberComponent ?component.
+
+  ?component rdf:type ?svgClass;
+             svg:fill ?fill ;
+             svg:points ?points ;
+             svg:stroke ?stroke ;
+             svg:stroke-width ?strokeWidth ;
+             svg:cx ?cx ;
+             svg:cy ?cy ;
+             svg:r ?r .   
+
+} where {
+ 
+  ?definitions rdf:type svg:Defs, archiSVG:Template; 
+              ?member ?definitionTemplate.
+  
+  ?definitionTemplate rdf:type svg:Marker, archiSVG:Definition;
+              svg:id ?id;
+              svg:markerWidth ?markerWidth;
+              svg:markerHeight ?markerHeight;
+              svg:refX ?refX;
+              svg:refY ?refY;
+              svg:orient ?orient;
+              svg:markerUnits ?markerUnits;
+              ?memberComponent ?componentTemplate.
+
+  ?componentTemplate rdf:type ?svgClass, archiSVG:Definition;
+             svg:fill ?fill ;
+             svg:stroke ?stroke ;
+             svg:stroke-width ?strokeWidth .
+
+  ?svgClass rdfs:subClassOf svg:Element.     
+ 
+  optional {?componentTemplate svg:points ?points.}
+  optional {?componentTemplate 
+            svg:cx ?cx ;
+             svg:cy ?cy ;
+             svg:r ?r .  }
+
+  bind(str(strafter(str(?member), concat(str(rdf:), '_')))          as ?definitionIdentifier)
+  bind(str(strafter(str(?memberComponent), concat(str(rdf:), '_'))) as ?componentIdentifier) 
+  
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),"-Definition-", ?definitionIdentifier))     as ?definition)
+  BIND(IRI(CONCAT(STR(?definition),"-Component-", ?componentIdentifier)) as ?component)  
+  
+  }
+''';
+    rdfs:isDefinedBy archiSVG:.    
 
 shp:NodeCreator
     a sh:NodeShape;
@@ -281,18 +406,18 @@ rule:NodeCreator
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix svg: <http://www.w3.org/SVG/model/def/>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
@@ -437,6 +562,8 @@ construct {
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
+
+
 
 shp:ContainerCreator
     a sh:NodeShape;
@@ -1014,22 +1141,21 @@ rule:ConnectionCreator
     sh:construct '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix svg: <http://www.w3.org/SVG/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
 
 construct {
 
     ?connection
           rdf:type svg:G, archiSVG:Connection;
           skos:prefLabel ?relationshipName;
-          rdf:_1 ?connectionPart1;
-          rdf:_2 ?connectionPart2;
-          rdf:_3 ?connectionPart3;
+          rdf:_1 ?connectionPart;
+          archiSVG:accessType ?accessType;
           archiSVG:fromX ?fromX ;
           archiSVG:fromY ?fromY ;
           archiSVG:fromW ?fromW ;
@@ -1039,19 +1165,21 @@ construct {
           archiSVG:toW ?toW ;
           archiSVG:toH ?toH ;
           prov:wasDerivedFrom $this;
-          foaf:depicts ?relationship.
-
-    ?connectionPart1 
-          rdf:type ?template1Class, archiSVG:ConnectionTail;
-          prov:wasDerivedFrom ?iconTemplate1.
-
-    ?connectionPart2
+          foaf:depicts ?relationship;
+          archiSVG:bendPoint ?bendPointListSVG.
+          
+    ?bendPointListSVG ?memberBendPoint ?bendPointSVG.
+  
+    ?bendPointSVG
+         rdf:type archiSVG:BendPoint;
+         archiSVG:toX   ?x;
+         archiSVG:toY   ?y;
+         archiSVG:fromX ?x;
+         archiSVG:fromY ?y.          
+         
+    ?connectionPart
           rdf:type svg:Polyline, archiSVG:ConnectionLine;
-          prov:wasDerivedFrom ?iconTemplate2.
-
-    ?connectionPart3 
-          rdf:type svg:Polyline, archiSVG:ConnectionHead;
-          prov:wasDerivedFrom ?iconTemplate3.
+          prov:wasDerivedFrom ?iconTemplate.
 
 }
   where {
@@ -1064,6 +1192,9 @@ construct {
                 archimate:to ?toArchimateElement;
                 skos:prefLabel ?relationshipName.
   ?relationType rdf:type/rdfs:subClassOf+ archimate:RelationType.
+
+  optional {
+  ?relationship archimate:accessType ?accessType.}
 
   ?archimateView archimate:contains ?source, ?target.
   ?source foaf:depicts ?fromArchimateElement.
@@ -1090,22 +1221,40 @@ optional {
     archimate:width      ?toW.
 
   }
+  
+optional {
+  $this 
+     archimate:bendPoint ?bendPointList.
+  ?bendPointList rdf:rest*/rdf:first ?bendPoint.
+  
+  ?bendPoint 
+     rdf:type archimate:BendPoint;
+     archimate:horizontal ?x;
+     archimate:vertical   ?y.
+  }  
 
+  # Establish the bendpoint index, if present
+  optional {
+  {select ?bendPointList ?bendPoint (count(?sublist) as ?indexBendPoint) {
+   $this rdf:type archimate:Connection;
+         archimate:bendPoint ?bendPointList.
+   ?bendPointList rdf:rest* ?sublist.
+   ?sublist rdf:rest*/rdf:first ?bendPoint.
+    } group by ?bendPointList ?bendPoint
+   }
+  BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexBendPoint))) as ?memberBendPoint)
+  }
+  
   # Get the template SVG for the relationship.
   ?svgTemplate rdf:type svg:G, archiSVG:Template;
                foaf:depicts ?relationType;
-               rdf:_1 ?iconTemplate1;
-               rdf:_2 ?iconTemplate2;
-               rdf:_3 ?iconTemplate3.
-
-  ?iconTemplate1 rdf:type ?template1Class, archiSVG:Template.
-  ?template1Class rdfs:subClassOf* svg:Element.
+               rdf:_1 ?iconTemplate.
 
   # Create IRI's
-  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship"))                 as ?connection)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-1"))            as ?connectionPart1)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-2"))            as ?connectionPart2)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-3"))            as ?connectionPart3)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship"))                                                         as ?connection)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-1"))                                                    as ?connectionPart)
+  BIND(IF(BOUND(?bendPointList),IRI(CONCAT(STR($this),"-SVG-Relationship","-bendPoints")), ?unboundDummy)  as ?bendPointListSVG)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationship","-bendPoint-", str(?indexBendPoint)))                     as ?bendPointSVG)
 
 }
 ''';
@@ -1173,7 +1322,7 @@ construct {
   ?parent archimate:contains ?node.
   ?documentNode prov:wasDerivedFrom ?parent;
                 rdf:_1 ?svg.
-  ?svg rdf:_1 ?elements.
+  ?svg rdf:_2 ?elements.
 
   # Establish position of the element within the parent
   {select ?parent ?node ((count(?prevIndex)) as ?indexMember)
@@ -1261,7 +1410,7 @@ construct {
   ?parent archimate:contains ?connection.
   ?documentNode prov:wasDerivedFrom ?parent;
                 rdf:_1 ?svg.
-  ?svg rdf:_2 ?connections.
+  ?svg rdf:_3 ?connections.
 
   # Establish position of the connection within the parent
   {select ?parent ?connection ((count(?prevIndex)) as ?indexMember)
@@ -1645,35 +1794,111 @@ rule:ConnectionLine
     skos:prefLabel 'connection line rule'@en;
     sh:construct '''
 
+prefix archimate:   <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
 prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov:        <http://www.w3.org/ns/prov#>
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
+prefix svg:         <http://www.w3.org/SVG/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
 construct {
 
-  $this svg:points ?bendPoints;
+  $this svg:points ?coordinates;
         svg:transform ?translate;
         svg:transform ?rotate;
+        svg:fill ?fill;
         svg:stroke ?lineColor;
         svg:stroke-width ?lineSize;
+        svg:stroke-dasharray ?dasharray;
+        svg:marker-start ?markerStart;
+        svg:marker-end   ?markerEnd;
         prov:wasDerivedFrom rule:ConnectionLine.
 
 } where {
 
   ?connection ?member $this.
+  filter(strstarts(str(?member), concat(str(rdf:), '_')))
+
+  # Get the first bendpoint, if any
+  optional {
+    ?connection
+      archiSVG:bendPoint ?bendPointList.
+    ?bendPointList rdf:_1 ?firstBendPoint.
+  }
+
+  # Establish start coordinate
+  bind(function:getStartCoordinate(?connection, coalesce(?firstBendPoint, ?connection)) as ?startCoordinate)
+
+  # Get the last bendpoint, if any
+  optional {
+
+    {
+      select ?connection (count (?bendPoints) as ?totalBendPoints)
+      where {
+        ?connection
+          archiSVG:bendPoint ?bendPointList.
+        ?bendPointList ?memberBendPoint ?bendPoints.
+      } group by ?connection
+    }
+
+    ?connection archiSVG:bendPoint ?bendPointList.
+    ?bendPointList ?memberBendPoint ?lastBendPoint.
+    bind(xsd:integer(strafter(str(?memberBendPoint), concat(str(rdf:), '_'))) as ?bendPointIndex)
+    filter(?bendPointIndex = ?totalBendPoints)
+  }
+
+  # Establish end coordinate
+  bind(function:getEndCoordinate(coalesce(?lastBendPoint, ?connection), ?connection) as ?endCoordinate)
+
+  # Get the possible string of bendpoint coordinates
+  optional {
+    {
+      select ?connection (group_concat(?bendPointCoordinate; separator=" ") as ?bendPointCoordinates)
+      where {
+        # First order the bendpoints based on their index
+        {
+          select ?connection ?bendPoint
+          where {
+            ?connection
+              archiSVG:bendPoint ?bendPointList.
+            ?bendPointList ?memberBendPoint ?bendPoint.
+            bind(str(strafter(str(?memberBendPoint), concat(str(rdf:), '_'))) as ?bendPointIndex)
+          } order by ?connection ?bendPointIndex
+        }
+        # Get the coordinates for each bendpoint
+        ?bendPoint
+          rdf:type archiSVG:BendPoint;
+          archiSVG:fromX ?x;
+          archiSVG:fromY ?y.
+        bind(concat(str(?x),",",str(?y)) as ?bendPointCoordinate)
+      } group by ?connection
+    }
+  }
+
+  bind(concat(?startCoordinate, coalesce(concat(" ", ?bendPointCoordinates), ""), " ",?endCoordinate) as ?coordinates)
 
   $this prov:wasDerivedFrom ?template.
 
   ?template
-            rdf:type svg:Polyline, archiSVG:Template;
-            svg:fill ?fill;
-            svg:stroke ?lineColor;
-            svg:stroke-width ?lineSize.
- bind(function:getBendPoints($this) as ?bendPoints)
+    rdf:type svg:Polyline,
+             archiSVG:Template;
+    svg:fill ?fill;
+    svg:stroke ?lineColor;
+    svg:stroke-width ?lineSize.
 
+  optional {
+    ?template svg:stroke-dasharray ?dasharray.
+  }
+  
+  optional {
+    ?template svg:marker-start ?markerStart;
+  }
+  
+  optional {
+    ?template svg:marker-end   ?markerEnd;
+  }
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -1739,7 +1964,7 @@ construct {
             svg:fill ?fill;
             svg:stroke ?lineColor;
             svg:stroke-width ?lineSize.
- bind(function:getBendPoints($this) as ?bendPoints)
+ bind(function:getEndCoordinate($this, $this) as ?bendPoints)
 
 }
 ''';
@@ -1886,290 +2111,714 @@ construct {
             svg:fill ?fill;
             svg:stroke ?lineColor;
             svg:stroke-width ?lineSize.
- bind(function:getBendPoints($this) as ?bendPoints)
+ bind(function:getStartCoordinate($this, $this) as ?bendPoints)
 
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-function:getBendPoints
+function:getStartCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the bendpoints for a connection line in an archimate view." ;
+    rdfs:comment "Returns a string containing the start coordinates for a connection line in an archimate view." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:from ;
         sh:datatype xsd:anyURI ;
-        sh:description "The element for which the bendpoints coordinates have to be returned." ;
+        sh:description "The element from which the connection starts." ;
     ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
     sh:returnType xsd:string ;
     sh:select """
 
 prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix svg:         <http://www.w3.org/SVG/model/def/>
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
 select ?result where {
-  optional
 
-  {
-    ?connection
-      rdf:type svg:G,
-        archiSVG:Connection;
-      rdf:_2 $input;
-      archiSVG:fromX ?fromX_string ;
-      archiSVG:fromY ?fromY_string ;
-      archiSVG:fromW ?fromW_string ;
-      archiSVG:fromH ?fromH_string ;
-      archiSVG:toX ?toX_string ;
-      archiSVG:toY ?toY_string ;
-      archiSVG:toW ?toW_string ;
-      archiSVG:toH ?toH_string .
+      $from
+        archiSVG:fromX ?fromX_string ;
+        archiSVG:fromY ?fromY_string .
+        
+      optional{
+      $from
+        archiSVG:fromW ?fromW_string ;
+        archiSVG:fromH ?fromH_string .
+      }
+      
+      $to
+        archiSVG:toX ?toX_string ;
+        archiSVG:toY ?toY_string .
+        
+      optional{
+      $to
+        archiSVG:toW ?toW_string ;
+        archiSVG:toH ?toH_string .
+      }
+    
+    bind(xsd:decimal(?fromX_string)                  as ?fromX)
+    bind(xsd:decimal(?fromY_string)                  as ?fromY)
+    bind(xsd:decimal(coalesce(?fromW_string, '0.0')) as ?fromW)
+    bind(xsd:decimal(coalesce(?fromH_string, '0.0')) as ?fromH)
+    bind(xsd:decimal(?toX_string)                    as ?toX)
+    bind(xsd:decimal(?toY_string)                    as ?toY)
+    bind(xsd:decimal(coalesce(?toW_string, '0.0'))   as ?toW)
+    bind(xsd:decimal(coalesce(?toH_string, '0.0'))   as ?toH)
 
-    bind(xsd:integer(?fromX_string) as ?fromX)
-    bind(xsd:integer(?fromY_string) as ?fromY)
-    bind(xsd:integer(?fromW_string) as ?fromW)
-    bind(xsd:integer(?fromH_string) as ?fromH)
-    bind(xsd:integer(?toX_string) as ?toX)
-    bind(xsd:integer(?toY_string) as ?toY)
-    bind(xsd:integer(?toW_string) as ?toW)
-    bind(xsd:integer(?toH_string) as ?toH)
     
     # 1. Diagonal line
+    
     # Quadrant 1: diagonal line when [a] left of [b] and [a] above [b]       
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?fromX + ?fromW),     ?unboundDummy) as ?startX1a)
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?fromY + ?fromH),     ?unboundDummy) as ?startY1a)
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?toX),                ?unboundDummy) as ?endX1a)
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?toY),                ?unboundDummy) as ?endY1a)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?fromX + ?fromW),     ?unboundDummy) as ?startDiagonalX1)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?fromY + ?fromH),     ?unboundDummy) as ?startDiagonalY1)
 
     # Quadrant 2: diagonal line when [a] right of [b] and [a] above [b]
-    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?fromX),              ?unboundDummy) as ?startX1b)
-    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?fromY + ?fromH),     ?unboundDummy) as ?startY1b)
-    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?toX+?toW),           ?unboundDummy) as ?endX1b)
-    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?toY),                ?unboundDummy) as ?endY1b)
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?fromX),              ?unboundDummy) as ?startDiagonalX2)
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?fromY + ?fromH),     ?unboundDummy) as ?startDiagonalY2)
 
     # Quadrant 3: diagonal line when [a] right of [b] and [a] below [b]
-    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?fromX),                  ?unboundDummy) as ?startX1c)
-    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?fromY),                  ?unboundDummy) as ?startY1c)
-    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?toX+?toW),               ?unboundDummy) as ?endX1c)
-    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?toY+?toH),               ?unboundDummy) as ?endY1c)
+    bind(if(((?toX + ?toW < ?fromX))  && (?toY + ?toH < ?fromY), str(?fromX),                 ?unboundDummy) as ?startDiagonalX3)
+    bind(if(((?toX + ?toW < ?fromX))  && (?toY + ?toH < ?fromY), str(?fromY),                 ?unboundDummy) as ?startDiagonalY3)
 
     # Quadrant 4: diagonal line when [a] left of [b] and [a] below [b] 
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?fromX + ?fromW),       ?unboundDummy) as ?startX1d)
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?fromY),                ?unboundDummy) as ?startY1d)
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?toX),                  ?unboundDummy) as ?endX1d)
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?toY+?toH),             ?unboundDummy) as ?endY1d)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?fromX + ?fromW),       ?unboundDummy) as ?startDiagonalX4)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?fromY),                ?unboundDummy) as ?startDiagonalY4)
+
 
     # 2. Horizontal line
-    # Quadrant 1: horizontal line when [a] left of [b] and [a] above [b] but overlapping      
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?fromX + ?fromW),                    ?unboundDummy) as ?startX2a)
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2), ?unboundDummy) as ?startY2a)
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toX),                               ?unboundDummy) as ?endX2a)
-    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2), ?unboundDummy) as ?endY2a)
-
-    # Quadrant 2: horizontal line when [a] right of [b] and [a] above [b] but overlapping
-    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?fromX),                               ?unboundDummy) as ?startX2b)
-    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2),   ?unboundDummy) as ?startY2b)
-    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toX + ?toW),                          ?unboundDummy) as ?endX2b)
-    bind(if(((?toX + ?toW < ?fromX) && (?fromY + ?fromH <= ?toY + ?toH) && (?fromY + ?fromH > ?toY)), str(?toY + ((?fromY + ?fromH) -?toY)/2),   ?unboundDummy) as ?endY2b)
-
-    # Quadrant 3: horizontal line when [a] left of [b] and [a] below [b] but overlapping  
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromX + ?fromW),                    ?unboundDummy) as ?startX2c)
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2), ?unboundDummy) as ?startY2c)
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?toX),                               ?unboundDummy) as ?endX2c)
-    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2), ?unboundDummy) as ?endY2c)
-
-    # Quadrant 4: horizontal line when [a] right of [b] and [a] below [b] but overlapping 
-    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromX),                               ?unboundDummy) as ?startX2d)
-    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2),   ?unboundDummy) as ?startY2d)
-    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?toX + ?toW),                          ?unboundDummy) as ?endX2d)
-    bind(if(((?toX + ?toW < ?fromX) && (?toY + ?toH <= ?fromY + ?fromH) && (?toY + ?toH > ?fromY)), str(?fromY + ((?toY + ?toH) -?fromY)/2),   ?unboundDummy) as ?endY2d)
+    # horizontal line when [a] and [b] are overlapping vertically   
+    
+    bind(if(function:isVerticalOverlap($from, $to),   function:getStartHorizontalCoordinate($from, $to)                                    , ?unboundDummy) as ?startHorizontalLineX)
+    bind(if(function:isVerticalOverlap($from, $to),   function:getMaxVerticalCoordinate($from, $to) + function:getDeltaVertical($from, $to), ?unboundDummy) as ?startHorizontalLineY)
 
     # 3. Vertical line
-    # Quadrant 1: vertical line when [a] left of [b] and [a] above [b] but overlapping      
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?startX3a)
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?fromY + ?fromH),                                                        ?unboundDummy) as ?startY3a)
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?endX3a)
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?fromY + ?fromH < ?toY), str(?toY),                                                                   ?unboundDummy) as ?endY3a)
+    # vertical line when [a] and [b] are overlapping horizontally   
+    
+    bind(if(function:isHorizontalOverlap($from, $to), function:getMaxHorizontalCoordinate($from, $to) + function:getDeltaHorizontal($from, $to), ?unboundDummy) as ?startVerticalLineX)
+    bind(if(function:isHorizontalOverlap($from, $to), function:getStartVerticalCoordinate($from, $to)                                          , ?unboundDummy) as ?startVerticalLineY)
 
-    # Quadrant 2: vertical line when [a] right of [b] and [a] above [b] but overlapping
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                      ?unboundDummy) as ?startX3b)
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?fromY + ?fromH),                                                         ?unboundDummy) as ?startY3b)
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                      ?unboundDummy) as ?endX3b)
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?fromY + ?fromH < ?toY), str(?toY),                                                                    ?unboundDummy) as ?endY3b)
-
-    # Quadrant 3: vertical line when [a] left of [b] and [a] below [b] but overlapping
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?startX3c)
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?fromY + ?fromH),                                                        ?unboundDummy) as ?startY3c)
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?toX + ((?fromX + ?fromW) -?toX)/2),                                     ?unboundDummy) as ?endX3c)
-    bind(if((?fromX + ?fromW > ?toX) && (?toX + ?toW > ?fromX) && (?toY + ?toH < ?fromY), str(?toY),                                                                   ?unboundDummy) as ?endY3c)
-
-    # Quadrant 4: vertical line when [a] right of [b] and [a] below [b] but overlapping 
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                ?unboundDummy) as ?startX3d)
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?fromY),                                                            ?unboundDummy) as ?startY3d)
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?fromX + ((?toX + ?toW) -?fromX)/2),                                ?unboundDummy) as ?endX3d)
-    bind(if((?toX + ?toW > ?fromX) && (?fromX + ?fromW > ?toX) && (?toY + ?toH < ?fromY), str(?toY + ?toH),                                                       ?unboundDummy) as ?endY3d)
-  }
-
-  bind(concat(str(coalesce(?startX1a,?startX1b,?startX1c,?startX1d,?startX2a,?startX2b,?startX2c,?startX2d,?startX3a,?startX3b,?startX3c,?startX3d,"")), ',', str(coalesce(?startY1a,?startY1b,?startY1c,?startY1d,?startY2a,?startY2b,?startY2c,?startY2d,?startY3a,?startY3b,?startY3c,?startY3d,"")), ' ', str(coalesce(?endX1a,?endX1b,?endX1c,?endX1d,?endX2a,?endX2b,?endX2c,?endX2d,?endX3a,?endX3b,?endX3c,?endX3d, "")), ',', str(coalesce(?endY1a,?endY1b,?endY1c,?endY1d,?endY2a,?endY2b,?endY2c,?endY2d,?endY3a,?endY3b,?endY3c,?endY3d,""))) as ?result)
+    # 4. Concatenate result
+    
+    bind(concat(str(coalesce(?startDiagonalX1,?startDiagonalX2,?startDiagonalX3,?startDiagonalX4,?startHorizontalLineX, ?startVerticalLineX,"")), ',', str(coalesce(?startDiagonalY1,?startDiagonalY2,?startDiagonalY3,?startDiagonalY4,?startHorizontalLineY, ?startVerticalLineY,""))) as ?result)
 }
 """ .
+
+function:getEndCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the end coordinate for a connection line in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg:         <http://www.w3.org/SVG/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result where {
+
+      $from
+        archiSVG:fromX ?fromX_string ;
+        archiSVG:fromY ?fromY_string .
+        
+      optional{
+      $from
+        archiSVG:fromW ?fromW_string ;
+        archiSVG:fromH ?fromH_string .
+      }
+      
+      $to
+        archiSVG:toX ?toX_string ;
+        archiSVG:toY ?toY_string .
+      optional{
+      $to
+        archiSVG:toW ?toW_string ;
+        archiSVG:toH ?toH_string .
+      }
     
-function:getSubElementPosition
+    bind(xsd:decimal(?fromX_string)                  as ?fromX)
+    bind(xsd:decimal(?fromY_string)                  as ?fromY)
+    bind(xsd:decimal(coalesce(?fromW_string, '0.0')) as ?fromW)
+    bind(xsd:decimal(coalesce(?fromH_string, '0.0')) as ?fromH)
+    bind(xsd:decimal(?toX_string)                    as ?toX)
+    bind(xsd:decimal(?toY_string)                    as ?toY)
+    bind(xsd:decimal(coalesce(?toW_string, '0.0'))   as ?toW)
+    bind(xsd:decimal(coalesce(?toH_string, '0.0'))   as ?toH)
+    
+    
+    # 1. Diagonal line
+    
+    # Quadrant 1: diagonal line when [a] left of [b] and [a] above [b]       
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?toX),                ?unboundDummy) as ?endDiagonalX1)
+    bind(if(((?fromX + ?fromW < ?toX) && (?fromY + ?fromH < ?toY)), str(?toY),                ?unboundDummy) as ?endDiagonalY1)
+
+    # Quadrant 2: diagonal line when [a] right of [b] and [a] above [b]
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?toX+?toW),           ?unboundDummy) as ?endDiagonalX2)
+    bind(if(((?toX + ?toW < ?fromX)   && (?fromY + ?fromH < ?toY)), str(?toY),                ?unboundDummy) as ?endDiagonalY2)
+
+    # Quadrant 3: diagonal line when [a] right of [b] and [a] below [b]
+    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?toX+?toW),               ?unboundDummy) as ?endDiagonalX3)
+    bind(if(((?toX + ?toW < ?fromX)) && (?toY + ?toH < ?fromY), str(?toY+?toH),               ?unboundDummy) as ?endDiagonalY3)
+
+    # Quadrant 4: diagonal line when [a] left of [b] and [a] below [b] 
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?toX),                  ?unboundDummy) as ?endDiagonalX4)
+    bind(if(((?fromX + ?fromW < ?toX) && (?toY + ?toH < ?fromY)), str(?toY+?toH),             ?unboundDummy) as ?endDiagonalY4)
+
+
+    # 2. Horizontal line
+    # horizontal line when [a] and [b] are overlapping vertically   
+    
+    bind(if(function:isVerticalOverlap($from, $to),   function:getEndHorizontalCoordinate($from, $to)                                        ,   ?unboundDummy) as ?endHorizontalLineX)
+    bind(if(function:isVerticalOverlap($from, $to),   function:getMaxVerticalCoordinate($from, $to)   + function:getDeltaVertical($from, $to),   ?unboundDummy) as ?endHorizontalLineY)
+
+    # 3. Vertical line
+    # vertical line when [a] and [b] are overlapping horizontally   
+    
+    bind(if(function:isHorizontalOverlap($from, $to), function:getMaxHorizontalCoordinate($from, $to) + function:getDeltaHorizontal($from, $to), ?unboundDummy) as ?endVerticalLineX)
+    bind(if(function:isHorizontalOverlap($from, $to), function:getEndVerticalCoordinate($from, $to)                                            , ?unboundDummy) as ?endVerticalLineY)
+
+    # 4. Concatenate result
+    
+    bind(concat(str(coalesce(?endDiagonalX1,?endDiagonalX2,?endDiagonalX3,?endDiagonalX4,?endHorizontalLineX, ?endVerticalLineX,"")), ',', str(coalesce(?endDiagonalY1,?endDiagonalY2,?endDiagonalY3,?endDiagonalY4,?endHorizontalLineY, ?endVerticalLineY,""))) as ?result)
+}
+""" .
+
+
+
+function:getMinHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns alphabetical position of an archimate element within the set of elements that share the same xsi:type." ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:from ;
         sh:datatype xsd:anyURI ;
-        sh:description "The element for which the position has to be returned." ;
+        sh:description "The element from which the connection starts." ;
     ] ;
-    sh:returnType xsd:integer ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
     sh:select """
 
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
-       SELECT ?result WHERE {
-       {SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
-        WHERE {
-          ?element rdf:type archiSVG:Element;
-                   xsi:type ?xsiType.
-          OPTIONAL {
-            ?prevElement rdf:type archiSVG:Element;
-                         xsi:type ?xsiType.
-            FILTER(str(?prevElement) < str(?element))
-          }
-        }
-        GROUP BY ?element
-        ORDER BY ?element
-        }
-       FILTER (?element = $input)
-       BIND(?member as ?result)
+select (MIN(?Xend) as ?result)
+
+where {
+      {select $from $to (coalesce(?Xend1, ?Xend2) as ?Xend) where {
+      {$from
+        archiSVG:fromX ?fromX_string .
+        
+      optional{
+      $from
+        archiSVG:fromW ?fromW_string .
       }
-        """ .
+      bind((xsd:decimal(?fromX_string) + xsd:decimal(coalesce(?fromW_string,0.0))) as ?Xend1)  
+        }
 
-function:getElementPosition
+      UNION
+
+      {
+      $to
+        archiSVG:toX ?toX_string .
+        
+      optional{
+      $to
+        archiSVG:toW ?toW_string .
+      }       
+      bind((xsd:decimal(?toX_string) + xsd:decimal(coalesce(?toW_string,0.0))) as ?Xend2)  
+}
+}
+}
+}
+""" .
+
+function:getStartHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns alphabetical position of an archimate element within the set of all elements." ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:from ;
         sh:datatype xsd:anyURI ;
-        sh:description "The element for which the position has to be returned." ;
+        sh:description "The element from which the connection starts." ;
     ] ;
-    sh:returnType xsd:integer ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
     sh:select """
 
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
-       SELECT ?result WHERE {
-       {SELECT ?element (COUNT(?prevElement) + 1 AS ?member)
-        WHERE {
-          ?element rdf:type archiSVG:Element.
-          OPTIONAL {
-            ?prevElement rdf:type archiSVG:Element.
-            FILTER(str(?prevElement) < str(?element))
-          }
-        }
-        GROUP BY ?element
-        ORDER BY ?element
-        }
-       FILTER (?element = $input)
-       BIND(?member as ?result)
+select ?result
+
+where {
+  
+      $from
+        archiSVG:fromX ?fromX_string .
+        
+      optional{
+      $from
+        archiSVG:fromW ?fromW_string .
       }
-        """ .
+      bind(xsd:decimal(?fromX_string) as ?fromX)
+      bind(coalesce(xsd:decimal(?fromW_string), 0.0) as ?fromW)
 
-function:getRelationshipPosition
+      $to
+        archiSVG:toX ?toX_string .
+        
+      optional{
+      $to
+        archiSVG:toW ?toW_string .
+      }
+      bind(xsd:decimal(?toX_string) as ?toX)
+      bind(coalesce(xsd:decimal(?toW_string), 0.0) as ?toW)
+
+      bind(if(?toX + ?toW < ?fromX, ?fromX, if(?toX > ?fromX + ?fromW, ?fromX + ?fromW, ?unboundDummy)) as ?result)
+}
+""" .
+
+function:getStartVerticalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns alphabetical position of an archimate relationship within the set of all relationships." ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
     sh:parameter [
-        sh:path function:relationship ;
+        sh:path function:from ;
         sh:datatype xsd:anyURI ;
-        sh:description "The relationship for which the position has to be returned." ;
+        sh:description "The element from which the connection starts." ;
     ] ;
-    sh:returnType xsd:integer ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
     sh:select """
 
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
-       SELECT ?result WHERE {
-       {SELECT $relationship (COUNT(?prevRelationship) + 1 AS ?member)
-        WHERE {
-          $relationship rdf:type archimate:Relationship.
-          OPTIONAL {
-            ?prevRelationship rdf:type archimate:Relationship.
-            FILTER(str(?prevRelationship) < str($relationship))
-          }
-        }
-        GROUP BY $relationship
-        ORDER BY $relationship
-        }
-       BIND(?member as ?result)
+select ?result
+
+where {
+  
+      $from
+        archiSVG:fromY ?fromY_string .
+        
+      optional{
+      $from
+        archiSVG:fromH ?fromH_string .
       }
-        """ .
+      bind(xsd:decimal(?fromY_string) as ?fromY)
+      bind(coalesce(xsd:decimal(?fromH_string), 0.0) as ?fromH)
 
-function:getModelPosition
+      $to
+        archiSVG:toY ?toY_string .
+        
+      optional{
+      $to
+        archiSVG:toH ?toH_string .
+      }
+      bind(xsd:decimal(?toY_string) as ?toY)
+      bind(coalesce(xsd:decimal(?toH_string), 0.0) as ?toH)
+
+      bind(if(?toY + ?toH < ?fromY, ?fromY, if(?toY > ?fromY + ?fromH, ?fromY + ?fromH, ?unboundDummy)) as ?result)
+}
+""" .
+
+function:getEndHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns alphabetical position of an archimate model within the set of all models." ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:from ;
         sh:datatype xsd:anyURI ;
-        sh:description "The model for which the position has to be returned." ;
+        sh:description "The element from which the connection starts." ;
     ] ;
-    sh:returnType xsd:integer ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
     sh:select """
 
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
-       SELECT ?result WHERE {
-       {SELECT ?model (COUNT(?prevModel) + 1 AS ?member)
-        WHERE {
-          ?model rdf:type archiSVG:Model.
-          OPTIONAL {
-            ?prevModel rdf:type archiSVG:Model.
-            FILTER(str(?prevModel) < str(?model))
-          }
-        }
-        GROUP BY ?model
-        ORDER BY ?model
-        }
-       FILTER (?model = $input)
-       BIND(?member as ?result)
+select ?result
+
+where {
+  
+      $from
+        archiSVG:fromX ?fromX_string .
+        
+      optional{
+      $from
+        archiSVG:fromW ?fromW_string .
       }
-        """ .
+      bind(xsd:decimal(?fromX_string) as ?fromX)
+      bind(coalesce(xsd:decimal(?fromW_string), 0.0) as ?fromW)
 
-function:getViewPosition
+      $to
+        archiSVG:toX ?toX_string .
+        
+      optional{
+      $to
+        archiSVG:toW ?toW_string .
+      }
+      bind(xsd:decimal(?toX_string) as ?toX)
+      bind(coalesce(xsd:decimal(?toW_string), 0.0) as ?toW)
+
+      bind(if(?toX > ?fromX + ?fromW, ?toX, if(?toX + ?toW < ?fromX, ?toX + ?toW, ?unboundDummy)) as ?result)
+}
+""" .
+
+function:getEndVerticalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns alphabetical position of a view node within the set of all views." ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:from ;
         sh:datatype xsd:anyURI ;
-        sh:description "The view for which the position has to be returned." ;
+        sh:description "The element from which the connection starts." ;
     ] ;
-    sh:returnType xsd:integer ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
     sh:select """
 
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 
-       SELECT ?result WHERE {
-       {SELECT ?view (COUNT(?prevView) + 1 AS ?member)
-        WHERE {
-          ?view rdf:type archiSVG:View.
-          OPTIONAL {
-            ?prevView rdf:type archiSVG:View.
-            FILTER(str(?prevView) < str(?view))
-          }
-        }
-        GROUP BY ?view
-        ORDER BY ?view
-        }
-       FILTER (?view = $input)
-       BIND(?member as ?result)
+select ?result
+
+where {
+  
+      $from
+        archiSVG:fromY ?fromY_string .
+        
+      optional{
+      $from
+        archiSVG:fromH ?fromH_string .
       }
-        """ .
+      bind(xsd:decimal(?fromY_string) as ?fromY)
+      bind(coalesce(xsd:decimal(?fromH_string), 0.0) as ?fromH)
+
+      $to
+        archiSVG:toY ?toY_string .
+        
+      optional{
+      $to
+        archiSVG:toH ?toH_string .
+      }
+      bind(xsd:decimal(?toY_string) as ?toY)
+      bind(coalesce(xsd:decimal(?toH_string), 0.0) as ?toH)
+
+      bind(if(?toY > ?fromY + ?fromH, ?toY, if(?toY + ?toH < ?fromY, ?toY + ?toH, ?unboundDummy)) as ?result)
+}
+""" .
+
+function:isHorizontalOverlap
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a boolean indicating whether there is overlap for two concepts in the X-axis in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:boolean ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+      bind(function:getMinHorizontalCoordinate($from, $to) as ?minEndCoordinate)
+      bind(function:getMaxHorizontalCoordinate($from, $to) as ?maxStartCoordinate)
+      bind((?minEndCoordinate-?maxStartCoordinate) as ?differenceMinMax)
+      bind(if(?differenceMinMax >= 0.0, true, false) as ?result)
+      
+}
+""" .
+
+
+function:isVerticalOverlap
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a boolean indicating whether there is overlap for two concepts in the Y-axis in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:boolean ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+      bind(function:getMinVerticalCoordinate($from, $to) as ?minEndCoordinate)
+      bind(function:getMaxVerticalCoordinate($from, $to) as ?maxStartCoordinate)
+      bind((?minEndCoordinate-?maxStartCoordinate) as ?differenceMinMax)
+      bind(if(?differenceMinMax >= 0.0, true, false) as ?result)
+      
+}
+""" .
+
+function:getDeltaHorizontal
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select (?halfOverlapDistance as ?result)
+
+where {
+  
+      bind(function:getMinHorizontalCoordinate($from, $to) as ?minEndCoordinate)
+      bind(function:getMaxHorizontalCoordinate($from, $to) as ?maxStartCoordinate)
+      bind((?minEndCoordinate-?maxStartCoordinate) as ?differenceMinMax)
+      bind(if(?differenceMinMax > 0.0, ?differenceMinMax, 0.0) as ?overlapDistance)
+      bind((?overlapDistance/2.0) as ?halfOverlapDistance)
+      
+}
+""" .
+
+function:getMaxHorizontalCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:decimal ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select (MAX(?Xstart) as ?result)
+
+where {
+      {select $from $to (coalesce(?Xstart1, ?Xstart2) as ?Xstart) where {
+      {$from
+        archiSVG:fromX ?fromX_string .
+        
+      optional{
+      $from
+        archiSVG:fromW ?fromW_string .
+      }
+      bind(xsd:decimal(?fromX_string) as ?Xstart1)
+        }
+
+      UNION
+
+      {
+      $to
+        archiSVG:toX ?toX_string .
+        
+      optional{
+      $to
+        archiSVG:toW ?toW_string .
+      }
+      bind(xsd:decimal(?toX_string) as ?Xstart2)        
+}
+}
+} 
+}
+""" .
+
+function:getMinVerticalCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select (MIN(?Yend) as ?result)
+
+where {
+      {select $from $to (coalesce(?Yend1, ?Yend2) as ?Yend) where {
+      {$from
+        archiSVG:fromY ?fromY_string .
+        
+      optional{
+      $from
+        archiSVG:fromH ?fromH_string .
+      }
+      bind((xsd:decimal(?fromY_string) + xsd:decimal(coalesce(?fromH_string,0.0))) as ?Yend1)  
+        }
+
+      UNION
+
+      {
+      $to
+        archiSVG:toY ?toY_string .
+        
+      optional{
+      $to
+        archiSVG:toH ?toH_string .
+      }       
+      bind((xsd:decimal(?toY_string) + xsd:decimal(coalesce(?toH_string,0.0))) as ?Yend2)  
+}
+}
+}
+}
+""" .
+
+function:getMaxVerticalCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select (MAX(?Ystart) as ?result)
+
+where {
+      {select $from $to (coalesce(?Ystart1, ?Ystart2) as ?Ystart) where {  
+      {$from
+        archiSVG:fromY ?fromY_string .
+        
+      optional{
+      $from
+        archiSVG:fromH ?fromH_string .
+      }
+      bind(xsd:decimal(?fromY_string) as ?Ystart1)
+        }
+
+      UNION
+
+      {
+      $to
+        archiSVG:toY ?toY_string .
+        
+      optional{
+      $to
+        archiSVG:toH ?toH_string .
+      }
+      bind(xsd:decimal(?toY_string) as ?Ystart2)        
+} 
+}
+}
+}
+""" .
+
+function:getDeltaVertical
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element from which the connection starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The element where the connection ends." ;
+    ] ;    
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select (?halfOverlapDistance as ?result)
+
+where {
+  
+      bind(function:getMinVerticalCoordinate($from, $to) as ?minEndCoordinate)
+      bind(function:getMaxVerticalCoordinate($from, $to) as ?maxStartCoordinate)
+      bind((?minEndCoordinate-?maxStartCoordinate) as ?differenceMinMax)
+      bind(if(?differenceMinMax > 0.0, ?differenceMinMax, 0.0) as ?overlapDistance)
+      bind((?overlapDistance/2.0) as ?halfOverlapDistance)
+      
+}
+""" .
+
 
 function:escapeXML
     a sh:SPARQLFunction ;

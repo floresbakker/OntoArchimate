@@ -84,12 +84,138 @@ archiSVG:svg a svg:Svg  , archiSVG:Template ;
     xml:xmlns "http://www.w3.org/2000/svg";
     svg:height  "600";
     svg:width  "1200";
-    rdf:_1 archiSVG:ApplicationLayer; 
-    rdf:_2 archiSVG:BusinessLayer.
+    rdf:_1 archiSVG:definitions;
+    rdf:_2 archiSVG:applicationLayer; 
+    rdf:_3 archiSVG:businessLayer.
+
+archiSVG:definitions rdf:type svg:Defs, archiSVG:Template ;
+    skos:prefLabel 'Template for SVG definitions';
+    rdf:_1 archiSVG:aggregation;
+    rdf:_2 archiSVG:read;
+    rdf:_3 archiSVG:write;
+    rdf:_4 archiSVG:serving;
+    rdf:_5 archiSVG:realization;
+    rdf:_6 archiSVG:assignmentStart;
+    rdf:_7 archiSVG:assignmentEnd.    
+    
+archiSVG:aggregation rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "aggregation";
+    svg:markerWidth "20";
+    svg:markerHeight "20";
+    svg:refX "0";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:aggregationStart.
+
+archiSVG:aggregationStart rdf:type svg:Polyline, archiSVG:Definition ;
+    svg:fill "white" ;
+    svg:points "10,0 0,5 10,10 20,5 10,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .
+
+archiSVG:read rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "read";
+    svg:markerWidth "25";
+    svg:markerHeight "35";
+    svg:refX "0";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:readStart.
+
+archiSVG:readStart rdf:type svg:Polyline, archiSVG:Definition ;
+    svg:fill "none" ;
+    svg:points "10,10 0,5 10,0";
+    svg:stroke "black" ;
+    svg:stroke-width "1" . 
+
+archiSVG:write rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "write";
+    svg:markerWidth "25";
+    svg:markerHeight "35";
+    svg:refX "15";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:writeStart.
+
+archiSVG:writeStart rdf:type svg:Polyline, archiSVG:Definition ;
+    svg:fill "none" ;
+    svg:points "5,0 15,5 5,10";
+    svg:stroke "black" ;
+    svg:stroke-width "1" .     
+
+archiSVG:serving rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "serving";
+    svg:markerWidth "25";
+    svg:markerHeight "35";
+    svg:refX "15";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:servingEnd.
+
+archiSVG:servingEnd rdf:type svg:Polyline, archiSVG:Definition ;
+    svg:fill "none" ;
+    svg:points "5,0 15,5 5,10";
+    svg:stroke "black" ;
+    svg:stroke-width "1" .     
+
+archiSVG:realization rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "realization";
+    svg:markerWidth "25";
+    svg:markerHeight "35";
+    svg:refX "15";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:realizationEnd.
+
+archiSVG:realizationEnd rdf:type svg:Polyline, archiSVG:Definition ;
+    svg:fill "white" ;
+    svg:points "5,0 5,10 15,5 5,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .  
+    
+archiSVG:assignmentStart rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "assignmentStart";
+    svg:markerWidth "10";
+    svg:markerHeight "10";
+    svg:refX "0";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:assignmentStartCircle.
+
+archiSVG:assignmentStartCircle rdf:type svg:Circle, archiSVG:Definition ;
+    svg:cx "4" ;
+    svg:cy "5" ;
+    svg:fill "black" ;
+    svg:r "4" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+  
+archiSVG:assignmentEnd rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "assignmentEnd";
+    svg:markerWidth "25";
+    svg:markerHeight "35";
+    svg:refX "15";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:assignmentEndArrow.
+
+archiSVG:assignmentEndArrow rdf:type svg:Polyline, archiSVG:Definition ;
+    svg:fill "none" ;
+    svg:points "5,0 15,5 5,10";
+    svg:stroke "black" ;
+    svg:stroke-width "1" ;
+    svg:fill "black".
 
 ### Application Layer
     
-archiSVG:ApplicationLayer a svg:G , archiSVG:Template ;
+archiSVG:applicationLayer a svg:G , archiSVG:Template ;
     rdf:_1 archiSVG:ApplicationComponent;
     rdf:_2 archiSVG:ApplicationCollaboration;
     rdf:_3 archiSVG:DataObject;
@@ -258,7 +384,7 @@ archiSVG:DataObjectTextFragment a svg:Text  , archiSVG:Template ;
 
 archiSVG:ApplicationService a svg:G , archiSVG:Template ;
     foaf:depicts archimate:ApplicationService;
-    skos:prefLabel "SVG depiction of a data object in Archimate";
+    skos:prefLabel "SVG depiction of a application service in Archimate";
     rdf:_1 archiSVG:ApplicationServiceBox;
     rdf:_2 archiSVG:ApplicationServiceIcon;
     rdf:_3 archiSVG:ApplicationServiceText.
@@ -274,7 +400,7 @@ archiSVG:ApplicationServiceBox a svg:Rect  , archiSVG:Template ;
     svg:y "0" .
 
 archiSVG:ApplicationServiceIcon a svg:G, archiSVG:Template ;
-    skos:prefLabel "SVG-based icon for a data object in Archimate";
+    skos:prefLabel "SVG-based icon for a application service in Archimate";
     rdf:_1 archiSVG:ApplicationServiceIconPart1.
     
 archiSVG:ApplicationServiceIconPart1 a svg:Rect , archiSVG:Template ;
@@ -300,7 +426,7 @@ archiSVG:ApplicationServiceTextFragment a svg:Text  , archiSVG:Template ;
     
 ### Business layer 
 
-archiSVG:BusinessLayer a svg:G , archiSVG:Template ;
+archiSVG:businessLayer a svg:G , archiSVG:Template ;
     rdf:_1 archiSVG:BusinessObject;
     rdf:_2 archiSVG:BusinessService;
     rdf:_3 archiSVG:BusinessProcess;
@@ -310,7 +436,7 @@ archiSVG:BusinessLayer a svg:G , archiSVG:Template ;
 
 archiSVG:BusinessObject a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessObject;
-    skos:prefLabel "SVG depiction of a data object in Archimate";
+    skos:prefLabel "SVG depiction of a business object in Archimate";
     rdf:_1 archiSVG:BusinessObjectBox;
     rdf:_2 archiSVG:BusinessObjectIcon;
     rdf:_3 archiSVG:BusinessObjectText.
@@ -324,7 +450,7 @@ archiSVG:BusinessObjectBox a svg:Rect  , archiSVG:Template ;
     svg:y "0" .
 
 archiSVG:BusinessObjectIcon a svg:G , archiSVG:Template ;
-    skos:prefLabel "SVG-based icon for a data object in Archimate";
+    skos:prefLabel "SVG-based icon for a business object in Archimate";
     rdf:_1 archiSVG:BusinessObjectIconPart1;
     rdf:_2 archiSVG:BusinessObjectIconPart2.
     
@@ -360,7 +486,7 @@ archiSVG:BusinessObjectTextFragment a svg:Text  , archiSVG:Template ;
 
 archiSVG:BusinessService a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessService;
-    skos:prefLabel "SVG depiction of a data object in Archimate";
+    skos:prefLabel "SVG depiction of a business service in Archimate";
     rdf:_1 archiSVG:BusinessServiceBox;
     rdf:_2 archiSVG:BusinessServiceIcon;
     rdf:_3 archiSVG:BusinessServiceText.
@@ -376,7 +502,7 @@ archiSVG:BusinessServiceBox a svg:Rect  , archiSVG:Template ;
     svg:y "0" .
 
 archiSVG:BusinessServiceIcon a svg:G , archiSVG:Template ;
-    skos:prefLabel "SVG-based icon for a data object in Archimate";
+    skos:prefLabel "SVG-based icon for a business service in Archimate";
     rdf:_1 archiSVG:BusinessServiceIconPart1.
     
 archiSVG:BusinessServiceIconPart1 a svg:Rect , archiSVG:Template ;
@@ -405,7 +531,7 @@ archiSVG:BusinessServiceTextFragment a svg:Text  , archiSVG:Template ;
 
 archiSVG:BusinessProcess a svg:G , archiSVG:Template ;
     foaf:depicts archimate:BusinessProcess;
-    skos:prefLabel "SVG depiction of a data object in Archimate";
+    skos:prefLabel "SVG depiction of a business process in Archimate";
     rdf:_1 archiSVG:BusinessProcessBox;
     rdf:_2 archiSVG:BusinessProcessIcon;
     rdf:_3 archiSVG:BusinessProcessText.
@@ -421,7 +547,7 @@ archiSVG:BusinessProcessBox a svg:Rect , archiSVG:Template ;
     svg:y "0" .
 
 archiSVG:BusinessProcessIcon a svg:G , archiSVG:Template ;
-    skos:prefLabel "SVG-based icon for a data object in Archimate";
+    skos:prefLabel "SVG-based icon for a business process in Archimate";
     rdf:_1 archiSVG:BusinessProcessIconPart1.
     
 archiSVG:BusinessProcessIconPart1 a svg:Polyline, archiSVG:Template ;
@@ -458,7 +584,7 @@ archiSVG:BusinessActorBox a svg:Rect  , archiSVG:Template ;
     svg:y "0" .
 
 archiSVG:BusinessActorIcon a svg:G , archiSVG:Template ;
-    skos:prefLabel "SVG-based icon for a data object in Archimate";
+    skos:prefLabel "SVG-based icon for a business actor in Archimate";
     rdf:_1 archiSVG:BusinessActorIconPart1;
     rdf:_2 archiSVG:BusinessActorIconPart2;
     rdf:_3 archiSVG:BusinessActorIconPart3;
@@ -523,126 +649,70 @@ archiSVG:BusinessActorTextFragment a svg:Text  , archiSVG:Template ;
 
 # Aggregate
 archiSVG:Aggegrate a svg:G, archiSVG:Template;
-    skos:prefLabel "SVG-based icon for the relationship Aggregate";
+    skos:prefLabel "SVG-based icon for the relationship aggregate";
     foaf:depicts archimate:aggregation;
-    rdf:_1 archiSVG:AggregateTail;
-    rdf:_2 archiSVG:AggregateLine;
-    rdf:_3 archiSVG:AggregateHead.
-
-archiSVG:AggregateTail a svg:G, archiSVG:Template;
-    skos:prefLabel 'dummy SVG element'.
+    rdf:_1 archiSVG:AggregateLine.
 
 archiSVG:AggregateLine a svg:Polyline, archiSVG:Template;
     svg:fill "none" ;
     svg:points "0,0" ;
     svg:stroke "black" ;
-    svg:stroke-width "1" .
-
-archiSVG:AggregateHead a svg:Polyline, archiSVG:Template;
-    svg:fill "none" ;
-    # 0,0 10,-5 20,0 10,5 0,0 (rotate)
-    svg:points "0,0 -5,10 0,20 5,10, 0,0" ;
-    svg:stroke "black" ;
-    svg:stroke-width "1" .
+    svg:stroke-width "1" ;
+    svg:marker-start "url(#aggregation)".
     
-# Access: Read/Write
-archiSVG:ReadWrite a svg:G, archiSVG:Template;
-    skos:prefLabel "SVG-based icon for the relationship Access: Read/Write";
-    foaf:depicts archimate:readWriteAccess;
-    rdf:_1 archiSVG:ReadWriteTail;
-    rdf:_2 archiSVG:ReadWriteLine;
-    rdf:_3 archiSVG:ReadWriteHead.
+# Access
+archiSVG:access a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship access.";
+    foaf:depicts archimate:access;
+    rdf:_1 archiSVG:AccessLine.
     
-archiSVG:ReadWriteTail a svg:Polyline, archiSVG:Template;
-    svg:fill "none" ;
-    svg:points "0,0 4,8 0,0 -4,8"; 
-    svg:stroke "black" ;
-    svg:stroke-width "1" .
-
-archiSVG:ReadWriteLine a svg:Polyline, archiSVG:Template;
+archiSVG:AccessLine a svg:Polyline, archiSVG:Template;
     svg:fill "none" ;
     svg:points "0,0" ;
     svg:stroke "black" ;
     svg:stroke-width "1" ;
-    svg:stroke-dasharray "4".
-
-archiSVG:ReadWriteHead a svg:Polyline, archiSVG:Template;
-    svg:fill "none" ;
-    svg:points "0,0 4,8 0,0 -4,8" ;
-    svg:stroke "black" ;
-    svg:stroke-width "1" .
+    svg:stroke-dasharray "4";
+    svg:marker-start "url(#read)";
+    svg:marker-end "url(#write)".    
 
 # Serving
 archiSVG:Serving a svg:G, archiSVG:Template;
-    skos:prefLabel "SVG-based icon for the relationship Serving";
+    skos:prefLabel "SVG-based icon for the relationship serving";
     foaf:depicts archimate:serving;
-    rdf:_1 archiSVG:ServingTail;
-    rdf:_2 archiSVG:ServingLine;
-    rdf:_3 archiSVG:ServingHead.
-
-archiSVG:ServingTail a svg:G, archiSVG:Template;
-    skos:prefLabel 'dummy SVG element'.
+    rdf:_1 archiSVG:ServingLine.
     
 archiSVG:ServingLine a svg:Polyline, archiSVG:Template;
     svg:fill "none" ;
     svg:points "0,0" ;
     svg:stroke "black" ;
-    svg:stroke-width "1" .
-
-archiSVG:ServingHead a svg:Polyline, archiSVG:Template;
-    svg:fill "none" ;
-    svg:points "0,0 4,8 0,0 -4,8" ;
-    svg:stroke "black" ;
-    svg:stroke-width "1" .
+    svg:stroke-width "1";
+    svg:marker-end "url(#serving)".
 
 # Realization
 archiSVG:Realization a svg:G, archiSVG:Template;
-    skos:prefLabel "SVG-based icon for the relationship Realization";
+    skos:prefLabel "SVG-based icon for the relationship realization";
     foaf:depicts archimate:realization;
-    rdf:_1 archiSVG:RealizationTail;
-    rdf:_2 archiSVG:RealizationLine;
-    rdf:_3 archiSVG:RealizationHead.
-
-archiSVG:RealizationTail a svg:G, archiSVG:Template;
-    skos:prefLabel 'dummy SVG element'.
+    rdf:_1 archiSVG:RealizationLine.
     
 archiSVG:RealizationLine a svg:Polyline, archiSVG:Template;
     svg:fill "none" ;
     svg:points "0,0" ;
     svg:stroke "black" ;
-    svg:stroke-width "1" .
-
-archiSVG:RealizationHead a svg:Polyline, archiSVG:Template;
-    svg:fill "none" ;
-    svg:points "0,0 -5,0 0,10 5,0, 0,0" ;
-    svg:stroke "black" ;
-    svg:stroke-width "1" .
+    svg:stroke-width "1" ;
+    svg:stroke-dasharray "4";    
+    svg:marker-end "url(#realization)".
 
 # Assignment
 archiSVG:Assignment a svg:G, archiSVG:Template;
-    skos:prefLabel "SVG-based icon for the relationship Assignment";
+    skos:prefLabel "SVG-based icon for the relationship assignment";
     foaf:depicts archimate:assignedTo;
-    rdf:_1 archiSVG:AssignmentTail;
-    rdf:_2 archiSVG:AssignmentLine;
-    rdf:_3 archiSVG:AssignmentHead.
-
-archiSVG:AssignmentTail a svg:Circle, archiSVG:Template ;
-    svg:cx "0" ;
-    svg:cy "0" ;
-    svg:fill "none" ;
-    svg:r "4" ;
-    svg:stroke "black" ;
-    svg:stroke-width "0.5" .
+    rdf:_1 archiSVG:AssignmentLine.
 
 archiSVG:AssignmentLine a svg:Polyline, archiSVG:Template;
     svg:fill "none" ;
     svg:points "0,0" ;
     svg:stroke "black" ;
-    svg:stroke-width "1" .
-
-archiSVG:AssignmentHead a svg:Polyline, archiSVG:Template;
-    svg:fill "none" ;
-    svg:points "0,0 4,8 -4,8 0,0" ;
-    svg:stroke "black" ;
     svg:stroke-width "1" ;
-    svg:fill "black".
+    svg:marker-start "url(#assignmentStart)";    
+    svg:marker-end "url(#assignmentEnd)".
+

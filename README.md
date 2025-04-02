@@ -4,14 +4,16 @@ This is the repository for the OntoArchimate ontology, a family of RDF-based voc
 
 The OntoArchimate familiy of ontologies provides a comprehensive description of the Archimate vocabulary, encompassing the elements and relationships that constitute Archimate documents. Additionally, it includes algorithms for generating, parsing, validating, annotating, and reusing Archimate documents.
 
-The family of OntoArchimate consists of the following four vocabularies:
+The family of OntoArchimate consists of the following six vocabularies:
 
 1. Archimate Core Vocabulary
 2. Archimate Serialisation Vocabulary
 3. ArchiXML Core Vocabulary
 4. ArchiXML Serialisation Vocabulary
+5. ArchiSVG Core Vocabulary
+6. ArchiSVG Serialisation Vocabulary
 
-With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. Finally, we can serialize this to an actual XML document using the XML Core Vocabulary. We can also roundtrip this process and start with an XML file, parse it to the ArchiXML vocabulary then serialize it to the Archimate Core Vocabulary, using the Archimate Serialisation Vocabulary.
+With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. We can then serialize this to an actual XML document using the XML Core Vocabulary. We can also roundtrip this process and start with an XML file, parse it to the ArchiXML vocabulary then serialize it to the Archimate Core Vocabulary, using the Archimate Serialisation Vocabulary. Finally, we can also express Archimate views as SVG images, through the use of the ArchiSVG Core Vocabulary and ArchiSVG Serialisation Vocabulary.
 
 ![Overview OntoArchimate Objects](/Examples/OntoArchimateObjects.JPG)
 
