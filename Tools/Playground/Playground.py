@@ -49,7 +49,7 @@ archiXML_vocabulary     = readStringFromFile(directory_path + "/specification/ar
 archimate_serialisation = readStringFromFile(directory_path + "/specification/archimate - serialisation.trig")
 archiXML_serialisation  = readStringFromFile(directory_path + "/specification/archiXML - serialisation.trig")
 
-vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archiXML_vocabulary + '\n'
+vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archimate_vocabulary + '\n' + archiXML_vocabulary + '\n'
 example_rdf_code = readStringFromFile(directory_path + "/examples/ArchiXMLBasicModel.trig")
 example_archimate_code = readStringFromFile(directory_path + "/examples/ArchimateBasicModel.xml")
 
@@ -74,7 +74,85 @@ def generate_element_id(element):
     else:
         return str(sibling_index)  # This happens at the root level
 
-def iteratePyShacl(shaclgraph, serializable_graph):
+def transform2ArchiVoc(shaclgraph, serializable_graph):
+        
+        # call PyShacl engine and apply the Archimate serialization vocabulary to the Archimate model
+        old_triples = set(serializable_graph.quads((None, None, None, None)))
+
+        pyshacl.validate(
+        data_graph=serializable_graph,
+        shacl_graph=shaclgraph,
+        data_graph_format="trig",
+        shacl_graph_format="trig",
+        advanced=True,
+        inplace=True,
+        inference=None,
+        iterate_rules=False, # Not using the iterate rules function of PyShacl as it seems to not be working properly. Instead, offer each new resulting state freshly to PyShacl.
+        debug=False,
+        )
+              
+        new_triples = set(serializable_graph.quads((None, None, None, None)))
+
+        # If new triples were added, recurse
+        if new_triples != old_triples:
+           return transform2ArchiVoc(shaclgraph, serializable_graph)
+        else:
+           return serializable_graph
+            
+def transform2ArchiXML(shaclgraph, serializable_graph):
+        
+        # call PyShacl engine and apply the ArchiXML vocabulary to the Archimate model
+        pyshacl.validate(
+        data_graph=serializable_graph,
+        shacl_graph=shaclgraph,
+        data_graph_format="trig",
+        shacl_graph_format="trig",
+        advanced=True,
+        inplace=True,
+        inference=None,
+        iterate_rules=False, # Not using the iterate rules function of PyShacl as it seems to not be working properly. Instead, offer each new resulting state freshly to PyShacl.
+        debug=False,
+        )
+      
+        # Query to know if the model has been fully transformed by testing whether all archimate concepts in the model have a archiXML mirror element. 
+        resultquery = serializable_graph.query('''
+
+        PREFIX archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+        PREFIX archiXML:  <https://data.rijksfinancien.nl/archixml/model/def/>
+        PREFIX prov:      <http://www.w3.org/ns/prov#>
+        PREFIX rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs:      <http://www.w3.org/2000/01/rdf-schema#>       
+        PREFIX xml:       <http://www.w3.org/XML/model/def/> 
+
+        ASK 
+        WHERE {
+          ?concept rdf:type/rdfs:subClassOf* archimate:Concept.
+          
+          # Do not check Archimate concepts themselves
+          filter not exists {
+          ?concept rdfs:isDefinedBy archimate:.
+          }
+          
+          # Are there any unprocessed Archimate model concepts?
+          filter not exists {
+          ?archiXML prov:wasDerivedFrom ?concept;
+                   rdf:type/rdfs:subClassOf* archiXML:DomElement.
+          }            
+        }
+
+        ''')   
+
+        # Check whether another iteration is needed. 
+        for result in resultquery:
+            print ("ask result = ", result)
+            if result == True:
+                
+                return transform2ArchiXML(shaclgraph, serializable_graph)
+         
+            else:
+                return serializable_graph
+            
+def serializeXMLFragment(shaclgraph, serializable_graph):
         
         # call PyShacl engine and apply the Archimate vocabulary to the serializable Archimate document
         pyshacl.validate(
@@ -110,7 +188,7 @@ def iteratePyShacl(shaclgraph, serializable_graph):
             print ("ask result = ", result)
             if result == False:
                 
-                return iteratePyShacl(shaclgraph, serializable_graph)
+                return serializeXMLFragment(shaclgraph, serializable_graph)
          
             else:
                 xmlQuery = serializable_graph.query('''
@@ -141,10 +219,11 @@ def convert_to_archimate():
     g.parse(data=text , format="trig")
     # Zet de RDF-triples om naar een string
     triples = g.serialize(format='trig')
-    serializable_graph_string = vocabulary + '\n' + triples
+    serializable_graph_string = vocabulary + triples
     serializable_graph = Dataset(default_union=True)
     serializable_graph.parse(data=serializable_graph_string , format="trig")    
-    archimate_fragment = iteratePyShacl(xml_vocabulary, serializable_graph)
+    serializable_graph = transform2ArchiXML(archiXML_serialisation, serializable_graph)   
+    archimate_fragment = serializeXMLFragment(xml_vocabulary, serializable_graph)
     print("Archimate fragment =", archimate_fragment)
     return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text)
 
@@ -152,7 +231,7 @@ def convert_to_archimate():
 def convert_to_rdf():
         archimateInput = request.form['archimate']
         # initialize graph
-        g = Graph(bind_namespaces="rdflib")
+        g = Dataset(default_union=True)
               
         g.bind("rdf", rdf)
         g.bind("rdfs", rdfs)
@@ -280,7 +359,14 @@ def convert_to_rdf():
                       g.add((doc[child_id], xml["fragment"], Literal(text_fragment)))
 
         # return the resulting triples
-        triples = g.serialize(format="trig").split('\n')
+            
+        archiXMLTriples = g.serialize(format="trig")
+        serializable_graph_string = vocabulary + '\n' + archiXMLTriples + '\n'
+        serializable_graph = Dataset(default_union=True)
+        serializable_graph.parse(data=serializable_graph_string , format="trig")    
+        serializable_graph = transform2ArchiVoc(archimate_serialisation, serializable_graph)        
+        triples = serializable_graph.serialize(format="trig").split('\n')
+        
         return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput)
 
 @app.route('/')
