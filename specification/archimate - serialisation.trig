@@ -17,7 +17,7 @@ prefix xml:       <http://www.w3.org/XML/model/def/>
 prefix xmlns:     <http://www.w3.org/2000/xmlns/model/def/> 
 prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
-prefix graph:     <https://data.rijksfinancien.nl/archimate/graph/>
+prefix graph:     <https://data.rijksfinancien.nl/archimate/model/rule/>
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix respec:    <https://respec.org/model/def/>
 prefix rule:      <https://data.rijksfinancien.nl/archimate/model/rule/>
@@ -25,6 +25,8 @@ prefix section:   <https://data.rijksfinancien.nl/archimate/id/section/>
 prefix shp:       <https://data.rijksfinancien.nl/archimate/model/shp/>
 prefix standard:  <https://data.rijksfinancien.nl/archimate/id/standard/>
 prefix target:    <https://data.rijksfinancien.nl/archimate/model/target/>
+
+rule: {
 
 archimate:
     a
@@ -208,11 +210,12 @@ construct {
 
   ?relationship rdf:type archimate:Relationship;
            skos:prefLabel ?relationshipName;
+           archimate:name ?archimateName;
            skos:definition ?definition;
            archimate:relationship ?relationtype;
            archimate:from ?source;
            archimate:to ?target;
-           archimate:accessType ?accessType;           
+           archimate:accessType ?accessType;
            archimate:strength ?influenceStrength;
            rdfs:isDefinedBy ?model;
            prov:wasDerivedFrom $this.
@@ -233,7 +236,8 @@ construct {
   ?relationshipNameNode rdf:type archiXML:Name;
         rdf:_1 ?relationshipNameTextNode.
   ?relationshipNameTextNode rdf:type archiXML:Text;
-        xml:fragment ?relationshipName.}
+        xml:fragment ?relationshipName.
+  bind(?relationshipName as ?archimateName)}
  
   $this archiXML:target ?targetIdentifier;
         archiXML:source ?sourceIdentifier;
@@ -571,9 +575,9 @@ construct {
       ?archiXML_Element archiXML:identifier ?identifier.
       ?archimate_Element prov:wasDerivedFrom ?archiXML_Element;
                          rdfs:isDefinedBy ?model;
-                         skos:prefLabel ?label.  
+                         skos:prefLabel ?label.
 
-  # Style is optional                    
+  # Style is optional
   optional {
   $this ?memberStyle ?style.
   ?style     rdf:type archiXML:Style;
@@ -594,11 +598,11 @@ construct {
              archiXML:name ?fontName;
              archiXML:size ?fontSize;
              ?fontMember   ?fontColor.
-  ?fontColor rdf:type archiXML:Color;             
+  ?fontColor rdf:type archiXML:Color;
              archiXML:r ?fontColorR;
-             archiXML:g ?fontColorG;             
-             archiXML:b ?fontColorB.  
-  }          
+             archiXML:g ?fontColorG;
+             archiXML:b ?fontColorB.
+  }
   
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),  '-Archimate'))           as ?viewNode)
@@ -716,7 +720,7 @@ construct {
     ?labelTextNode rdf:type archiXML:Text;
                    xml:fragment ?label. 
 
-  # Style is optional.                  
+  # Style is optional.
   optional {
   $this ?memberStyle ?style.
   ?style     rdf:type archiXML:Style;
@@ -741,7 +745,7 @@ construct {
              archiXML:r ?fontColorR;
              archiXML:g ?fontColorG;             
              archiXML:b ?fontColorB.  
-  }          
+  }
 
   # Establish a comment
   BIND(CONCAT('Container: ',?label) as ?comment)
@@ -868,7 +872,7 @@ construct {
   ?labelTextNode rdf:type archiXML:Text;
                  xml:fragment ?label. 
 
-  # Style is optional                    
+  # Style is optional
   optional {
   $this ?memberStyle ?style.
   ?style     rdf:type archiXML:Style;
@@ -1023,7 +1027,7 @@ construct {
   ?archiXML_view archiXML:identifier ?viewIdentifier.
   ?view prov:wasDerivedFrom ?archiXML_view.
   
-  # Style is optional                    
+  # Style is optional
   optional {
   $this ?memberStyle ?style.
   ?style     rdf:type archiXML:Style;
@@ -1111,26 +1115,28 @@ prefix prov: <http://www.w3.org/ns/prov#>
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 construct {
 
   # create the depiction of an archimate relationship
-  
+
   ?relationshipDepiction 
     rdf:type archimate:Connection;
-    skos:prefLabel ?label;
+    skos:prefLabel ?relationshipLabel;
+    archimate:name ?archimateName;
     foaf:depicts ?archimate_Relationship;
     archimate:lineColor  ?lineColorIRI;
     archimate:font       ?fontIRI;
     prov:wasDerivedFrom $this;
-    rdfs:isDefinedBy ?model.    
-  
+    rdfs:isDefinedBy ?model.
+
   ?lineColorIRI 
     rdf:type archimate:Color;
     archimate:red   ?lineColorR;
     archimate:green ?lineColorG;
     archimate:blue  ?lineColorB;
-    prov:wasDerivedFrom ?lineColor;    
+    prov:wasDerivedFrom ?lineColor;
     rdfs:isDefinedBy ?model. 
 
   ?fontIRI 
@@ -1146,21 +1152,23 @@ construct {
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB;
-    prov:wasDerivedFrom ?fontColor;    
+    prov:wasDerivedFrom ?fontColor;
     rdfs:isDefinedBy ?model.
 
-  ?bendPointListItem
+  ?bendPointList
     rdf:type rdf:List;
-    skos:prefLabel 'List of bendpoints';
-    skos:definition 'List of bendpoints for an archimate view';
-    rdf:first ?bendPointIRI.
-    
+    skos:prefLabel ?bendPointListLabel;
+    skos:definition 'List of bendpoints for a relationship in an Archimate view.';
+    rdf:first ?bendPointIRI;
+    rdfs:isDefinedBy ?model.
+
   ?bendPointIRI
-    rdf:type archimate:BendPoint;    
+    rdf:type archimate:BendPoint;
+    skos:prefLabel ?bendPointLabel;
     archimate:horizontal ?x;
     archimate:vertical   ?y;
     prov:wasDerivedFrom ?bendPoint;
-    rdfs:isDefinedBy ?model.    
+    rdfs:isDefinedBy ?model.
 
 } where {
   
@@ -1168,8 +1176,13 @@ construct {
   ?archiXML_Relationship archiXML:identifier ?identifier.
   ?archimate_Relationship prov:wasDerivedFrom ?archiXML_Relationship;
                           rdfs:isDefinedBy ?model;
-                          skos:prefLabel ?label.
-  BIND(IRI(CONCAT(STR($this),  '-Archimate')) as ?relationshipDepiction)
+                          skos:prefLabel ?relationshipLabel.
+  optional{
+  ?archimate_Relationship archimate:name ?archimateName.
+  }
+
+  bind(concat("List of bendpoints for relationship ", ?relationshipLabel) as ?bendPointListLabel)
+  bind(iri(concat(str($this),  '-Archimate')) as ?relationshipDepiction)
   
   optional {
   $this      ?member ?style.
@@ -1178,17 +1191,22 @@ construct {
              ?styleFontMember      ?font.
   ?lineColor rdf:type archiXML:LineColor;
              archiXML:r ?lineColorR;
-             archiXML:g ?lineColorG;             
-             archiXML:b ?lineColorB.            
+             archiXML:g ?lineColorG;
+             archiXML:b ?lineColorB.
   ?font      rdf:type archiXML:Font;
              archiXML:name ?fontName;
              archiXML:size ?fontSize;
              ?fontMember   ?fontColor.
-  ?fontColor rdf:type archiXML:Color;             
+  ?fontColor rdf:type archiXML:Color;
              archiXML:r ?fontColorR;
-             archiXML:g ?fontColorG;             
+             archiXML:g ?fontColorG;
              archiXML:b ?fontColorB.
   }
+
+  bind(iri(concat(str($this),  '-Archimate_LineColor'))            as ?lineColorIRI)
+  bind(iri(concat(str($this),  '-Archimate_Font'))                 as ?fontIRI)
+  bind(iri(concat(str($this),  '-Archimate_FontColor'))            as ?fontColorIRI)
+
 
   optional {
   $this      ?memberBendPoint ?bendPoint.
@@ -1197,12 +1215,27 @@ construct {
              archiXML:y ?y.
   }
 
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_LineColor'))            as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_Font'))                 as ?fontIRI)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_FontColor'))            as ?fontColorIRI)
-  BIND(IRI(CONCAT(STR($this),  '-Archimate_BendPoint', '-',?x,'-',?y)) as ?bendPointIRI)
-  BIND(BNODE() as ?bendPointListItem)
-
+  # Establish the bendpoint index
+  optional {
+  {select $this ?bendPoint ((count(?prevIndex)+1) as ?indexBendPoint)
+   where {
+    $this ?member ?bendPoint.
+    ?bendPoint rdf:type archiXML:BendPoint.
+    filter(strstarts(str(?member), concat(str(rdf:), '_')))
+    bind(xsd:integer(strafter(str(?member), concat(str(rdf:),'_'))) as ?index)
+    optional {
+              $this ?prevMember ?prevBendPoint.
+              ?prevBendPoint rdf:type archiXML:BendPoint.              
+              filter(strstarts(str(?prevMember), concat(str(rdf:), '_')))
+              bind(xsd:integer(strafter(str(?prevMember), concat(str(rdf:),'_'))) as ?prevIndex)
+              filter(?prevIndex < ?index)
+             }
+     } group by $this ?bendPoint
+   }
+   bind(iri(concat(str($this),  '-Archimate_BendPointList-',str(?indexBendPoint)))         as ?bendPointList)
+   bind(iri(concat(str($this),  '-Archimate_BendPoint-',str(?indexBendPoint)))             as ?bendPointIRI)
+   bind(concat("Bendpoint number ", str(?indexBendPoint), ": (",str(?x), ",",str(?y), ")") as ?bendPointLabel)
+  }
   }
 ''';
     rdfs:isDefinedBy archimate:.
@@ -1480,3 +1513,81 @@ construct {
   }
 ''';
     rdfs:isDefinedBy archimate:.    
+
+function:getIRI
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns an IRI for an Archimate model concept." ;
+    sh:parameter [
+        sh:path function:concept ;
+        sh:datatype xsd:anyURI ;
+        sh:description "An archimate concept" ;
+    ] ;   
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+  $this 
+    ?memberProperties ?propertiesNode.
+  ?propertiesNode 
+    rdf:type archiXML:Properties;
+    ?memberProperty ?propertyNode.
+  ?propertyNode 
+    rdf:type archiXML:Property;
+    archiXML:propertyDefinitionRef ?propertyID;
+    ?memberValue ?propertyValue.
+  ?propertyValue 
+    rdf:type archiXML:Value ;
+    ?memberValueText ?propertyValueText.
+  ?propertyValueText 
+    rdf:type archiXML:Text;
+    xml:fragment ?localName.
+  
+  ?propertyDefinitions 
+    rdf:type archiXML:PropertyDefinition;
+    ?memberDefinitions ?propertyDefinitionNode_LocalName, ?propertyDefinitionNode_BaseIRI.
+  ?propertyDefinitionNode 
+    rdf:type archiXML:PropertyDefinition;
+    archiXML:identifier ?propertyID;
+    ?memberDefinition ?propertyName.
+  ?propertyName 
+    rdf:type archiXML:Name;
+    ?memberName ?propertyNameText.
+  ?propertyNameText 
+    rdf:type archiXML:Text;
+    xml:fragment "ontoArchimateLocalName".
+
+  ?propertyDefinitionNode_BaseIRI
+    rdf:type archiXML:PropertyDefinition;
+    archiXML:identifier ?propertyID_BaseIRI;
+    ?memberDefinition_BaseIRI ?propertyName_BaseIRI.
+  ?propertyName_BaseIRI 
+    rdf:type archiXML:Name;
+    ?memberNameBaseIRI ?propertyNameText_BaseIRI.
+  ?propertyNameText_BaseIRI 
+    rdf:type archiXML:Text;
+    xml:fragment "ontoArchimateBaseIRI".    
+
+  $modelDocument 
+    ?memberProperties_BaseIRI ?propertiesNode_BaseIRI.
+  ?propertiesNode_BaseIRI 
+    rdf:type archiXML:Properties;
+    ?memberPropertyBaseIRI ?propertyNode_BaseIRI.
+  ?propertyNode_BaseIRI 
+    rdf:type archiXML:Property;
+    archiXML:propertyDefinitionRef ?propertyID_BaseIRI;
+    ?memberValue_BaseIRI ?propertyValue_BaseIRI.
+  ?propertyValue_BaseIRI 
+    rdf:type archiXML:Value ;
+    ?memberValueText_BaseIRI ?propertyValueText_BaseIRI.
+  ?propertyValueText_BaseIRI 
+    rdf:type archiXML:Text;
+    xml:fragment ?baseIRI.        
+}
+""" .
+
+}

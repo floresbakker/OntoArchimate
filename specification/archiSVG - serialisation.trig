@@ -18,14 +18,15 @@ prefix xml:       <http://www.w3.org/XML/model/def/>
 prefix xmlns:     <http://www.w3.org/2000/xmlns/model/def/> 
 prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
-prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/rule/>
 prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix graph:     <https://data.rijksfinancien.nl/archisvg/graph/>
 prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
 prefix section:   <https://data.rijksfinancien.nl/archisvg/id/section/>
 prefix shp:       <https://data.rijksfinancien.nl/archisvg/model/shp/>
 prefix standard:  <https://data.rijksfinancien.nl/archisvg/id/standard/>
 prefix target:    <https://data.rijksfinancien.nl/archisvg/model/target/>
+
+rule: {
 
 archiSVG:
     a
@@ -196,37 +197,51 @@ rule:View
     sh:construct '''
 
 prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
+prefix dct:      <http://purl.org/dc/terms/>
 prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix svg: <http://www.w3.org/SVG/model/def/>
-prefix xml: <http://www.w3.org/XML/model/def/>
-prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix prov:     <http://www.w3.org/ns/prov#>
+prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos:     <http://www.w3.org/2004/02/skos/core#>
+prefix svg:      <http://www.w3.org/SVG/model/def/>
+prefix xml:      <http://www.w3.org/XML/model/def/>
+prefix xmlns:    <http://www.w3.org/2000/xmlns/model/def/> 
+prefix xsi:      <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  ?view  rdf:type svg:Document;
+  ?doc   rdf:type svg:Document;
          skos:prefLabel ?svgLabel;
          skos:definition ?svgDefinition;
          rdf:_1 ?svg;
          prov:wasDerivedFrom $this.
+         
   ?svg   rdf:type svg:Svg;
          xml:xmlns "http://www.w3.org/2000/svg" ;
+         xmlns:xlink "http://www.w3.org/1999/xlink" ;
+         svg:viewBox ?viewBox;
+         svg:height "900";
          rdf:_1 ?definitions;
          rdf:_2 ?elements;
-         rdf:_3 ?relationships;
-         svg:width "10000";
-         svg:height "1000".
+         rdf:_3 ?relationships.
+         
   ?definitions rdf:type svg:Defs;
-         dct:subject "Definitions".
+         dct:subject "definitions";
+         rdf:_1 ?definitionsRelations;
+         rdf:_2 ?definitionsIcons.
+         
+  ?definitionsRelations rdf:type svg:G;  
+         dct:subject "definitions of relations".
+  
+  ?definitionsIcons rdf:type svg:G;  
+         dct:subject "definitions of icons".
+  
   ?elements rdf:type svg:G;
-         dct:subject "Elements";
+         dct:subject "elements";
          skos:prefLabel "Archimate elements".
+         
   ?relationships rdf:type svg:G;
-         skos:prefLabel "Archimate relationships";
-         dct:subject "Relationships".
+         dct:subject "relationships";
+         skos:prefLabel "Archimate relationships".
 
 } where {
 
@@ -239,27 +254,31 @@ construct {
   bind(coalesce(?label, 'A view') as ?svgLabel)
   bind(coalesce(?definition, 'A view in an archimate model.') as ?svgDefinition)
   
+  bind(function:getViewBox($this) as ?viewBox)
+  
   # Create IRI's
-  BIND(IRI(CONCAT(STR($this),"-View"))                as ?view)
-  BIND(IRI(CONCAT(STR($this),"-SVG"))                 as ?svg)
-  BIND(IRI(CONCAT(STR($this),"-Definitions"))         as ?definitions)  
-  BIND(IRI(CONCAT(STR($this),"-Elements"))            as ?elements)
-  BIND(IRI(CONCAT(STR($this),"-Relationships"))       as ?relationships)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Document"))              as ?doc)
+  BIND(IRI(CONCAT(STR($this),"-SVG"))                       as ?svg)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Definitions"))           as ?definitions)  
+  BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Relations")) as ?definitionsRelations)  
+  BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Icons"))     as ?definitionsIcons)  
+  BIND(IRI(CONCAT(STR($this),"-SVG-Elements"))              as ?elements)
+  BIND(IRI(CONCAT(STR($this),"-SVG-Relationships"))         as ?relationships)
 
   }
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-shp:Definitions
+shp:DefinitionsIcons
     a sh:NodeShape;
-    sh:rule rule:Definitions;
-    sh:target target:Definitions;
-    skos:prefLabel 'definitions shape'@en;
+    sh:rule rule:DefinitionsIcons;
+    sh:target target:DefinitionsIcons;
+    skos:prefLabel 'definitions icons shape'@en;
     rdfs:isDefinedBy archiSVG:.
 
-target:Definitions
+target:DefinitionsIcons
     a sh:SPARQLTarget;
-    rdfs:comment 'Select all definitions in the archisvg template.'@en;
+    rdfs:comment 'Select all definitions of icons in the archisvg template.'@en;
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
@@ -273,8 +292,98 @@ prefix svg: <http://www.w3.org/SVG/model/def/>
 select $this {
 
   # Select all definitions... 
-  $this rdf:type svg:Defs;
-      dct:subject "Definitions".
+  $this rdf:type svg:G;
+      dct:subject "definitions of icons".
+    
+  # ...that are not processed yet
+  filter not exists { 
+  $this ?member ?definition.
+  ?definition rdf:type svg:Symbol.
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+rule:DefinitionsIcons
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates SVG definitions for icons.'@en;
+    skos:prefLabel 'SVG definitions of icons rule'@en;
+    sh:construct '''
+
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:      <http://purl.org/dc/terms/>
+prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:     <http://www.w3.org/ns/prov#>
+prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:     <http://www.w3.org/2004/02/skos/core#>
+prefix svg:      <http://www.w3.org/SVG/model/def/>
+prefix xml:      <http://www.w3.org/XML/model/def/>
+prefix xsi:      <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+
+  $this      ?member ?definition.
+  
+  ?definition rdf:type svg:Symbol;
+              skos:prefLabel ?label;
+              svg:id ?id;
+              ?memberComponent ?component.
+
+  ?component ?predicate ?object. 
+
+} where {
+ 
+  archiSVG:iconDefinitions
+              ?member ?definitionTemplate.
+  filter(strstarts(str(?member), concat(str(rdf:), '_')))  
+  
+  ?definitionTemplate 
+              rdf:type svg:Symbol, archiSVG:Template;
+              skos:prefLabel ?label;
+              svg:id ?id;
+              ?memberComponent ?componentTemplate.
+  filter(strstarts(str(?memberComponent), concat(str(rdf:), '_')))
+  
+  ?componentTemplate 
+             ?predicate ?object.
+
+  bind(str(strafter(str(?member), concat(str(rdf:), '_')))          as ?definitionIdentifier)
+  bind(str(strafter(str(?memberComponent), concat(str(rdf:), '_'))) as ?componentIdentifier) 
+  
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),"-Definition-", ?definitionIdentifier))     as ?definition)
+  BIND(IRI(CONCAT(STR(?definition),"-Component-", ?componentIdentifier)) as ?component)  
+  
+  }
+''';
+    rdfs:isDefinedBy archiSVG:.    
+    
+shp:DefinitionsRelations
+    a sh:NodeShape;
+    sh:rule rule:DefinitionsRelations;
+    sh:target target:DefinitionsRelations;
+    skos:prefLabel 'definitions relations shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:DefinitionsRelations
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all definitions of relations in the archisvg template.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
+
+select $this {
+
+  # Select all definitions... 
+  $this rdf:type svg:G;
+      dct:subject "definitions of relations".
     
   # ...that are not processed yet
   filter not exists { 
@@ -285,10 +394,10 @@ select $this {
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-rule:Definitions
+rule:DefinitionsRelations
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that creates SVG definitions.'@en;
-    skos:prefLabel 'SVG definitions rule'@en;
+    rdfs:comment 'A rule that creates SVG definitions for relations.'@en;
+    skos:prefLabel 'SVG definitions of relations rule'@en;
     sh:construct '''
 
 prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
@@ -327,10 +436,11 @@ construct {
 
 } where {
  
-  ?definitions rdf:type svg:Defs, archiSVG:Template; 
+  archiSVG:relationDefinitions
               ?member ?definitionTemplate.
   
-  ?definitionTemplate rdf:type svg:Marker, archiSVG:Definition;
+  ?definitionTemplate 
+              rdf:type svg:Marker, archiSVG:Definition;
               svg:id ?id;
               svg:markerWidth ?markerWidth;
               svg:markerHeight ?markerHeight;
@@ -340,7 +450,8 @@ construct {
               svg:markerUnits ?markerUnits;
               ?memberComponent ?componentTemplate.
 
-  ?componentTemplate rdf:type ?svgClass, archiSVG:Definition;
+  ?componentTemplate 
+             rdf:type ?svgClass, archiSVG:Definition;
              svg:fill ?fill ;
              svg:stroke ?stroke ;
              svg:stroke-width ?strokeWidth .
@@ -349,9 +460,9 @@ construct {
  
   optional {?componentTemplate svg:points ?points.}
   optional {?componentTemplate 
-            svg:cx ?cx ;
-             svg:cy ?cy ;
-             svg:r ?r .  }
+              svg:cx ?cx ;
+              svg:cy ?cy ;
+              svg:r ?r .  }
 
   bind(str(strafter(str(?member), concat(str(rdf:), '_')))          as ?definitionIdentifier)
   bind(str(strafter(str(?memberComponent), concat(str(rdf:), '_'))) as ?componentIdentifier) 
@@ -415,6 +526,7 @@ prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:      <http://www.w3.org/2004/02/skos/core#>
 prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xlink:     <https://www.w3.org/1999/xlink/model/def/> 
 prefix xml:       <http://www.w3.org/XML/model/def/>
 prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
 prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
@@ -424,6 +536,7 @@ construct {
     ?elementNode 
           rdf:type svg:G, archiSVG:Element;
           skos:prefLabel ?elementName;
+          svg:transform  ?translate;
           rdf:_1 ?box;
           rdf:_2 ?icon;
           rdf:_3 ?text;
@@ -431,35 +544,29 @@ construct {
           foaf:depicts ?element.
 
     ?box 
-          rdf:type ?boxClass;
-          svg:x      ?horizontal ;
-          svg:y      ?vertical ;
-          svg:height ?height ;
-          svg:width  ?width ; 
-          svg:fill   ?fillColor ;
-          svg:stroke ?lineColor .
+          rdf:type svg:Path;
+          svg:d         ?path ;
+          svg:transform ?scale;
+          svg:vector-effect "non-scaling-stroke";
+          svg:fill      ?fillColor ;
+          svg:stroke    ?lineColor .
 
     ?icon 
-          rdf:type svg:G;
-          archiSVG:offsetX ?horizontal;
-          archiSVG:offsetY ?vertical;
-          prov:wasDerivedFrom ?iconTemplate;
-          ?iconMember ?iconPart.
+          rdf:type svg:Use;
+          svg:transform ?iconTranslate;
+          xlink:href ?iconID.
 
-    ?iconPart 
-          rdf:type ?iconPartClass, archiSVG:ElementIconPart;
-          prov:wasDerivedFrom ?iconTemplatePart.
-
-    ?text rdf:type svg:TextElement ;
-          svg:font-family ?fontName ;
-          svg:font-size   ?fontSize ;
-          svg:x           ?textX ;
-          svg:y           ?textY ;
-          svg:transform   ?translate;
-          rdf:_1          ?textFragment .
-          
-    ?textFragment rdf:type svg:Text;
-          xml:fragment ?elementName.
+    ?text 
+          rdf:type svg:TextElement, archiSVG:TextElement ;
+          skos:prefLabel     ?elementName;
+          svg:font-family    ?fontName ;
+          svg:font-size      ?fontSize ;
+          svg:x              ?textX ;
+          svg:y              ?textY ;
+          svg:text-anchor    ?textAnchor;
+          archiSVG:maxChars  ?maxChars;
+          archiSVG:maxLines  ?maxLines;
+          archiSVG:textLines ?textLines.
 
 } where {
   
@@ -508,16 +615,24 @@ construct {
   bind(concat("rgb(", ?fontColorR, "," ,?fontColorG, "," ,?fontColorB, ")") as ?fontColorElement)
   }
   
-  BIND(COALESCE(?heightElement,    ?defaultHeight)        as ?height)
-  BIND(COALESCE(?widthElement,     ?defaultWidth)         as ?width)
-  BIND(COALESCE(?fillColorElement, ?defaultFillColor)     as ?fillColor)
-  BIND(COALESCE(?lineColorElement, ?defaultLineColor)     as ?lineColor)
-  BIND(COALESCE(?fontColorElement, ?defaultFontColor)     as ?fontColor)
-  BIND(COALESCE(?fontNameElement,  ?defaultFontName)      as ?fontName)
-  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize)      as ?fontSize)
+  BIND(COALESCE(?heightElement,    "55")                       as ?height)
+  BIND(COALESCE(?widthElement,     "144")                      as ?width)
+  BIND(str(xsd:decimal(?horizontal) + xsd:decimal(?width) - 5) as ?iconBorder)
+  BIND(COALESCE(?fillColorElement, ?defaultFillColor)          as ?fillColor)
+  BIND(COALESCE(?lineColorElement, ?defaultLineColor)          as ?lineColor)
+  BIND(COALESCE(?fontColorElement, ?defaultFontColor)          as ?fontColor)
+  BIND(COALESCE(?fontNameElement,  ?defaultFontName)           as ?fontName)
+  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize)           as ?fontSize)
   
+  # Calculate the translation of the box position against the position of the template box
   BIND(CONCAT('translate(', str(?horizontal), ',', str(?vertical), ')') as ?translate)
   
+  # Calculate the translation of the icon position compensating for the size of the box against the size of the template box
+  BIND(CONCAT('translate(', str(xsd:integer(?width)-144), ', 0)') as ?iconTranslate)
+  
+  # Calculate the scaling of the box against the size of the template box
+  BIND(CONCAT('scale(', str(xsd:integer(?width)/144), ',', str(xsd:integer(?height)/55), ')') as ?scale)
+    
   # A view node depicts an element, get the metadata for this.
   $this foaf:depicts ?element.
   ?element rdf:type ?archimateClass;
@@ -530,36 +645,48 @@ construct {
                rdf:_2 ?iconTemplate;
                rdf:_3 ?textTemplate.
 
-  ?boxTemplate rdf:type ?boxClass, archiSVG:Template;
-               svg:height ?defaultHeight ;
-               svg:width  ?defaultWidth ; 
+  ?boxTemplate rdf:type svg:Path, archiSVG:Template;
+               svg:d      ?path ;
                svg:fill   ?defaultFillColor ;
                svg:stroke ?defaultLineColor .
-  ?boxClass rdfs:subClassOf* svg:Element.
 
-  ?iconTemplate rdf:type svg:G, archiSVG:Template;
-               ?iconMember ?iconTemplatePart.
-
-  ?iconTemplatePart rdf:type ?iconPartClass, archiSVG:Template.
-  ?iconPartClass rdfs:subClassOf* svg:Element.
+  ?iconTemplate rdf:type svg:Use, archiSVG:Template;
+                xlink:href ?iconID.
     
   ?textTemplate rdf:type svg:TextElement, archiSVG:Template;
                 svg:font-family ?defaultFontName ;
                 svg:font-size   ?defaultFontSize ;
-                svg:x           ?textX;
                 svg:y           ?textY.
+optional{
+  ?textTemplate svg:text-anchor ?templateTextAnchor.
+}
+bind(coalesce(?templateTextAnchor, "middle") as ?textAnchor)
 
-  # Set unique identifier icon part
-  BIND(str(strafter(str(?iconMember), concat(str(rdf:), '_'))) as ?iconPartIdentifier)
+  # Establish text area limits
+  
+  # Calculate available space for text (98% of box width)
+  bind(xsd:integer(floor(xsd:integer(?width) * 0.98)) as ?textWidth)  
+
+  # Approximate max chars per line based on font size (each character on average takes up 0.6 of fontsize in width)
+  bind(xsd:integer(floor(?textWidth / (xsd:integer(?fontSize) * 0.6))) as ?maxChars)
+
+  # Calculate how many lines fit in the box (120% of fontsize per line)
+  bind(xsd:integer(floor(xsd:integer(?height) / (xsd:integer(?fontSize) * 1.2))) as ?maxLines)
+
+  # Calculate how many lines are needed
+  bind(xsd:integer(ceil(strlen(?elementName)/?maxChars)) as ?textLines)
+  
+  # Calculate the text position
+  bind(if(?textAnchor="middle", xsd:integer(?width)/2, if(?textAnchor="start", 10, xsd:integer(?width)-10)) as ?textX)
 
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),"-SVG-Element"))                                    as ?elementNode)
   BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Box"))                             as ?box)
   BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Icon"))                            as ?icon)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-IconPart", ?iconPartIdentifier))   as ?iconPart)
   BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Text"))                            as ?text)
   BIND(IRI(CONCAT(STR($this),"-SVG-Element","-TextFragment"))                    as ?textFragment)
 }
+
 ''';
     rdfs:isDefinedBy archiSVG:.
 
@@ -1029,13 +1156,13 @@ construct {
   }
   bind(concat("ViewReference", str(?indexRef)) as ?labelIdentifier)
   bind("Label" as ?xsiType)
-  
+
   # Get optional label for the note
   optional {
   $this  
       skos:prefLabel ?label.
   }
-  
+
   optional {
   $this
     archimate:horizontal ?x;
@@ -1043,7 +1170,7 @@ construct {
     archimate:height     ?h;     
     archimate:width      ?w.
   }
-  
+
   optional {
   $this
     archimate:fillColor  ?fillColor;
@@ -1126,7 +1253,7 @@ select $this {
                  archimate:contains ?viewnodes.
   ?viewnodes rdf:type archimate:ViewNode.
    filter not exists {
-      ?viewnodes prov:wasDerivedFrom [].
+       [] prov:wasDerivedFrom ?viewnodes.
     }
   }
 }
@@ -1196,7 +1323,7 @@ construct {
   optional {
   ?relationship archimate:accessType ?accessType.}
 
-  ?archimateView archimate:contains ?source, ?target.
+  ?archimateView archimate:contains+ ?source, ?target.
   ?source foaf:depicts ?fromArchimateElement.
   ?target foaf:depicts ?toArchimateElement.
 
@@ -1307,6 +1434,7 @@ prefix prov:      <http://www.w3.org/ns/prov#>
 prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
 prefix xml:       <http://www.w3.org/XML/model/def/>
 prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
 prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
@@ -1317,26 +1445,29 @@ construct {
 
 } where {
 
-  # Get the parent node
+  # Get the elements node
   $this prov:wasDerivedFrom ?node. 
-  ?parent archimate:contains ?node.
-  ?documentNode prov:wasDerivedFrom ?parent;
+  ?view   archimate:contains* ?node.
+  ?documentNode rdf:type svg:Document;
+                prov:wasDerivedFrom ?view;
                 rdf:_1 ?svg.
   ?svg rdf:_2 ?elements.
 
-  # Establish position of the element within the parent
-  {select ?parent ?node ((count(?prevIndex)) as ?indexMember)
+  # Establish position of the element within the view
+  {select ?view ?node ((count(?prevIndex)) as ?indexMember)
    where{
-    ?parent archimate:contains ?node.
+    ?view rdf:type archimate:View;
+          archimate:contains* ?node.
     bind(str(?node) as ?index)
     optional {
-              ?parent archimate:contains ?prevNode.
+              ?view rdf:type archimate:View;
+                    archimate:contains+ ?prevNode.
               ?prevNode rdf:type ?prevNodeClass.
               filter (?prevNodeClass in (archimate:ViewNode, archimate:Container, archimate:Note, archimate:ViewReference))
               bind(str(?prevNode) as ?prevIndex)
               filter(?prevIndex < ?index)
              } 
-     } group by ?parent ?node
+     } group by ?view ?node
   }
   
   # Establish instance of rdfs:member for the node.
@@ -1435,328 +1566,6 @@ construct {
 ''';
     rdfs:isDefinedBy archiSVG:.
 
-shp:IconPartPolyLine
-    a sh:NodeShape;
-    sh:rule rule:IconPartPolyLine;
-    sh:target target:IconPartPolyLine;
-    skos:prefLabel 'archisvg icon part polyline shape'@en;
-    rdfs:isDefinedBy archiSVG:.
-
-target:IconPartPolyLine
-    a sh:SPARQLTarget;
-    rdfs:comment 'Select the archisvg icon part polyline that have to get enriched with attributes.'@en;
-    sh:select '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov:      <http://www.w3.org/ns/prov#>
-prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:       <http://www.w3.org/SVG/model/def/> 
-
-select $this {
-
-  # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:ElementIconPart, svg:Polyline.
-  filter not exists { 
-   $this prov:wasDerivedFrom rule:IconPartPolyLine.
-   }
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-rule:IconPartPolyLine
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that adds attributes to an icon part polyline in archiSVG.'@en;
-    skos:prefLabel 'icon part polyline rule'@en;
-    sh:construct '''
-
-prefix archimate:   <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct:         <http://purl.org/dc/terms/>
-prefix prov:        <http://www.w3.org/ns/prov#>
-prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
-prefix xsi:         <http://www.w3.org/2001/XMLSchema-instance/model/def/>
-
-construct {
-
-  $this svg:fill ?fill;
-        svg:points ?bendPoints;
-        svg:stroke ?lineColor ;
-        svg:stroke-width ?lineSize ;
-        svg:transform ?translate;
-        prov:wasDerivedFrom rule:IconPartPolyLine.
-
-} where {
-  
-  ?icon ?member $this; 
-        archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY.
-        
-  $this prov:wasDerivedFrom ?template.
-        
-  ?template
-            rdf:type svg:Polyline, archiSVG:Template;
-            svg:fill ?fill;
-            svg:stroke ?lineColor;
-            svg:stroke-width ?lineSize;
-            svg:points ?bendPoints.
-           
-  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-
-shp:IconPartRect
-    a sh:NodeShape;
-    sh:rule rule:IconPartRect;
-    sh:target target:IconPartRect;
-    skos:prefLabel 'archisvg icon part rect shape'@en;
-    rdfs:isDefinedBy archiSVG:.
-
-target:IconPartRect
-    a sh:SPARQLTarget;
-    rdfs:comment 'Select the archisvg icon part rect that have to get enriched with attributes.'@en;
-    sh:select '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov:      <http://www.w3.org/ns/prov#>
-prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:       <http://www.w3.org/SVG/model/def/> 
-
-select $this {
-
-  # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:ElementIconPart, svg:Rect.
-  filter not exists { 
-   $this prov:wasDerivedFrom rule:IconPartRect.
-   }
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-rule:IconPartRect
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that adds attributes to an icon part rect in archiSVG.'@en;
-    skos:prefLabel 'icon part rect rule'@en;
-    sh:construct '''
-
-prefix archimate:   <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct:         <http://purl.org/dc/terms/>
-prefix prov:        <http://www.w3.org/ns/prov#>
-prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
-prefix xsi:         <http://www.w3.org/2001/XMLSchema-instance/model/def/>
-
-construct {
-
-  $this svg:fill ?fill;
-        svg:width  ?width;
-        svg:height ?height;
-        svg:x ?horizontal;
-        svg:y ?vertical;
-        svg:rx ?rx ;
-        svg:ry ?ry ;
-        svg:transform ?translate;
-        svg:stroke ?lineColor ;
-        svg:stroke-width ?lineSize ;
-        prov:wasDerivedFrom rule:IconPartRect.
-
-} where {
-
-  ?icon ?member $this; 
-        archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY.
-  
-  $this prov:wasDerivedFrom ?template.
-        
-  ?template
-            rdf:type svg:Rect, archiSVG:Template;
-            svg:fill ?fill;
-            svg:stroke ?lineColor;
-            svg:x ?horizontal;
-            svg:y ?vertical;
-            svg:width ?width;
-            svg:height ?height.
-
-  optional {
-  ?template svg:rx ?rx;
-            svg:ry ?ry.
-  }   
-  
-  optional {
-  ?template svg:stroke-width ?lineSize;
-  }
-  
-  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-
-shp:IconPartCircle
-    a sh:NodeShape;
-    sh:rule rule:IconPartCircle;
-    sh:target target:IconPartCircle;
-    skos:prefLabel 'archisvg icon part circle shape'@en;
-    rdfs:isDefinedBy archiSVG:.
-
-target:IconPartCircle
-    a sh:SPARQLTarget;
-    rdfs:comment 'Select the archisvg icon part circle that have to get enriched with attributes.'@en;
-    sh:select '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov:      <http://www.w3.org/ns/prov#>
-prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:       <http://www.w3.org/SVG/model/def/> 
-
-select $this {
-
-  # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:ElementIconPart, svg:Circle.
-  filter not exists { 
-   $this prov:wasDerivedFrom rule:IconPartCircle.
-   }
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-rule:IconPartCircle
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that adds attributes to an icon part circle in archiSVG.'@en;
-    skos:prefLabel 'icon part circle rule'@en;
-    sh:construct '''
-
-prefix archimate:   <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct:         <http://purl.org/dc/terms/>
-prefix prov:        <http://www.w3.org/ns/prov#>
-prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
-prefix xsi:         <http://www.w3.org/2001/XMLSchema-instance/model/def/>
-
-construct {
-
-  $this svg:fill ?fill;
-        svg:cx ?horizontal;
-        svg:cy ?vertical;
-        svg:r  ?radius ;
-        svg:transform ?translate;
-        svg:stroke ?lineColor ;
-        svg:stroke-width ?lineSize ;
-        prov:wasDerivedFrom rule:IconPartCircle.
-
-} where {
-
-  ?icon ?member $this; 
-        archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY.
-
-  $this prov:wasDerivedFrom ?template.
-
-  ?template
-            rdf:type svg:Circle, archiSVG:Template;
-            svg:fill ?fill;
-            svg:stroke ?lineColor;
-            svg:stroke-width ?lineSize;
-            svg:cx ?horizontal ;
-            svg:cy ?vertical ;
-            svg:r  ?radius .
-
-  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-
-shp:IconPartLine
-    a sh:NodeShape;
-    sh:rule rule:IconPartLine;
-    sh:target target:IconPartLine;
-    skos:prefLabel 'archisvg icon part line shape'@en;
-    rdfs:isDefinedBy archiSVG:.
-
-target:IconPartLine
-    a sh:SPARQLTarget;
-    rdfs:comment 'Select the archisvg icon part line that have to get enriched with attributes.'@en;
-    sh:select '''
-
-prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix prov:      <http://www.w3.org/ns/prov#>
-prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:      <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:       <http://www.w3.org/SVG/model/def/> 
-
-select $this {
-
-  # Select the archiSVG icon part that needs to be processed
-  $this rdf:type archiSVG:ElementIconPart, svg:Line.
-  filter not exists { 
-   $this prov:wasDerivedFrom rule:IconPartLine.
-   }
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
-    
-rule:IconPartLine
-    a sh:SPARQLRule;
-    rdfs:comment 'A rule that adds attributes to an icon part line in archiSVG.'@en;
-    skos:prefLabel 'icon part line rule'@en;
-    sh:construct '''
-
-prefix archimate:   <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct:         <http://purl.org/dc/terms/>
-prefix prov:        <http://www.w3.org/ns/prov#>
-prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
-prefix svg:         <http://www.w3.org/SVG/model/def/> 
-prefix xsi:         <http://www.w3.org/2001/XMLSchema-instance/model/def/>
-
-construct {
-
-  $this svg:fill ?fill;
-        svg:x1 ?horizontal1;
-        svg:y1 ?vertical1;
-        svg:x2 ?horizontal2;
-        svg:y2 ?vertical2;
-        svg:transform ?translate;
-        svg:stroke ?lineColor ;
-        svg:stroke-width ?lineSize ;
-        prov:wasDerivedFrom rule:IconPartLine.
-
-} where {
-  
-  ?icon ?member $this; 
-        archiSVG:offsetX ?offsetX;
-        archiSVG:offsetY ?offsetY.
-
-  $this prov:wasDerivedFrom ?template.
-
-  ?template
-            rdf:type svg:Line, archiSVG:Template;
-            svg:fill ?fill;
-            svg:stroke ?lineColor;
-            svg:stroke-width ?lineSize;
-            svg:x1 ?horizontal1;
-            svg:y1 ?vertical1;
-            svg:x2 ?horizontal2;
-            svg:y2 ?vertical2.
-
-  bind(concat('translate(', str(?offsetX), ',', str(?offsetY), ')') as ?translate)
-}
-''';
-    rdfs:isDefinedBy archiSVG:.
 
 shp:ConnectionLine
     a sh:NodeShape;
@@ -1796,16 +1605,36 @@ rule:ConnectionLine
 
 prefix archimate:   <https://data.rijksfinancien.nl/archimate/model/def/>
 prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf:        <http://xmlns.com/foaf/0.1/>
 prefix function:    <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov:        <http://www.w3.org/ns/prov#>
 prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rule:        <https://data.rijksfinancien.nl/archisvg/model/rule/>
+prefix skos:        <http://www.w3.org/2004/02/skos/core#>
 prefix svg:         <http://www.w3.org/SVG/model/def/>
 prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+prefix xml:         <http://www.w3.org/XML/model/def/>
 
 construct {
 
-  $this svg:points ?coordinates;
+  ?connection 
+         rdf:_2 ?textLine.
+  
+  ?textLine 
+         rdf:type svg:TextElement;
+         svg:font-family ?fontName ;
+         svg:font-size ?fontSize ;
+         svg:x ?textX;
+         svg:y ?textY;
+         svg:text-anchor "middle";
+         rdf:_1 ?text.
+
+  ?text  
+         rdf:type svg:Text;
+         xml:fragment ?textFragment.
+
+  $this 
+        svg:points ?coordinates;
         svg:transform ?translate;
         svg:transform ?rotate;
         svg:fill ?fill;
@@ -1818,14 +1647,36 @@ construct {
 
 } where {
 
-  ?connection ?member $this.
-  filter(strstarts(str(?member), concat(str(rdf:), '_')))
+  # Get text
+  ?connection 
+        rdf:_1 $this;
+        skos:prefLabel ?label.
+  
+  optional{
+  ?connection foaf:depicts ?relationship.
+  ?relationship archimate:name ?archimateName.
+  }
+  bind(coalesce(?archimateName, "") as ?textFragment)
+  bind(iri(concat(str(?connection), '-textLine'))     as ?textLine)
+  bind(iri(concat(str(?connection), '-textFragment')) as ?text)
 
+  optional{
+  ?connection  prov:wasDerivedFrom ?archimateConnection.
+  ?archimateConnection archimate:font ?fontIRI.
+  ?fontIRI 
+           rdf:type archimate:Font;
+           archimate:fontName  ?fontName;
+           archimate:fontSize  ?fontSize.
+  }
   # Get the first bendpoint, if any
   optional {
-    ?connection
-      archiSVG:bendPoint ?bendPointList.
+    ?connection archiSVG:bendPoint ?bendPointList.
     ?bendPointList rdf:_1 ?firstBendPoint.
+    ?firstBendPoint 
+          rdf:type archiSVG:BendPoint;
+          archiSVG:fromX ?firstBendPointx;
+          archiSVG:fromY ?firstBendPointy.
+    bind(concat(str(?firstBendPointx),",",str(?firstBendPointy)) as ?firstBendPointCoordinate)
   }
 
   # Establish start coordinate
@@ -1833,7 +1684,6 @@ construct {
 
   # Get the last bendpoint, if any
   optional {
-
     {
       select ?connection (count (?bendPoints) as ?totalBendPoints)
       where {
@@ -1851,6 +1701,13 @@ construct {
 
   # Establish end coordinate
   bind(function:getEndCoordinate(coalesce(?lastBendPoint, ?connection), ?connection) as ?endCoordinate)
+
+  # Establish second coordinate
+  bind(coalesce(?firstBendPointCoordinate, ?endCoordinate) as ?secondCoordinate)
+
+  # Establish text coordinates
+  bind(function:getMidXCoordinate(?startCoordinate, ?secondCoordinate) as ?textX)
+  bind(function:getMidYCoordinate(?startCoordinate, ?secondCoordinate) as ?textY)
 
   # Get the possible string of bendpoint coordinates
   optional {
@@ -1893,12 +1750,18 @@ construct {
   }
   
   optional {
-    ?template svg:marker-start ?markerStart;
+    ?template svg:marker-start ?templateMarkerStart;
   }
   
   optional {
-    ?template svg:marker-end   ?markerEnd;
+    ?template svg:marker-end   ?templateMarkerEnd;
   }
+  
+  optional {
+  ?connection archiSVG:accessType ?accessType.
+  }
+  bind(if((?accessType='Read'  || ?accessType='Read&Write') || (!bound(?accessType) && bound(?templateMarkerStart)), ?templateMarkerStart,?unboundDummy) as ?markerStart)
+  bind(if((?accessType='Write' || ?accessType='Read&Write') || (!bound(?accessType) && bound(?templateMarkerEnd))  , ?templateMarkerEnd  ,?unboundDummy) as ?markerEnd) 
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -2112,6 +1975,115 @@ construct {
             svg:stroke ?lineColor;
             svg:stroke-width ?lineSize.
  bind(function:getStartCoordinate($this, $this) as ?bendPoints)
+
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+shp:TextCreator
+    a sh:NodeShape;
+    sh:rule rule:TextCreator;
+    sh:target target:TextCreator;
+    skos:prefLabel 'text creator shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:TextCreator
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all text nodes in the archisvg document.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+
+select $this {
+
+  # Select all text elements.. 
+  
+  $this rdf:type archiSVG:TextElement, svg:TextElement.
+ 
+  # ...that have not reached the text limit yet.
+  filter not exists { 
+    $this archiSVG:maxLines ?maxLines;
+          archiSVG:textLines ?textLines;
+          ?member [].
+    bind(xsd:integer(strafter(str(?member), concat(str(rdf:), '_'))) as ?lineIndex)
+    filter((?lineIndex = ?textLines) || (?lineIndex = ?maxLines))
+    
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+
+rule:TextCreator
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archisvg tspan node in the XML document for each line of text in the elements name.'@en;
+    skos:prefLabel 'archisvg text creator rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+
+    $this ?memberText ?tspan.
+    ?tspan 
+          rdf:type svg:Tspan;
+          skos:prefLabel ?textFragment;
+          svg:x ?horizontal;
+          svg:y ?vertical;
+          rdf:_1 ?text.
+
+    ?text rdf:type svg:Text;
+          xml:fragment ?textFragment;
+
+} where {
+  
+  $this 
+          skos:prefLabel ?elementName;
+          svg:font-size      ?fontSize;
+          svg:x              ?x ;
+          svg:y              ?y ;
+          archiSVG:maxChars  ?maxChars;
+          archiSVG:maxLines  ?maxLines;
+          archiSVG:textLines ?textLines.
+          
+  optional {
+    {
+      select (max(?lineIndex) as ?previousLineIndex) where {
+        $this ?member [].
+        filter(strstarts(str(?member), concat(str(rdf:), '_')))
+        bind(xsd:integer(strafter(str(?member), concat(str(rdf:), '_'))) as ?lineIndex)
+      }
+    }
+  }
+
+  # Establish fragment metadata
+  bind(coalesce(?previousLineIndex+1, 1) as ?lineIndex)
+  bind(if(?lineIndex <= ?textLines && ?lineIndex <= ?maxLines, substr(?elementName,((?lineIndex-1)*?maxChars)+1, ?maxChars), ?unboundDummy) as ?textFragment)
+  bind(iri(concat(str(rdf:),"_", str(?lineIndex))) as ?memberText)
+  bind((xsd:decimal(?y) + 10 + (1.2*xsd:decimal(?fontSize)*(?lineIndex-1))) as ?vertical)
+  bind(xsd:decimal(?x) as ?horizontal)
+
+  # Create IRI's
+  bind(iri(concat(str($this),"-SVG-Span-", str(?lineIndex))) as ?tspan)
+  bind(iri(concat(str($this),"-SVG-Text-", str(?lineIndex))) as ?text)
 
 }
 ''';
@@ -2758,7 +2730,7 @@ prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 select (MAX(?Ystart) as ?result)
 
 where {
-      {select $from $to (coalesce(?Ystart1, ?Ystart2) as ?Ystart) where {  
+      {select $from $to (coalesce(?Ystart1, ?Ystart2) as ?Ystart) where {
       {$from
         archiSVG:fromY ?fromY_string .
         
@@ -2779,7 +2751,7 @@ where {
       $to
         archiSVG:toH ?toH_string .
       }
-      bind(xsd:decimal(?toY_string) as ?Ystart2)        
+      bind(xsd:decimal(?toY_string) as ?Ystart2)
 } 
 }
 }
@@ -2845,3 +2817,120 @@ function:escapeXML
                 AS ?result).
         }
         """ .
+        
+function:getViewBox
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns the viewbox dimensions for a view." ;
+    sh:parameter [
+        sh:path function:view ;
+        sh:datatype xsd:anyURI ;
+        sh:description "A view." ;
+    ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+{select $view (min(?xCoordinate) as ?minX)
+where {
+  $view archimate:contains ?object.
+  ?object archimate:horizontal ?x.
+  bind(xsd:decimal(?x) as ?xCoordinate)
+  } group by $view
+} 
+
+{select $view (max(?xCoordinate) as ?maxX)
+where {
+  $view archimate:contains ?object.
+  ?object archimate:horizontal ?x;
+          archimate:width ?width.
+  bind(xsd:decimal(?x)+ xsd:decimal(?width) as ?xCoordinate)
+  } group by $view
+}
+
+{select $view (min(?yCoordinate) as ?minY)
+where {
+  $view archimate:contains ?object.
+  ?object archimate:vertical ?y.
+  bind(xsd:decimal(?y) as ?yCoordinate)
+  } group by $view
+}
+
+{select $view (max(?yCoordinate) as ?maxY)
+where {
+  $view archimate:contains ?object.
+  ?object archimate:vertical ?y;
+          archimate:height ?height.
+  bind(xsd:decimal(?y)+ xsd:decimal(?height) as ?yCoordinate)
+  } group by $view
+}
+
+bind(concat(str(?minX), " ",str(?minY), " ",str(?maxX+1), " ",str(?maxY+1)) as ?result)
+      
+}
+""" .
+
+function:getMidXCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the X coordinate for the middle point of a line between two input coordinates." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The coordinate from which the line starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The coordinate where the line ends." ;
+    ] ;    
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+      bind(xsd:decimal(strbefore($from, ",")) as ?start)
+      bind(xsd:decimal(strbefore($to  , ",")) as ?end)
+      bind((str((?start + ?end)/2))           as ?result)
+      
+}
+""" .
+
+function:getMidYCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the Y coordinate for the middle point of a line between two input coordinates." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The coordinate from which the line starts." ;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:anyURI ;
+        sh:description "The coordinate where the line ends." ;
+    ] ;    
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+      bind(xsd:decimal(strafter($from, ",")) as ?start)
+      bind(xsd:decimal(strafter($to  , ",")) as ?end)
+      bind(str(((?start + ?end)/2)-6.0)      as ?result)
+
+}
+""" .
+
+}

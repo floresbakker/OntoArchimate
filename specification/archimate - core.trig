@@ -26,6 +26,8 @@ prefix shp:       <https://data.rijksfinancien.nl/archimate/model/shp/>
 prefix standard:  <https://data.rijksfinancien.nl/archimate/id/standard/>
 prefix target:    <https://data.rijksfinancien.nl/archimate/model/target/>
 
+archimate: {
+
 archimate:
     a
       owl:Ontology,
@@ -35,7 +37,16 @@ archimate:
     dct:creator
       'Flores Bakker';
       
-    respec:introduction '''OntoArchimate is a family of RDF-based vocabularies designed to represent and transform Archimate enterprise architecture models using semantic web technologies. It consists of four interconnected ontologies, each serving a distinct purpose:
+    respec:introduction '''OntoArchimate is a family of RDF-based vocabularies designed to represent and transform Archimate enterprise architecture models using semantic web technologies. It consists of six interconnected ontologies, each serving a distinct purpose:
+
+* Archimate Core Vocabulary
+* Archimate Serialisation Vocabulary
+* ArchiXML Core Vocabulary
+* ArchiXML Serialisation Vocabulary
+* ArchiSVG Core Vocabulary
+* ArchiSVG Serialisation Vocabulary
+
+With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. We can then serialize this to an actual XML document using the XML Core Vocabulary. We can also roundtrip this process and start with an XML file, parse it to the ArchiXML vocabulary then serialize it to the Archimate Core Vocabulary, using the Archimate Serialisation Vocabulary. Finally, we can also express Archimate views as SVG images, through the use of the ArchiSVG Core Vocabulary and ArchiSVG Serialisation Vocabulary.
 
 * Archimate Ontology
 The Archimate Ontology represents pure Archimate concepts and relationships in RDF, mirroring the structure of enterprise architecture models.
@@ -47,9 +58,15 @@ The Archimate Serialization Ontology defines rules for converting RDF-based repr
 The ArchiXML Ontology models the structure of Archimate XML documents in RDF, preserving the document-centric view.
 
 * ArchiXML Serialization Ontology 
-The ArchiXML Serialization Ontology specifies how to serialize RDF-based Archimate models into RDF-based Archimate XML representations.
+The ArchiXML Serialization Ontology specifies how to serialize RDF-based Archimate models into RDF-based models of Archimate XML documents.
 
-These ontologies work together to bridge the gap between Archimate's XML exchange formats and RDF models, supporting bi-directional transformations between the two.
+* ArchiSVG Ontology
+The ArchiSVG Ontology models the structure of SVG images in RDF, representing an Archimate based image.
+
+* ArchiSVG Serialization Ontology 
+The ArchiSVG Serialization Ontology specifies how to serialize RDF-based Archimate models into RDF-based models of Archimate images.
+
+These ontologies work together to bridge the gap between Archimate's XML exchange formats and RDF models, supporting transformations between the two.
 
 OntoArchimate also makes use of another family of vocabularies:
 
@@ -58,10 +75,11 @@ OntoArchimate also makes use of another family of vocabularies:
 * XMLNS Core Vocabulary
 * XLINK Core Vocabulary
 * XSI Core Vocabulary
+* SVG Core Vocabulary
 
-These five vocabularies are used for generating, parsing, validating, annotating, and reusing XML-based documents within a semantic web framework.'''@en;
+These six vocabularies are used for generating, parsing, validating, annotating, visualizing and reusing XML-based documents within a semantic web framework.'''@en;
     
-    respec:objective '''The primary goal of OntoArchimate is to facilitate the parsing, annotation, validation, reuse, and generation of Archimate models using RDF technologies. By aligning Archimate concepts with the semantic web stack, OntoArchimate allows for seamless querying via SPARQL, reasoning with OWL, and integration with other RDF datasets.'''@en;
+    respec:objective '''The primary goal of OntoArchimate is to facilitate the parsing, annotation, validation, visualization, reuse, and generation of Archimate models using RDF technologies. By aligning Archimate concepts with the semantic web stack, OntoArchimate allows for querying via SPARQL, reasoning with OWL, and integration with other RDF datasets.'''@en;
     
     respec:background '''Archimate is a standardized modeling language for enterprise architectures, encompassing business processes, organizational structures, information flows, and technical infrastructure. While Archimate tools often use XML or proprietary formats, the need for semantic, linked data representations is growing. OntoArchimate addresses this by enabling:
 
@@ -69,6 +87,7 @@ These five vocabularies are used for generating, parsing, validating, annotating
 * Transformation of RDF-based representations of Archimate XML documents to RDF using the Archimate serialization ontology.
 * Generation of RDF-based representations of Archimate XML documents from a RDF-based Archimate model using the ArchiXML serialization ontology.
 * RDF-based representation of XML-documents expressing Archimate models.
+* Image generation by the ArchiSVG core ontology and ArchiSVG serialization ontology.
 * Semantic querying and reasoning: By aligning Archimate models with the RDF and OWL ecosystems. Architecture becomes a domain that can be linked to other domains of interest, like IT asset management, information products, laws and regulations, and business processes.'''@en;
     
     respec:audience '''OntoArchimate is intended for:
@@ -80,7 +99,7 @@ These five vocabularies are used for generating, parsing, validating, annotating
     
     dct:description '''Description of archimate vocabulary'''@en;
     
-    dct:abstract '''The Archimate Ontology is part of OntoArchimate and represents pure Archimate concepts and relationships in RDF, mirroring the structure of enterprise architecture models. OntoArchimate is a RDF-based vocabulary suite for representing and working with Archimate models, supporting concepts such as elements, relationships, and views. It enables the semantic parsing, validation, and generation of Archimate documents, allowing integration with the linked data ecosystem. OntoArchimate ensures interoperability by leveraging RDF, OWL, SHACL and SPARQL, fostering the reuse and combination of enterprise architecture data across domains. OntoArchimate consists of four interconnected ontologies, each serving a distinct purpose.'''@en; 
+    dct:abstract '''The Archimate Ontology is part of OntoArchimate and represents pure Archimate concepts and relationships in RDF, mirroring the structure of enterprise architecture models. OntoArchimate is a RDF-based vocabulary suite for representing and working with Archimate models, supporting concepts such as elements, relationships, and views. It enables the semantic parsing, validation, visualization and generation of Archimate documents, allowing integration with the linked data ecosystem. OntoArchimate ensures interoperability by leveraging RDF, OWL, SHACL and SPARQL, fostering the reuse and combination of enterprise architecture data across domains. OntoArchimate consists of six interconnected ontologies, each serving a distinct purpose.'''@en; 
     
     skos:example """
 
@@ -260,9 +279,9 @@ archimate:StructureElement a owl:Class;
     rdfs:isDefinedBy archimate:.
         
 archimate:MotivationElement a owl:Class;
-    rdfs:subClassOf archimate:StructureElement;
+    rdfs:subClassOf archimate:Element;
     skos:definition 'A motivation element represents the context of or reason behind the architecture of an enterprise.'@en;
-    skos:prefLabel 'passive structure element'@en;
+    skos:prefLabel 'motivation element'@en;
     rdfs:isDefinedBy archimate:.
 
 archimate:CompositeElement a owl:Class;
@@ -1311,3 +1330,5 @@ archimate:fontColor a owl:ObjectProperty;
     rdfs:domain archimate:Font;
     rdfs:range archimate:Color;
     rdfs:isDefinedBy archimate:.
+
+}

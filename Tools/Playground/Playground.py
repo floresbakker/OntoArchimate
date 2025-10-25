@@ -1,18 +1,18 @@
 from flask import Flask, request, render_template
 import rdflib
-from rdflib import Graph, Namespace, Literal, RDF
+from rdflib import Graph, Namespace, Literal, RDF, Dataset
 import pyshacl
 from bs4 import BeautifulSoup
 from bs4.element import Tag, NavigableString
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='tools/playground/templates', static_folder='tools/playground/static')
 
 # Get the current working directory in which the Playground.py file is located.
 current_dir = os.getcwd()
 
 # Set the path to the desired standard directory. 
-directory_path = os.path.abspath(os.path.join(current_dir, '..', '..','..'))
+directory_path = os.path.abspath(os.path.join(current_dir))
 
 # namespace declaration
 rdf       = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
@@ -27,7 +27,7 @@ xlink     = Namespace("https://www.w3.org/1999/xlink/model/def/")
 xsi       = Namespace("http://www.w3.org/2001/XMLSchema-instance/model/def/")
 
 def writeGraph(graph, name):
-    graph.serialize(destination=directory_path + "/OntoArchimate/Tools/Playground/" + name + ".ttl", format="turtle")
+    graph.serialize(destination=directory_path + "/tools/playground/" + name + ".ttl", format="turtle")
     
 # Function to read a graph (as a string) from a file 
 def readStringFromFile(file_path):
@@ -39,19 +39,19 @@ def readStringFromFile(file_path):
 
 
 # Get all the vocabularies and place them in a string
-dom_vocabulary          = readStringFromFile(directory_path + "/OntoArchimate/Specification/dom - core.ttl")
-xml_vocabulary          = readStringFromFile(directory_path + "/OntoArchimate/Specification/xml - core.ttl")
-xmlns_vocabulary        = readStringFromFile(directory_path + "/OntoArchimate/Specification/xmlns - core.ttl")
-xlink_vocabulary        = readStringFromFile(directory_path + "/OntoArchimate/Specification/xlink - core.ttl")
-xsi_vocabulary          = readStringFromFile(directory_path + "/OntoArchimate/Specification/xsi - core.ttl")
-archimate_vocabulary    = readStringFromFile(directory_path + "/OntoArchimate/Specification/archimate - core.ttl")
-archiXML_vocabulary     = readStringFromFile(directory_path + "/OntoArchimate/Specification/archiXML - core.ttl")
-archimate_serialisation = readStringFromFile(directory_path + "/OntoArchimate/Specification/archimate - serialisation.ttl")
-archiXML_serialisation  = readStringFromFile(directory_path + "/OntoArchimate/Specification/archiXML - serialisation.ttl")
+dom_vocabulary          = readStringFromFile(directory_path + "/specification/dom - core.trig")
+xml_vocabulary          = readStringFromFile(directory_path + "/specification/xml - core.trig")
+xmlns_vocabulary        = readStringFromFile(directory_path + "/specification/xmlns - core.trig")
+xlink_vocabulary        = readStringFromFile(directory_path + "/specification/xlink - core.trig")
+xsi_vocabulary          = readStringFromFile(directory_path + "/specification/xsi - core.trig")
+archimate_vocabulary    = readStringFromFile(directory_path + "/specification/archimate - core.trig")
+archiXML_vocabulary     = readStringFromFile(directory_path + "/specification/archiXML - core.trig")
+archimate_serialisation = readStringFromFile(directory_path + "/specification/archimate - serialisation.trig")
+archiXML_serialisation  = readStringFromFile(directory_path + "/specification/archiXML - serialisation.trig")
 
 vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archiXML_vocabulary + '\n'
-example_rdf_code = readStringFromFile(directory_path + "/OntoArchimate/Examples/ArchiXMLBasicModel.ttl")
-example_archimate_code = readStringFromFile(directory_path + "/OntoArchimate/Examples/ArchimateBasicModel.xml")
+example_rdf_code = readStringFromFile(directory_path + "/examples/ArchiXMLBasicModel.trig")
+example_archimate_code = readStringFromFile(directory_path + "/examples/ArchimateBasicModel.xml")
 
 
 def generate_element_id(element):
@@ -80,8 +80,8 @@ def iteratePyShacl(shaclgraph, serializable_graph):
         pyshacl.validate(
         data_graph=serializable_graph,
         shacl_graph=shaclgraph,
-        data_graph_format="turtle",
-        shacl_graph_format="turtle",
+        data_graph_format="trig",
+        shacl_graph_format="trig",
         advanced=True,
         inplace=True,
         inference=None,
@@ -109,7 +109,7 @@ def iteratePyShacl(shaclgraph, serializable_graph):
         for result in resultquery:
             print ("ask result = ", result)
             if result == False:
-                writeGraph(serializable_graph, 'TEST')
+                
                 return iteratePyShacl(shaclgraph, serializable_graph)
          
             else:
@@ -137,11 +137,13 @@ def iteratePyShacl(shaclgraph, serializable_graph):
 @app.route('/convert2Archimate', methods=['POST'])
 def convert_to_archimate():
     text = request.form['rdf']   
-    g = rdflib.Graph().parse(data=text , format="turtle")
+    g = Dataset(default_union=True)
+    g.parse(data=text , format="trig")
     # Zet de RDF-triples om naar een string
-    triples = g.serialize(format='turtle')
+    triples = g.serialize(format='trig')
     serializable_graph_string = vocabulary + '\n' + triples
-    serializable_graph = rdflib.Graph().parse(data=serializable_graph_string , format="turtle")
+    serializable_graph = Dataset(default_union=True)
+    serializable_graph.parse(data=serializable_graph_string , format="trig")    
     archimate_fragment = iteratePyShacl(xml_vocabulary, serializable_graph)
     print("Archimate fragment =", archimate_fragment)
     return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text)
@@ -163,7 +165,8 @@ def convert_to_rdf():
         g.bind("xsi", xsi)        
 
         # fill graph with archiXML vocabulary
-        xml_graph = Graph().parse(directory_path+"/OntoArchimate/Specification/archiXML - core.ttl" , format="ttl")
+        xml_graph = Dataset(default_union=True)
+        xml_graph.parse(directory_path+"/specification/archiXML - core.trig" , format="trig")
 
         # string for query to establish IRI of a 'tag' HTML element
         tagquerystring = '''
@@ -277,7 +280,7 @@ def convert_to_rdf():
                       g.add((doc[child_id], xml["fragment"], Literal(text_fragment)))
 
         # return the resulting triples
-        triples = g.serialize(format="turtle").split('\n')
+        triples = g.serialize(format="trig").split('\n')
         return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput)
 
 @app.route('/')

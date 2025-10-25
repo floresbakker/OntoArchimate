@@ -16,6 +16,8 @@ prefix void:     <http://rdfs.org/ns/void#>
 prefix xsd:      <http://www.w3.org/2001/XMLSchema#>
 prefix xml:      <http://www.w3.org/XML/model/def/>
 
+archiXML: {
+
 archiXML:
     a
       owl:Ontology,
@@ -101,7 +103,7 @@ archiXML:Document
     a owl:Class;
     rdfs:subClassOf xml:Document;
     dct:conformsTo archiXML:;
-    skos:definition 'An archiXML document represents an XML document that contains an archimate model. It consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<element>’, and an end tag, such as ‘</element>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The ArchiXML Core Vocabulary defines a set of elements that can be used in an archiXML document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document.'@en;
+    skos:definition 'An archimate document consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<element>’, and an end tag, such as ‘</element>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The ArchiXML Core Vocabulary defines a set of elements that can be used in an archimate document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document.'@en;
     skos:prefLabel 'archimate XML document'@en;
     rdfs:isDefinedBy archiXML:.
 
@@ -109,14 +111,14 @@ archiXML:DomElement
     a owl:Class;
     rdfs:subClassOf xml:Element;
     skos:definition 'An element with namespace URI <> as defined in the Archimate specification, that is used to create and manipulate Archimate content.'@en;
-    skos:prefLabel "The ArchiXML DOM element"@en;
+    skos:prefLabel "The Archimate DOM element"@en;
     rdfs:isDefinedBy archiXML:.
 
 archiXML:Text
     a owl:Class;
     rdfs:subClassOf xml:Text;
-    skos:definition "A plain text node in an ArchiXML document."@en;
-    skos:prefLabel "The ArchiXML DOM text node"@en;
+    skos:definition "A plain text node in an Archimate document."@en;
+    skos:prefLabel "The Archimate DOM text node"@en;
     rdfs:isDefinedBy archiXML:.
 
 archiXML:Attribute
@@ -132,7 +134,7 @@ archiXML:Attribute
     a owl:Class;
     xml:tag 'model';
     rdfs:subClassOf archiXML:DomElement;
-    skos:definition 'The model element represents the root (top-level element) of the archiXML document. All other elements must be descendants of this element.'@en;
+    skos:definition 'The model element represents the root (top-level element) of the Archimate xml document. All other elements must be descendants of this element.'@en;
     skos:prefLabel 'the model element'@en;
     rdfs:isDefinedBy archiXML:.
   
@@ -350,7 +352,7 @@ archiXML:Attribute
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The bendpoint element'@en;
     skos:prefLabel 'the bendpoint element'@en;
-    rdfs:isDefinedBy archiXML:.  
+    rdfs:isDefinedBy archiXML:.
 
   archiXML:Container
     a owl:Class;
@@ -358,7 +360,7 @@ archiXML:Attribute
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The container element'@en;
     skos:prefLabel 'the container element'@en;
-    rdfs:isDefinedBy archiXML:. 
+    rdfs:isDefinedBy archiXML:.
 
   archiXML:Line
     a owl:Class;
@@ -366,7 +368,7 @@ archiXML:Attribute
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The line element'@en;
     skos:prefLabel 'the line element'@en;
-    rdfs:isDefinedBy archiXML:.      
+    rdfs:isDefinedBy archiXML:.
 
   archiXML:ViewRef
     a owl:Class;
@@ -374,9 +376,49 @@ archiXML:Attribute
     rdfs:subClassOf archiXML:DomElement;
     skos:definition 'The viewref element'@en;
     skos:prefLabel 'the viewref element'@en;
-    rdfs:isDefinedBy archiXML:.  
+    rdfs:isDefinedBy archiXML:.
 
-### Properties: ArchiXML attributes
+  archiXML:Properties
+    a owl:Class;
+    xml:tag 'properties';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The properties element'@en;
+    skos:prefLabel 'the properties element'@en;
+    rdfs:isDefinedBy archiXML:.
+
+  archiXML:Property
+    a owl:Class;
+    xml:tag 'property';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The property element'@en;
+    skos:prefLabel 'the property element'@en;
+    rdfs:isDefinedBy archiXML:.
+
+  archiXML:PropertyDefinitions
+    a owl:Class;
+    xml:tag 'propertyDefinitions';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The propertyDefinitions element'@en;
+    skos:prefLabel 'the propertyDefinitions element'@en;
+    rdfs:isDefinedBy archiXML:.
+
+  archiXML:PropertyDefinition
+    a owl:Class;
+    xml:tag 'propertyDefinition';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The propertyDefinition element'@en;
+    skos:prefLabel 'the propertyDefinition element'@en;
+    rdfs:isDefinedBy archiXML:.
+
+  archiXML:Value
+    a owl:Class;
+    xml:tag 'value';
+    rdfs:subClassOf archiXML:DomElement;
+    skos:definition 'The value element'@en;
+    skos:prefLabel 'the value element'@en;
+    rdfs:isDefinedBy archiXML:.
+
+### Properties: Archimate attributes
 
   archiXML:id
     a owl:DatatypeProperty, 
@@ -644,3 +686,5 @@ archiXML:Attribute
     skos:definition 'Property that links the xml fragment that is represented by an element within a XML-based archimate document to that element.'@en;
     skos:prefLabel 'fragment property'@en;
     rdfs:isDefinedBy archiXML:.
+
+}

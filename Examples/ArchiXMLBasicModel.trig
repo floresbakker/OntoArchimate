@@ -1,0 +1,173 @@
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
+@prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix model: <https://data.rijksfinancien.nl/archimate/id/> .
+@prefix ns1: <https://respec.org/model/def/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <http://purl.org/adms/status/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xml1: <http://www.w3.org/XML/model/def/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
+
+model:BasicModel-Document a archiXML:Document ;
+    rdf:_1 model:BasicModel-Model .
+
+model:BasicModel-Documentation a archiXML:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationText ;
+    xml1:lang "en" .
+
+model:BasicModel-DocumentationText a archiXML:Text ;
+    xml1:fragment "Example of a basic model with two elements and a relationship" .
+
+model:BasicModel-Elements a archiXML:Elements ;
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessObject-Element ;
+    rdf:_3 model:aBusinessRole-Element .
+
+model:BasicModel-Model a archiXML:Model ;
+    rdf:_1 model:BasicModel-ModelName ;
+    rdf:_2 model:BasicModel-Documentation ;
+    rdf:_3 model:BasicModel-Elements ;
+    rdf:_4 model:BasicModel-Relationships ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    prov:wasDerivedFrom model:BasicModel ;
+    archiXML:identifier "Model-1" .
+
+model:BasicModel-ModelName a archiXML:Name ;
+    rdf:_1 model:BasicModel-ModelNameText ;
+    xml1:lang "en" .
+
+model:BasicModel-ModelNameText a archiXML:Text ;
+    xml1:fragment "Basic Model" .
+
+model:BasicModel-Relationships a archiXML:Relationships ;
+    rdf:_1 model:aRelationship1-Relationship ;
+    rdf:_2 model:aRelationship2-Relationship .
+
+model:aBusinessActor-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business actor" .
+
+model:aBusinessActor-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    rdf:_2 model:aBusinessActor-ElementDocumentation ;
+    xsi:type "BusinessActor" ;
+    prov:wasDerivedFrom model:aBusinessActor ;
+    archiXML:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aBusinessActor-DocumentationText ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessActor-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business actor" .
+
+model:aBusinessObject-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business object" .
+
+model:aBusinessObject-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessObject-ElementName ;
+    rdf:_2 model:aBusinessObject-ElementDocumentation ;
+    xsi:type "BusinessObject" ;
+    prov:wasDerivedFrom model:aBusinessObject ;
+    archiXML:identifier "BusinessObject1" .
+
+model:aBusinessObject-ElementDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aBusinessObject-DocumentationText ;
+    xml1:lang "en" .
+
+model:aBusinessObject-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessObject-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessObject-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business object" .
+
+model:aBusinessRole-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business role" .
+
+model:aBusinessRole-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    rdf:_2 model:aBusinessRole-ElementDocumentation ;
+    xsi:type "BusinessRole" ;
+    prov:wasDerivedFrom model:aBusinessRole ;
+    archiXML:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aBusinessRole-DocumentationText ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessRole-ElementNameText ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business role" .
+
+model:aRelationship1-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business actor and role assignment" .
+
+model:aRelationship1-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship1-RelationshipName ;
+    rdf:_2 model:aRelationship1-RelationshipDocumentation ;
+    xsi:type "Assignment" ;
+    prov:wasDerivedFrom model:aRelationship1 ;
+    archiXML:identifier "Relation_1" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+model:aRelationship1-RelationshipDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aRelationship1-DocumentationText ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship1-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Assignment Relationship"@en .
+
+model:aRelationship2 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business object and relationship association" ;
+    skos:prefLabel "a business object - relationship association" ;
+    archimate:from model:aBusinessObject ;
+    archimate:relationship archimate:association ;
+    archimate:to model:aRelationship1 .
+
+model:aRelationship2-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business object and relationship association" .
+
+model:aRelationship2-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship2-RelationshipName ;
+    rdf:_2 model:aRelationship2-RelationshipDocumentation ;
+    xsi:type "Association" ;
+    prov:wasDerivedFrom model:aRelationship2 ;
+    archiXML:identifier "Relation_2" ;
+    archiXML:source "BusinessObject1" ;
+    archiXML:target "Relation_1" .
+
+model:aRelationship2-RelationshipDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aRelationship2-DocumentationText ;
+    xml1:lang "en" .
+
+model:aRelationship2-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship2-RelationshipNameText ;
+    xml1:lang "en" .
+
+model:aRelationship2-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Association Relationship"@en .
+

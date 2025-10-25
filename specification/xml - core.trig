@@ -24,7 +24,7 @@ prefix standard: <http://www.w3.org/XML/id/standard/>
 prefix target: <http://www.w3.org/XML/model/target/>
 prefix xml: <http://www.w3.org/XML/model/def/> 
 
-#xml: {
+xml: {
   xml:
     a
       owl:Ontology,
@@ -663,4 +663,4 @@ function:getElementAttribute
     }
 """ .
 
-#}
+}
