@@ -438,12 +438,37 @@ We can also roundtrip from the XML document back to the RDF-based archiXML back 
 
 # Tools and dependencies
 
-This repository comes with three, fairly primitive, Python-based tools to handle Archimate-documents and RDF-representations of Archimate. 
+This repository comes with five, fairly primitive, Python-based tools to handle Archimate-documents and RDF-representations of Archimate. 
 
-1. ArchiVoc2ArchiXML
-2. ArchiXML2Archimate
-3. Archimate2ArchiXML
-4. ArchiXML2ArchiVoc
+1. Playground
+2. ArchiVoc2ArchiXML
+3. ArchiXML2Archimate
+4. Archimate2ArchiXML
+5. ArchiXML2ArchiVoc
+
+## Playground
+
+The tool Playground is used to read an RDF-based representation of an Archimate model into a graph and then serialize and save this to actual archimate XML code, ready for use in archimate-compliant software, and vice versa, from archimate XML code to an abstract RDF-based representation of an Archimate model.
+
+### How to use Playground
+
+A. Install all necessary libraries (in this order):
+
+    1. pip install os
+    2. pip install pyshacl
+    3. pip install rdflib
+    4. pip install flask
+    5. pip install datetime
+
+B. Run the script in the command prompt by typing: 
+
+```
+python playground.py
+```
+
+C. Go to localhost:5000 in your browser. 
+
+D. You are now ready to use the application. Insert either a RDF-based archimate model or XML-code of an archimate model.
 
 
 ## ArchiVoc2ArchiXML
