@@ -1608,12 +1608,8 @@ construct {
   ?svgSourceConnection 
      rdf:type archiSVG:Connection;
      prov:wasDerivedFrom ?source;
-     archiSVG:fromX ?sourceConnectionFromX;
-     archiSVG:fromY ?sourceConnectionFromY;
-     archiSVG:toX   ?sourceConnectionToX;
-     archiSVG:toY   ?sourceConnectionToY.
-  bind((?sourceConnectionFromX + ?sourceConnectionToX)/2 as ?fromX)
-  bind((?sourceConnectionFromY + ?sourceConnectionToY)/2 as ?fromY)  
+     archiSVG:middleX ?fromX;
+     archiSVG:middleY ?fromY;
   }
 
   optional {
@@ -1632,12 +1628,8 @@ construct {
   ?svgTargetConnection 
      rdf:type archiSVG:Connection;
      prov:wasDerivedFrom ?target;
-     archiSVG:fromX ?targetConnectionFromX;
-     archiSVG:fromY ?targetConnectionFromY;
-     archiSVG:toX   ?targetConnectionToX;
-     archiSVG:toY   ?targetConnectionToY.
-  bind((?targetConnectionFromX + ?targetConnectionToX)/2 as ?toX)
-  bind((?targetConnectionFromY + ?targetConnectionToY)/2 as ?toY)  
+     archiSVG:middleX ?toX;
+     archiSVG:middleY ?toY;
   }
 
   optional {
@@ -1916,7 +1908,9 @@ prefix xml:         <http://www.w3.org/XML/model/def/>
 construct {
 
   ?connection 
-         rdf:_2 ?textLine.
+         rdf:_2 ?textLine;
+         archiSVG:middleX ?middleCoordinatex;
+         archiSVG:middleY ?middleCoordinatey.
   
   ?textLine 
          rdf:type svg:TextElement;
@@ -1997,15 +1991,42 @@ construct {
     filter(?bendPointIndex = ?totalBendPoints)
   }
 
+  # Get the middle bendpoint, if any
+  optional {
+    {
+      select ?connection (count (?bendPoints) as ?totalBendPoints)
+      where {
+        ?connection
+          archiSVG:bendPoint ?bendPointList.
+        ?bendPointList ?memberBendPoint ?bendPoints.
+      } group by ?connection
+    }
+
+    ?connection archiSVG:bendPoint ?bendPointList.
+    ?bendPointList ?memberBendPoint ?middleBendPoint.
+    bind(xsd:integer(strafter(str(?memberBendPoint), concat(str(rdf:), '_'))) as ?bendPointIndex)
+    filter(?bendPointIndex = xsd:integer(floor(?totalBendPoints/2)))
+    ?middleBendPoint 
+          rdf:type archiSVG:BendPoint;
+          archiSVG:fromX ?middleBendPointx;
+          archiSVG:fromY ?middleBendPointy. 
+  }
+
   # Establish end coordinate
   bind(function:getEndCoordinate(coalesce(?lastBendPoint, ?connection), ?connection) as ?endCoordinate)
 
   # Establish second coordinate
   bind(coalesce(?firstBendPointCoordinate, ?endCoordinate) as ?secondCoordinate)
 
+  # Establish middle coordinates
+  bind(function:getMidXCoordinate(?startCoordinate, ?endCoordinate, 0.0) as ?middleLineCoordinatex)
+  bind(function:getMidYCoordinate(?startCoordinate, ?endCoordinate, 0.0) as ?middleLineCoordinatey)
+  bind(coalesce(?middleBendPointx, ?middleLineCoordinatex) as ?middleCoordinatex)
+  bind(coalesce(?middleBendPointy, ?middleLineCoordinatey) as ?middleCoordinatey)  
+  
   # Establish text coordinates
-  bind(function:getMidXCoordinate(?startCoordinate, ?secondCoordinate) as ?textX)
-  bind(function:getMidYCoordinate(?startCoordinate, ?secondCoordinate) as ?textY)
+  bind(function:getMidXCoordinate(?startCoordinate, ?secondCoordinate, 0.0) as ?textX)
+  bind(function:getMidYCoordinate(?startCoordinate, ?secondCoordinate, 6.0) as ?textY)
 
   # Get the possible string of bendpoint coordinates
   optional {
@@ -3180,14 +3201,22 @@ function:getMidXCoordinate
     rdfs:comment "Returns a string containing the X coordinate for the middle point of a line between two input coordinates." ;
     sh:parameter [
         sh:path function:from ;
-        sh:datatype xsd:anyURI ;
+        sh:datatype xsd:string ;
         sh:description "The coordinate from which the line starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
-        sh:datatype xsd:anyURI ;
+        sh:datatype xsd:string ;
         sh:description "The coordinate where the line ends." ;
+        sh:order 2;        
     ] ;    
+    sh:parameter [
+        sh:path function:padding ;
+        sh:datatype xsd:decimal ;
+        sh:description "A padding." ;
+        sh:order 3;        
+    ] ;     
     sh:returnType xsd:string ;
     sh:select """
 
@@ -3197,9 +3226,9 @@ select ?result
 
 where {
   
-      bind(xsd:decimal(strbefore($from, ",")) as ?start)
-      bind(xsd:decimal(strbefore($to  , ",")) as ?end)
-      bind((str((?start + ?end)/2))           as ?result)
+      bind(xsd:decimal(strbefore($from, ","))   as ?start)
+      bind(xsd:decimal(strbefore($to  , ","))   as ?end)
+      bind(str(((?start + ?end)/2) - $padding)     as ?result)
       
 }
 """ .
@@ -3209,14 +3238,22 @@ function:getMidYCoordinate
     rdfs:comment "Returns a string containing the Y coordinate for the middle point of a line between two input coordinates." ;
     sh:parameter [
         sh:path function:from ;
-        sh:datatype xsd:anyURI ;
+        sh:datatype xsd:string ;
         sh:description "The coordinate from which the line starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
-        sh:datatype xsd:anyURI ;
+        sh:datatype xsd:string ;
         sh:description "The coordinate where the line ends." ;
+        sh:order 2;        
     ] ;    
+    sh:parameter [
+        sh:path function:padding ;
+        sh:datatype xsd:decimal ;
+        sh:description "A padding." ;
+        sh:order 3;        
+    ] ;        
     sh:returnType xsd:string ;
     sh:select """
 
@@ -3226,9 +3263,9 @@ select ?result
 
 where {
   
-      bind(xsd:decimal(strafter($from, ",")) as ?start)
-      bind(xsd:decimal(strafter($to  , ",")) as ?end)
-      bind(str(((?start + ?end)/2)-6.0)      as ?result)
+      bind(xsd:decimal(strafter($from, ","))       as ?start)
+      bind(xsd:decimal(strafter($to  , ","))       as ?end)
+      bind(str(((?start + ?end)/2) - $padding)     as ?result)
 
 }
 """ .
