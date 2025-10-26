@@ -1566,22 +1566,49 @@ construct {
   ?source foaf:depicts ?fromArchimateElement.
   ?target foaf:depicts ?toArchimateElement.
 
-?source
+  optional {
+  ?source
     archimate:horizontal ?fromX;
     archimate:vertical   ?fromY.
+  }
+  
+  optional {
+  ?svgSourceConnection 
+     rdf:type archiSVG:Connection;
+     prov:wasDerivedFrom ?source;
+     archiSVG:fromX ?sourceConnectionFromX;
+     archiSVG:fromY ?sourceConnectionFromY;
+     archiSVG:toX   ?sourceConnectionToX;
+     archiSVG:toY   ?sourceConnectionToY.
+  bind((?sourceConnectionFromX + ?sourceConnectionToX)/2 as ?fromX)
+  bind((?sourceConnectionFromY + ?sourceConnectionToY)/2 as ?fromY)  
+  }
 
-optional {
+  optional {
   ?source
     archimate:height     ?fromH;
     archimate:width      ?fromW.
   }
 
-?target
+  optional {
+  ?target
     archimate:horizontal ?toX;
     archimate:vertical   ?toY.
-    
+  }
 
-optional {
+  optional {
+  ?svgTargetConnection 
+     rdf:type archiSVG:Connection;
+     prov:wasDerivedFrom ?target;
+     archiSVG:fromX ?targetConnectionFromX;
+     archiSVG:fromY ?targetConnectionFromY;
+     archiSVG:toX   ?targetConnectionToX;
+     archiSVG:toY   ?targetConnectionToY.
+  bind((?targetConnectionFromX + ?targetConnectionToX)/2 as ?toX)
+  bind((?targetConnectionFromY + ?targetConnectionToY)/2 as ?toY)  
+  }
+
+  optional {
   ?target
     archimate:height     ?toH;
     archimate:width      ?toW.
@@ -1838,7 +1865,7 @@ select $this {
     
 rule:ConnectionLine
     a sh:SPARQLRule;
-    rdfs:comment 'A rule that adds attributes to an connection line in archiSVG.'@en;
+    rdfs:comment 'A rule that adds attributes to a connection line in archiSVG.'@en;
     skos:prefLabel 'connection line rule'@en;
     sh:construct '''
 
@@ -2221,7 +2248,7 @@ construct {
 
 shp:TextCreator
     a sh:NodeShape;
-#    sh:rule rule:TextCreator;
+    sh:rule rule:TextCreator;
     sh:target target:TextCreator;
     skos:prefLabel 'text creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -2250,9 +2277,9 @@ select $this {
     $this archiSVG:maxLines ?maxLines;
           archiSVG:textLines ?textLines;
           ?member [].
+    filter(strstarts(str(?member), concat(str(rdf:), '_')))          
     bind(xsd:integer(strafter(str(?member), concat(str(rdf:), '_'))) as ?lineIndex)
-    filter((?lineIndex = ?textLines) || (?lineIndex = ?maxLines))
-    
+    filter((?lineIndex = ?textLines) || (?lineIndex = ?maxLines))    
   }
 }
 ''';
@@ -2315,7 +2342,8 @@ construct {
 
   # Establish fragment metadata
   bind(coalesce(?previousLineIndex+1, 1) as ?lineIndex)
-  bind(if(?lineIndex <= ?textLines && ?lineIndex <= ?maxLines, substr(?elementName,((?lineIndex-1)*?maxChars)+1, ?maxChars), ?unboundDummy) as ?textFragment)
+  bind(xsd:integer(((?lineIndex-1)*?maxChars)+1) as ?sliceStart)
+  bind(if(?lineIndex <= ?textLines && ?lineIndex <= ?maxLines, substr(?elementName,?sliceStart, ?maxChars), ?unboundDummy) as ?textFragment)
   bind(iri(concat(str(rdf:),"_", str(?lineIndex))) as ?memberText)
   bind((xsd:decimal(?y) + 10 + (1.2*xsd:decimal(?fontSize)*(?lineIndex-1))) as ?vertical)
   bind(xsd:decimal(?x) as ?horizontal)
@@ -2456,6 +2484,7 @@ select ?result where {
       $to
         archiSVG:toX ?toX_string ;
         archiSVG:toY ?toY_string .
+
       optional{
       $to
         archiSVG:toW ?toW_string ;
