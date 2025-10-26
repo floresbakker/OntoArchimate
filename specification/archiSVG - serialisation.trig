@@ -1891,8 +1891,6 @@ select $this {
   filter not exists { 
    $this prov:wasDerivedFrom rule:ConnectionLine.
    }
-   
-   filter($this != <https://data.rijksfinancien.nl/archimate/view/id/aRelationship2-SVG-Relationship-1>)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
