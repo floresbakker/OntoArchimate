@@ -446,9 +446,11 @@ This repository comes with five, fairly primitive, Python-based tools to handle 
 4. Archimate2ArchiXML
 5. ArchiXML2ArchiVoc
 
-## Playground
+## OntoArchimate Playground
 
-The tool Playground is used to read an RDF-based representation of an Archimate model into a graph and then serialize and save this to actual archimate XML code, ready for use in archimate-compliant software, and vice versa, from archimate XML code to an abstract RDF-based representation of an Archimate model.
+The tool OntoArchimate Playground is used to transform an RDF-based representation of an Archimate model into actual archimate XML code or an actual SVG image (including RDF & SVG representations), ready for use in archimate-compliant software. In addition, it is also possible to transform archimate XML code to an abstract RDF-based representation of an Archimate model. Please note that OntoArchimate Playground is not meant for production use and is rather slow. It is advised to apply the OntoArchimate vocabularies as contained in this repository within a fast enviroment consisting of a performant triple store, sparlq engine and shacl engine for an optimal experience.
+
+![OntoArchimatePlayground](/Examples/Playground.JPG)
 
 ### How to use Playground
 
