@@ -98,8 +98,10 @@ def transform2ArchiVoc(shaclgraph, serializable_graph):
 
         # If new triples were added, recurse
         if new_triples != old_triples:
+           print("transform2ArchiVoc iteration - running")
            return transform2ArchiVoc(shaclgraph, serializable_graph)
         else:
+           print("transform2ArchiVoc - done")              
            return serializable_graph
             
 def transform2ArchiXML(shaclgraph, serializable_graph):
@@ -147,10 +149,11 @@ def transform2ArchiXML(shaclgraph, serializable_graph):
 
         # Check whether another iteration is needed. 
         for result in resultquery:
-            print ("ask result = ", result)
+            print("transform2ArchiXML iteration - running")
             if result == True:
                 return transform2ArchiXML(shaclgraph, serializable_graph)
             else:
+                print("transform2ArchiXML - done")                
                 return serializable_graph
 
 def transform2ArchiSVG(shaclgraph, serializable_graph, iterator):
@@ -174,10 +177,10 @@ def transform2ArchiSVG(shaclgraph, serializable_graph, iterator):
 
         # If new triples were added, recurse
         if new_triples != old_triples:
-           print("transform2ArchiSVG iteration")
+           print("transform2ArchiSVG iteration - running")
            return transform2ArchiSVG(shaclgraph, serializable_graph, iterator)
         elif iterator < 10:          
-           print("transform2ArchiSVG iteration - stabilizing")            
+           print("transform2ArchiSVG iteration - finalizing")            
            iterator = iterator + 1
            return transform2ArchiSVG(shaclgraph, serializable_graph, iterator)
         else:
@@ -217,7 +220,7 @@ def serializeXMLFragment(shaclgraph, serializable_graph):
 
         # Check whether another iteration is needed. If the archimate root of the document contains a xml:fragment statement then the serialisation is considered done.
         for result in resultquery:
-            print ("ask result = ", result)
+            print ("check if fragment is complete: ", result)
             if result == False:
                 
                 return serializeXMLFragment(shaclgraph, serializable_graph)
@@ -282,7 +285,6 @@ where {
         for result in resultquery:
             print ("check if fragment is complete: ", result)
             if result == False:
-                writeGraph(serializable_graph, "svg")
                 return serializeSVGFragment(shaclgraph, serializable_graph)
          
             else:
@@ -327,7 +329,7 @@ def convert_to_archimate():
     filepath = directory_path+"/tools/playground/static/output.xml"
     with open(filepath, 'w', encoding='utf-8') as file:
        file.write(archimate_fragment)    
-    writeGraph(serializable_graph, "output")
+    writeGraph(serializable_graph, "static/output")
     return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text)
 
 @app.route('/convert2SVG', methods=['POST'])
@@ -344,14 +346,13 @@ def convert_to_SVG():
     serializable_graph.parse(data=serializable_graph_string , format="trig")
     
     serializable_graph = transform2ArchiSVG(archiSVG_serialisation, serializable_graph, 1)   
-    writeGraph(serializable_graph, "testSVG")
     print("Step 2: serializing archiSVG to SVG code...")      
     svg_fragment = serializeSVGFragment(xml_vocabulary, serializable_graph)
-    filepath = directory_path+"/tools/playground/static/output.html"
-    src_filepath = url_for('static', filename='output.html')
+    filepath = directory_path+"/tools/playground/static/output.xml"
+    src_filepath = url_for('static', filename='output.xml')
     with open(filepath, 'w', encoding='utf-8') as file:
        file.write(svg_fragment)
-    writeGraph(serializable_graph, "output")
+    writeGraph(serializable_graph, "static/output")
     return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>')
 
 @app.route('/convert2RDF', methods=['POST'])
@@ -495,7 +496,7 @@ def convert_to_rdf():
         serializable_graph.parse(data=serializable_graph_string , format="trig")    
         serializable_graph = transform2ArchiVoc(archimate_serialisation, serializable_graph)        
         triples = serializable_graph.serialize(format="trig").split('\n')
-        writeGraph(serializable_graph, "output")
+        writeGraph(serializable_graph, "static/output")
         return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput)
 
 @app.route('/')

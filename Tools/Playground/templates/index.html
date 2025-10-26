@@ -61,7 +61,7 @@ textarea {
   margin-top: 5px;
   margin-bottom: 10px;
   resize: vertical;
-  font-family: monospace;
+  font-family: monospace;  
 }
 
 button[type="submit"] {
@@ -103,33 +103,57 @@ button[type="submit"]:hover {
 .output-box {
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 15px;
+  padding: 0px;
   background-color: #fafafa;
   min-height: 400px;  
-  text-align: center;  
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
   font-family: monospace;
   color: #333;
-  
 }
 
+/* Centered instructions */
+.output-instruction {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  color: #333;  
+  text-align: center;  
+}
 
 /* SVG BOX (Right column) */
 .svg-box {
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 15px;
+  padding: 0px;
   background-color: #fafafa;
-  min-height: 400px;
-  text-align: center;
+  min-height: 400px;  
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
   font-family: monospace;
-  color: #333;  
+  color: #333;
 }
+
+/* Placeholder text inside SVG box */
+.svg-box .output-instruction {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  color: #333;
+  text-align: center;
+}
+
+/* Make contained SVG scale responsively */
+.svg-box svg {
+  width: 100%;       /* fill the container width */
+  height: auto;      /* maintain aspect ratio */
+  max-height: 800px; /* optional: prevent huge SVGs from breaking layout */
+  display: block;    /* remove extra inline spacing */
+  margin: 0 auto;    /* center the SVG horizontally */
+}
+
 
 /* RESPONSIVENESS */
 @media (max-width: 900px) {
@@ -170,35 +194,38 @@ button[type="submit"]:hover {
                             <!-- COLUMN 2: Output -->
                             <div class="column">
                                 <div class="output-box">
-                                {% if xmlRawOutput %}
-                                <div>{{ xmlRawOutput }}</div>
-                                {% elif rdfOutput %}
-                                <div>
-                                  {% for triple in rdfOutput %}
-                                  <div class="triple">{{ triple }}</div>
-                                  {% endfor %}
+                                  {% if xmlRawOutput %}
+                                    <div>{{ xmlRawOutput }}</div>
+                                  {% elif rdfOutput %}
+                                    <div>
+                                      {% for triple in rdfOutput %}
+                                        <div class="triple">{{ triple }}</div>
+                                      {% endfor %}
+                                    </div>
+                                  {% else %}
+                                    <div class="output-instruction">Output code will appear here (RDF or XML).</div>
+                                  {% endif %}
                                 </div>
-                                {% else %}
-                                <div>XML output will appear here.</div>
-                                {% endif %}
-                              </div>
                             </div>
                             <!-- COLUMN 3: SVG Image -->
                             <div class="column">
                                 <div class="svg-box">
-                                    {% if htmlOutput %}
+                                  {% if htmlOutput %}
                                     {{ htmlOutput | safe }}
-                                    {% else %}
-                                    <p>SVG image will appear here.</p>
-                                    {% endif %}
-                                 </div>
-                                             <!-- Download buttons -->
-            <div>
-                <a href="/static/output.html" download="output.html"><button class="download-button">Download Output HTML</button></a><br>
-                <a href="/static/output.xml" download="output.xml"><button class="download-button">Download Output XML</button></a><br>
-                <a href="/static/output.trig" download="output.trig"><button class="download-button">Download Output RDF</button></a>
-            </div>
-          </div>
+                                  {% else %}
+                                    <div class="output-instruction">SVG image will appear here.</div>
+                                  {% endif %}
+                                </div>
+                              <!-- Download buttons -->
+                              <div>
+                                <a href="/static/output.xml" download="output.xml">
+                                  <button class="download-button">Download Output XML</button>
+                                </a><br>
+                                <a href="/static/output.trig" download="output.trig">
+                                  <button class="download-button">Download Output RDF</button>
+                                </a>
+                              </div>
+                            </div>
         </div>
     </body>
 </html>
