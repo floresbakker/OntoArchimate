@@ -477,7 +477,7 @@ construct {
 
 shp:NodeCreator
     a sh:NodeShape;
-    sh:rule rule:NodeCreator;
+    sh:rule rule:NodeCreator, rule:NodeBoxCreator, rule:NodeIconCreator, rule:NodeTextCreator;
     sh:target target:NodeCreator;
     skos:prefLabel 'node creator shape'@en;
     rdfs:isDefinedBy archiSVG:.
@@ -502,8 +502,9 @@ select $this {
  
   # ...that are not processed yet
   filter not exists { 
-    ?archiSVG_node rdf:type svg:G ;
-                   prov:wasDerivedFrom $this.
+    ?archiSVG_node 
+       rdf:type svg:G ;
+       prov:wasDerivedFrom $this.
   }
 }
 ''';
@@ -543,19 +544,314 @@ construct {
           prov:wasDerivedFrom $this;
           foaf:depicts ?element.
 
+} where {
+  
+  $this
+    archimate:horizontal ?horizontal;
+    archimate:vertical   ?vertical.
+  
+  # Calculate the translation of the box position against the position of the template box
+  bind(concat('translate(', str(?horizontal), ',', str(?vertical), ')') as ?translate)
+    
+  # A view node depicts an element, get the metadata for this.
+  $this foaf:depicts ?element.
+  ?element rdf:type ?archimateClass;
+           skos:prefLabel ?elementName.
+  ?archimateClass rdfs:subClassOf* archimate:Element.
+
+  # Create IRI's
+  bind(iri(concat(str($this),"-SVG-Element"))                                    as ?elementNode)
+  bind(iri(concat(str($this),"-SVG-Element","-Box"))                             as ?box)
+  bind(iri(concat(str($this),"-SVG-Element","-Icon"))                            as ?icon)
+  bind(iri(concat(str($this),"-SVG-Element","-Text"))                            as ?text)
+}
+
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+shp:NodeBoxCreator
+    a sh:NodeShape;
+    sh:rule rule:NodeBoxCreator;
+    sh:target target:NodeBoxCreator;
+    skos:prefLabel 'node box creator shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:NodeBoxCreator
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all archimate view nodes in the archimate model.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
+
+select $this {
+
+  # Select all archimate view nodes whose box is not processed yet... 
+  
+  $this rdf:type archimate:ViewNode.
+  ?archiSVG_node 
+    rdf:type svg:G ;
+    rdf:_1 ?box;
+    prov:wasDerivedFrom $this.
+  filter not exists {
+  ?box ?anyPredicate ?anyObject
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+    
+rule:NodeBoxCreator
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archisvg box node in the XML document based on an archimate view node.'@en;
+    skos:prefLabel 'archisvg box node creator rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xlink:     <https://www.w3.org/1999/xlink/model/def/> 
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+
     ?box 
           rdf:type svg:Path;
+          skos:prefLabel ?elementName;
           svg:d         ?path ;
           svg:transform ?scale;
           svg:vector-effect "non-scaling-stroke";
           svg:fill      ?fillColor ;
           svg:stroke    ?lineColor .
 
+} where {
+  
+  $this foaf:depicts ?element.
+  ?element rdf:type ?archimateClass;
+           skos:prefLabel ?elementName.
+  ?archimateClass rdfs:subClassOf* archimate:Element.
+  
+  ?svgTemplate rdf:type svg:G, archiSVG:Template;
+               foaf:depicts ?archimateClass;
+               rdf:_1 ?boxTemplate.
+
+  ?boxTemplate rdf:type svg:Path, archiSVG:Template;
+               svg:d      ?path ;
+               svg:fill   ?defaultFillColor ;
+               svg:stroke ?defaultLineColor .
+               
+  optional {
+  $this
+    archimate:height     ?heightElement; 
+    archimate:width      ?widthElement.
+  }
+  
+  optional {
+  $this
+    archimate:fillColor  ?fillColorIRI;
+    archimate:lineColor  ?lineColorIRI.
+    
+  ?fillColorIRI rdf:type archimate:Color;
+    archimate:red   ?fillColorR;
+    archimate:green ?fillColorG;
+    archimate:blue  ?fillColorB. 
+
+  bind(concat("rgb(", ?fillColorR, "," ,?fillColorG, "," ,?fillColorB, ")") as ?fillColorElement)
+
+  ?lineColorIRI rdf:type archimate:Color;
+    archimate:red   ?lineColorR;
+    archimate:green ?lineColorG;
+    archimate:blue  ?lineColorB.
+  
+  bind(concat("rgb(", ?lineColorR, "," ,?lineColorG, "," ,?lineColorB, ")") as ?lineColorElement)
+  }               
+  
+  bind(coalesce(?heightElement,    "55")                       as ?height)
+  bind(coalesce(?widthElement,     "144")                      as ?width)
+  bind(coalesce(?fillColorElement, ?defaultFillColor)          as ?fillColor)
+  bind(coalesce(?lineColorElement, ?defaultLineColor)          as ?lineColor)  
+    
+  # Calculate the scaling of the box against the size of the template box
+  bind(concat('scale(', str(xsd:integer(?width)/144), ',', str(xsd:integer(?height)/55), ')') as ?scale)
+  
+  # Create IRI's
+  bind(iri(concat(str($this),"-SVG-Element","-Box")) as ?box)
+
+}
+
+''';
+    rdfs:isDefinedBy archiSVG:.    
+    
+shp:NodeIconCreator
+    a sh:NodeShape;
+    sh:rule rule:NodeIconCreator;
+    sh:target target:NodeIconCreator;
+    skos:prefLabel 'node icon creator shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:NodeIconCreator
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all archimate view nodes in the archimate model.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
+
+select $this {
+
+  # Select all archimate view nodes whose icon is not processed yet... 
+  
+  $this rdf:type archimate:ViewNode.
+  ?archiSVG_node 
+    rdf:type svg:G ;
+    rdf:_2 ?icon;
+    prov:wasDerivedFrom $this.
+  filter not exists {
+  ?icon ?anyPredicate ?anyObject
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+    
+rule:NodeIconCreator
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archisvg  icon node in the XML document based on an archimate view node.'@en;
+    skos:prefLabel 'archisvg icon node creator rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xlink:     <https://www.w3.org/1999/xlink/model/def/> 
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+          
     ?icon 
+          skos:prefLabel ?elementName;
           rdf:type svg:Use;
           svg:transform ?iconTranslate;
           xlink:href ?iconID.
 
+} where {
+  
+  $this foaf:depicts ?element.
+  ?element rdf:type ?archimateClass;
+           skos:prefLabel ?elementName.
+  ?archimateClass rdfs:subClassOf* archimate:Element.
+  
+  ?svgTemplate rdf:type svg:G, archiSVG:Template;
+               foaf:depicts ?archimateClass;
+               rdf:_2 ?iconTemplate.
+
+  ?iconTemplate rdf:type svg:Use, archiSVG:Template;
+                xlink:href ?iconID.
+               
+  optional {
+  $this
+    archimate:width      ?widthElement.
+  }
+            
+  bind(coalesce(?widthElement,     "144")                      as ?width)
+ 
+  # Calculate the translation of the icon position compensating for the size of the box against the size of the template box
+  bind(concat('translate(', str(xsd:integer(?width)-144), ', 0)') as ?iconTranslate)
+  
+  # Create IRI's
+  bind(iri(concat(STR($this),"-SVG-Element","-Icon")) as ?icon)
+
+}
+
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+shp:NodeTextCreator
+    a sh:NodeShape;
+    sh:rule rule:NodeTextCreator;
+    sh:target target:NodeTextCreator;
+    skos:prefLabel 'node text creator shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:NodeTextCreator
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all archimate view nodes in the archimate model.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
+
+select $this {
+
+  # Select all archimate view nodes whose text is not processed yet... 
+  
+  $this rdf:type archimate:ViewNode.
+  ?archiSVG_node 
+    rdf:type svg:G ;
+    rdf:_3 ?text;
+    prov:wasDerivedFrom $this.
+  filter not exists {
+  ?text ?anyPredicate ?anyObject
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+
+
+rule:NodeTextCreator
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates an archisvg text node in the XML document based on an archimate view node.'@en;
+    skos:prefLabel 'archisvg text node creator rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xlink:     <https://www.w3.org/1999/xlink/model/def/> 
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsd:       <http://www.w3.org/2001/XMLSchema#>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+          
     ?text 
           rdf:type svg:TextElement, archiSVG:TextElement ;
           skos:prefLabel     ?elementName;
@@ -570,70 +866,6 @@ construct {
 
 } where {
   
-  $this
-    archimate:horizontal ?horizontal;
-    archimate:vertical   ?vertical.
-    
-  optional {
-  $this
-    archimate:height     ?heightElement; 
-    archimate:width      ?widthElement.
-  }
-  
-  optional {
-  $this
-    archimate:fillColor  ?fillColorIRI;
-    archimate:lineColor  ?lineColorIRI;
-    archimate:font       ?fontIRI.
-    
-  ?fillColorIRI rdf:type archimate:Color;
-    archimate:red   ?fillColorR;
-    archimate:green ?fillColorG;
-    archimate:blue  ?fillColorB;
-    archimate:alpha ?fillColorA. 
-
-  bind(concat("rgb(", ?fillColorR, "," ,?fillColorG, "," ,?fillColorB, ")") as ?fillColorElement)
-
-  ?lineColorIRI rdf:type archimate:Color;
-    archimate:red   ?lineColorR;
-    archimate:green ?lineColorG;
-    archimate:blue  ?lineColorB;
-    archimate:alpha ?lineColorA. 
-  
-  bind(concat("rgb(", ?lineColorR, "," ,?lineColorG, "," ,?lineColorB, ")") as ?lineColorElement)
-
-  ?fontIRI rdf:type archimate:Font;
-    archimate:fontName  ?fontNameElement;
-    archimate:fontSize  ?fontSizeElement;
-    archimate:fontColor ?fontColorIRI.
-
-  ?fontColorIRI rdf:type archimate:Color;
-    archimate:red   ?fontColorR;
-    archimate:green ?fontColorG;
-    archimate:blue  ?fontColorB.
-
-  bind(concat("rgb(", ?fontColorR, "," ,?fontColorG, "," ,?fontColorB, ")") as ?fontColorElement)
-  }
-  
-  BIND(COALESCE(?heightElement,    "55")                       as ?height)
-  BIND(COALESCE(?widthElement,     "144")                      as ?width)
-  BIND(str(xsd:decimal(?horizontal) + xsd:decimal(?width) - 5) as ?iconBorder)
-  BIND(COALESCE(?fillColorElement, ?defaultFillColor)          as ?fillColor)
-  BIND(COALESCE(?lineColorElement, ?defaultLineColor)          as ?lineColor)
-  BIND(COALESCE(?fontColorElement, ?defaultFontColor)          as ?fontColor)
-  BIND(COALESCE(?fontNameElement,  ?defaultFontName)           as ?fontName)
-  BIND(COALESCE(?fontSizeElement,  ?defaultFontSize)           as ?fontSize)
-  
-  # Calculate the translation of the box position against the position of the template box
-  BIND(CONCAT('translate(', str(?horizontal), ',', str(?vertical), ')') as ?translate)
-  
-  # Calculate the translation of the icon position compensating for the size of the box against the size of the template box
-  BIND(CONCAT('translate(', str(xsd:integer(?width)-144), ', 0)') as ?iconTranslate)
-  
-  # Calculate the scaling of the box against the size of the template box
-  BIND(CONCAT('scale(', str(xsd:integer(?width)/144), ',', str(xsd:integer(?height)/55), ')') as ?scale)
-    
-  # A view node depicts an element, get the metadata for this.
   $this foaf:depicts ?element.
   ?element rdf:type ?archimateClass;
            skos:prefLabel ?elementName.
@@ -641,27 +873,38 @@ construct {
   
   ?svgTemplate rdf:type svg:G, archiSVG:Template;
                foaf:depicts ?archimateClass;
-               rdf:_1 ?boxTemplate;
-               rdf:_2 ?iconTemplate;
                rdf:_3 ?textTemplate.
 
-  ?boxTemplate rdf:type svg:Path, archiSVG:Template;
-               svg:d      ?path ;
-               svg:fill   ?defaultFillColor ;
-               svg:stroke ?defaultLineColor .
-
-  ?iconTemplate rdf:type svg:Use, archiSVG:Template;
-                xlink:href ?iconID.
-    
   ?textTemplate rdf:type svg:TextElement, archiSVG:Template;
                 svg:font-family ?defaultFontName ;
                 svg:font-size   ?defaultFontSize ;
                 svg:y           ?textY.
-optional{
+  optional {
   ?textTemplate svg:text-anchor ?templateTextAnchor.
-}
-bind(coalesce(?templateTextAnchor, "middle") as ?textAnchor)
+  }
+  
+  bind(coalesce(?templateTextAnchor, "middle") as ?textAnchor)
 
+  optional {
+  $this
+    archimate:height     ?heightElement; 
+    archimate:width      ?widthElement.
+  }
+  
+  bind(coalesce(?heightElement,    "55")                       as ?height)
+  bind(coalesce(?widthElement,     "144")                      as ?width)
+  
+  optional {  
+    $this archimate:font ?fontIRI.
+    ?fontIRI 
+             rdf:type archimate:Font;
+             archimate:fontName  ?fontNameElement;
+             archimate:fontSize  ?fontSizeElement;
+  }
+ 
+  bind(coalesce(?fontNameElement,  ?defaultFontName)           as ?fontName)
+  bind(coalesce(?fontSizeElement,  ?defaultFontSize)           as ?fontSize)
+  
   # Establish text area limits
   
   # Calculate available space for text (98% of box width)
@@ -678,19 +921,15 @@ bind(coalesce(?templateTextAnchor, "middle") as ?textAnchor)
   
   # Calculate the text position
   bind(if(?textAnchor="middle", xsd:integer(?width)/2, if(?textAnchor="start", 10, xsd:integer(?width)-10)) as ?textX)
-
+  
   # Create IRI's
-  BIND(IRI(CONCAT(STR($this),"-SVG-Element"))                                    as ?elementNode)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Box"))                             as ?box)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Icon"))                            as ?icon)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-Text"))                            as ?text)
-  BIND(IRI(CONCAT(STR($this),"-SVG-Element","-TextFragment"))                    as ?textFragment)
+  bind(iri(concat(str($this),"-SVG-Element","-Text"))                            as ?text)
+  bind(iri(concat(str($this),"-SVG-Element","-TextFragment"))                    as ?textFragment)
+
 }
 
 ''';
-    rdfs:isDefinedBy archiSVG:.
-
-
+    rdfs:isDefinedBy archiSVG:.    
 
 shp:ContainerCreator
     a sh:NodeShape;
@@ -1982,7 +2221,7 @@ construct {
 
 shp:TextCreator
     a sh:NodeShape;
-    sh:rule rule:TextCreator;
+#    sh:rule rule:TextCreator;
     sh:target target:TextCreator;
     skos:prefLabel 'text creator shape'@en;
     rdfs:isDefinedBy archiSVG:.

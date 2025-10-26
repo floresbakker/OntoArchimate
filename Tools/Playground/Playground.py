@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
 import rdflib
 from rdflib import Graph, Namespace, Literal, RDF, Dataset
 import pyshacl
@@ -27,7 +27,7 @@ xlink     = Namespace("https://www.w3.org/1999/xlink/model/def/")
 xsi       = Namespace("http://www.w3.org/2001/XMLSchema-instance/model/def/")
 
 def writeGraph(graph, name):
-    graph.serialize(destination=directory_path + "/tools/playground/" + name + ".ttl", format="turtle")
+    graph.serialize(destination=directory_path + "/tools/playground/" + name + ".trig", format="trig")
     
 # Function to read a graph (as a string) from a file 
 def readStringFromFile(file_path):
@@ -44,13 +44,16 @@ xml_vocabulary          = readStringFromFile(directory_path + "/specification/xm
 xmlns_vocabulary        = readStringFromFile(directory_path + "/specification/xmlns - core.trig")
 xlink_vocabulary        = readStringFromFile(directory_path + "/specification/xlink - core.trig")
 xsi_vocabulary          = readStringFromFile(directory_path + "/specification/xsi - core.trig")
+svg_vocabulary          = readStringFromFile(directory_path + "/specification/svg - core.trig")
 archimate_vocabulary    = readStringFromFile(directory_path + "/specification/archimate - core.trig")
 archiXML_vocabulary     = readStringFromFile(directory_path + "/specification/archiXML - core.trig")
+archiSVG_vocabulary     = readStringFromFile(directory_path + "/specification/archiSVG - core.trig")
 archimate_serialisation = readStringFromFile(directory_path + "/specification/archimate - serialisation.trig")
 archiXML_serialisation  = readStringFromFile(directory_path + "/specification/archiXML - serialisation.trig")
+archiSVG_serialisation  = readStringFromFile(directory_path + "/specification/archiSVG - serialisation.trig")
 
-vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archimate_vocabulary + '\n' + archiXML_vocabulary + '\n'
-example_rdf_code = readStringFromFile(directory_path + "/examples/ArchiXMLBasicModel.trig")
+vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archimate_vocabulary + '\n' + archiXML_vocabulary + '\n' + archiSVG_vocabulary + '\n' + svg_vocabulary
+example_rdf_code = readStringFromFile(directory_path + "/examples/ArchimateBasicModel.trig")
 example_archimate_code = readStringFromFile(directory_path + "/examples/ArchimateBasicModel.xml")
 
 
@@ -146,11 +149,40 @@ def transform2ArchiXML(shaclgraph, serializable_graph):
         for result in resultquery:
             print ("ask result = ", result)
             if result == True:
-                
                 return transform2ArchiXML(shaclgraph, serializable_graph)
-         
             else:
                 return serializable_graph
+
+def transform2ArchiSVG(shaclgraph, serializable_graph, iterator):
+        
+        old_triples = set(serializable_graph.quads((None, None, None, None)))  
+        
+        # call PyShacl engine and apply the ArchiSVG vocabulary to the Archimate model
+        pyshacl.validate(
+        data_graph=serializable_graph,
+        shacl_graph=shaclgraph,
+        data_graph_format="trig",
+        shacl_graph_format="trig",
+        advanced=True,
+        inplace=True,
+        inference=None,
+        iterate_rules=False, # Not using the iterate rules function of PyShacl as it seems to not be working properly. Instead, offer each new resulting state freshly to PyShacl.
+        debug=False,
+        )
+      
+        new_triples = set(serializable_graph.quads((None, None, None, None)))
+
+        # If new triples were added, recurse
+        if new_triples != old_triples:
+           print("transform2ArchiSVG iteration")
+           return transform2ArchiSVG(shaclgraph, serializable_graph, iterator)
+        elif iterator < 10:          
+           print("transform2ArchiSVG iteration - stabilizing")            
+           iterator = iterator + 1
+           return transform2ArchiSVG(shaclgraph, serializable_graph, iterator)
+        else:
+            print("transform2ArchiSVG maximum iterations done")  
+            return serializable_graph                        
             
 def serializeXMLFragment(shaclgraph, serializable_graph):
         
@@ -211,9 +243,76 @@ def serializeXMLFragment(shaclgraph, serializable_graph):
                     print ("xml.fragment = ", xml.fragment)
                     return xml.fragment
 
+def serializeSVGFragment(shaclgraph, serializable_graph):
+        
+        # call PyShacl engine and apply the ArchiSVG vocabulary to the serializable Archimate document
+        pyshacl.validate(
+        data_graph=serializable_graph,
+        shacl_graph=shaclgraph,
+        data_graph_format="trig",
+        shacl_graph_format="trig",
+        advanced=True,
+        inplace=True,
+        inference=None,
+        iterate_rules=False, # Not using the iterate rules function of PyShacl as it seems to not be working properly. Instead, offer each new resulting state freshly to PyShacl.
+        debug=False,
+        )
+      
+        # Query to know if the document has been fully serialised by testing whether the root has a xml:fragment property. If it has, the algorithm has reached the final level of the document.
+        resultquery = serializable_graph.query('''
+                                               
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+
+ask
+where {
+  ?document a svg:Document ;
+    prov:wasDerivedFrom ?archimateView;
+    xml:fragment ?fragment.
+  ?archimateModel rdf:type archimate:View.
+}
+
+        ''')   
+
+        # Check whether another iteration is needed. If the archimate root of the document contains a xml:fragment statement then the serialisation is considered done.
+        for result in resultquery:
+            print ("check if fragment is complete: ", result)
+            if result == False:
+                writeGraph(serializable_graph, "svg")
+                return serializeSVGFragment(shaclgraph, serializable_graph)
+         
+            else:
+                xmlQuery = serializable_graph.query('''
+                   
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+
+select ?fragment
+where {
+  ?document a svg:Document ;
+    prov:wasDerivedFrom ?archimateView;
+    xml:fragment ?fragment.
+  ?archimateModel rdf:type archimate:View.
+}
+               ''')   
+
+         
+                for xml in xmlQuery:
+                    print ("xml.fragment = ", xml.fragment)
+                    return xml.fragment
 
 @app.route('/convert2Archimate', methods=['POST'])
 def convert_to_archimate():
+    print("Starting to convert RDF to XML...")    
+    print("Step 1: transforming archimate vocabulary to archiXML...")    
     text = request.form['rdf']   
     g = Dataset(default_union=True)
     g.parse(data=text , format="trig")
@@ -222,13 +321,39 @@ def convert_to_archimate():
     serializable_graph_string = vocabulary + triples
     serializable_graph = Dataset(default_union=True)
     serializable_graph.parse(data=serializable_graph_string , format="trig")    
-    serializable_graph = transform2ArchiXML(archiXML_serialisation, serializable_graph)   
+    serializable_graph = transform2ArchiXML(archiXML_serialisation, serializable_graph)  
+    print("Step 2: serializing archiXML to XML code")     
     archimate_fragment = serializeXMLFragment(xml_vocabulary, serializable_graph)
-    print("Archimate fragment =", archimate_fragment)
+
     return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text)
+
+@app.route('/convert2SVG', methods=['POST'])
+def convert_to_SVG():
+    print("Starting to convert RDF to SVG...")    
+    print("Step 1: transforming archimate vocabulary to archiSVG...")  
+    text = request.form['rdf']   
+    g = Dataset(default_union=True)
+    g.parse(data=text , format="trig")
+    # Zet de RDF-triples om naar een string
+    triples = g.serialize(format='trig')
+    serializable_graph_string = vocabulary + triples
+    serializable_graph = Dataset(default_union=True)
+    serializable_graph.parse(data=serializable_graph_string , format="trig")
+    writeGraph(serializable_graph, "testSVG")
+    serializable_graph = transform2ArchiSVG(archiSVG_serialisation, serializable_graph, 1)   
+    print("Step 2: serializing archiSVG to SVG code...")      
+    svg_fragment = serializeSVGFragment(xml_vocabulary, serializable_graph)
+    filepath = directory_path+"/tools/playground/static/output.html"
+    src_filepath = url_for('static', filename='output.html')
+    with open(filepath, 'w', encoding='utf-8') as file:
+       file.write(svg_fragment)
+    
+    return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>')
 
 @app.route('/convert2RDF', methods=['POST'])
 def convert_to_rdf():
+        print("Starting to convert XML to RDF...")
+        print("Step 1: parsing XML into ArchiXML...")
         archimateInput = request.form['archimate']
         # initialize graph
         g = Dataset(default_union=True)
@@ -359,7 +484,7 @@ def convert_to_rdf():
                       g.add((doc[child_id], xml["fragment"], Literal(text_fragment)))
 
         # return the resulting triples
-            
+        print("Step 2: transforming archiXML to archimate vocabulary...")            
         archiXMLTriples = g.serialize(format="trig")
         serializable_graph_string = vocabulary + '\n' + archiXMLTriples + '\n'
         serializable_graph = Dataset(default_union=True)

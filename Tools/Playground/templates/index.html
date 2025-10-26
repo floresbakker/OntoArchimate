@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XML Archimate Rendering</title>
+    <title>OntoArchimate Playground</title>
     <style>
         /* Style for the container holding form and output box */
         .container {
@@ -39,11 +39,16 @@
     <div class="container">
         <!-- First form -->
         <div class="form">
-            <form action="http://localhost:5000/convert2Archimate" method="post">
-                <label for="textInput">RDF</label><br>
-                <textarea id="rdfInput" name="rdf" rows="15" cols="60">{{rdfInput}}</textarea><br>
-                <button type="submit">Convert to Archimate XML</button>
-            </form>
+          <form method="post">
+              <label for="rdfInput">RDF</label><br>
+              <textarea id="rdfInput" name="rdf" rows="15" cols="60">{{ rdfInput }}</textarea><br>
+              <button type="submit" formaction="http://localhost:5000/convert2Archimate">
+                  Convert to Archimate XML
+              </button>
+              <button type="submit" formaction="http://localhost:5000/convert2SVG">
+                  Convert to SVG XML
+              </button>
+          </form>
         </div>
 
         <!-- Raw output box for the first form (raw Archimate content) -->
@@ -61,6 +66,21 @@
             </div>
             {% endif %}
         </div>
+
+        <div class="output-box">
+            <!-- SVG content -->
+            {% if htmlOutput %}
+            <div class="output-container">
+                <!-- show SVG content with HTML escaping -->
+                {{ htmlOutput | safe}}
+            </div>
+            {% else %}
+            <div class="output-container">
+                
+                SVG image is shown here
+            </div>
+            {% endif %}
+        </div>        
     </div>
 
     <!-- Container for the second form and its output box -->
