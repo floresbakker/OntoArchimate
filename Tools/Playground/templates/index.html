@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OntoArchimate Playground</title>
-  <style>
-    body {
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>OntoArchimate Playground</title>
+                <style>
+body {
       font-family: Arial, sans-serif;
       margin: 20px;
       background-color: #fff;
@@ -14,8 +13,8 @@
     }
 
 h1 {
-  color: #4CAF50;
-  border-bottom: 2px solid #4CAF50;
+  color: #007BFF;
+  border-bottom: 2px solid #007BFF;
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
@@ -44,7 +43,7 @@ h1 {
 
 .section-title {
   font-weight: bold;
-  color: #4CAF50;
+  color: #007BFF;
   margin-bottom: 10px;
 }
 
@@ -66,17 +65,38 @@ textarea {
 }
 
 button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #007BFF;
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 5px;
+  transition: background-color 0.2s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
+}
+
+/* Style for download buttons */
+.download-button {
+    width: 100%; /* Make buttons equally wide */
+    margin-bottom: 10px; /* Add margin between buttons */
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.download-button:hover {
+    background-color: #45a049; /* Darker green when hovering */
 }
 
 /* OUTPUT BOX (Middle column) */
@@ -85,27 +105,30 @@ button[type="submit"]:hover {
   border-radius: 5px;
   padding: 15px;
   background-color: #fafafa;
-  height: 100%;
-  overflow-y: auto;
-  min-height: 400px;
-}
-
-.output-container {
+  min-height: 400px;  
+  text-align: center;  
+  overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
   font-family: monospace;
   color: #333;
+  
 }
+
 
 /* SVG BOX (Right column) */
 .svg-box {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 15px;
-  background-color: #fff;
+  background-color: #fafafa;
   min-height: 400px;
   text-align: center;
   overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  color: #333;  
 }
 
 /* RESPONSIVENESS */
@@ -115,66 +138,67 @@ button[type="submit"]:hover {
   }
 }
 
-</style>
-</head>
-<body>
-  <h1>OntoArchimate Playground</h1>
-
-  <div class="main-container">
-
-<!-- COLUMN 1: Inputs -->
-<div class="column">
-  <div class="form-section">
-    <div class="section-title">RDF → XML and SVG</div>
-    <form method="post">
-      
-      <textarea id="rdfInput" name="rdf" rows="10">{{ rdfInput }}</textarea><br>
-      <button type="submit" formaction="http://localhost:5000/convert2Archimate">
+  </style>
+            </head>
+            <body>
+                <h1>OntoArchimate Playground</h1>
+                <div class="main-container">
+                    <!-- COLUMN 1: Inputs -->
+                    <div class="column">
+                        <div class="form-section">
+                            <div class="section-title">RDF → Archimate-XML and SVG</div>
+                            <form method="post">
+                                <textarea id="rdfInput" name="rdf" rows="10">{{ rdfInput }}</textarea>
+                                <br>
+                                    <button type="submit" formaction="http://localhost:5000/convert2Archimate">
         Convert to Archimate-XML
       </button>
-      <button type="submit" formaction="http://localhost:5000/convert2SVG">
+                                    <button type="submit" formaction="http://localhost:5000/convert2SVG">
         Convert to SVG-XML and SVG-RDF
       </button>
-    </form>
-  </div>
-
-  <div class="form-section">
-    <div class="section-title">XML → RDF</div>
-    <form action="http://localhost:5000/convert2RDF" method="post">
-      
-      <textarea id="xmlInput" name="archimate" rows="10">{{ xmlRawInput }}</textarea><br>
-      <button type="submit">Convert to Archimate-RDF</button>
-    </form>
-  </div>
-</div>
-
-<!-- COLUMN 2: Output -->
-<div class="column">
-  <div class="output-box">
-    {% if xmlRawOutput %}
-    <div class="output-container">{{ xmlRawOutput }}</div>
-    {% elif rdfOutput %}
-    <div class="output-container">
-      {% for triple in rdfOutput %}
-      <div class="triple">{{ triple }}</div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <div class="output-container">XML output will appear here.</div>
-    {% endif %}
-  </div>
-</div>
-
-<!-- COLUMN 3: SVG Image -->
-<div class="column">
-  <div class="svg-box">
-    {% if htmlOutput %}
-    {{ htmlOutput | safe }}
-    {% else %}
-    <p>SVG image will appear here (if applicable).</p>
-    {% endif %}
-  </div>
-</div>
-</div>
-</body>
+                                </form>
+                            </div>
+                            <div class="form-section">
+                                <div class="section-title">Archimate-XML → RDF</div>
+                                <form action="http://localhost:5000/convert2RDF" method="post">
+                                    <textarea id="xmlInput" name="archimate" rows="10">{{ xmlRawInput }}</textarea>
+                                    <br>
+                                        <button type="submit">Convert to RDF</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- COLUMN 2: Output -->
+                            <div class="column">
+                                <div class="output-box">
+                                {% if xmlRawOutput %}
+                                <div>{{ xmlRawOutput }}</div>
+                                {% elif rdfOutput %}
+                                <div>
+                                  {% for triple in rdfOutput %}
+                                  <div class="triple">{{ triple }}</div>
+                                  {% endfor %}
+                                </div>
+                                {% else %}
+                                <div>XML output will appear here.</div>
+                                {% endif %}
+                              </div>
+                            </div>
+                            <!-- COLUMN 3: SVG Image -->
+                            <div class="column">
+                                <div class="svg-box">
+                                    {% if htmlOutput %}
+                                    {{ htmlOutput | safe }}
+                                    {% else %}
+                                    <p>SVG image will appear here.</p>
+                                    {% endif %}
+                                 </div>
+                                             <!-- Download buttons -->
+            <div>
+                <a href="/static/output.html" download="output.html"><button class="download-button">Download Output HTML</button></a><br>
+                <a href="/static/output.xml" download="output.xml"><button class="download-button">Download Output XML</button></a><br>
+                <a href="/static/output.trig" download="output.trig"><button class="download-button">Download Output RDF</button></a>
+            </div>
+          </div>
+        </div>
+    </body>
 </html>

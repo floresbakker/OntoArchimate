@@ -324,7 +324,10 @@ def convert_to_archimate():
     serializable_graph = transform2ArchiXML(archiXML_serialisation, serializable_graph)  
     print("Step 2: serializing archiXML to XML code")     
     archimate_fragment = serializeXMLFragment(xml_vocabulary, serializable_graph)
-
+    filepath = directory_path+"/tools/playground/static/output.xml"
+    with open(filepath, 'w', encoding='utf-8') as file:
+       file.write(archimate_fragment)    
+    writeGraph(serializable_graph, "output")
     return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text)
 
 @app.route('/convert2SVG', methods=['POST'])
@@ -348,7 +351,7 @@ def convert_to_SVG():
     src_filepath = url_for('static', filename='output.html')
     with open(filepath, 'w', encoding='utf-8') as file:
        file.write(svg_fragment)
-    
+    writeGraph(serializable_graph, "output")
     return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>')
 
 @app.route('/convert2RDF', methods=['POST'])
@@ -492,7 +495,7 @@ def convert_to_rdf():
         serializable_graph.parse(data=serializable_graph_string , format="trig")    
         serializable_graph = transform2ArchiVoc(archimate_serialisation, serializable_graph)        
         triples = serializable_graph.serialize(format="trig").split('\n')
-        
+        writeGraph(serializable_graph, "output")
         return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput)
 
 @app.route('/')
