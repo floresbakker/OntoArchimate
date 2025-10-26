@@ -1,115 +1,180 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OntoArchimate Playground</title>
-    <style>
-        /* Style for the container holding form and output box */
-        .container {
-            display: flex;
-            align-items: stretch; /* Make container divs stretch to the height of the tallest content */
-            margin-bottom: 20px; /* Adjust as needed */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OntoArchimate Playground</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #fff;
+      color: #333;
+    }
 
-        /* Style for form */
-        .form {
-            flex: 1;
-            margin-right: 10px; /* Adjust as needed */
-        }
+h1 {
+  color: #4CAF50;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
 
-        /* Style for output box */
-        .output-box {
-            flex: 1;
-            border: 1px solid #ccc;
-            padding: 10px;
-            overflow-y: auto; /* Add vertical scrollbar if content overflows */
-        }
+/* MAIN LAYOUT: three columns */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
 
-        /* Style for output container */
-        .output-container {
-            /* Optionally limit max-height to prevent excessive stretching */
-            max-height: 100%; /* Adjust as needed */
-        }
-    </style>
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* INPUT SECTIONS (Left column) */
+.form-section {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.section-title {
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  resize: vertical;
+  font-family: monospace;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* OUTPUT BOX (Middle column) */
+.output-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #fafafa;
+  height: 100%;
+  overflow-y: auto;
+  min-height: 400px;
+}
+
+.output-container {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  color: #333;
+}
+
+/* SVG BOX (Right column) */
+.svg-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #fff;
+  min-height: 400px;
+  text-align: center;
+  overflow: auto;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+  }
+}
+
+</style>
 </head>
 <body>
-    <h1>OntoArchimate Playground</h1>
-    <!-- Container for the first form and its output box -->
-    <div class="container">
-        <!-- First form -->
-        <div class="form">
-          <form method="post">
-              <label for="rdfInput">RDF</label><br>
-              <textarea id="rdfInput" name="rdf" rows="15" cols="60">{{ rdfInput }}</textarea><br>
-              <button type="submit" formaction="http://localhost:5000/convert2Archimate">
-                  Convert to Archimate XML
-              </button>
-              <button type="submit" formaction="http://localhost:5000/convert2SVG">
-                  Convert to SVG XML
-              </button>
-          </form>
-        </div>
+  <h1>OntoArchimate Playground</h1>
 
-        <!-- Raw output box for the first form (raw Archimate content) -->
-        <div class="output-box">
-            <!-- XML content -->
-            {% if xmlRawOutput %}
-            <div class="output-container">
-                <!-- show XML content with HTML escaping -->
-                {{ xmlRawOutput }}
-            </div>
-            {% else %}
-            <div class="output-container">
-                
-                Raw XML output code is shown here
-            </div>
-            {% endif %}
-        </div>
+  <div class="main-container">
 
-        <div class="output-box">
-            <!-- SVG content -->
-            {% if htmlOutput %}
-            <div class="output-container">
-                <!-- show SVG content with HTML escaping -->
-                {{ htmlOutput | safe}}
-            </div>
-            {% else %}
-            <div class="output-container">
-                
-                SVG image is shown here
-            </div>
-            {% endif %}
-        </div>        
+<!-- COLUMN 1: Inputs -->
+<div class="column">
+  <div class="form-section">
+    <div class="section-title">RDF → XML and SVG</div>
+    <form method="post">
+      
+      <textarea id="rdfInput" name="rdf" rows="10">{{ rdfInput }}</textarea><br>
+      <button type="submit" formaction="http://localhost:5000/convert2Archimate">
+        Convert to Archimate-XML
+      </button>
+      <button type="submit" formaction="http://localhost:5000/convert2SVG">
+        Convert to SVG-XML and SVG-RDF
+      </button>
+    </form>
+  </div>
+
+  <div class="form-section">
+    <div class="section-title">XML → RDF</div>
+    <form action="http://localhost:5000/convert2RDF" method="post">
+      
+      <textarea id="xmlInput" name="archimate" rows="10">{{ xmlRawInput }}</textarea><br>
+      <button type="submit">Convert to Archimate-RDF</button>
+    </form>
+  </div>
+</div>
+
+<!-- COLUMN 2: Output -->
+<div class="column">
+  <div class="output-box">
+    {% if xmlRawOutput %}
+    <div class="output-container">{{ xmlRawOutput }}</div>
+    {% elif rdfOutput %}
+    <div class="output-container">
+      {% for triple in rdfOutput %}
+      <div class="triple">{{ triple }}</div>
+      {% endfor %}
     </div>
+    {% else %}
+    <div class="output-container">XML output will appear here.</div>
+    {% endif %}
+  </div>
+</div>
 
-    <!-- Container for the second form and its output box -->
-    <div class="container">
-        <!-- Second form -->
-        <div class="form">
-            <form action="http://localhost:5000/convert2RDF" method="post">
-                <label for="rdf">Archimate</label><br>
-                <textarea id="xmlInput" name="archimate" rows="15" cols="60">{{xmlRawInput}}</textarea><br>
-                <button type="submit">Convert to RDF</button>
-            </form>
-        </div>
-
-        <!-- Output box for the second form (text content) -->
-        <div class="output-box">
-            <!-- Text content -->
-          {% if rdfOutput %}
-          <div class="output-container">
-            {% for triple in rdfOutput %}
-            <div class="triple">{{ triple }}</div>
-            {% endfor %}
-          </div>
-          {% else %}
-          <div class="output-container">
-                
-                RDF output code is shown here
-          </div>
-          {% endif %}
-        </div>
-    </div>
+<!-- COLUMN 3: SVG Image -->
+<div class="column">
+  <div class="svg-box">
+    {% if htmlOutput %}
+    {{ htmlOutput | safe }}
+    {% else %}
+    <p>SVG image will appear here (if applicable).</p>
+    {% endif %}
+  </div>
+</div>
+</div>
 </body>
 </html>
