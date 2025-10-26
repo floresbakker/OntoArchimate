@@ -1495,6 +1495,38 @@ select $this {
        [] prov:wasDerivedFrom ?viewnodes.
     }
   }
+  
+  # ...and only if all the archimate connections in the view are already processed
+  filter not exists {
+  $this  
+     foaf:depicts ?relationship.
+  ?relationship 
+     archimate:to ?otherRelationshipTo.
+  ?otherRelationshipTo 
+     rdf:type archimate:Relationship.
+  ?otherConnectionTo 
+     rdf:type archimate:Connection;
+     foaf:depicts ?otherRelationshipTo.
+   filter not exists {
+       [] prov:wasDerivedFrom ?otherConnectionTo.
+    }
+  }
+
+    # ...and only if all the archimate connections in the view are already processed
+  filter not exists {
+  $this  
+    foaf:depicts ?relationship.
+  ?relationship 
+    archimate:from ?otherRelationshipFrom.
+  ?otherRelationshipFrom 
+    rdf:type archimate:Relationship.
+  ?otherConnectionFrom 
+    rdf:type archimate:Connection;
+    foaf:depicts ?otherRelationshipFrom.
+   filter not exists {
+       [] prov:wasDerivedFrom ?otherConnectionFrom.
+    }
+  }
 }
 ''';
     rdfs:isDefinedBy archiSVG:.
@@ -1859,6 +1891,8 @@ select $this {
   filter not exists { 
    $this prov:wasDerivedFrom rule:ConnectionLine.
    }
+   
+   filter($this != <https://data.rijksfinancien.nl/archimate/view/id/aRelationship2-SVG-Relationship-1>)
 }
 ''';
     rdfs:isDefinedBy archiSVG:.

@@ -339,8 +339,9 @@ def convert_to_SVG():
     serializable_graph_string = vocabulary + triples
     serializable_graph = Dataset(default_union=True)
     serializable_graph.parse(data=serializable_graph_string , format="trig")
-    writeGraph(serializable_graph, "testSVG")
+    
     serializable_graph = transform2ArchiSVG(archiSVG_serialisation, serializable_graph, 1)   
+    writeGraph(serializable_graph, "testSVG")
     print("Step 2: serializing archiSVG to SVG code...")      
     svg_fragment = serializeSVGFragment(xml_vocabulary, serializable_graph)
     filepath = directory_path+"/tools/playground/static/output.html"
