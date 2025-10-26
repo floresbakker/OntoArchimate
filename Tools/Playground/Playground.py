@@ -330,7 +330,7 @@ def convert_to_archimate():
     with open(filepath, 'w', encoding='utf-8') as file:
        file.write(archimate_fragment)    
     writeGraph(serializable_graph, "static/output")
-    return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text)
+    return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text, rdfOutputButton="true")
 
 @app.route('/convert2SVG', methods=['POST'])
 def convert_to_SVG():
@@ -353,7 +353,7 @@ def convert_to_SVG():
     with open(filepath, 'w', encoding='utf-8') as file:
        file.write(svg_fragment)
     writeGraph(serializable_graph, "static/output")
-    return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>')
+    return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>', rdfOutputButton="true")
 
 @app.route('/convert2RDF', methods=['POST'])
 def convert_to_rdf():
@@ -497,7 +497,7 @@ def convert_to_rdf():
         serializable_graph = transform2ArchiVoc(archimate_serialisation, serializable_graph)        
         triples = serializable_graph.serialize(format="trig").split('\n')
         writeGraph(serializable_graph, "static/output")
-        return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput)
+        return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput, rdfOutputButton="true")
 
 @app.route('/')
 def index():

@@ -215,15 +215,19 @@ button[type="submit"]:hover {
                                     <div class="output-instruction">SVG image will appear here.</div>
                                   {% endif %}
                                 </div>
-                              <!-- Download buttons -->
-                              <div>
-                                <a href="/static/output.xml" download="output.xml">
-                                  <button class="download-button">Download Output XML</button>
-                                </a><br>
-                                <a href="/static/output.trig" download="output.trig">
-                                  <button class="download-button">Download Output RDF</button>
-                                </a>
-                              </div>
+                                <!-- Download buttons -->
+                                <div>
+                                  {% if xmlRawOutput %}
+                                    <a href="/static/output.xml" download="output.xml">
+                                      <button class="download-button">Download Output XML</button>
+                                    </a><br>
+                                  {% endif %}
+                                  {% if rdfOutputButton %}
+                                    <a href="/static/output.trig" download="output.trig">
+                                      <button class="download-button">Download Output RDF</button>
+                                    </a>
+                                  {% endif %}
+                                </div>
                             </div>
         </div>
     </body>
