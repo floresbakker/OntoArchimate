@@ -24,8 +24,9 @@ OntoArchimate also makes use of another family of vocabularies:
 3. XMLNS Core Vocabulary
 4. XLINK Core Vocabulary
 5. XSI Core Vocabulary
+6. SVG Core Vocabulary
 
-These five vocabularies are used for generating, parsing, validating, annotating, and reusing XML-based documents.
+These six vocabularies are used for generating, parsing, validating, annotating, visualizing and reusing XML-based documents.
 
 # Status
 
@@ -440,7 +441,7 @@ We can also roundtrip from the XML document back to the RDF-based archiXML back 
 
 This repository comes with five, fairly primitive, Python-based tools to handle Archimate-documents and RDF-representations of Archimate. 
 
-1. Playground
+1. OntoArchimate Playground
 2. ArchiVoc2ArchiXML
 3. ArchiXML2Archimate
 4. Archimate2ArchiXML
@@ -448,7 +449,7 @@ This repository comes with five, fairly primitive, Python-based tools to handle 
 
 ## OntoArchimate Playground
 
-The tool OntoArchimate Playground is used to transform an RDF-based representation of an Archimate model into actual archimate XML code or an actual SVG image (including RDF & SVG representations), ready for use in archimate-compliant software. In addition, it is also possible to transform archimate XML code to an abstract RDF-based representation of an Archimate model. Please note that OntoArchimate Playground is not meant for production use and is rather slow. It is advised to apply the OntoArchimate vocabularies as contained in this repository within a fast enviroment consisting of a performant triple store, sparlq engine and shacl engine for an optimal experience.
+The tool OntoArchimate Playground is used to transform an RDF-based representation of an Archimate model into actual archimate XML code or an actual SVG image (including RDF & SVG representations), ready for use in archimate-compliant software. In addition, it is also possible to transform archimate XML code to an abstract RDF-based representation of an Archimate model. Please note that OntoArchimate Playground is not meant for production use as it is rather slow and unforgiving in the user experience it offers. It is advised to apply the OntoArchimate vocabularies as contained in this repository within a fast enviroment consisting of a performant triple store, sparlq engine and shacl engine for an optimal experience.
 
 ![OntoArchimatePlayground](/Examples/Playground.JPG)
 
@@ -569,10 +570,15 @@ D. Go to the output folder in OntoArchimate\Tools\ArchiXML2ArchiVoc\Output and g
 
 All tools make extensive use of [RDFlib](https://rdflib.readthedocs.io/en/stable/index.html). Rdflib is a Python library used for working with Resource Description Framework (RDF) data. RDF is a widely used framework for representing and processing information on the web. It is a standard model for data interchange on the web, particularly for representing metadata and data about resources available on the internet.
 
-Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples. From experience, the RDFlib library unfortunately does not always guarantee a good performance; some of the scripts sometimes may take very long to finish ( > 1 hour), whereas the same SHACL shapes and the same data are run within 40 seconds on a commerical SHACL engine. It is good to have this in mind when running it locally. Also, RDFlib is improved constantly, so upgrading may help from time to time.
+Rdflib provides a comprehensive set of tools and utilities for working with RDF data, including parsing and serializing RDF in various formats (such as RDF/XML, Turtle, JSON-LD, and more), querying RDF data using SPARQL, creating RDF graphs, and performing various operations on RDF triples. From experience, the RDFlib library unfortunately does not always guarantee a fast performance; some of the scripts sometimes may take very long to finish ( > 1 hour), whereas the same SHACL shapes and the same data are run within 40 seconds on a commerical SHACL engine. It is good to have this in mind when running it locally. Also, RDFlib is improved constantly, so upgrading may help from time to time.
 
 Two out of three tools additionally makes use of [PyShacl](https://github.com/RDFLib/pySHACL). PySHACL is a complete open-source implementation of the SHACL W3C specification, with broad use in the community as well. 
 
 # Acknowledgements
 
-We would like to thank Iwan Aucamp @RDFlib for his unrelenting support and accomplishments regarding the open source triple store and related services, as well as Ashley Sommer @RDFlib & @PyShacl for his work on the important open source implementation of a SHACL engine. 
+I would like to thank the people at RDFlib and PyShacl for their support and accomplishments regarding their open source triple store, SPARQL service and SHACL engine:
+
+* Iwan Aucamp
+* Ashley Sommer
+* White Gobo
+* Edmond Chuc

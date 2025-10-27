@@ -2416,11 +2416,13 @@ function:getStartCoordinate
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:string ;
     sh:select """
@@ -2507,11 +2509,13 @@ function:getEndCoordinate
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:string ;
     sh:select """
@@ -2595,16 +2599,18 @@ select ?result where {
 
 function:getMinHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the smallest horizontal coordinate of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2615,46 +2621,49 @@ prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
 select (MIN(?Xend) as ?result)
 
 where {
-      {select $from $to (coalesce(?Xend1, ?Xend2) as ?Xend) where {
-      {$from
-        archiSVG:fromX ?fromX_string .
-        
-      optional{
-      $from
-        archiSVG:fromW ?fromW_string .
-      }
-      bind((xsd:decimal(?fromX_string) + xsd:decimal(coalesce(?fromW_string,0.0))) as ?Xend1)  
+          {select $from $to (coalesce(?Xend1, ?Xend2) as ?Xend) where {
+              {
+              $from
+                archiSVG:fromX ?fromX_string .
+                
+               optional{
+               $from
+                archiSVG:fromW ?fromW_string .
+               }
+               bind((xsd:decimal(?fromX_string) + xsd:decimal(coalesce(?fromW_string,0.0))) as ?Xend1)  
+              }
+
+          UNION
+
+             {
+              $to
+                archiSVG:toX ?toX_string .
+                
+              optional{
+              $to
+                archiSVG:toW ?toW_string .
+              }       
+              bind((xsd:decimal(?toX_string) + xsd:decimal(coalesce(?toW_string,0.0))) as ?Xend2)  
+             }
+            }
+          }
         }
-
-      UNION
-
-      {
-      $to
-        archiSVG:toX ?toX_string .
-        
-      optional{
-      $to
-        archiSVG:toW ?toW_string .
-      }       
-      bind((xsd:decimal(?toX_string) + xsd:decimal(coalesce(?toW_string,0.0))) as ?Xend2)  
-}
-}
-}
-}
 """ .
 
 function:getStartHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the horizontal start coordinate of a horizontal line for the visual vertical overlap of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2692,16 +2701,18 @@ where {
 
 function:getStartVerticalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the vertical start coordinate of a vertical line for the visual horizontal overlap of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2739,16 +2750,18 @@ where {
 
 function:getEndHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the horizontal end coordinate of a horizontal line for the visual vertical overlap of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2786,16 +2799,18 @@ where {
 
 function:getEndVerticalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the vertical end coordinate of a vertical line for the visual horizontal overlap of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2838,11 +2853,13 @@ function:isHorizontalOverlap
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:boolean ;
     sh:select """
@@ -2871,11 +2888,13 @@ function:isVerticalOverlap
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:boolean ;
     sh:select """
@@ -2898,16 +2917,18 @@ where {
 
 function:getDeltaHorizontal
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the horizontal distance that is half the horizontal visual overlap of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2931,16 +2952,18 @@ where {
 
 function:getMaxHorizontalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the biggest horizontal coordinate of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
     sh:returnType xsd:decimal ;
     sh:select """
@@ -2981,18 +3004,20 @@ where {
 
 function:getMinVerticalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the smallest vertical coordinate of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
-    sh:returnType xsd:string ;
+    sh:returnType xsd:decimal ;
     sh:select """
 
 prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
@@ -3031,18 +3056,20 @@ where {
 
 function:getMaxVerticalCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the biggest vertical coordinate of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
-    sh:returnType xsd:string ;
+    sh:returnType xsd:decimal ;
     sh:select """
 
 prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
@@ -3081,18 +3108,20 @@ where {
 
 function:getDeltaVertical
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the coordinates for the visual overlap of two concepts in an archimate view." ;
+    rdfs:comment "Returns a decimal containing the vertical distance that is half the vertical visual overlap of two concepts in an archimate view." ;
     sh:parameter [
         sh:path function:from ;
         sh:datatype xsd:anyURI ;
         sh:description "The element from which the connection starts." ;
+        sh:order 1;
     ] ;
     sh:parameter [
         sh:path function:to ;
         sh:datatype xsd:anyURI ;
         sh:description "The element where the connection ends." ;
+        sh:order 2;
     ] ;    
-    sh:returnType xsd:string ;
+    sh:returnType xsd:decimal ;
     sh:select """
 
 prefix archiSVG:    <https://data.rijksfinancien.nl/archisvg/model/def/>
