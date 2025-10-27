@@ -88,10 +88,13 @@ archiSVG:svg a svg:Svg  , archiSVG:Template ;
     svg:height  "600";
     svg:width  "1200";
     rdf:_1 archiSVG:definitions;
-    rdf:_2 archiSVG:applicationLayer; 
-    rdf:_3 archiSVG:businessLayer.
+    rdf:_2 archiSVG:genericElements;
+    rdf:_3 archiSVG:applicationLayer; 
+    rdf:_4 archiSVG:businessLayer;
+    rdf:_5 archiSVG:motivationElements;
+    rdf:_6 archiSVG:relationships.
 
-archiSVG:definitions rdf:type archiSVG:Definitions, archiSVG:Template ;
+archiSVG:definitions rdf:type svg:G, archiSVG:Definitions, archiSVG:Template ;
     skos:prefLabel 'Template for SVG definitions';
     rdf:_1 archiSVG:relationDefinitions;
     rdf:_2 archiSVG:iconDefinitions.
@@ -1559,8 +1562,6 @@ archiSVG:businessLayer a svg:G , archiSVG:Template ;
     rdf:_12 archiSVG:Representation;
     rdf:_13 archiSVG:Product.
     
-
-
 # Business Actor
 
 archiSVG:BusinessActor a svg:G , archiSVG:Template ;
@@ -1914,6 +1915,18 @@ archiSVG:ProductTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Product" .
     
 ### Relationship
+
+archiSVG:relationships a svg:G , archiSVG:Template ;
+    skos:prefLabel "SVG depiction of all relationships in Archimate";
+    rdf:_1 archiSVG:Associate; 
+    rdf:_2 archiSVG:Aggegrate;
+    rdf:_3 archiSVG:Access;
+    rdf:_4 archiSVG:Compose;
+    rdf:_5 archiSVG:Influence; 
+    rdf:_6 archiSVG:Serving;
+    rdf:_7 archiSVG:Realization;
+    rdf:_8 archiSVG:Assignment;
+    rdf:_9 archiSVG:Specialization.
 
 # Associate
 archiSVG:Associate a svg:G, archiSVG:Template;

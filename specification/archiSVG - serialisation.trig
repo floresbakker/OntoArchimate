@@ -1501,30 +1501,14 @@ select $this {
   $this  
      foaf:depicts ?relationship.
   ?relationship 
-     archimate:to ?otherRelationshipTo.
-  ?otherRelationshipTo 
+     archimate:to | archimate:from ?otherRelationship.
+  ?otherRelationship 
      rdf:type archimate:Relationship.
-  ?otherConnectionTo 
+  ?otherConnection 
      rdf:type archimate:Connection;
-     foaf:depicts ?otherRelationshipTo.
+     foaf:depicts ?otherRelationship.
    filter not exists {
-       [] prov:wasDerivedFrom ?otherConnectionTo.
-    }
-  }
-
-    # ...and only if all the archimate connections in the view are already processed
-  filter not exists {
-  $this  
-    foaf:depicts ?relationship.
-  ?relationship 
-    archimate:from ?otherRelationshipFrom.
-  ?otherRelationshipFrom 
-    rdf:type archimate:Relationship.
-  ?otherConnectionFrom 
-    rdf:type archimate:Connection;
-    foaf:depicts ?otherRelationshipFrom.
-   filter not exists {
-       [] prov:wasDerivedFrom ?otherConnectionFrom.
+       [] prov:wasDerivedFrom ?otherConnection.
     }
   }
 }
