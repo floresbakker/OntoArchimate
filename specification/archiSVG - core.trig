@@ -89,10 +89,13 @@ archiSVG:svg a svg:Svg  , archiSVG:Template ;
     svg:width  "1200";
     rdf:_1 archiSVG:definitions;
     rdf:_2 archiSVG:genericElements;
-    rdf:_3 archiSVG:applicationLayer; 
-    rdf:_4 archiSVG:businessLayer;
-    rdf:_5 archiSVG:motivationElements;
-    rdf:_6 archiSVG:relationships.
+    rdf:_3 archiSVG:motivationElements;
+    rdf:_4 archiSVG:businessLayer;    
+    rdf:_5 archiSVG:applicationLayer; 
+    rdf:_6 archiSVG:technologyLayer;
+    rdf:_7 archiSVG:strategyLayer;
+    rdf:_8 archiSVG:implementationMigrationLayer;
+    rdf:_9 archiSVG:relationships.
 
 archiSVG:definitions rdf:type svg:G, archiSVG:Definitions, archiSVG:Template ;
     skos:prefLabel 'Template for SVG definitions';
@@ -293,44 +296,100 @@ archiSVG:specializationEnd rdf:type svg:Polyline, archiSVG:Definition ;
     svg:stroke "black" ;
     svg:stroke-width "1" .  
 
+archiSVG:triggering rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "triggering";
+    svg:markerWidth "20";
+    svg:markerHeight "20";
+    svg:refX "0";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:triggeringStart.
+
+archiSVG:triggeringStart rdf:type svg:G, archiSVG:Definition ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" . 
+
+archiSVG:flow rdf:type svg:Marker, archiSVG:Definition ;
+    svg:id "flow";
+    svg:markerWidth "20";
+    svg:markerHeight "20";
+    svg:refX "0";
+    svg:refY "5";
+    svg:orient "auto";
+    svg:markerUnits "strokeWidth";
+    rdf:_1 archiSVG:flowStart.
+
+archiSVG:flowStart rdf:type svg:G, archiSVG:Definition ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" .   
+
 # Definition of icons 
     
-archiSVG:iconDefinitions rdf:type svg:G, archiSVG:Template ;
-    skos:prefLabel 'Template for SVG definitions of icons';
-    rdf:_1 archiSVG:GroupingIcon;
-    rdf:_2 archiSVG:LocationIcon;
-    rdf:_3 archiSVG:StakeholderIcon;
-    rdf:_4 archiSVG:DriverIcon;
-    rdf:_5 archiSVG:AssessmentIcon;
-    rdf:_6 archiSVG:GoalIcon;
-    rdf:_7 archiSVG:OutcomeIcon;
-    rdf:_8 archiSVG:PrincipleIcon;
-    rdf:_9 archiSVG:RequirementIcon; 
-    rdf:_10 archiSVG:ConstraintIcon;  
-    rdf:_11 archiSVG:MeaningIcon;
-    rdf:_12 archiSVG:ValueIcon;    
-    rdf:_13 archiSVG:ApplicationComponentIcon;
-    rdf:_14 archiSVG:ApplicationCollaborationIcon;
-    rdf:_15 archiSVG:ApplicationInterfaceIcon;
-    rdf:_16 archiSVG:ApplicationFunctionIcon;
-    rdf:_17 archiSVG:ApplicationInteractionIcon;
-    rdf:_18 archiSVG:ApplicationProcessIcon;    
-    rdf:_19 archiSVG:ApplicationEventIcon;    
-    rdf:_20 archiSVG:DataObjectIcon;   
-    rdf:_21 archiSVG:ApplicationServiceIcon;    
-    rdf:_22 archiSVG:BusinessActorIcon;   
-    rdf:_23 archiSVG:BusinessRoleIcon;
-    rdf:_24 archiSVG:BusinessCollaborationIcon;
-    rdf:_25 archiSVG:BusinessInterfaceIcon;
-    rdf:_26 archiSVG:BusinessProcessIcon;
-    rdf:_27 archiSVG:BusinessFunctionIcon;
-    rdf:_28 archiSVG:BusinessInteractionIcon;   
-    rdf:_29 archiSVG:BusinessEventIcon;    
-    rdf:_30 archiSVG:BusinessServiceIcon;    
-    rdf:_31 archiSVG:BusinessObjectIcon;    
-    rdf:_32 archiSVG:ContractIcon;    
-    rdf:_33 archiSVG:RepresentationIcon;
-    rdf:_34 archiSVG:ProductIcon.
+### Icon definitions for all ArchiMate elements
+archiSVG:iconDefinitions rdf:type svg:G , archiSVG:Template ;
+    skos:prefLabel "Template for SVG definitions of icons" ;
+    rdf:_1  archiSVG:GroupingIcon ;
+    rdf:_2  archiSVG:LocationIcon ;
+    rdf:_3  archiSVG:StakeholderIcon ;
+    rdf:_4  archiSVG:DriverIcon ;
+    rdf:_5  archiSVG:AssessmentIcon ;
+    rdf:_6  archiSVG:GoalIcon ;
+    rdf:_7  archiSVG:OutcomeIcon ;
+    rdf:_8  archiSVG:PrincipleIcon ;
+    rdf:_9  archiSVG:RequirementIcon ;
+    rdf:_10 archiSVG:ConstraintIcon ;
+    rdf:_11 archiSVG:MeaningIcon ;
+    rdf:_12 archiSVG:ValueIcon ;
+    rdf:_13 archiSVG:CapabilityIcon ;
+    rdf:_14 archiSVG:CourseOfActionIcon ;
+    rdf:_15 archiSVG:ResourceIcon ;
+    rdf:_16 archiSVG:ValueStreamIcon ;
+    rdf:_17 archiSVG:ApplicationComponentIcon ;
+    rdf:_18 archiSVG:ApplicationCollaborationIcon ;
+    rdf:_19 archiSVG:ApplicationInterfaceIcon ;
+    rdf:_20 archiSVG:ApplicationFunctionIcon ;
+    rdf:_21 archiSVG:ApplicationInteractionIcon ;
+    rdf:_22 archiSVG:ApplicationProcessIcon ;
+    rdf:_23 archiSVG:ApplicationEventIcon ;
+    rdf:_24 archiSVG:DataObjectIcon ;
+    rdf:_25 archiSVG:ApplicationServiceIcon ;
+    rdf:_26 archiSVG:BusinessActorIcon ;
+    rdf:_27 archiSVG:BusinessRoleIcon ;
+    rdf:_28 archiSVG:BusinessCollaborationIcon ;
+    rdf:_29 archiSVG:BusinessInterfaceIcon ;
+    rdf:_30 archiSVG:BusinessProcessIcon ;
+    rdf:_31 archiSVG:BusinessFunctionIcon ;
+    rdf:_32 archiSVG:BusinessInteractionIcon ;
+    rdf:_33 archiSVG:BusinessEventIcon ;
+    rdf:_34 archiSVG:BusinessServiceIcon ;
+    rdf:_35 archiSVG:BusinessObjectIcon ;
+    rdf:_36 archiSVG:ContractIcon ;
+    rdf:_37 archiSVG:RepresentationIcon ;
+    rdf:_38 archiSVG:ProductIcon ;
+    rdf:_39 archiSVG:NodeIcon ;
+    rdf:_40 archiSVG:DeviceIcon ;
+    rdf:_41 archiSVG:SystemSoftwareIcon ;
+    rdf:_42 archiSVG:TechnologyCollaborationIcon ;
+    rdf:_43 archiSVG:TechnologyInterfaceIcon ;
+    rdf:_44 archiSVG:TechnologyFunctionIcon ;
+    rdf:_45 archiSVG:TechnologyProcessIcon ;
+    rdf:_46 archiSVG:TechnologyInteractionIcon ;
+    rdf:_47 archiSVG:TechnologyServiceIcon ;
+    rdf:_48 archiSVG:TechnologyEventIcon ;
+    rdf:_49 archiSVG:ArtifactIcon ;
+    rdf:_50 archiSVG:FacilityIcon ;
+    rdf:_51 archiSVG:DistributionNetworkIcon ;
+    rdf:_52 archiSVG:MaterialIcon ;
+    rdf:_53 archiSVG:PathIcon ;
+    rdf:_54 archiSVG:CommunicationNetworkIcon ;
+    rdf:_55 archiSVG:DeliverableIcon ;
+    rdf:_56 archiSVG:WorkPackageIcon ;
+    rdf:_57 archiSVG:PlateauIcon ;
+    rdf:_58 archiSVG:GapIcon ;
+    rdf:_59 archiSVG:ImplementationEventIcon .   
 
 archiSVG:GroupingIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a grouping in Archimate";
@@ -529,6 +588,62 @@ archiSVG:ValueIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
+    svg:y "5" .
+    
+archiSVG:CapabilityIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a capability in Archimate" ;
+    svg:id "capability" ;
+    rdf:_1 archiSVG:CapabilityIconPart1 .
+    
+archiSVG:CapabilityIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:CourseOfActionIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a course of action in Archimate" ;
+    svg:id "courseOfAction" ;
+    rdf:_1 archiSVG:CourseOfActionIconPart1 .
+    
+archiSVG:CourseOfActionIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:ResourceIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a resource in Archimate" ;
+    svg:id "resource" ;
+    rdf:_1 archiSVG:ResourceIconPart1 .
+    
+archiSVG:ResourceIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:ValueStreamIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a value stream in Archimate" ;
+    svg:id "valueStream" ;
+    rdf:_1 archiSVG:ValueStreamIconPart1 .
+    
+archiSVG:ValueStreamIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
     svg:y "5" .
 
 archiSVG:ApplicationComponentIcon a svg:Symbol , archiSVG:Template ;
@@ -920,6 +1035,300 @@ archiSVG:ProductIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
+    svg:y "5" .
+    
+archiSVG:NodeIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a node in Archimate" ;
+    svg:id "node" ;
+    rdf:_1 archiSVG:NodeIconPart1 .
+    
+archiSVG:NodeIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:DeviceIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a device in Archimate" ;
+    svg:id "device" ;
+    rdf:_1 archiSVG:DeviceIconPart1 .
+    
+archiSVG:DeviceIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:SystemSoftwareIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for system software in Archimate" ;
+    svg:id "systemSoftware" ;
+    rdf:_1 archiSVG:SystemSoftwareIconPart1 .
+    
+archiSVG:SystemSoftwareIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .    
+
+archiSVG:TechnologyCollaborationIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology collaboration in Archimate" ;
+    svg:id "technologyCollaboration" ;
+    rdf:_1 archiSVG:TechnologyCollaborationIconPart1 .
+    
+archiSVG:TechnologyCollaborationIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none";
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:TechnologyInterfaceIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology interface in Archimate" ;
+    svg:id "technologyInterface" ;
+    rdf:_1 archiSVG:TechnologyInterfaceIconPart1 .
+    
+archiSVG:TechnologyInterfaceIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:TechnologyFunctionIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology function in Archimate" ;
+    svg:id "technologyFunction" ;
+    rdf:_1 archiSVG:TechnologyFunctionIconPart1 .
+    
+archiSVG:TechnologyFunctionIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:TechnologyProcessIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology process in Archimate" ;
+    svg:id "technologyProcess" ;
+    rdf:_1 archiSVG:TechnologyProcessIconPart1 .
+    
+archiSVG:TechnologyProcessIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20";
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:TechnologyInteractionIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology interaction in Archimate" ;
+    svg:id "technologyInteraction" ;
+    rdf:_1 archiSVG:TechnologyInteractionIconPart1 .
+    
+archiSVG:TechnologyInteractionIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:TechnologyServiceIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology service in Archimate" ;
+    svg:id "technologyService" ;
+    rdf:_1 archiSVG:TechnologyServiceIconPart1 .
+    
+archiSVG:TechnologyServiceIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:TechnologyEventIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a technology event in Archimate" ;
+    svg:id "technologyEvent" ;
+    rdf:_1 archiSVG:TechnologyEventIconPart1 .
+    
+archiSVG:TechnologyEventIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:ArtifactIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for an artifact in Archimate" ;
+    svg:id "artifact" ;
+    rdf:_1 archiSVG:ArtifactIconPart1 .
+    
+archiSVG:ArtifactIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:FacilityIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a facility in Archimate" ;
+    svg:id "facility" ;
+    rdf:_1 archiSVG:FacilityIconPart1 .
+    
+archiSVG:FacilityIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:DistributionNetworkIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a distribution network in Archimate" ;
+    svg:id "distributionNetwork" ;
+    rdf:_1 archiSVG:DistributionNetworkIconPart1 .
+    
+archiSVG:DistributionNetworkIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:MaterialIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a material in Archimate" ;
+    svg:id "material" ;
+    rdf:_1 archiSVG:MaterialIconPart1 .
+    
+archiSVG:MaterialIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:PathIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a path in Archimate" ;
+    svg:id "path" ;
+    rdf:_1 archiSVG:PathIconPart1 .
+    
+archiSVG:PathIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:CommunicationNetworkIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a communication network in Archimate" ;
+    svg:id "communicationNetwork" ;
+    rdf:_1 archiSVG:CommunicationNetworkIconPart1 .
+    
+archiSVG:CommunicationNetworkIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:DeliverableIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a deliverable in Archimate" ;
+    svg:id "deliverable" ;
+    rdf:_1 archiSVG:DeliverableIconPart1 .
+    
+archiSVG:DeliverableIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:WorkPackageIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a work package in Archimate" ;
+    svg:id "workPackage" ;
+    rdf:_1 archiSVG:WorkPackageIconPart1 .
+    
+archiSVG:WorkPackageIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:PlateauIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a plateau in Archimate" ;
+    svg:id "plateau" ;
+    rdf:_1 archiSVG:PlateauIconPart1 .
+    
+archiSVG:PlateauIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:GapIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for a gap in Archimate" ;
+    svg:id "gap" ;
+    rdf:_1 archiSVG:GapIconPart1 .
+    
+archiSVG:GapIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
+
+archiSVG:ImplementationEventIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for an implementation event in Archimate" ;
+    svg:id "implementationEvent" ;
+    rdf:_1 archiSVG:ImplementationEventIconPart1 .
+    
+archiSVG:ImplementationEventIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "20"; 
+    svg:x "115"; 
     svg:y "5" .
 
 ### Generic elements
@@ -1913,6 +2322,693 @@ archiSVG:ProductText a svg:TextElement , archiSVG:Template ;
 
 archiSVG:ProductTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Product" .
+
+### Technology layer
+
+archiSVG:technologyLayer a svg:G , archiSVG:Template ;
+    skos:prefLabel "SVG depiction of all concepts in the technology layer of Archimate";
+    rdf:_1 archiSVG:Node;
+    rdf:_2 archiSVG:Device;
+    rdf:_3 archiSVG:SystemSoftware;
+    rdf:_4 archiSVG:TechnologyCollaboration;
+    rdf:_5 archiSVG:TechnologyInterface;
+    rdf:_6 archiSVG:TechnologyFunction;
+    rdf:_7 archiSVG:TechnologyProcess;    
+    rdf:_8 archiSVG:TechnologyInteraction;
+    rdf:_9 archiSVG:TechnologyService;
+    rdf:_10 archiSVG:TechnologyEvent;
+    rdf:_11 archiSVG:Artifact;
+    rdf:_12 archiSVG:Facility;
+    rdf:_13 archiSVG:DistributionNetwork;
+    rdf:_14 archiSVG:Material;
+    rdf:_15 archiSVG:Path;
+    rdf:_16 archiSVG:CommunicationNetwork .
+
+archiSVG:Node a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Node ;
+    skos:prefLabel "SVG depiction of a node in Archimate" ;
+    rdf:_1 archiSVG:NodeBox ;
+    rdf:_2 archiSVG:NodeIconUse ;
+    rdf:_3 archiSVG:NodeText .
+
+archiSVG:NodeBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:NodeIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#node" .
+
+archiSVG:NodeText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:NodeTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:NodeTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Node" .
+
+
+archiSVG:Device a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Device ;
+    skos:prefLabel "SVG depiction of a device in Archimate" ;
+    rdf:_1 archiSVG:DeviceBox ;
+    rdf:_2 archiSVG:DeviceIconUse ;
+    rdf:_3 archiSVG:DeviceText .
+
+archiSVG:DeviceBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:DeviceIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#device" .
+
+archiSVG:DeviceText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:DeviceTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:DeviceTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Device" .
+
+
+archiSVG:SystemSoftware a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:SystemSoftware ;
+    skos:prefLabel "SVG depiction of system software in Archimate" ;
+    rdf:_1 archiSVG:SystemSoftwareBox ;
+    rdf:_2 archiSVG:SystemSoftwareIconUse ;
+    rdf:_3 archiSVG:SystemSoftwareText .
+
+archiSVG:SystemSoftwareBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:SystemSoftwareIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#systemSoftware" .
+
+archiSVG:SystemSoftwareText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:SystemSoftwareTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:SystemSoftwareTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "System Software" .
+
+
+archiSVG:TechnologyCollaboration a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyCollaboration ;
+    skos:prefLabel "SVG depiction of a technology collaboration in Archimate" ;
+    rdf:_1 archiSVG:TechnologyCollaborationBox ;
+    rdf:_2 archiSVG:TechnologyCollaborationIconUse ;
+    rdf:_3 archiSVG:TechnologyCollaborationText .
+
+archiSVG:TechnologyCollaborationBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyCollaborationIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyCollaboration" .
+
+archiSVG:TechnologyCollaborationText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyCollaborationTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyCollaborationTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Collaboration" .
+
+archiSVG:TechnologyInterface a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyInterface ;
+    skos:prefLabel "SVG depiction of a technology interface in Archimate" ;
+    rdf:_1 archiSVG:TechnologyInterfaceBox ;
+    rdf:_2 archiSVG:TechnologyInterfaceIconUse ;
+    rdf:_3 archiSVG:TechnologyInterfaceText .
+
+archiSVG:TechnologyInterfaceBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyInterfaceIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyInterface" .
+
+archiSVG:TechnologyInterfaceText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyInterfaceTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyInterfaceTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Interface" .
+
+
+archiSVG:TechnologyFunction a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyFunction ;
+    skos:prefLabel "SVG depiction of a technology function in Archimate" ;
+    rdf:_1 archiSVG:TechnologyFunctionBox ;
+    rdf:_2 archiSVG:TechnologyFunctionIconUse ;
+    rdf:_3 archiSVG:TechnologyFunctionText .
+
+archiSVG:TechnologyFunctionBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyFunctionIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyFunction" .
+
+archiSVG:TechnologyFunctionText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyFunctionTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyFunctionTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Function" .
+
+
+archiSVG:TechnologyProcess a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyProcess ;
+    skos:prefLabel "SVG depiction of a technology process in Archimate" ;
+    rdf:_1 archiSVG:TechnologyProcessBox ;
+    rdf:_2 archiSVG:TechnologyProcessIconUse ;
+    rdf:_3 archiSVG:TechnologyProcessText .
+
+archiSVG:TechnologyProcessBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyProcessIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyProcess" .
+
+archiSVG:TechnologyProcessText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyProcessTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyProcessTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Process" .
+
+
+archiSVG:TechnologyInteraction a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyInteraction ;
+    skos:prefLabel "SVG depiction of a technology interaction in Archimate" ;
+    rdf:_1 archiSVG:TechnologyInteractionBox ;
+    rdf:_2 archiSVG:TechnologyInteractionIconUse ;
+    rdf:_3 archiSVG:TechnologyInteractionText .
+
+archiSVG:TechnologyInteractionBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyInteractionIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyInteraction" .
+
+archiSVG:TechnologyInteractionText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyInteractionTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyInteractionTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Interaction" .
+
+
+archiSVG:TechnologyService a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyService ;
+    skos:prefLabel "SVG depiction of a technology service in Archimate" ;
+    rdf:_1 archiSVG:TechnologyServiceBox ;
+    rdf:_2 archiSVG:TechnologyServiceIconUse ;
+    rdf:_3 archiSVG:TechnologyServiceText .
+
+archiSVG:TechnologyServiceBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyServiceIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyService" .
+
+archiSVG:TechnologyServiceText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyServiceTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyServiceTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Service" .
+
+
+archiSVG:TechnologyEvent a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:TechnologyEvent ;
+    skos:prefLabel "SVG depiction of a technology event in Archimate" ;
+    rdf:_1 archiSVG:TechnologyEventBox ;
+    rdf:_2 archiSVG:TechnologyEventIconUse ;
+    rdf:_3 archiSVG:TechnologyEventText .
+
+archiSVG:TechnologyEventBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:TechnologyEventIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#technologyEvent" .
+
+archiSVG:TechnologyEventText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:TechnologyEventTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:TechnologyEventTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Technology Event" .
+
+
+archiSVG:Artifact a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Artifact ;
+    skos:prefLabel "SVG depiction of an artifact in Archimate" ;
+    rdf:_1 archiSVG:ArtifactBox ;
+    rdf:_2 archiSVG:ArtifactIconUse ;
+    rdf:_3 archiSVG:ArtifactText .
+
+archiSVG:ArtifactBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:ArtifactIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#artifact" .
+
+archiSVG:ArtifactText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:ArtifactTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:ArtifactTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Artifact" .
+
+
+archiSVG:Facility a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Facility ;
+    skos:prefLabel "SVG depiction of a facility in Archimate" ;
+    rdf:_1 archiSVG:FacilityBox ;
+    rdf:_2 archiSVG:FacilityIconUse ;
+    rdf:_3 archiSVG:FacilityText .
+
+archiSVG:FacilityBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:FacilityIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#facility" .
+
+archiSVG:FacilityText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:FacilityTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:FacilityTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Facility" .
+
+
+archiSVG:DistributionNetwork a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:DistributionNetwork ;
+    skos:prefLabel "SVG depiction of a distribution network in Archimate" ;
+    rdf:_1 archiSVG:DistributionNetworkBox ;
+    rdf:_2 archiSVG:DistributionNetworkIconUse ;
+    rdf:_3 archiSVG:DistributionNetworkText .
+
+archiSVG:DistributionNetworkBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:DistributionNetworkIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#distributionNetwork" .
+
+archiSVG:DistributionNetworkText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:DistributionNetworkTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:DistributionNetworkTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Distribution Network" .
+
+
+archiSVG:Material a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Material ;
+    skos:prefLabel "SVG depiction of a material in Archimate" ;
+    rdf:_1 archiSVG:MaterialBox ;
+    rdf:_2 archiSVG:MaterialIconUse ;
+    rdf:_3 archiSVG:MaterialText .
+
+archiSVG:MaterialBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:MaterialIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#material" .
+
+archiSVG:MaterialText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:MaterialTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:MaterialTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Material" .
+
+
+archiSVG:Path a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Path ;
+    skos:prefLabel "SVG depiction of a path in Archimate" ;
+    rdf:_1 archiSVG:PathBox ;
+    rdf:_2 archiSVG:PathIconUse ;
+    rdf:_3 archiSVG:PathText .
+
+archiSVG:PathBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:PathIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#path" .
+
+archiSVG:PathText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:PathTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:PathTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Path" .
+
+archiSVG:CommunicationNetwork a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:CommunicationNetwork ;
+    skos:prefLabel "SVG depiction of a communication network in Archimate" ;
+    rdf:_1 archiSVG:CommunicationNetworkBox ;
+    rdf:_2 archiSVG:CommunicationNetworkIconUse ;
+    rdf:_3 archiSVG:CommunicationNetworkText .
+
+archiSVG:CommunicationNetworkBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:CommunicationNetworkIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#communicationNetwork" .
+
+archiSVG:CommunicationNetworkText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:CommunicationNetworkTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:CommunicationNetworkTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Communication Network" .
+
+### Implementation and migration layer
+
+archiSVG:implementationMigrationLayer a svg:G , archiSVG:Template ;
+    skos:prefLabel "SVG depiction of all concepts in the implementation and migration layer of Archimate";
+    rdf:_1 archiSVG:Deliverable;
+    rdf:_2 archiSVG:WorkPackage;
+    rdf:_3 archiSVG:Plateau;
+    rdf:_4 archiSVG:Gap;
+    rdf:_5 archiSVG:ImplementationEvent.
+
+archiSVG:Deliverable a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Deliverable ;
+    skos:prefLabel "SVG depiction of a deliverable in Archimate" ;
+    rdf:_1 archiSVG:DeliverableBox ;
+    rdf:_2 archiSVG:DeliverableIconUse ;
+    rdf:_3 archiSVG:DeliverableText .
+
+archiSVG:DeliverableBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:DeliverableIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#deliverable" .
+
+archiSVG:DeliverableText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:DeliverableTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:DeliverableTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Deliverable" .
+
+
+archiSVG:WorkPackage a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:WorkPackage ;
+    skos:prefLabel "SVG depiction of a work package in Archimate" ;
+    rdf:_1 archiSVG:WorkPackageBox ;
+    rdf:_2 archiSVG:WorkPackageIconUse ;
+    rdf:_3 archiSVG:WorkPackageText .
+
+archiSVG:WorkPackageBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:WorkPackageIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#workPackage" .
+
+archiSVG:WorkPackageText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:WorkPackageTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:WorkPackageTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Work Package" .
+
+
+archiSVG:Plateau a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Plateau ;
+    skos:prefLabel "SVG depiction of a plateau in Archimate" ;
+    rdf:_1 archiSVG:PlateauBox ;
+    rdf:_2 archiSVG:PlateauIconUse ;
+    rdf:_3 archiSVG:PlateauText .
+
+archiSVG:PlateauBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:PlateauIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#plateau" .
+
+archiSVG:PlateauText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:PlateauTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:PlateauTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Plateau" .
+
+
+archiSVG:Gap a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Gap ;
+    skos:prefLabel "SVG depiction of a gap in Archimate" ;
+    rdf:_1 archiSVG:GapBox ;
+    rdf:_2 archiSVG:GapIconUse ;
+    rdf:_3 archiSVG:GapText .
+
+archiSVG:GapBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:GapIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#gap" .
+
+archiSVG:GapText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:GapTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:GapTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Gap" .
+
+
+archiSVG:ImplementationEvent a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:ImplementationEvent ;
+    skos:prefLabel "SVG depiction of an implementation event in Archimate" ;
+    rdf:_1 archiSVG:ImplementationEventBox ;
+    rdf:_2 archiSVG:ImplementationEventIconUse ;
+    rdf:_3 archiSVG:ImplementationEventText .
+
+archiSVG:ImplementationEventBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:ImplementationEventIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#implementationEvent" .
+
+archiSVG:ImplementationEventText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:ImplementationEventTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:ImplementationEventTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Implementation Event" .    
+
+### Strategy layer
+
+archiSVG:strategyLayer a svg:G , archiSVG:Template ;
+    skos:prefLabel "SVG depiction of all concepts in the implementation and migration layer of Archimate";
+    rdf:_1 archiSVG:Capability;
+    rdf:_2 archiSVG:CourseOfAction;
+    rdf:_3 archiSVG:Resource;
+    rdf:_4 archiSVG:ValueStream;
+    rdf:_5 archiSVG:ImplementationEvent. 
+
+archiSVG:Capability a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Capability ;
+    skos:prefLabel "SVG depiction of a capability in Archimate" ;
+    rdf:_1 archiSVG:CapabilityBox ;
+    rdf:_2 archiSVG:CapabilityIconUse ;
+    rdf:_3 archiSVG:CapabilityText .
+
+archiSVG:CapabilityBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:CapabilityIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#capability" .
+
+archiSVG:CapabilityText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:CapabilityTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:CapabilityTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Capability" .
+
+
+archiSVG:CourseOfAction a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:CourseOfAction ;
+    skos:prefLabel "SVG depiction of a course of action in Archimate" ;
+    rdf:_1 archiSVG:CourseOfActionBox ;
+    rdf:_2 archiSVG:CourseOfActionIconUse ;
+    rdf:_3 archiSVG:CourseOfActionText .
+
+archiSVG:CourseOfActionBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:CourseOfActionIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#courseOfAction" .
+
+archiSVG:CourseOfActionText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:CourseOfActionTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:CourseOfActionTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Course of Action" .
+
+
+archiSVG:Resource a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Resource ;
+    skos:prefLabel "SVG depiction of a resource in Archimate" ;
+    rdf:_1 archiSVG:ResourceBox ;
+    rdf:_2 archiSVG:ResourceIconUse ;
+    rdf:_3 archiSVG:ResourceText .
+
+archiSVG:ResourceBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:ResourceIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#resource" .
+
+archiSVG:ResourceText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:ResourceTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:ResourceTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Resource" .
+
+
+archiSVG:ValueStream a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:ValueStream ;
+    skos:prefLabel "SVG depiction of a value stream in Archimate" ;
+    rdf:_1 archiSVG:ValueStreamBox ;
+    rdf:_2 archiSVG:ValueStreamIconUse ;
+    rdf:_3 archiSVG:ValueStreamText .
+
+archiSVG:ValueStreamBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:ValueStreamIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#valueStream" .
+
+archiSVG:ValueStreamText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:ValueStreamTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:ValueStreamTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Value Stream" .
+
     
 ### Relationship
 
@@ -1926,7 +3022,9 @@ archiSVG:relationships a svg:G , archiSVG:Template ;
     rdf:_6 archiSVG:Serving;
     rdf:_7 archiSVG:Realization;
     rdf:_8 archiSVG:Assignment;
-    rdf:_9 archiSVG:Specialization.
+    rdf:_9 archiSVG:Specialization;
+    rdf:_10 archiSVG:Triggering;
+    rdf:_11 archiSVG:Flow.
 
 # Associate
 archiSVG:Associate a svg:G, archiSVG:Template;
@@ -2051,4 +3149,29 @@ archiSVG:SpecializationLine a svg:Polyline, archiSVG:Template;
     svg:stroke-width "1" ;   
     svg:marker-end "url(#specialization)".
 
+# Triggering
+archiSVG:Triggering a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship trigger";
+    foaf:depicts archimate:triggering;
+    rdf:_1 archiSVG:TriggeringLine.
+
+archiSVG:TriggeringLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" ;
+    svg:marker-start "url(#triggering)".
+
+# Flow
+archiSVG:Flow a svg:G, archiSVG:Template;
+    skos:prefLabel "SVG-based icon for the relationship flow";
+    foaf:depicts archimate:flow;
+    rdf:_1 archiSVG:FlowLine.
+
+archiSVG:FlowLine a svg:Polyline, archiSVG:Template;
+    svg:fill "none" ;
+    svg:points "0,0" ;
+    svg:stroke "black" ;
+    svg:stroke-width "1" ;
+    svg:marker-start "url(#flow)".    
 }

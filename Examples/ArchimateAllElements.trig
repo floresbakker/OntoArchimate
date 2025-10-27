@@ -1,0 +1,1127 @@
+# Generic prefixes
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+# Specific prefixes
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix model:     <https://data.rijksfinancien.nl/archimate/model/id/>
+prefix view:      <https://data.rijksfinancien.nl/archimate/view/id/>
+
+
+model:allElements {
+
+### STRATEGY LAYER
+
+model:aCapability
+    rdf:type archimate:Capability ;
+    skos:prefLabel "A capability" ;
+    skos:definition "An example of a capability" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aCourseOfAction
+    rdf:type archimate:CourseOfAction ;
+    skos:prefLabel "A course of action" ;
+    skos:definition "An example of a course of action" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aResource
+    rdf:type archimate:Resource ;
+    skos:prefLabel "A resource" ;
+    skos:definition "An example of a resource" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aValueStream
+    rdf:type archimate:ValueStream ;
+    skos:prefLabel "A value stream" ;
+    skos:definition "An example of a value stream" ;
+    rdfs:isDefinedBy model:allElements .    
+
+### BUSINESS LAYER
+
+model:aBusinessActor
+    rdf:type archimate:BusinessActor ;
+    skos:prefLabel "A business actor" ;
+    skos:definition "An example of a business actor" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessRole
+    rdf:type archimate:BusinessRole ;
+    skos:prefLabel "A business role" ;
+    skos:definition "An example of a business role" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessCollaboration
+    rdf:type archimate:BusinessCollaboration ;
+    skos:prefLabel "A business collaboration" ;
+    skos:definition "An example of a business collaboration" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessInterface
+    rdf:type archimate:BusinessInterface ;
+    skos:prefLabel "A business interface" ;
+    skos:definition "An example of a business interface" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessProcess
+    rdf:type archimate:BusinessProcess ;
+    skos:prefLabel "A business process" ;
+    skos:definition "An example of a business process" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessFunction
+    rdf:type archimate:BusinessFunction ;
+    skos:prefLabel "A business function" ;
+    skos:definition "An example of a business function" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessInteraction
+    rdf:type archimate:BusinessInteraction ;
+    skos:prefLabel "A business interaction" ;
+    skos:definition "An example of a business interaction" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessEvent
+    rdf:type archimate:BusinessEvent ;
+    skos:prefLabel "A business event" ;
+    skos:definition "An example of a business event" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessService
+    rdf:type archimate:BusinessService ;
+    skos:prefLabel "A business service" ;
+    skos:definition "An example of a business service" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aBusinessObject
+    rdf:type archimate:BusinessObject ;
+    skos:prefLabel "A business object" ;
+    skos:definition "An example of a business object" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aContract
+    rdf:type archimate:Contract ;
+    skos:prefLabel "A contract" ;
+    skos:definition "An example of a contract" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aRepresentation
+    rdf:type archimate:Representation ;
+    skos:prefLabel "A representation" ;
+    skos:definition "An example of a representation" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aProduct
+    rdf:type archimate:Product ;
+    skos:prefLabel "A product" ;
+    skos:definition "An example of a product" ;
+    rdfs:isDefinedBy model:allElements .
+
+### APPLICATION LAYER
+
+model:anApplicationComponent
+    rdf:type archimate:ApplicationComponent ;
+    skos:prefLabel "An application component" ;
+    skos:definition "An example of an application component" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationCollaboration
+    rdf:type archimate:ApplicationCollaboration ;
+    skos:prefLabel "An application collaboration" ;
+    skos:definition "An example of an application collaboration" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationInterface
+    rdf:type archimate:ApplicationInterface ;
+    skos:prefLabel "An application interface" ;
+    skos:definition "An example of an application interface" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationFunction
+    rdf:type archimate:ApplicationFunction ;
+    skos:prefLabel "An application function" ;
+    skos:definition "An example of an application function" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationInteraction
+    rdf:type archimate:ApplicationInteraction ;
+    skos:prefLabel "An application interaction" ;
+    skos:definition "An example of an application interaction" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationProcess
+    rdf:type archimate:ApplicationProcess ;
+    skos:prefLabel "An application process" ;
+    skos:definition "An example of an application process" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationService
+    rdf:type archimate:ApplicationService ;
+    skos:prefLabel "An application service" ;
+    skos:definition "An example of an application service" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anApplicationEvent
+    rdf:type archimate:ApplicationEvent ;
+    skos:prefLabel "An application event" ;
+    skos:definition "An example of an application event" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aDataObject
+    rdf:type archimate:DataObject ;
+    skos:prefLabel "A data object" ;
+    skos:definition "An example of a data object" ;
+    rdfs:isDefinedBy model:allElements .
+
+### TECHNOLOGY & PHYSICAL LAYER
+
+model:aNode
+    rdf:type archimate:Node ;
+    skos:prefLabel "A node" ;
+    skos:definition "An example of a node" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aDevice
+    rdf:type archimate:Device ;
+    skos:prefLabel "A device" ;
+    skos:definition "An example of a device" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aSystemSoftware
+    rdf:type archimate:SystemSoftware ;
+    skos:prefLabel "A system software" ;
+    skos:definition "An example of a system software" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aTechnologyCollaboration
+    rdf:type archimate:TechnologyCollaboration ;
+    skos:prefLabel "A technology collaboration" ;
+    skos:definition "An example of a technology collaboration" ;
+    rdfs:isDefinedBy model:allElements .
+    
+model:aTechnologyInterface
+    rdf:type archimate:TechnologyInterface ;
+    skos:prefLabel "A technology interface" ;
+    skos:definition "An example of a technology interface" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aTechnologyFunction
+    rdf:type archimate:TechnologyFunction ;
+    skos:prefLabel "A technology function" ;
+    skos:definition "An example of a technology function" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aTechnologyProcess
+    rdf:type archimate:TechnologyProcess ;
+    skos:prefLabel "A technology process" ;
+    skos:definition "An example of a technology process" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aTechnologyInteraction
+    rdf:type archimate:TechnologyInteraction ;
+    skos:prefLabel "A technology interaction" ;
+    skos:definition "An example of a technology interaction" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aTechnologyService
+    rdf:type archimate:TechnologyService ;
+    skos:prefLabel "A technology service" ;
+    skos:definition "An example of a technology service" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aTechnologyEvent
+    rdf:type archimate:TechnologyEvent ;
+    skos:prefLabel "A technology event" ;
+    skos:definition "An example of a technology event" ;
+    rdfs:isDefinedBy model:allElements .
+    
+model:anArtifact
+    rdf:type archimate:Artifact ;
+    skos:prefLabel "An artifact" ;
+    skos:definition "An example of an artifact" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aFacility
+    rdf:type archimate:Facility ;
+    skos:prefLabel "A facility" ;
+    skos:definition "An example of a facility" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aDistributionNetwork
+    rdf:type archimate:DistributionNetwork ;
+    skos:prefLabel "A distribution network" ;
+    skos:definition "An example of a distribution network" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aMaterial
+    rdf:type archimate:Material ;
+    skos:prefLabel "A material" ;
+    skos:definition "An example of a material" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aPath
+    rdf:type archimate:Path ;
+    skos:prefLabel "A path" ;
+    skos:definition "An example of a path" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aCommunicationNetwork
+    rdf:type archimate:CommunicationNetwork ;
+    skos:prefLabel "A communication network" ;
+    skos:definition "An example of a communication network" ;
+    rdfs:isDefinedBy model:allElements .
+
+### MOTIVATION LAYER
+
+model:anAssessment
+    rdf:type archimate:Assessment ;
+    skos:prefLabel "An assessment" ;
+    skos:definition "An example of an assessment" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aDriver
+    rdf:type archimate:Driver ;
+    skos:prefLabel "A driver" ;
+    skos:definition "An example of a driver" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aGoal
+    rdf:type archimate:Goal ;
+    skos:prefLabel "A goal" ;
+    skos:definition "An example of a goal" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anOutcome
+    rdf:type archimate:Outcome ;
+    skos:prefLabel "An outcome" ;
+    skos:definition "An example of an outcome" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aPrinciple
+    rdf:type archimate:Principle ;
+    skos:prefLabel "A principle" ;
+    skos:definition "An example of a principle" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aRequirement
+    rdf:type archimate:Requirement ;
+    skos:prefLabel "A requirement" ;
+    skos:definition "An example of a requirement" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aConstraint
+    rdf:type archimate:Constraint ;
+    skos:prefLabel "A constraint" ;
+    skos:definition "An example of a constraint" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aMeaning
+    rdf:type archimate:Meaning ;
+    skos:prefLabel "A meaning" ;
+    skos:definition "An example of a meaning" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aValue
+    rdf:type archimate:Value ;
+    skos:prefLabel "A value" ;
+    skos:definition "An example of a value" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aStakeholder
+    rdf:type archimate:Stakeholder ;
+    skos:prefLabel "A stakeholder" ;
+    skos:definition "An example of a stakeholder" ;
+    rdfs:isDefinedBy model:allElements .
+
+### IMPLEMENTATION & MIGRATION
+
+model:aDeliverable
+    rdf:type archimate:Deliverable ;
+    skos:prefLabel "A deliverable" ;
+    skos:definition "An example of a deliverable" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aWorkPackage
+    rdf:type archimate:WorkPackage ;
+    skos:prefLabel "A work package" ;
+    skos:definition "An example of a work package" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aPlateau
+    rdf:type archimate:Plateau ;
+    skos:prefLabel "A plateau" ;
+    skos:definition "An example of a plateau" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aGap
+    rdf:type archimate:Gap ;
+    skos:prefLabel "A gap" ;
+    skos:definition "An example of a gap" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:anImplementationEvent
+    rdf:type archimate:ImplementationEvent ;
+    skos:prefLabel "An implementation event" ;
+    skos:definition "An example of an implementation event" ;
+    rdfs:isDefinedBy model:allElements .
+    
+### GENERIC
+
+model:aGrouping
+    rdf:type archimate:Grouping ;
+    skos:prefLabel "A grouping" ;
+    skos:definition "An example of a grouping" ;
+    rdfs:isDefinedBy model:allElements .
+
+model:aLocation
+    rdf:type archimate:Location ;
+    skos:prefLabel "A location" ;
+    skos:definition "An example of a location" ;
+    rdfs:isDefinedBy model:allElements .
+
+
+### View
+
+### View
+
+view:aView 
+    rdf:type archimate:View ;
+    skos:prefLabel "An example of a view" ;
+    skos:definition "An ArchiMate view containing a depiction of all ArchiMate elements." ;
+    archimate:contains
+        # STRATEGY
+        view:aCapability ,
+        view:aCourseOfAction ,
+        view:aResource ,
+        view:aValueStream ,
+        # BUSINESS
+        view:aBusinessActor ,
+        view:aBusinessRole ,
+        view:aBusinessCollaboration ,
+        view:aBusinessInterface ,
+        view:aBusinessProcess ,
+        view:aBusinessFunction ,
+        view:aBusinessInteraction ,
+        view:aBusinessEvent ,
+        view:aBusinessService ,
+        view:aBusinessObject ,
+        view:aContract ,
+        view:aRepresentation ,
+        view:aProduct ,
+        # APPLICATION
+        view:anApplicationComponent ,
+        view:anApplicationCollaboration ,
+        view:anApplicationInterface ,
+        view:anApplicationFunction ,
+        view:anApplicationInteraction ,
+        view:anApplicationProcess ,
+        view:anApplicationService ,
+        view:anApplicationEvent ,
+        view:aDataObject ,
+        # TECHNOLOGY & PHYSICAL
+        view:aNode ,
+        view:aDevice ,
+        view:aSystemSoftware ,
+        view:aTechnologyCollaboration ,
+        view:aTechnologyInterface ,
+        view:aTechnologyFunction ,
+        view:aTechnologyProcess ,
+        view:aTechnologyInteraction ,
+        view:aTechnologyService ,
+        view:aTechnologyEvent ,
+        view:anArtifact ,
+        view:aFacility ,
+        view:aDistributionNetwork ,
+        view:aMaterial ,
+        view:aPath ,
+        view:aCommunicationNetwork ,
+        # MOTIVATION
+        view:anAssessment ,
+        view:aDriver ,
+        view:aGoal ,
+        view:anOutcome ,
+        view:aPrinciple ,
+        view:aRequirement ,
+        view:aConstraint ,
+        view:aMeaning ,
+        view:aValue ,
+        view:aStakeholder ,
+        # IMPLEMENTATION & MIGRATION
+        view:aDeliverable ,
+        view:aWorkPackage ,
+        view:aPlateau ,
+        view:aGap ,
+        view:anImplementationEvent ,
+        # GENERIC
+        view:aGrouping ,
+        view:aLocation
+    ;
+    rdfs:isDefinedBy model:allElements .
+
+########## VIEW NODES ##########
+
+### STRATEGY LAYER (row @ y=100)
+
+view:aCapability 
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a capability" ;
+    skos:definition "An example of a depiction of a capability." ;
+    foaf:depicts model:aCapability ;
+    archimate:horizontal 200 ;
+    archimate:vertical 100 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aCourseOfAction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a course of action" ;
+    skos:definition "An example of a depiction of a course of action." ;
+    foaf:depicts model:aCourseOfAction ;
+    archimate:horizontal 450 ;
+    archimate:vertical 100 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aResource
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a resource" ;
+    skos:definition "An example of a depiction of a resource." ;
+    foaf:depicts model:aResource ;
+    archimate:horizontal 700 ;
+    archimate:vertical 100 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aValueStream
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a value stream" ;
+    skos:definition "An example of a depiction of a value stream." ;
+    foaf:depicts model:aValueStream ;
+    archimate:horizontal 950 ;
+    archimate:vertical 100 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+### BUSINESS LAYER (rows @ y=280, 450, 620)
+
+view:aBusinessActor 
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business actor" ;
+    skos:definition "An example of a depiction of a business actor." ;
+    foaf:depicts model:aBusinessActor ;
+    archimate:horizontal 400 ;
+    archimate:vertical 280 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessRole 
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business role" ;
+    skos:definition "An example of a depiction of a business role." ;
+    foaf:depicts model:aBusinessRole ;
+    archimate:horizontal 700 ;
+    archimate:vertical 280 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessObject 
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business object" ;
+    skos:definition "An example of a depiction of a business object." ;
+    foaf:depicts model:aBusinessObject ;
+    archimate:horizontal 550 ;
+    archimate:vertical 450 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessCollaboration
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business collaboration" ;
+    skos:definition "An example of a depiction of a business collaboration." ;
+    foaf:depicts model:aBusinessCollaboration ;
+    archimate:horizontal 200 ;
+    archimate:vertical 280 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessInterface
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business interface" ;
+    skos:definition "An example of a depiction of a business interface." ;
+    foaf:depicts model:aBusinessInterface ;
+    archimate:horizontal 950 ;
+    archimate:vertical 280 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessProcess
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business process" ;
+    skos:definition "An example of a depiction of a business process." ;
+    foaf:depicts model:aBusinessProcess ;
+    archimate:horizontal 200 ;
+    archimate:vertical 450 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessFunction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business function" ;
+    skos:definition "An example of a depiction of a business function." ;
+    foaf:depicts model:aBusinessFunction ;
+    archimate:horizontal 450 ;
+    archimate:vertical 450 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessInteraction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business interaction" ;
+    skos:definition "An example of a depiction of a business interaction." ;
+    foaf:depicts model:aBusinessInteraction ;
+    archimate:horizontal 700 ;
+    archimate:vertical 450 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessEvent
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business event" ;
+    skos:definition "An example of a depiction of a business event." ;
+    foaf:depicts model:aBusinessEvent ;
+    archimate:horizontal 950 ;
+    archimate:vertical 450 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aBusinessService
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a business service" ;
+    skos:definition "An example of a depiction of a business service." ;
+    foaf:depicts model:aBusinessService ;
+    archimate:horizontal 200 ;
+    archimate:vertical 620 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aContract
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a contract" ;
+    skos:definition "An example of a depiction of a contract." ;
+    foaf:depicts model:aContract ;
+    archimate:horizontal 450 ;
+    archimate:vertical 620 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aRepresentation
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a representation" ;
+    skos:definition "An example of a depiction of a representation." ;
+    foaf:depicts model:aRepresentation ;
+    archimate:horizontal 700 ;
+    archimate:vertical 620 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aProduct
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a product" ;
+    skos:definition "An example of a depiction of a product." ;
+    foaf:depicts model:aProduct ;
+    archimate:horizontal 950 ;
+    archimate:vertical 620 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+### APPLICATION LAYER (rows @ y=800, 970, 1140)
+
+view:anApplicationComponent
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application component" ;
+    skos:definition "An example of a depiction of an application component." ;
+    foaf:depicts model:anApplicationComponent ;
+    archimate:horizontal 200 ;
+    archimate:vertical 800 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationCollaboration
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application collaboration" ;
+    skos:definition "An example of a depiction of an application collaboration." ;
+    foaf:depicts model:anApplicationCollaboration ;
+    archimate:horizontal 450 ;
+    archimate:vertical 800 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationInterface
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application interface" ;
+    skos:definition "An example of a depiction of an application interface." ;
+    foaf:depicts model:anApplicationInterface ;
+    archimate:horizontal 700 ;
+    archimate:vertical 800 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationFunction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application function" ;
+    skos:definition "An example of a depiction of an application function." ;
+    foaf:depicts model:anApplicationFunction ;
+    archimate:horizontal 950 ;
+    archimate:vertical 800 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationInteraction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application interaction" ;
+    skos:definition "An example of a depiction of an application interaction." ;
+    foaf:depicts model:anApplicationInteraction ;
+    archimate:horizontal 200 ;
+    archimate:vertical 970 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationProcess
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application process" ;
+    skos:definition "An example of a depiction of an application process." ;
+    foaf:depicts model:anApplicationProcess ;
+    archimate:horizontal 450 ;
+    archimate:vertical 970 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationService
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application service" ;
+    skos:definition "An example of a depiction of an application service." ;
+    foaf:depicts model:anApplicationService ;
+    archimate:horizontal 700 ;
+    archimate:vertical 970 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anApplicationEvent
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application event" ;
+    skos:definition "An example of a depiction of an application event." ;
+    foaf:depicts model:anApplicationEvent ;
+    archimate:horizontal 950 ;
+    archimate:vertical 970 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aDataObject
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a data object" ;
+    skos:definition "An example of a depiction of a data object." ;
+    foaf:depicts model:aDataObject ;
+    archimate:horizontal 200 ;
+    archimate:vertical 1140 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+### TECHNOLOGY & PHYSICAL LAYER (rows @ y=1320, 1490, 1660, 1830)
+
+view:aNode
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a node" ;
+    skos:definition "An example of a depiction of a node." ;
+    foaf:depicts model:aNode ;
+    archimate:horizontal 200 ;
+    archimate:vertical 1320 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aDevice
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a device" ;
+    skos:definition "An example of a depiction of a device." ;
+    foaf:depicts model:aDevice ;
+    archimate:horizontal 450 ;
+    archimate:vertical 1320 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aSystemSoftware
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a system software" ;
+    skos:definition "An example of a depiction of a system software." ;
+    foaf:depicts model:aSystemSoftware ;
+    archimate:horizontal 700 ;
+    archimate:vertical 1320 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyCollaboration
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology collaboration" ;
+    skos:definition "An example of a depiction of a technology collaboration." ;
+    foaf:depicts model:aTechnologyCollaboration ;
+    archimate:horizontal 950 ;
+    archimate:vertical 1320 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyInterface
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology interface" ;
+    skos:definition "An example of a depiction of a technology interface." ;
+    foaf:depicts model:aTechnologyInterface ;
+    archimate:horizontal 200 ;
+    archimate:vertical 1490 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyFunction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology function" ;
+    skos:definition "An example of a depiction of a technology function." ;
+    foaf:depicts model:aTechnologyFunction ;
+    archimate:horizontal 450 ;
+    archimate:vertical 1490 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyProcess
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology process" ;
+    skos:definition "An example of a depiction of a technology process." ;
+    foaf:depicts model:aTechnologyProcess ;
+    archimate:horizontal 700 ;
+    archimate:vertical 1490 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyInteraction
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology interaction" ;
+    skos:definition "An example of a depiction of a technology interaction." ;
+    foaf:depicts model:aTechnologyInteraction ;
+    archimate:horizontal 950 ;
+    archimate:vertical 1490 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyService
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology service" ;
+    skos:definition "An example of a depiction of a technology service." ;
+    foaf:depicts model:aTechnologyService ;
+    archimate:horizontal 200 ;
+    archimate:vertical 1660 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aTechnologyEvent
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a technology event" ;
+    skos:definition "An example of a depiction of a technology event." ;
+    foaf:depicts model:aTechnologyEvent ;
+    archimate:horizontal 450 ;
+    archimate:vertical 1660 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anArtifact
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an artifact" ;
+    skos:definition "An example of a depiction of an artifact." ;
+    foaf:depicts model:anArtifact ;
+    archimate:horizontal 700 ;
+    archimate:vertical 1660 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aFacility
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a facility" ;
+    skos:definition "An example of a depiction of a facility." ;
+    foaf:depicts model:aFacility ;
+    archimate:horizontal 950 ;
+    archimate:vertical 1660 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aDistributionNetwork
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a distribution network" ;
+    skos:definition "An example of a depiction of a distribution network." ;
+    foaf:depicts model:aDistributionNetwork ;
+    archimate:horizontal 200 ;
+    archimate:vertical 1830 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aMaterial
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a material" ;
+    skos:definition "An example of a depiction of a material." ;
+    foaf:depicts model:aMaterial ;
+    archimate:horizontal 450 ;
+    archimate:vertical 1830 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aPath
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a path" ;
+    skos:definition "An example of a depiction of a path." ;
+    foaf:depicts model:aPath ;
+    archimate:horizontal 700 ;
+    archimate:vertical 1830 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aCommunicationNetwork
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a communication network" ;
+    skos:definition "An example of a depiction of a communication network." ;
+    foaf:depicts model:aCommunicationNetwork ;
+    archimate:horizontal 950 ;
+    archimate:vertical 1830 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+### MOTIVATION LAYER (rows @ y=2010, 2180, 2350)
+
+view:anAssessment
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an assessment" ;
+    skos:definition "An example of a depiction of an assessment." ;
+    foaf:depicts model:anAssessment ;
+    archimate:horizontal 200 ;
+    archimate:vertical 2010 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aDriver
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a driver" ;
+    skos:definition "An example of a depiction of a driver." ;
+    foaf:depicts model:aDriver ;
+    archimate:horizontal 450 ;
+    archimate:vertical 2010 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aGoal
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a goal" ;
+    skos:definition "An example of a depiction of a goal." ;
+    foaf:depicts model:aGoal ;
+    archimate:horizontal 700 ;
+    archimate:vertical 2010 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anOutcome
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an outcome" ;
+    skos:definition "An example of a depiction of an outcome." ;
+    foaf:depicts model:anOutcome ;
+    archimate:horizontal 950 ;
+    archimate:vertical 2010 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aPrinciple
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a principle" ;
+    skos:definition "An example of a depiction of a principle." ;
+    foaf:depicts model:aPrinciple ;
+    archimate:horizontal 200 ;
+    archimate:vertical 2180 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aRequirement
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a requirement" ;
+    skos:definition "An example of a depiction of a requirement." ;
+    foaf:depicts model:aRequirement ;
+    archimate:horizontal 450 ;
+    archimate:vertical 2180 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aConstraint
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a constraint" ;
+    skos:definition "An example of a depiction of a constraint." ;
+    foaf:depicts model:aConstraint ;
+    archimate:horizontal 700 ;
+    archimate:vertical 2180 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aMeaning
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a meaning" ;
+    skos:definition "An example of a depiction of a meaning." ;
+    foaf:depicts model:aMeaning ;
+    archimate:horizontal 950 ;
+    archimate:vertical 2180 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aValue
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a value" ;
+    skos:definition "An example of a depiction of a value." ;
+    foaf:depicts model:aValue ;
+    archimate:horizontal 200 ;
+    archimate:vertical 2350 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aStakeholder
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a stakeholder" ;
+    skos:definition "An example of a depiction of a stakeholder." ;
+    foaf:depicts model:aStakeholder ;
+    archimate:horizontal 450 ;
+    archimate:vertical 2350 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+### IMPLEMENTATION & MIGRATION (rows @ y=2530, 2700)
+
+view:aDeliverable
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a deliverable" ;
+    skos:definition "An example of a depiction of a deliverable." ;
+    foaf:depicts model:aDeliverable ;
+    archimate:horizontal 200 ;
+    archimate:vertical 2530 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aWorkPackage
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a work package" ;
+    skos:definition "An example of a depiction of a work package." ;
+    foaf:depicts model:aWorkPackage ;
+    archimate:horizontal 450 ;
+    archimate:vertical 2530 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aPlateau
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a plateau" ;
+    skos:definition "An example of a depiction of a plateau." ;
+    foaf:depicts model:aPlateau ;
+    archimate:horizontal 700 ;
+    archimate:vertical 2530 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aGap
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a gap" ;
+    skos:definition "An example of a depiction of a gap." ;
+    foaf:depicts model:aGap ;
+    archimate:horizontal 950 ;
+    archimate:vertical 2530 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:anImplementationEvent
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an implementation event" ;
+    skos:definition "An example of a depiction of an implementation event." ;
+    foaf:depicts model:anImplementationEvent ;
+    archimate:horizontal 200 ;
+    archimate:vertical 2700 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+### GENERIC (row @ y=2880)
+
+view:aGrouping
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a grouping" ;
+    skos:definition "An example of a depiction of a grouping." ;
+    foaf:depicts model:aGrouping ;
+    archimate:horizontal 200 ;
+    archimate:vertical 2880 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+
+view:aLocation
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of a location" ;
+    skos:definition "An example of a depiction of a location." ;
+    foaf:depicts model:aLocation ;
+    archimate:horizontal 450 ;
+    archimate:vertical 2880 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .
+        
+}
