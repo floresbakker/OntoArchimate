@@ -313,50 +313,61 @@ where {
 
 @app.route('/convert2Archimate', methods=['POST'])
 def convert_to_archimate():
-    print("Starting to convert RDF to XML...")    
-    print("Step 1: transforming archimate vocabulary to archiXML...")    
-    text = request.form['rdf']   
-    g = Dataset(default_union=True)
-    g.parse(data=text , format="trig")
-    # Zet de RDF-triples om naar een string
-    triples = g.serialize(format='trig')
-    serializable_graph_string = vocabulary + triples
-    serializable_graph = Dataset(default_union=True)
-    serializable_graph.parse(data=serializable_graph_string , format="trig")    
-    serializable_graph = transform2ArchiXML(archiXML_serialisation, serializable_graph)  
-    print("Step 2: serializing archiXML to XML code")     
-    archimate_fragment = serializeXMLFragment(xml_vocabulary, serializable_graph)
-    filepath = directory_path+"/tools/playground/static/output.xml"
-    with open(filepath, 'w', encoding='utf-8') as file:
-       file.write(archimate_fragment)    
-    writeGraph(serializable_graph, "static/output")
-    return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text, rdfOutputButton="true")
+    try:
+        print("Starting to convert RDF to XML...")    
+        print("Step 1: transforming archimate vocabulary to archiXML...")    
+        text = request.form['rdf']   
+        g = Dataset(default_union=True)
+        g.parse(data=text , format="trig")
+        # Zet de RDF-triples om naar een string
+        triples = g.serialize(format='trig')
+        serializable_graph_string = vocabulary + triples
+        serializable_graph = Dataset(default_union=True)
+        serializable_graph.parse(data=serializable_graph_string , format="trig")    
+        serializable_graph = transform2ArchiXML(archiXML_serialisation, serializable_graph)  
+        print("Step 2: serializing archiXML to XML code")     
+        archimate_fragment = serializeXMLFragment(xml_vocabulary, serializable_graph)
+        filepath = directory_path+"/tools/playground/static/output.xml"
+        with open(filepath, 'w', encoding='utf-8') as file:
+           file.write(archimate_fragment)    
+        writeGraph(serializable_graph, "static/output")
+        return render_template('index.html', xmlRawOutput=archimate_fragment, rdfInput=text, rdfOutputButton="true")
+
+    except Exception as e:
+        print("Error during processing:", e)
+        return render_template('index.html', rdfInput=f"Error: {e}")
 
 @app.route('/convert2SVG', methods=['POST'])
 def convert_to_SVG():
-    print("Starting to convert RDF to SVG...")    
-    print("Step 1: transforming archimate vocabulary to archiSVG...")  
-    text = request.form['rdf']   
-    g = Dataset(default_union=True)
-    g.parse(data=text , format="trig")
-    # Zet de RDF-triples om naar een string
-    triples = g.serialize(format='trig')
-    serializable_graph_string = vocabulary + triples
-    serializable_graph = Dataset(default_union=True)
-    serializable_graph.parse(data=serializable_graph_string , format="trig")
-    
-    serializable_graph = transform2ArchiSVG(archiSVG_serialisation, serializable_graph, 1)   
-    print("Step 2: serializing archiSVG to SVG code...")      
-    svg_fragment = serializeSVGFragment(xml_vocabulary, serializable_graph)
-    filepath = directory_path+"/tools/playground/static/output.xml"
-    src_filepath = url_for('static', filename='output.xml')
-    with open(filepath, 'w', encoding='utf-8') as file:
-       file.write(svg_fragment)
-    writeGraph(serializable_graph, "static/output")
-    return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>', rdfOutputButton="true")
+    try:
+        print("Starting to convert RDF to SVG...")    
+        print("Step 1: transforming archimate vocabulary to archiSVG...")  
+        text = request.form['rdf']   
+        g = Dataset(default_union=True)
+        g.parse(data=text , format="trig")
+        # Zet de RDF-triples om naar een string
+        triples = g.serialize(format='trig')
+        serializable_graph_string = vocabulary + triples
+        serializable_graph = Dataset(default_union=True)
+        serializable_graph.parse(data=serializable_graph_string , format="trig")
+        
+        serializable_graph = transform2ArchiSVG(archiSVG_serialisation, serializable_graph, 1)   
+        print("Step 2: serializing archiSVG to SVG code...")      
+        svg_fragment = serializeSVGFragment(xml_vocabulary, serializable_graph)
+        filepath = directory_path+"/tools/playground/static/output.xml"
+        src_filepath = url_for('static', filename='output.xml')
+        with open(filepath, 'w', encoding='utf-8') as file:
+           file.write(svg_fragment)
+        writeGraph(serializable_graph, "static/output")
+        return render_template('index.html', xmlRawOutput=svg_fragment, rdfInput=text, htmlOutput='<iframe src='+ src_filepath + ' width="100%" height="600"></iframe>', rdfOutputButton="true")
 
+    except Exception as e:
+        print("Error during processing:", e)
+        return render_template('index.html', rdfInput=f"Error: {e}")
+    
 @app.route('/convert2RDF', methods=['POST'])
 def convert_to_rdf():
+    try:
         print("Starting to convert XML to RDF...")
         print("Step 1: parsing XML into ArchiXML...")
         archimateInput = request.form['archimate']
@@ -390,7 +401,9 @@ def convert_to_rdf():
         '''
 
         # parse xml document
+        
         soup = BeautifulSoup(archimateInput, features="xml")
+        
         root_element = soup.contents[0]
         root_id = generate_element_id(root_element)
        
@@ -498,6 +511,10 @@ def convert_to_rdf():
         triples = serializable_graph.serialize(format="trig").split('\n')
         writeGraph(serializable_graph, "static/output")
         return render_template('index.html', rdfOutput=triples, xmlRawInput = archimateInput, rdfOutputButton="true")
+    
+    except Exception as e:
+        print("Error during processing:", e)
+        return render_template('index.html', xmlRawInput=f"Error: {e}")
 
 @app.route('/')
 def index():
