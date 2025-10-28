@@ -1,0 +1,1788 @@
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
+@prefix doc: <https://data.rijksfinancien.nl/archixml/doc/id/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml1: <http://www.w3.org/XML/model/def/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
+
+doc:1 a archiXML:Document ;
+    rdf:_1 doc:1.1 .
+
+doc:1.1 a archiXML:Model ;
+    rdf:_1 doc:1.1.1 ;
+    rdf:_10 doc:1.1.10 ;
+    rdf:_11 doc:1.1.11 ;
+    rdf:_12 doc:1.1.12 ;
+    rdf:_13 doc:1.1.13 ;
+    rdf:_14 doc:1.1.14 ;
+    rdf:_15 doc:1.1.15 ;
+    rdf:_2 doc:1.1.2 ;
+    rdf:_3 doc:1.1.3 ;
+    rdf:_4 doc:1.1.4 ;
+    rdf:_5 doc:1.1.5 ;
+    rdf:_6 doc:1.1.6 ;
+    rdf:_7 doc:1.1.7 ;
+    rdf:_8 doc:1.1.8 ;
+    rdf:_9 doc:1.1.9 ;
+    xmlns:dc "http://purl.org/dc/elements/1.1/" ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd http://purl.org/dc/elements/1.1/ http://www.opengroup.org/xsd/archimate/3.1/dc.xsd" ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archiXML:identifier "Model-1" .
+
+doc:1.1.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10 a archiXML:Relationships ;
+    rdf:_1 doc:1.1.10.1 ;
+    rdf:_10 doc:1.1.10.10 ;
+    rdf:_11 doc:1.1.10.11 ;
+    rdf:_12 doc:1.1.10.12 ;
+    rdf:_13 doc:1.1.10.13 ;
+    rdf:_2 doc:1.1.10.2 ;
+    rdf:_3 doc:1.1.10.3 ;
+    rdf:_4 doc:1.1.10.4 ;
+    rdf:_5 doc:1.1.10.5 ;
+    rdf:_6 doc:1.1.10.6 ;
+    rdf:_7 doc:1.1.10.7 ;
+    rdf:_8 doc:1.1.10.8 ;
+    rdf:_9 doc:1.1.10.9 .
+
+doc:1.1.10.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10.10 a archiXML:Relationship ;
+    xsi:type "Access" ;
+    archiXML:accessType "Access" ;
+    archiXML:identifier "id-f6eb14ca7ff4424d9f8bd4e05bc2a735" ;
+    archiXML:source "id-1e647b8915c2431f8ef9ff3eb428484e" ;
+    archiXML:target "id-047854d20cab4e0296c4cef115abb403" .
+
+doc:1.1.10.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10.12 a archiXML:Relationship ;
+    xsi:type "Influence" ;
+    archiXML:identifier "id-1bed00b8597f48cea7fa1ff87561567d" ;
+    archiXML:modifier "++" ;
+    archiXML:source "id-aa8198c8fb774f0d91af0da63c8b1d7b" ;
+    archiXML:target "id-574ca0d1e5944fb99e358c0ce22c52f2" .
+
+doc:1.1.10.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10.2 a archiXML:Relationship ;
+    xsi:type "Access" ;
+    archiXML:accessType "Write" ;
+    archiXML:identifier "id-8bf3134681fc4f53b4017660e6b7cfff" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessObject1" .
+
+doc:1.1.10.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10.4 a archiXML:Relationship ;
+    xsi:type "Access" ;
+    archiXML:accessType "Write" ;
+    archiXML:identifier "id-6bb6076bbc144060999458944a555a7c" ;
+    archiXML:source "id-9ef5441e6666443bb8beea7b1c253729" ;
+    archiXML:target "id-047854d20cab4e0296c4cef115abb403" .
+
+doc:1.1.10.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10.6 a archiXML:Relationship ;
+    xsi:type "Access" ;
+    archiXML:accessType "Read" ;
+    archiXML:identifier "id-7e31ee38b55144feb2a5b7ce0139a9f6" ;
+    archiXML:source "id-f8ee22743b1f45789e9d70033e721da7" ;
+    archiXML:target "id-047854d20cab4e0296c4cef115abb403" .
+
+doc:1.1.10.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.10.8 a archiXML:Relationship ;
+    xsi:type "Access" ;
+    archiXML:accessType "ReadWrite" ;
+    archiXML:identifier "id-095ec59690004856986908e0955f6da9" ;
+    archiXML:source "id-091cf4ec8242486189037fbc3b00f86a" ;
+    archiXML:target "id-047854d20cab4e0296c4cef115abb403" .
+
+doc:1.1.10.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12 a archiXML:Organizations ;
+    rdf:_1 doc:1.1.12.1 ;
+    rdf:_10 doc:1.1.12.10 ;
+    rdf:_11 doc:1.1.12.11 ;
+    rdf:_2 doc:1.1.12.2 ;
+    rdf:_3 doc:1.1.12.3 ;
+    rdf:_4 doc:1.1.12.4 ;
+    rdf:_5 doc:1.1.12.5 ;
+    rdf:_6 doc:1.1.12.6 ;
+    rdf:_7 doc:1.1.12.7 ;
+    rdf:_8 doc:1.1.12.8 ;
+    rdf:_9 doc:1.1.12.9 .
+
+doc:1.1.12.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.10 a archiXML:Item ;
+    rdf:_1 doc:1.1.12.10.1 ;
+    rdf:_2 doc:1.1.12.10.2 ;
+    rdf:_3 doc:1.1.12.10.3 ;
+    rdf:_4 doc:1.1.12.10.4 ;
+    rdf:_5 doc:1.1.12.10.5 .
+
+doc:1.1.12.10.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.10.2 a archiXML:Label ;
+    rdf:_1 doc:1.1.12.10.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.12.10.2.1 a archiXML:Text ;
+    xml1:fragment "Views" .
+
+doc:1.1.12.10.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.10.4 a archiXML:Item ;
+    archiXML:identifierRef "id-938e11fcfdf74bccbb6c7eca8db3df3a" .
+
+doc:1.1.12.10.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.2 a archiXML:Item ;
+    rdf:_1 doc:1.1.12.2.1 ;
+    rdf:_2 doc:1.1.12.2.2 ;
+    rdf:_3 doc:1.1.12.2.3 ;
+    rdf:_4 doc:1.1.12.2.4 ;
+    rdf:_5 doc:1.1.12.2.5 ;
+    rdf:_6 doc:1.1.12.2.6 ;
+    rdf:_7 doc:1.1.12.2.7 ;
+    rdf:_8 doc:1.1.12.2.8 ;
+    rdf:_9 doc:1.1.12.2.9 .
+
+doc:1.1.12.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.2.2 a archiXML:Label ;
+    rdf:_1 doc:1.1.12.2.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.12.2.2.1 a archiXML:Text ;
+    xml1:fragment "Business" .
+
+doc:1.1.12.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.2.4 a archiXML:Item ;
+    archiXML:identifierRef "BusinessActor1" .
+
+doc:1.1.12.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.2.6 a archiXML:Item ;
+    archiXML:identifierRef "BusinessObject1" .
+
+doc:1.1.12.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.2.8 a archiXML:Item ;
+    archiXML:identifierRef "BusinessRole1" .
+
+doc:1.1.12.2.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4 a archiXML:Item ;
+    rdf:_1 doc:1.1.12.4.1 ;
+    rdf:_10 doc:1.1.12.4.10 ;
+    rdf:_11 doc:1.1.12.4.11 ;
+    rdf:_12 doc:1.1.12.4.12 ;
+    rdf:_13 doc:1.1.12.4.13 ;
+    rdf:_2 doc:1.1.12.4.2 ;
+    rdf:_3 doc:1.1.12.4.3 ;
+    rdf:_4 doc:1.1.12.4.4 ;
+    rdf:_5 doc:1.1.12.4.5 ;
+    rdf:_6 doc:1.1.12.4.6 ;
+    rdf:_7 doc:1.1.12.4.7 ;
+    rdf:_8 doc:1.1.12.4.8 ;
+    rdf:_9 doc:1.1.12.4.9 .
+
+doc:1.1.12.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4.10 a archiXML:Item ;
+    archiXML:identifierRef "id-091cf4ec8242486189037fbc3b00f86a" .
+
+doc:1.1.12.4.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4.12 a archiXML:Item ;
+    archiXML:identifierRef "id-1e647b8915c2431f8ef9ff3eb428484e" .
+
+doc:1.1.12.4.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4.2 a archiXML:Label ;
+    rdf:_1 doc:1.1.12.4.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.12.4.2.1 a archiXML:Text ;
+    xml1:fragment "Application" .
+
+doc:1.1.12.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4.4 a archiXML:Item ;
+    archiXML:identifierRef "id-9ef5441e6666443bb8beea7b1c253729" .
+
+doc:1.1.12.4.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4.6 a archiXML:Item ;
+    archiXML:identifierRef "id-f8ee22743b1f45789e9d70033e721da7" .
+
+doc:1.1.12.4.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.4.8 a archiXML:Item ;
+    archiXML:identifierRef "id-047854d20cab4e0296c4cef115abb403" .
+
+doc:1.1.12.4.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.6 a archiXML:Item ;
+    rdf:_1 doc:1.1.12.6.1 ;
+    rdf:_2 doc:1.1.12.6.2 ;
+    rdf:_3 doc:1.1.12.6.3 ;
+    rdf:_4 doc:1.1.12.6.4 ;
+    rdf:_5 doc:1.1.12.6.5 ;
+    rdf:_6 doc:1.1.12.6.6 ;
+    rdf:_7 doc:1.1.12.6.7 .
+
+doc:1.1.12.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.6.2 a archiXML:Label ;
+    rdf:_1 doc:1.1.12.6.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.12.6.2.1 a archiXML:Text ;
+    xml1:fragment "Motivation" .
+
+doc:1.1.12.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.6.4 a archiXML:Item ;
+    archiXML:identifierRef "id-aa8198c8fb774f0d91af0da63c8b1d7b" .
+
+doc:1.1.12.6.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.6.6 a archiXML:Item ;
+    archiXML:identifierRef "id-574ca0d1e5944fb99e358c0ce22c52f2" .
+
+doc:1.1.12.6.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8 a archiXML:Item ;
+    rdf:_1 doc:1.1.12.8.1 ;
+    rdf:_10 doc:1.1.12.8.10 ;
+    rdf:_11 doc:1.1.12.8.11 ;
+    rdf:_12 doc:1.1.12.8.12 ;
+    rdf:_13 doc:1.1.12.8.13 ;
+    rdf:_14 doc:1.1.12.8.14 ;
+    rdf:_15 doc:1.1.12.8.15 ;
+    rdf:_2 doc:1.1.12.8.2 ;
+    rdf:_3 doc:1.1.12.8.3 ;
+    rdf:_4 doc:1.1.12.8.4 ;
+    rdf:_5 doc:1.1.12.8.5 ;
+    rdf:_6 doc:1.1.12.8.6 ;
+    rdf:_7 doc:1.1.12.8.7 ;
+    rdf:_8 doc:1.1.12.8.8 ;
+    rdf:_9 doc:1.1.12.8.9 .
+
+doc:1.1.12.8.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.10 a archiXML:Item ;
+    archiXML:identifierRef "id-095ec59690004856986908e0955f6da9" .
+
+doc:1.1.12.8.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.12 a archiXML:Item ;
+    archiXML:identifierRef "id-f6eb14ca7ff4424d9f8bd4e05bc2a735" .
+
+doc:1.1.12.8.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.14 a archiXML:Item ;
+    archiXML:identifierRef "id-1bed00b8597f48cea7fa1ff87561567d" .
+
+doc:1.1.12.8.15 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.2 a archiXML:Label ;
+    rdf:_1 doc:1.1.12.8.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.12.8.2.1 a archiXML:Text ;
+    xml1:fragment "Relations" .
+
+doc:1.1.12.8.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.4 a archiXML:Item ;
+    archiXML:identifierRef "id-8bf3134681fc4f53b4017660e6b7cfff" .
+
+doc:1.1.12.8.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.6 a archiXML:Item ;
+    archiXML:identifierRef "id-6bb6076bbc144060999458944a555a7c" .
+
+doc:1.1.12.8.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.8.8 a archiXML:Item ;
+    archiXML:identifierRef "id-7e31ee38b55144feb2a5b7ce0139a9f6" .
+
+doc:1.1.12.8.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.12.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14 a archiXML:Views ;
+    rdf:_1 doc:1.1.14.1 ;
+    rdf:_2 doc:1.1.14.2 ;
+    rdf:_3 doc:1.1.14.3 .
+
+doc:1.1.14.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2 a archiXML:Diagrams ;
+    rdf:_1 doc:1.1.14.2.1 ;
+    rdf:_2 doc:1.1.14.2.2 ;
+    rdf:_3 doc:1.1.14.2.3 .
+
+doc:1.1.14.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2 a archiXML:View ;
+    rdf:_1 doc:1.1.14.2.2.1 ;
+    rdf:_10 doc:1.1.14.2.2.10 ;
+    rdf:_11 doc:1.1.14.2.2.11 ;
+    rdf:_12 doc:1.1.14.2.2.12 ;
+    rdf:_13 doc:1.1.14.2.2.13 ;
+    rdf:_14 doc:1.1.14.2.2.14 ;
+    rdf:_15 doc:1.1.14.2.2.15 ;
+    rdf:_16 doc:1.1.14.2.2.16 ;
+    rdf:_17 doc:1.1.14.2.2.17 ;
+    rdf:_18 doc:1.1.14.2.2.18 ;
+    rdf:_19 doc:1.1.14.2.2.19 ;
+    rdf:_2 doc:1.1.14.2.2.2 ;
+    rdf:_20 doc:1.1.14.2.2.20 ;
+    rdf:_21 doc:1.1.14.2.2.21 ;
+    rdf:_22 doc:1.1.14.2.2.22 ;
+    rdf:_23 doc:1.1.14.2.2.23 ;
+    rdf:_24 doc:1.1.14.2.2.24 ;
+    rdf:_25 doc:1.1.14.2.2.25 ;
+    rdf:_26 doc:1.1.14.2.2.26 ;
+    rdf:_27 doc:1.1.14.2.2.27 ;
+    rdf:_28 doc:1.1.14.2.2.28 ;
+    rdf:_29 doc:1.1.14.2.2.29 ;
+    rdf:_3 doc:1.1.14.2.2.3 ;
+    rdf:_30 doc:1.1.14.2.2.30 ;
+    rdf:_31 doc:1.1.14.2.2.31 ;
+    rdf:_4 doc:1.1.14.2.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.7 ;
+    rdf:_8 doc:1.1.14.2.2.8 ;
+    rdf:_9 doc:1.1.14.2.2.9 ;
+    xsi:type "Diagram" ;
+    archiXML:identifier "id-938e11fcfdf74bccbb6c7eca8db3df3a" .
+
+doc:1.1.14.2.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.10.1 ;
+    rdf:_2 doc:1.1.14.2.2.10.2 ;
+    rdf:_3 doc:1.1.14.2.2.10.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-091cf4ec8242486189037fbc3b00f86a" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-543bf22606ae409abba4cd1dff68b50e" ;
+    archiXML:w "120" ;
+    archiXML:x "1151" ;
+    archiXML:y "285" .
+
+doc:1.1.14.2.2.10.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.10.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.10.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.10.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.10.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.10.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.10.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.10.2.7 .
+
+doc:1.1.14.2.2.10.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "255" ;
+    archiXML:r "181" .
+
+doc:1.1.14.2.2.10.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.10.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.10.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.10.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.10.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.10.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.10.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.10.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.12.1 ;
+    rdf:_2 doc:1.1.14.2.2.12.2 ;
+    rdf:_3 doc:1.1.14.2.2.12.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-1e647b8915c2431f8ef9ff3eb428484e" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-de27aadc06f24c65a0428b44b5a68c25" ;
+    archiXML:w "120" ;
+    archiXML:x "1467" ;
+    archiXML:y "297" .
+
+doc:1.1.14.2.2.12.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.12.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.12.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.12.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.12.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.12.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.12.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.12.2.7 .
+
+doc:1.1.14.2.2.12.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "255" ;
+    archiXML:r "181" .
+
+doc:1.1.14.2.2.12.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.12.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.12.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.12.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.12.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.12.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.12.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.12.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.14.1 ;
+    rdf:_2 doc:1.1.14.2.2.14.2 ;
+    rdf:_3 doc:1.1.14.2.2.14.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "BusinessActor1" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-5b429855b6ce4f069ed21a1a2c2e791c" ;
+    archiXML:w "120" ;
+    archiXML:x "134" ;
+    archiXML:y "441" .
+
+doc:1.1.14.2.2.14.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.14.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.14.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.14.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.14.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.14.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.14.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.14.2.7 .
+
+doc:1.1.14.2.2.14.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "181" ;
+    archiXML:g "255" ;
+    archiXML:r "255" .
+
+doc:1.1.14.2.2.14.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.14.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.14.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.14.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.14.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.14.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.14.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.14.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.15 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.16.1 ;
+    rdf:_2 doc:1.1.14.2.2.16.2 ;
+    rdf:_3 doc:1.1.14.2.2.16.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "BusinessObject1" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-be0e7989a3104b7c92d04836982879f5" ;
+    archiXML:w "120" ;
+    archiXML:x "240" ;
+    archiXML:y "329" .
+
+doc:1.1.14.2.2.16.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.16.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.16.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.16.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.16.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.16.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.16.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.16.2.7 .
+
+doc:1.1.14.2.2.16.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "181" ;
+    archiXML:g "255" ;
+    archiXML:r "255" .
+
+doc:1.1.14.2.2.16.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.16.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.16.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.16.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.16.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.16.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.16.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.16.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.17 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.18.1 ;
+    rdf:_2 doc:1.1.14.2.2.18.2 ;
+    rdf:_3 doc:1.1.14.2.2.18.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-aa8198c8fb774f0d91af0da63c8b1d7b" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-a1ac8a9e445641ecbce7c5e2bde7d559" ;
+    archiXML:w "120" ;
+    archiXML:x "1157" ;
+    archiXML:y "822" .
+
+doc:1.1.14.2.2.18.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.18.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.18.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.18.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.18.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.18.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.18.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.18.2.7 .
+
+doc:1.1.14.2.2.18.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "204" ;
+    archiXML:r "204" .
+
+doc:1.1.14.2.2.18.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.18.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.18.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.18.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.18.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.18.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.18.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.18.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.19 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.14.2.2.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.14.2.2.2.1 a archiXML:Text ;
+    xml1:fragment "New ArchiMate View" .
+
+doc:1.1.14.2.2.20 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.20.1 ;
+    rdf:_2 doc:1.1.14.2.2.20.2 ;
+    rdf:_3 doc:1.1.14.2.2.20.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-574ca0d1e5944fb99e358c0ce22c52f2" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-4d36978b46e74731a7dd6e9e36ec748f" ;
+    archiXML:w "120" ;
+    archiXML:x "1470" ;
+    archiXML:y "875" .
+
+doc:1.1.14.2.2.20.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.20.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.20.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.20.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.20.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.20.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.20.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.20.2.7 .
+
+doc:1.1.14.2.2.20.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "204" ;
+    archiXML:r "204" .
+
+doc:1.1.14.2.2.20.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.20.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.20.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.20.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.20.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.20.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.20.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.20.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.21 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22 a archiXML:Connection ;
+    rdf:_1 doc:1.1.14.2.2.22.1 ;
+    rdf:_2 doc:1.1.14.2.2.22.2 ;
+    rdf:_3 doc:1.1.14.2.2.22.3 ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "id-0e8f73ad3f524b8a8f4c6233c5107eb0" ;
+    archiXML:relationshipRef "id-6bb6076bbc144060999458944a555a7c" ;
+    archiXML:source "id-3eee1bdb97524ee88826614eb9d0a9c1" ;
+    archiXML:target "id-98698b79550840bd8d8ddf56e8fa61a3" .
+
+doc:1.1.14.2.2.22.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.22.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.22.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.22.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.22.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.22.2.5 .
+
+doc:1.1.14.2.2.22.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22.2.2 a archiXML:LineColor ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.22.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22.2.4 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.22.2.4.1 ;
+    rdf:_2 doc:1.1.14.2.2.22.2.4.2 ;
+    rdf:_3 doc:1.1.14.2.2.22.2.4.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.22.2.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22.2.4.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.22.2.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.22.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.23 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24 a archiXML:Connection ;
+    rdf:_1 doc:1.1.14.2.2.24.1 ;
+    rdf:_2 doc:1.1.14.2.2.24.2 ;
+    rdf:_3 doc:1.1.14.2.2.24.3 ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "id-cd500df5ed7c46218146c4665b905c8c" ;
+    archiXML:relationshipRef "id-7e31ee38b55144feb2a5b7ce0139a9f6" ;
+    archiXML:source "id-4061025db1e94ebb8a259ef18c19c563" ;
+    archiXML:target "id-98698b79550840bd8d8ddf56e8fa61a3" .
+
+doc:1.1.14.2.2.24.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.24.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.24.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.24.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.24.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.24.2.5 .
+
+doc:1.1.14.2.2.24.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24.2.2 a archiXML:LineColor ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.24.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24.2.4 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.24.2.4.1 ;
+    rdf:_2 doc:1.1.14.2.2.24.2.4.2 ;
+    rdf:_3 doc:1.1.14.2.2.24.2.4.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.24.2.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24.2.4.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.24.2.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.24.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.25 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26 a archiXML:Connection ;
+    rdf:_1 doc:1.1.14.2.2.26.1 ;
+    rdf:_2 doc:1.1.14.2.2.26.2 ;
+    rdf:_3 doc:1.1.14.2.2.26.3 ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "id-22297e461fa54ee0a7fe085f8e29c17e" ;
+    archiXML:relationshipRef "id-095ec59690004856986908e0955f6da9" ;
+    archiXML:source "id-543bf22606ae409abba4cd1dff68b50e" ;
+    archiXML:target "id-98698b79550840bd8d8ddf56e8fa61a3" .
+
+doc:1.1.14.2.2.26.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.26.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.26.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.26.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.26.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.26.2.5 .
+
+doc:1.1.14.2.2.26.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26.2.2 a archiXML:LineColor ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.26.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26.2.4 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.26.2.4.1 ;
+    rdf:_2 doc:1.1.14.2.2.26.2.4.2 ;
+    rdf:_3 doc:1.1.14.2.2.26.2.4.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.26.2.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26.2.4.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.26.2.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.26.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.27 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28 a archiXML:Connection ;
+    rdf:_1 doc:1.1.14.2.2.28.1 ;
+    rdf:_2 doc:1.1.14.2.2.28.2 ;
+    rdf:_3 doc:1.1.14.2.2.28.3 ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "id-3bc8e5238e654e97bc161f16b5f1d94d" ;
+    archiXML:relationshipRef "id-f6eb14ca7ff4424d9f8bd4e05bc2a735" ;
+    archiXML:source "id-de27aadc06f24c65a0428b44b5a68c25" ;
+    archiXML:target "id-98698b79550840bd8d8ddf56e8fa61a3" .
+
+doc:1.1.14.2.2.28.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.28.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.28.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.28.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.28.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.28.2.5 .
+
+doc:1.1.14.2.2.28.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28.2.2 a archiXML:LineColor ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.28.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28.2.4 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.28.2.4.1 ;
+    rdf:_2 doc:1.1.14.2.2.28.2.4.2 ;
+    rdf:_3 doc:1.1.14.2.2.28.2.4.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.28.2.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28.2.4.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.28.2.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.28.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.29 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30 a archiXML:Connection ;
+    rdf:_1 doc:1.1.14.2.2.30.1 ;
+    rdf:_2 doc:1.1.14.2.2.30.2 ;
+    rdf:_3 doc:1.1.14.2.2.30.3 ;
+    xsi:type "Relationship" ;
+    archiXML:identifier "id-aba5871d1877424d85b7b2207400129b" ;
+    archiXML:relationshipRef "id-1bed00b8597f48cea7fa1ff87561567d" ;
+    archiXML:source "id-a1ac8a9e445641ecbce7c5e2bde7d559" ;
+    archiXML:target "id-4d36978b46e74731a7dd6e9e36ec748f" .
+
+doc:1.1.14.2.2.30.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.30.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.30.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.30.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.30.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.30.2.5 .
+
+doc:1.1.14.2.2.30.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30.2.2 a archiXML:LineColor ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.30.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30.2.4 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.30.2.4.1 ;
+    rdf:_2 doc:1.1.14.2.2.30.2.4.2 ;
+    rdf:_3 doc:1.1.14.2.2.30.2.4.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.30.2.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30.2.4.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.30.2.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.30.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.31 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.4.1 ;
+    rdf:_2 doc:1.1.14.2.2.4.2 ;
+    rdf:_3 doc:1.1.14.2.2.4.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-9ef5441e6666443bb8beea7b1c253729" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-3eee1bdb97524ee88826614eb9d0a9c1" ;
+    archiXML:w "120" ;
+    archiXML:x "441" ;
+    archiXML:y "262" .
+
+doc:1.1.14.2.2.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.4.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.4.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.4.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.4.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.4.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.4.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.4.2.7 .
+
+doc:1.1.14.2.2.4.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "255" ;
+    archiXML:r "181" .
+
+doc:1.1.14.2.2.4.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.4.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.4.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.4.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.4.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.4.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.4.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.6.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-f8ee22743b1f45789e9d70033e721da7" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-4061025db1e94ebb8a259ef18c19c563" ;
+    archiXML:w "120" ;
+    archiXML:x "780" ;
+    archiXML:y "262" .
+
+doc:1.1.14.2.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.6.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.6.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.6.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.6.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.6.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.6.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.6.2.7 .
+
+doc:1.1.14.2.2.6.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "255" ;
+    archiXML:r "181" .
+
+doc:1.1.14.2.2.6.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.6.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.6.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.6.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.6.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.6.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.6.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8 a archiXML:Node ;
+    rdf:_1 doc:1.1.14.2.2.8.1 ;
+    rdf:_2 doc:1.1.14.2.2.8.2 ;
+    rdf:_3 doc:1.1.14.2.2.8.3 ;
+    xsi:type "Element" ;
+    archiXML:elementRef "id-047854d20cab4e0296c4cef115abb403" ;
+    archiXML:h "55" ;
+    archiXML:identifier "id-98698b79550840bd8d8ddf56e8fa61a3" ;
+    archiXML:w "120" ;
+    archiXML:x "675" ;
+    archiXML:y "664" .
+
+doc:1.1.14.2.2.8.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.2 a archiXML:Style ;
+    rdf:_1 doc:1.1.14.2.2.8.2.1 ;
+    rdf:_2 doc:1.1.14.2.2.8.2.2 ;
+    rdf:_3 doc:1.1.14.2.2.8.2.3 ;
+    rdf:_4 doc:1.1.14.2.2.8.2.4 ;
+    rdf:_5 doc:1.1.14.2.2.8.2.5 ;
+    rdf:_6 doc:1.1.14.2.2.8.2.6 ;
+    rdf:_7 doc:1.1.14.2.2.8.2.7 .
+
+doc:1.1.14.2.2.8.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.2.2 a archiXML:FillColor ;
+    archiXML:a "100" ;
+    archiXML:b "255" ;
+    archiXML:g "255" ;
+    archiXML:r "181" .
+
+doc:1.1.14.2.2.8.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.2.4 a archiXML:LineColor ;
+    archiXML:a "100" ;
+    archiXML:b "92" ;
+    archiXML:g "92" ;
+    archiXML:r "92" .
+
+doc:1.1.14.2.2.8.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.2.6 a archiXML:Font ;
+    rdf:_1 doc:1.1.14.2.2.8.2.6.1 ;
+    rdf:_2 doc:1.1.14.2.2.8.2.6.2 ;
+    rdf:_3 doc:1.1.14.2.2.8.2.6.3 ;
+    archiXML:name "Segoe UI" ;
+    archiXML:size "9" .
+
+doc:1.1.14.2.2.8.2.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.2.6.2 a archiXML:Color ;
+    archiXML:b "0" ;
+    archiXML:g "0" ;
+    archiXML:r "0" .
+
+doc:1.1.14.2.2.8.2.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.2.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.8.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.2.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.14.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.15 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.2.1 a archiXML:Text ;
+    xml1:fragment "Basic Model" .
+
+doc:1.1.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.4 a archiXML:Documentation ;
+    rdf:_1 doc:1.1.4.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.4.1 a archiXML:Text ;
+    xml1:fragment "Example of a basic model with two elements and a relationship" .
+
+doc:1.1.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6 a archiXML:Metadata ;
+    rdf:_1 doc:1.1.6.1 ;
+    rdf:_10 doc:1.1.6.10 ;
+    rdf:_11 doc:1.1.6.11 ;
+    rdf:_12 doc:1.1.6.12 ;
+    rdf:_13 doc:1.1.6.13 ;
+    rdf:_14 doc:1.1.6.14 ;
+    rdf:_15 doc:1.1.6.15 ;
+    rdf:_2 doc:1.1.6.2 ;
+    rdf:_3 doc:1.1.6.3 ;
+    rdf:_4 doc:1.1.6.4 ;
+    rdf:_5 doc:1.1.6.5 ;
+    rdf:_6 doc:1.1.6.6 ;
+    rdf:_7 doc:1.1.6.7 ;
+    rdf:_8 doc:1.1.6.8 ;
+    rdf:_9 doc:1.1.6.9 .
+
+doc:1.1.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.10 a archiXML:SchemaVersion ;
+    rdf:_1 doc:1.1.6.10.1 .
+
+doc:1.1.6.10.1 a archiXML:Text ;
+    xml1:fragment "Begrotingsinfrastructuur" .
+
+doc:1.1.6.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.12 a archiXML:SchemaVersion ;
+    rdf:_1 doc:1.1.6.12.1 .
+
+doc:1.1.6.12.1 a archiXML:Text ;
+    xml1:fragment "Rijksbegrotingscyclus" .
+
+doc:1.1.6.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.14 a archiXML:SchemaVersion ;
+    rdf:_1 doc:1.1.6.14.1 .
+
+doc:1.1.6.14.1 a archiXML:Text ;
+    xml1:fragment "02-11-2023" .
+
+doc:1.1.6.15 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.2 a archiXML:Schema ;
+    rdf:_1 doc:1.1.6.2.1 .
+
+doc:1.1.6.2.1 a archiXML:Text ;
+    xml1:fragment "Dublin Core" .
+
+doc:1.1.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.4 a archiXML:SchemaVersion ;
+    rdf:_1 doc:1.1.6.4.1 .
+
+doc:1.1.6.4.1 a archiXML:Text ;
+    xml1:fragment "1.1" .
+
+doc:1.1.6.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.6 a archiXML:SchemaVersion ;
+    rdf:_1 doc:1.1.6.6.1 .
+
+doc:1.1.6.6.1 a archiXML:Text ;
+    xml1:fragment "Begrotingsinfrastructuur" .
+
+doc:1.1.6.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.6.8 a archiXML:SchemaVersion ;
+    rdf:_1 doc:1.1.6.8.1 .
+
+doc:1.1.6.8.1 a archiXML:Text ;
+    xml1:fragment "Flores Bakker" .
+
+doc:1.1.6.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8 a archiXML:Elements ;
+    rdf:_1 doc:1.1.8.1 ;
+    rdf:_10 doc:1.1.8.10 ;
+    rdf:_11 doc:1.1.8.11 ;
+    rdf:_12 doc:1.1.8.12 ;
+    rdf:_13 doc:1.1.8.13 ;
+    rdf:_14 doc:1.1.8.14 ;
+    rdf:_15 doc:1.1.8.15 ;
+    rdf:_16 doc:1.1.8.16 ;
+    rdf:_17 doc:1.1.8.17 ;
+    rdf:_18 doc:1.1.8.18 ;
+    rdf:_19 doc:1.1.8.19 ;
+    rdf:_2 doc:1.1.8.2 ;
+    rdf:_20 doc:1.1.8.20 ;
+    rdf:_21 doc:1.1.8.21 ;
+    rdf:_3 doc:1.1.8.3 ;
+    rdf:_4 doc:1.1.8.4 ;
+    rdf:_5 doc:1.1.8.5 ;
+    rdf:_6 doc:1.1.8.6 ;
+    rdf:_7 doc:1.1.8.7 ;
+    rdf:_8 doc:1.1.8.8 ;
+    rdf:_9 doc:1.1.8.9 .
+
+doc:1.1.8.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.10 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.10.1 ;
+    rdf:_2 doc:1.1.8.10.2 ;
+    rdf:_3 doc:1.1.8.10.3 ;
+    xsi:type "ApplicationComponent" ;
+    archiXML:identifier "id-f8ee22743b1f45789e9d70033e721da7" .
+
+doc:1.1.8.10.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.10.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.10.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.10.2.1 a archiXML:Text ;
+    xml1:fragment "Another Application Component" .
+
+doc:1.1.8.10.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.11 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.12 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.12.1 ;
+    rdf:_2 doc:1.1.8.12.2 ;
+    rdf:_3 doc:1.1.8.12.3 ;
+    xsi:type "DataObject" ;
+    archiXML:identifier "id-047854d20cab4e0296c4cef115abb403" .
+
+doc:1.1.8.12.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.12.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.12.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.12.2.1 a archiXML:Text ;
+    xml1:fragment "Data Object" .
+
+doc:1.1.8.12.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.13 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.14 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.14.1 ;
+    rdf:_2 doc:1.1.8.14.2 ;
+    rdf:_3 doc:1.1.8.14.3 ;
+    xsi:type "ApplicationComponent" ;
+    archiXML:identifier "id-091cf4ec8242486189037fbc3b00f86a" .
+
+doc:1.1.8.14.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.14.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.14.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.14.2.1 a archiXML:Text ;
+    xml1:fragment "Yet Another Application Component" .
+
+doc:1.1.8.14.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.15 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.16 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.16.1 ;
+    rdf:_2 doc:1.1.8.16.2 ;
+    rdf:_3 doc:1.1.8.16.3 ;
+    xsi:type "ApplicationComponent" ;
+    archiXML:identifier "id-1e647b8915c2431f8ef9ff3eb428484e" .
+
+doc:1.1.8.16.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.16.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.16.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.16.2.1 a archiXML:Text ;
+    xml1:fragment "Yet Again An Application Component" .
+
+doc:1.1.8.16.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.17 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.18 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.18.1 ;
+    rdf:_2 doc:1.1.8.18.2 ;
+    rdf:_3 doc:1.1.8.18.3 ;
+    xsi:type "Driver" ;
+    archiXML:identifier "id-aa8198c8fb774f0d91af0da63c8b1d7b" .
+
+doc:1.1.8.18.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.18.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.18.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.18.2.1 a archiXML:Text ;
+    xml1:fragment "Driver" .
+
+doc:1.1.8.18.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.19 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.2 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.2.1 ;
+    rdf:_2 doc:1.1.8.2.2 ;
+    rdf:_3 doc:1.1.8.2.3 ;
+    rdf:_4 doc:1.1.8.2.4 ;
+    rdf:_5 doc:1.1.8.2.5 ;
+    xsi:type "BusinessActor" ;
+    archiXML:identifier "BusinessActor1" .
+
+doc:1.1.8.2.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.2.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.2.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.2.2.1 a archiXML:Text ;
+    xml1:fragment "A business actor" .
+
+doc:1.1.8.2.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.2.4 a archiXML:Documentation ;
+    rdf:_1 doc:1.1.8.2.4.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.2.4.1 a archiXML:Text ;
+    xml1:fragment "An example of a business actor" .
+
+doc:1.1.8.2.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.20 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.20.1 ;
+    rdf:_2 doc:1.1.8.20.2 ;
+    rdf:_3 doc:1.1.8.20.3 ;
+    xsi:type "Requirement" ;
+    archiXML:identifier "id-574ca0d1e5944fb99e358c0ce22c52f2" .
+
+doc:1.1.8.20.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.20.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.20.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.20.2.1 a archiXML:Text ;
+    xml1:fragment "Requirement" .
+
+doc:1.1.8.20.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.21 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.4 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.4.1 ;
+    rdf:_2 doc:1.1.8.4.2 ;
+    rdf:_3 doc:1.1.8.4.3 ;
+    rdf:_4 doc:1.1.8.4.4 ;
+    rdf:_5 doc:1.1.8.4.5 ;
+    xsi:type "BusinessObject" ;
+    archiXML:identifier "BusinessObject1" .
+
+doc:1.1.8.4.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.4.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.4.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.4.2.1 a archiXML:Text ;
+    xml1:fragment "A business object" .
+
+doc:1.1.8.4.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.4.4 a archiXML:Documentation ;
+    rdf:_1 doc:1.1.8.4.4.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.4.4.1 a archiXML:Text ;
+    xml1:fragment "An example of a business object" .
+
+doc:1.1.8.4.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.6 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.6.1 ;
+    rdf:_2 doc:1.1.8.6.2 ;
+    rdf:_3 doc:1.1.8.6.3 ;
+    rdf:_4 doc:1.1.8.6.4 ;
+    rdf:_5 doc:1.1.8.6.5 ;
+    xsi:type "BusinessRole" ;
+    archiXML:identifier "BusinessRole1" .
+
+doc:1.1.8.6.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.6.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.6.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.6.2.1 a archiXML:Text ;
+    xml1:fragment "A business role" .
+
+doc:1.1.8.6.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.6.4 a archiXML:Documentation ;
+    rdf:_1 doc:1.1.8.6.4.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.6.4.1 a archiXML:Text ;
+    xml1:fragment "An example of a business role" .
+
+doc:1.1.8.6.5 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.7 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.8 a archiXML:Element ;
+    rdf:_1 doc:1.1.8.8.1 ;
+    rdf:_2 doc:1.1.8.8.2 ;
+    rdf:_3 doc:1.1.8.8.3 ;
+    xsi:type "ApplicationComponent" ;
+    archiXML:identifier "id-9ef5441e6666443bb8beea7b1c253729" .
+
+doc:1.1.8.8.1 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.8.2 a archiXML:Name ;
+    rdf:_1 doc:1.1.8.8.2.1 ;
+    xml1:lang "nl" .
+
+doc:1.1.8.8.2.1 a archiXML:Text ;
+    xml1:fragment "An Application Component" .
+
+doc:1.1.8.8.3 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.8.9 a archiXML:Text ;
+    xml1:fragment "" .
+
+doc:1.1.9 a archiXML:Text ;
+    xml1:fragment "" .
+

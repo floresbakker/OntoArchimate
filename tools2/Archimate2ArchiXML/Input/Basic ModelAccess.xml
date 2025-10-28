@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd http://purl.org/dc/elements/1.1/ http://www.opengroup.org/xsd/archimate/3.1/dc.xsd" identifier="Model-1">
+  <name xml:lang="nl">Basic Model</name>
+  <documentation xml:lang="nl">Example of a basic model with two elements and a relationship</documentation>
+  <metadata>
+    <schema>Dublin Core</schema>
+    <schemaversion>1.1</schemaversion>
+    <dc:title>Begrotingsinfrastructuur</dc:title>
+    <dc:creator>Flores Bakker</dc:creator>
+    <dc:subject>Begrotingsinfrastructuur</dc:subject>
+    <dc:description>Rijksbegrotingscyclus</dc:description>
+    <dc:date>02-11-2023</dc:date>
+  </metadata>
+  <elements>
+    <element identifier="BusinessActor1" xsi:type="BusinessActor">
+      <name xml:lang="nl">A business actor</name>
+      <documentation xml:lang="nl">An example of a business actor</documentation>
+    </element>
+    <element identifier="BusinessObject1" xsi:type="BusinessObject">
+      <name xml:lang="nl">A business object</name>
+      <documentation xml:lang="nl">An example of a business object</documentation>
+    </element>
+    <element identifier="BusinessRole1" xsi:type="BusinessRole">
+      <name xml:lang="nl">A business role</name>
+      <documentation xml:lang="nl">An example of a business role</documentation>
+    </element>
+    <element identifier="id-9ef5441e6666443bb8beea7b1c253729" xsi:type="ApplicationComponent">
+      <name xml:lang="nl">An Application Component</name>
+    </element>
+    <element identifier="id-f8ee22743b1f45789e9d70033e721da7" xsi:type="ApplicationComponent">
+      <name xml:lang="nl">Another Application Component</name>
+    </element>
+    <element identifier="id-047854d20cab4e0296c4cef115abb403" xsi:type="DataObject">
+      <name xml:lang="nl">Data Object</name>
+    </element>
+    <element identifier="id-091cf4ec8242486189037fbc3b00f86a" xsi:type="ApplicationComponent">
+      <name xml:lang="nl">Yet Another Application Component</name>
+    </element>
+    <element identifier="id-1e647b8915c2431f8ef9ff3eb428484e" xsi:type="ApplicationComponent">
+      <name xml:lang="nl">Yet Again An Application Component</name>
+    </element>
+    <element identifier="id-aa8198c8fb774f0d91af0da63c8b1d7b" xsi:type="Driver">
+      <name xml:lang="nl">Driver</name>
+    </element>
+    <element identifier="id-574ca0d1e5944fb99e358c0ce22c52f2" xsi:type="Requirement">
+      <name xml:lang="nl">Requirement</name>
+    </element>
+  </elements>
+  <relationships>
+    <relationship identifier="id-8bf3134681fc4f53b4017660e6b7cfff" source="BusinessActor1" target="BusinessObject1" xsi:type="Access" accessType="Write" />
+    <relationship identifier="id-6bb6076bbc144060999458944a555a7c" source="id-9ef5441e6666443bb8beea7b1c253729" target="id-047854d20cab4e0296c4cef115abb403" xsi:type="Access" accessType="Write" />
+    <relationship identifier="id-7e31ee38b55144feb2a5b7ce0139a9f6" source="id-f8ee22743b1f45789e9d70033e721da7" target="id-047854d20cab4e0296c4cef115abb403" xsi:type="Access" accessType="Read" />
+    <relationship identifier="id-095ec59690004856986908e0955f6da9" source="id-091cf4ec8242486189037fbc3b00f86a" target="id-047854d20cab4e0296c4cef115abb403" xsi:type="Access" accessType="ReadWrite" />
+    <relationship identifier="id-f6eb14ca7ff4424d9f8bd4e05bc2a735" source="id-1e647b8915c2431f8ef9ff3eb428484e" target="id-047854d20cab4e0296c4cef115abb403" xsi:type="Access" accessType="Access" />
+    <relationship identifier="id-1bed00b8597f48cea7fa1ff87561567d" source="id-aa8198c8fb774f0d91af0da63c8b1d7b" target="id-574ca0d1e5944fb99e358c0ce22c52f2" xsi:type="Influence" modifier="++" />
+  </relationships>
+  <organizations>
+    <item>
+      <label xml:lang="nl">Business</label>
+      <item identifierRef="BusinessActor1" />
+      <item identifierRef="BusinessObject1" />
+      <item identifierRef="BusinessRole1" />
+    </item>
+    <item>
+      <label xml:lang="nl">Application</label>
+      <item identifierRef="id-9ef5441e6666443bb8beea7b1c253729" />
+      <item identifierRef="id-f8ee22743b1f45789e9d70033e721da7" />
+      <item identifierRef="id-047854d20cab4e0296c4cef115abb403" />
+      <item identifierRef="id-091cf4ec8242486189037fbc3b00f86a" />
+      <item identifierRef="id-1e647b8915c2431f8ef9ff3eb428484e" />
+    </item>
+    <item>
+      <label xml:lang="nl">Motivation</label>
+      <item identifierRef="id-aa8198c8fb774f0d91af0da63c8b1d7b" />
+      <item identifierRef="id-574ca0d1e5944fb99e358c0ce22c52f2" />
+    </item>
+    <item>
+      <label xml:lang="nl">Relations</label>
+      <item identifierRef="id-8bf3134681fc4f53b4017660e6b7cfff" />
+      <item identifierRef="id-6bb6076bbc144060999458944a555a7c" />
+      <item identifierRef="id-7e31ee38b55144feb2a5b7ce0139a9f6" />
+      <item identifierRef="id-095ec59690004856986908e0955f6da9" />
+      <item identifierRef="id-f6eb14ca7ff4424d9f8bd4e05bc2a735" />
+      <item identifierRef="id-1bed00b8597f48cea7fa1ff87561567d" />
+    </item>
+    <item>
+      <label xml:lang="nl">Views</label>
+      <item identifierRef="id-938e11fcfdf74bccbb6c7eca8db3df3a" />
+    </item>
+  </organizations>
+  <views>
+    <diagrams>
+      <view identifier="id-938e11fcfdf74bccbb6c7eca8db3df3a" xsi:type="Diagram">
+        <name xml:lang="nl">New ArchiMate View</name>
+        <node identifier="id-3eee1bdb97524ee88826614eb9d0a9c1" elementRef="id-9ef5441e6666443bb8beea7b1c253729" xsi:type="Element" x="441" y="262" w="120" h="55">
+          <style>
+            <fillColor r="181" g="255" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-4061025db1e94ebb8a259ef18c19c563" elementRef="id-f8ee22743b1f45789e9d70033e721da7" xsi:type="Element" x="780" y="262" w="120" h="55">
+          <style>
+            <fillColor r="181" g="255" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-98698b79550840bd8d8ddf56e8fa61a3" elementRef="id-047854d20cab4e0296c4cef115abb403" xsi:type="Element" x="675" y="664" w="120" h="55">
+          <style>
+            <fillColor r="181" g="255" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-543bf22606ae409abba4cd1dff68b50e" elementRef="id-091cf4ec8242486189037fbc3b00f86a" xsi:type="Element" x="1151" y="285" w="120" h="55">
+          <style>
+            <fillColor r="181" g="255" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-de27aadc06f24c65a0428b44b5a68c25" elementRef="id-1e647b8915c2431f8ef9ff3eb428484e" xsi:type="Element" x="1467" y="297" w="120" h="55">
+          <style>
+            <fillColor r="181" g="255" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-5b429855b6ce4f069ed21a1a2c2e791c" elementRef="BusinessActor1" xsi:type="Element" x="134" y="441" w="120" h="55">
+          <style>
+            <fillColor r="255" g="255" b="181" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-be0e7989a3104b7c92d04836982879f5" elementRef="BusinessObject1" xsi:type="Element" x="240" y="329" w="120" h="55">
+          <style>
+            <fillColor r="255" g="255" b="181" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-a1ac8a9e445641ecbce7c5e2bde7d559" elementRef="id-aa8198c8fb774f0d91af0da63c8b1d7b" xsi:type="Element" x="1157" y="822" w="120" h="55">
+          <style>
+            <fillColor r="204" g="204" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <node identifier="id-4d36978b46e74731a7dd6e9e36ec748f" elementRef="id-574ca0d1e5944fb99e358c0ce22c52f2" xsi:type="Element" x="1470" y="875" w="120" h="55">
+          <style>
+            <fillColor r="204" g="204" b="255" a="100" />
+            <lineColor r="92" g="92" b="92" a="100" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </node>
+        <connection identifier="id-0e8f73ad3f524b8a8f4c6233c5107eb0" relationshipRef="id-6bb6076bbc144060999458944a555a7c" xsi:type="Relationship" source="id-3eee1bdb97524ee88826614eb9d0a9c1" target="id-98698b79550840bd8d8ddf56e8fa61a3">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+        <connection identifier="id-cd500df5ed7c46218146c4665b905c8c" relationshipRef="id-7e31ee38b55144feb2a5b7ce0139a9f6" xsi:type="Relationship" source="id-4061025db1e94ebb8a259ef18c19c563" target="id-98698b79550840bd8d8ddf56e8fa61a3">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+        <connection identifier="id-22297e461fa54ee0a7fe085f8e29c17e" relationshipRef="id-095ec59690004856986908e0955f6da9" xsi:type="Relationship" source="id-543bf22606ae409abba4cd1dff68b50e" target="id-98698b79550840bd8d8ddf56e8fa61a3">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+        <connection identifier="id-3bc8e5238e654e97bc161f16b5f1d94d" relationshipRef="id-f6eb14ca7ff4424d9f8bd4e05bc2a735" xsi:type="Relationship" source="id-de27aadc06f24c65a0428b44b5a68c25" target="id-98698b79550840bd8d8ddf56e8fa61a3">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+        <connection identifier="id-aba5871d1877424d85b7b2207400129b" relationshipRef="id-1bed00b8597f48cea7fa1ff87561567d" xsi:type="Relationship" source="id-a1ac8a9e445641ecbce7c5e2bde7d559" target="id-4d36978b46e74731a7dd6e9e36ec748f">
+          <style>
+            <lineColor r="0" g="0" b="0" />
+            <font name="Segoe UI" size="9">
+              <color r="0" g="0" b="0" />
+            </font>
+          </style>
+        </connection>
+      </view>
+    </diagrams>
+  </views>
+</model>

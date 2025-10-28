@@ -1,0 +1,107 @@
+prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> 
+prefix dom: <http://www.w3.org/DOM/model/def/> 
+prefix model: <https://data.rijksfinancien.nl/ontoarchi/id/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix xml: <http://www.w3.org/XML/model/def/> 
+prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> 
+prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> 
+
+model:BasicModel-Document a archiXML:Document ;
+    rdf:_1 model:BasicModel-Model .
+    
+model:BasicModel-Model a archiXML:Model ;
+    rdf:_1 model:BasicModel-ModelName ;
+    rdf:_2 model:BasicModel-Documentation ;
+    rdf:_3 model:BasicModel-Elements ;
+    rdf:_4 model:BasicModel-Relationships ;
+    rdf:_5 model:BasicModel-Organizations ;
+    rdf:_6 model:BasicModel-Properties ;
+    rdf:_7 model:BasicModel-PropertyDefinitions ;
+    rdf:_8 model:BasicModel-Views ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archiXML:identifier "Model-1" .
+
+### Model
+
+model:BasicModel-ModelName a archiXML:Name ;
+    rdf:_1 model:BasicModel-ModelNameText ;
+    xml:lang "en" .
+
+model:BasicModel-ModelNameText a archiXML:Text ;
+    xml:fragment "Basic Model" .
+
+model:BasicModel-Documentation a archiXML:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationText ;
+    xml:lang "en" .
+
+model:BasicModel-DocumentationText a archiXML:Text ;
+    xml:fragment "Example of a basic model with two elements and a relationship" .
+
+### Element
+
+model:BasicModel-Elements a archiXML:Elements ;
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessRole-Element ;
+    rdf:_3 model:aBusinessObject-Element.
+
+model:aBusinessActor-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    xsi:type "BusinessActor" ;
+    archiXML:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessActor-ElementNameText ;
+    xml:lang "en" .
+
+model:aBusinessActor-ElementNameText a archiXML:Text ;
+    xml:fragment "A business actor" .
+
+model:aBusinessRole-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    xsi:type "BusinessRole" ;
+    archiXML:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessRole-ElementNameText ;
+    xml:lang "en" .
+
+model:aBusinessRole-ElementNameText a archiXML:Text ;
+    xml:fragment "A business role" .
+
+model:aBusinessObject-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessObject-ElementName ;
+    xsi:type "BusinessObject" ;
+    archiXML:identifier "BusinessObject1" .
+
+model:aBusinessObject-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessObject-ElementNameText ;
+    xml:lang "en" .
+
+model:aBusinessObject-ElementNameText a archiXML:Text ;
+    xml:fragment "A business object" .
+
+### Relationship
+    
+model:BasicModel-Relationships a archiXML:Relationships;
+    rdf:_1 model:assignmentRelationship1;
+    rdf:_2 model:assignmentRelationship2.
+    
+model:assignmentRelationship1 a archiXML:Relationship;
+    archiXML:identifier "relation-1";
+    archiXML:source "BusinessActor1";
+    archiXML:target "BusinessRole1";
+    xsi:type "Assignment".     
+
+model:assignmentRelationship2 a archiXML:Relationship;
+    archiXML:identifier "relation-2";
+    archiXML:source "BusinessActor1";
+    archiXML:target "BusinessRole1";
+    xsi:type "Association". 
+    
+
+    
+    
+
+    

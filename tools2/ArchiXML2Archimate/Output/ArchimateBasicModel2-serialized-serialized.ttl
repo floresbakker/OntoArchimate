@@ -1,0 +1,3064 @@
+@prefix archiXML: <https://data.rijksfinancien.nl/archixml/model/def/> .
+@prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/> .
+@prefix dcm: <http://purl.org/dc/dcmitype/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix decl: <http://www.w3.org/XML/id/decl/> .
+@prefix dom: <http://www.w3.org/DOM/model/def/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix function: <http://www.w3.org/XML/model/function/> .
+@prefix model: <https://data.rijksfinancien.nl/archimate/model/id/> .
+@prefix ns1: <https://respec.org/model/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix respec: <https://respec.org/model/def/> .
+@prefix rule: <http://www.w3.org/XML/model/rule/> .
+@prefix section: <http://www.w3.org/2001/XMLSchema-instance/id/section/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shp: <http://www.w3.org/XML/model/shp/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix standard: <http://www.w3.org/2001/XMLSchema-instance/id/standard/> .
+@prefix status: <http://purl.org/adms/status/> .
+@prefix target: <http://www.w3.org/XML/model/target/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix view: <https://data.rijksfinancien.nl/archimate/view/id/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xlink: <https://www.w3.org/1999/xlink/model/def/> .
+@prefix xml1: <http://www.w3.org/XML/model/def/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/model/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance/model/def/> .
+
+<http://www.w3.org/2000/xmlns/id/standard/xmlns> a dct:Standard ;
+    dct:created "2024-02-19"^^xsd:date ;
+    dct:source "https://www.w3.org/TR/xml-names11/"^^xsd:anyURI ;
+    skos:prefLabel "Namespaces in XML 1.1 (Second Edition)"@en .
+
+xmlns:cc a xmlns:Attribute,
+        owl:DatatypeProperty ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xmlns: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'cc' attribute is used to specify the Creative Commons namespace within an XML document. It associates elements and attributes with Creative Commons licenses and metadata."@en ;
+    skos:prefLabel "the cc attribute"@en ;
+    xml1:key "cc" .
+
+xmlns:dc a xmlns:Attribute,
+        owl:DatatypeProperty ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xmlns: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'dc' attribute is used to specify the Dublin Core namespace within an XML document. It associates elements and attributes with Dublin Core metadata terms."@en ;
+    skos:prefLabel "the dc attribute"@en ;
+    xml1:key "dc" .
+
+xmlns:rdf a xmlns:Attribute,
+        owl:DatatypeProperty ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xmlns: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'rdf' attribute is used to specify the RDF namespace within an XML document. It associates elements and attributes with RDF resources and statements."@en ;
+    skos:prefLabel "the rdf attribute"@en ;
+    xml1:key "rdf" .
+
+xmlns:xlink a xmlns:Attribute,
+        owl:DatatypeProperty ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xmlns: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'xlink' attribute is used to specify the XLink namespace within an XML document. It associates elements and attributes with XLink resources and links."@en ;
+    skos:prefLabel "the xlink attribute"@en ;
+    xml1:key "xlink" .
+
+xmlns:xsi a xmlns:Attribute,
+        owl:DatatypeProperty ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xmlns: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'xsi' attribute is used to specify the XML Schema Instance namespace within an XML document. It associates elements and attributes with XML Schema definitions."@en ;
+    skos:prefLabel "the xsi attribute"@en ;
+    xml1:key "xsi" .
+
+standard:xsi a dct:Standard ;
+    dct:created "2024-02-19"^^xsd:date ;
+    dct:source "https://www.w3.org/TR/xmlschema-1/"^^xsd:anyURI ;
+    skos:prefLabel "XML Schema Part 1: Structures Second Edition"@en .
+
+xsi:nil a xsi:Attribute,
+        owl:DatatypeProperty ;
+    dct:conformsTo section:2.6.2 ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xsi: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The xsi:nil attribute indicates whether an element has a nil value. When the xsi:nil attribute is set to 'true', it signifies that the element has no value. This attribute is typically used in XML Schema instance documents to represent null or empty values for elements defined in XML Schema."@en ;
+    skos:prefLabel "the nil attribute"@en ;
+    xml1:key "nil" .
+
+xsi:schemaLocation a xsi:Attribute,
+        owl:DatatypeProperty ;
+    dct:conformsTo section:2.6.3 ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xsi: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'schemaLocation' attribute is used in XML documents associated with XML Schema validation. It specifies the location of the XML Schema definition (XSD) that describes the structure and constraints of elements in the document."@en ;
+    skos:prefLabel "the schemaLocation attribute"@en ;
+    xml1:key "schemaLocation" .
+
+xsi:type a xsi:Attribute,
+        owl:DatatypeProperty ;
+    dct:conformsTo section:2.6.1 ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xsi: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The 'type' attribute is used in XML documents associated with XML Schema validation. It specifies the data type of an element or an attribute in accordance with the XML Schema definition (XSD)."@en ;
+    skos:prefLabel "the type attribute"@en ;
+    xml1:key "type" .
+
+<http://www.w3.org/DOM/id/section/DOMImplementation> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-domimplementation"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.5.1. Interface DOMImplementation"@en .
+
+<http://www.w3.org/DOM/id/section/NamedNodeMap> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-namednodemap"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.9.1. Interface NamedNodeMap"@en .
+
+<http://www.w3.org/DOM/id/section/NodeTree> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#node-trees"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.2. Node tree"@en .
+
+dom:DocumentElement a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/DocumentElement> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:DocumentTreeNode ;
+    skos:definition "The document element of a document is the element whose parent is that document."@en ;
+    skos:prefLabel "Document element"@en .
+
+dom:ShadowRoot a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/ShadowRoot> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:DocumentFragment ;
+    skos:definition "Represents a separate subtree of the document tree that can be associated with a particular element, effectively creating a 'shadow DOM' within the element."@en ;
+    skos:prefLabel "Shadow Root"@en .
+
+dom:class a owl:DatatypeProperty,
+        dom:Attribute ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Class> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies a class for a DOM element."@en ;
+    skos:prefLabel "the class attribute"@en ;
+    dom:key "class" .
+
+dom:customElementDefinition a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies a custom element definition for a DOM element."@en ;
+    skos:prefLabel "custom element definition"@en .
+
+dom:customElementState a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies a custom element state for a DOM element."@en ;
+    skos:prefLabel "custom element state"@en .
+
+dom:documentBaseURL a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Node> ;
+    rdfs:domain dom:Document ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies the node document's document base URL."@en ;
+    skos:prefLabel "document base URL"@en .
+
+dom:id a owl:DatatypeProperty,
+        dom:Attribute ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/ID> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies an associated unique identifier (ID) for a DOM element."@en ;
+    skos:prefLabel "the id attribute"@en ;
+    dom:key "id" .
+
+dom:isValue a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies an is value for a DOM element."@en ;
+    skos:prefLabel "is value"@en .
+
+dom:name a owl:DatatypeProperty,
+        dom:Attribute ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Name> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies a name for a DOM element."@en ;
+    skos:prefLabel "the name attribute"@en .
+
+dom:namespace a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:anyUri ;
+    skos:definition "Specifies the namespace for a DOM element."@en ;
+    skos:prefLabel "namespace"@en .
+
+dom:namespacePrefix a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies the namespace prefix for a DOM element."@en ;
+    skos:prefLabel "namespace prefix"@en .
+
+dom:nodeName a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Node> ;
+    rdfs:domain dom:Node ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies a name for a DOM node."@en ;
+    skos:prefLabel "node name"@en .
+
+dom:slot a owl:DatatypeProperty,
+        dom:Attribute ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Slot> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies a slot for a DOM element."@en ;
+    skos:prefLabel "the slot attribute"@en ;
+    dom:key "slot" .
+
+<http://www.w3.org/XML/id/section/Attributes> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "Attributes"@en .
+
+<http://www.w3.org/XML/id/section/CDATASections> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "CDATA Sections"@en .
+
+<http://www.w3.org/XML/id/section/Comments> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "Comments"@en .
+
+<http://www.w3.org/XML/id/section/Document> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "XML Document"@en .
+
+<http://www.w3.org/XML/id/section/Elements> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "Elements"@en .
+
+<http://www.w3.org/XML/id/section/ProcessingInstructions> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "Processing Instructions"@en .
+
+<http://www.w3.org/XML/id/section/TextElements> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/XML/id/standard/xml> ;
+    dct:source "https://www.w3.org/TR/xml/#sec-intro"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "Text Elements"@en .
+
+xml1:ProcessingInstruction a owl:Class ;
+    dct:conformsTo <http://www.w3.org/XML/id/section/XML-Spec> ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:ProcessingInstruction ;
+    skos:definition "An XML processing instruction provides instructions to the XML processor."@en ;
+    skos:prefLabel "XML Processing Instruction"@en .
+
+xml1:base a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the base for XML."@en ;
+    skos:prefLabel "the base attribute"@en ;
+    xml1:key "base" .
+
+xml1:documentTypeName a owl:DatatypeProperty ;
+    rdfs:domain xml1:DocumentType ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies the doctype name of a doctype declaration in a XML document."@en ;
+    skos:prefLabel "has document type name"@en .
+
+xml1:fragment a owl:DatatypeProperty ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( xml1:CDATASection xml1:Comment xml1:Document xml1:DocumentType xml1:Element xml1:Text ) ] ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range rdf:XML ;
+    skos:definition "Property that links a node in a XML-document with its XML fragment."@en ;
+    skos:prefLabel "fragment property"@en .
+
+xml1:id a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies an identifier for an XML element."@en ;
+    skos:prefLabel "the id attribute"@en ;
+    xml1:key "id" .
+
+xml1:key a owl:DatatypeProperty ;
+    rdfs:domain xml1:Attribute ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dom:localName ;
+    skos:definition "Property that links the key name of a specific attribute to a XML attribute."@en ;
+    skos:prefLabel "key property"@en .
+
+xml1:lang a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the language for XML."@en ;
+    skos:prefLabel "the lang attribute"@en ;
+    xml1:key "lang" .
+
+xml1:name a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies a name for an XML element."@en ;
+    skos:prefLabel "the name attribute"@en ;
+    xml1:key "name" .
+
+xml1:space a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the space for XML."@en ;
+    skos:prefLabel "the space attribute"@en ;
+    xml1:key "space" .
+
+xml1:xmlns a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies a namespace."@en ;
+    skos:prefLabel "the xmlns attribute"@en ;
+    xml1:key "xmlns" .
+
+function:getCDATASectionFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment for a XML CDATA Section in a XML document." ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "A XML CDATA Section in a XML document." ;
+            sh:path function:CDATASection ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+    prefix function: <http://www.w3.org/XML/model/function/>
+    
+    select ?result where {
+     
+    # Establish the XML fragment for this XML CDATA
+    bind(concat('<![CDATA[',function:getChildNodeFragment($CDATASection),']]>') as ?fragment)
+    bind(if(bound(?fragment),?fragment,'') as ?result)  
+}
+	
+""" .
+
+function:getChildNodeFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment of child nodes for a node in an XML Document" ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "A node in an XML document." ;
+            sh:path function:parentNode ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+    
+    prefix xml: <http://www.w3.org/XML/model/def/>
+  	prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+    
+    select ?result where {
+    
+    { # Get the XML fragments of child nodes, if there are any.
+    select $parentNode (group_concat(str(?childFragment);separator='') as ?childFragments) {
+      {
+        select $parentNode ?member ?childFragment {
+          $parentNode ?member ?childNode.
+          filter(strstarts(str(?member),concat(str(rdf:),'_')))
+          ?childNode xml:fragment ?childFragment.
+        }
+        order by xsd:integer(strafter(str(?member),concat(str(rdf:),'_')))
+       }
+      } group by $parentNode
+     }
+    bind(if(bound(?childFragments),?childFragments,'') as ?result) 
+    }
+""" .
+
+function:getCommentFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment for a XML comment in a XML document." ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "A XML comment in a XML document." ;
+            sh:path function:comment ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+    prefix function: <http://www.w3.org/XML/model/function/>
+    
+    select ?result where {
+     
+    # Establish the XML fragment for this XML comment
+    bind(concat('<!--',function:getChildNodeFragment($comment),'-->') as ?fragment)
+    bind(if(bound(?fragment),?fragment,'') as ?result)  
+}
+	
+""" .
+
+function:getDocumentFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment for a XML Document" ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "An XML document." ;
+            sh:path function:xmlDocument ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+    prefix function: <http://www.w3.org/XML/model/function/>    
+    
+    select ?result where {
+    
+    # Establish the XML fragment of the XML document by retrieving the XML fragments of all child nodes.
+    bind(function:getChildNodeFragment($xmlDocument) as ?result)
+    
+}
+	
+""" .
+
+function:getDocumentTypeFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment for a XML DocumentType in a XML document." ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "An XML DocumentType in a XML document." ;
+            sh:path function:doctype ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+    
+    prefix xml: <http://www.w3.org/XML/model/def/>
+    
+    select ?result where {
+    
+    # Establish the doctype name for this Document Type.
+    $doctype xml:documentTypeName ?name.
+    bind(concat('<!DOCTYPE ',str(?name),'>') as ?fragment)
+    bind(if(bound(?fragment),?fragment,'') as ?result)    
+}
+	
+""" .
+
+function:getElementAttribute a sh:SPARQLFunction ;
+    rdfs:comment "Returns an XML attribute of an XML element" ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "An XML element in an XML document." ;
+            sh:order 1 ;
+            sh:path function:elementXML ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "A ontology that defines an element class." ;
+            sh:order 2 ;
+            sh:path function:ontology ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+    prefix dom: <http://www.w3.org/DOM/model/def/>    
+    prefix function: <http://www.w3.org/XML/model/function/>    
+    prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    prefix vann: <http://purl.org/vocab/vann/>
+    prefix xml: <http://www.w3.org/XML/model/def/>
+    
+    select ?result where {
+    optional 
+    { 
+    # Get the XML attributes for this element, if there are any.
+    select $elementXML (group_concat(distinct ?attributeFragment) as ?attributesFragment) {  
+ 
+      $elementXML ?attribute ?value.
+      ?attribute a/rdfs:subClassOf* dom:Attribute;
+                 ?localName ?key;
+                 rdfs:isDefinedBy ?ontologyAttribute.   
+      ?ontologyAttribute vann:preferredNamespacePrefix ?prefix.
+      ?localName rdfs:subPropertyOf dom:localName. 
+         
+      # An attribute’s qualified name is its local name if its namespace prefix is null, and its namespace prefix, followed by ":", followed by its local name, otherwise. The namespace prefix is null when the attribute resides in the same namespace as the element. An exception is made for the xml:xmlns attribute.         
+      bind(if(?ontologyAttribute = $ontology || ?attribute = xml:xmlns,?key,concat(?prefix,":",?key)) as ?qualifiedName)
+      
+      # Establish a key - value pair for the attribute
+      bind(concat(?qualifiedName,'="',str(?value),'"') as ?attributeFragment)
+      } group by $elementXML
+     }
+    # Establish result     
+    bind(if(bound(?attributesFragment),?attributesFragment,'') as ?result)     
+    }
+""" .
+
+function:getElementFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment for a XML element in a XML document." ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "A xml element in a XML document." ;
+            sh:path function:elementXML ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+    prefix function: <http://www.w3.org/XML/model/function/>  
+    prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    prefix vann: <http://purl.org/vocab/vann/>
+    prefix xml: <http://www.w3.org/XML/model/def/>
+    
+    select ?result where {
+    
+    # Retrieve the tag name & namespace of the element.
+    $elementXML a ?class.
+    ?class xml:tag ?tag;
+           rdfs:isDefinedBy ?ontology.
+      
+    # Get the XML attributes for the element, if there are any.
+    bind(function:getElementAttribute($elementXML, ?ontology) as ?attributes)
+ 
+    # Get the XML fragments of child nodes for the element, if there are any.
+    bind(function:getChildNodeFragment($elementXML) as ?childFragments)
+    
+    # Build the XML fragment for this XML element, by combining everything retrieved above.
+    bind(
+    concat(
+      '<',?tag,if(?attributes='','',concat(' ',?attributes)),'>',
+      if(?childFragments='',concat('</',?tag,'>'),concat(?childFragments,'</',?tag,'>'))) as ?fragment)
+    bind(if(bound(?fragment),?fragment,'') as ?result)  
+      
+}
+	
+""" .
+
+function:getProcessingInstructionFragment a sh:SPARQLFunction ;
+    rdfs:processingInstruction "Returns a XML fragment for a XML processing instruction in a XML document." ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "A XML processing instruction in a XML document." ;
+            sh:path function:processingInstruction ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+
+    prefix function: <http://www.w3.org/XML/model/function/>       
+    
+    select ?result where {
+
+    # Establish the XML fragment for this XML processingInstruction
+    bind(concat('<?',function:getChildNodeFragment($processingInstruction),'>') as ?fragment)
+    bind(if(bound(?fragment),?fragment,'') as ?result)    
+}
+	
+""" .
+
+function:getTextFragment a sh:SPARQLFunction ;
+    rdfs:comment "Returns a XML fragment for a XML text node in a XML document." ;
+    sh:parameter [ sh:datatype xsd:anyURI ;
+            sh:description "A XML text node in a XML document." ;
+            sh:path function:text ] ;
+    sh:returnType xsd:string ;
+    sh:select """
+    
+    prefix dom: <https://data.rijksfinancien.nl/dom/model/def/>
+    prefix xsd: <http://www.w3.org/2001/XMLSchema#>     
+    
+    select ?result where {
+    
+    # Text is stored in de data attribute of DOM text nodes
+    $text dom:data ?data.
+    
+    # Establish the XML fragment for this XML text node
+    bind(strdt(?data,xsd:string) as ?fragment)
+    bind(if(bound(?fragment),?fragment,'') as ?result)  
+}
+	
+""" .
+
+shp:SerializableNode a sh:NodeShape ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "serializable node shape"@en ;
+    sh:rule rule:XMLFragmentSerializationAlgorithm ;
+    sh:target target:SerializableNode .
+
+archimate:Assessment a owl:Class ;
+    dct:identifier "Assessment" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "An assessment in Archimate represents the result of an analysis of the state of affairs of the enterprise with respect to some driver."@en ;
+    skos:prefLabel "assessment"@en .
+
+archimate:Attribute a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A property associated with an ArchiMate language element or relationship."@en ;
+    skos:prefLabel "attribute"@en .
+
+archimate:Constraint a owl:Class ;
+    dct:identifier "Constraint" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Requirement ;
+    skos:definition "A constraint in Archimate represents a limitation on aspects of the architecture, its implementation process, or its realization."@en ;
+    skos:prefLabel "constraint"@en .
+
+archimate:Container a owl:Class ;
+    dct:identifier "Container" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A representation of a visual container in a view."@en ;
+    skos:prefLabel "container"@en .
+
+archimate:Contract a owl:Class ;
+    dct:identifier "Contract" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BusinessObject ;
+    skos:definition "A contract in Archimate represents a formal or informal specification of an agreement between a provider and a consumer that specifies the rights and obligations associated with a product and establishes functional and non-functional parameters for interaction."@en ;
+    skos:prefLabel "contract"@en .
+
+archimate:CoreElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:BusinessLayerElement archimate:ApplicationLayerElement archimate:TechnologyLayerElement ) ;
+    skos:definition "A structure or behavior element in one of the core layers of the ArchiMate language. These layers are the business layer, application layer and technology layer."@en ;
+    skos:prefLabel "core element"@en .
+
+archimate:Driver a owl:Class ;
+    dct:identifier "Driver" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A driver in Archimate represents an external or internal condition that motivates an organization to define its goals and implement the changes necessary to achieve them."@en ;
+    skos:prefLabel "driver"@en .
+
+archimate:Goal a owl:Class ;
+    dct:identifier "Goal" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A goal in Archimate represents a high-level statement of intent, direction, or desired end state for an organization and its stakeholders."@en ;
+    skos:prefLabel "goal"@en .
+
+archimate:Grouping a owl:Class ;
+    dct:identifier "Grouping" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:CompositeElement ;
+    skos:definition "The grouping element aggregates or composes concepts that belong together based on some common characteristic."@en ;
+    skos:prefLabel "grouping"@en .
+
+archimate:ImplementationMigrationLayerElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:ImplementationMigrationInternalBehaviorElement archimate:ImplementationMigrationPassiveStructureElement archimate:Plateau archimate:ImplementationEvent ) ;
+    skos:definition "The class of all elements from the implementation and migration layer in Archimate."@en ;
+    skos:prefLabel "implementation and migration layer elements"@en .
+
+archimate:Label a owl:Class ;
+    dct:identifier "Label" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A representation of a label in a view."@en ;
+    skos:prefLabel "label"@en .
+
+archimate:Line a owl:Class ;
+    dct:identifier "Line" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A representation of a visual line in a view."@en ;
+    skos:prefLabel "line"@en .
+
+archimate:Location a owl:Class ;
+    dct:identifier "Location" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:CompositeElement ;
+    skos:definition "A location represents a conceptual or physical place or position where concepts are located (e.g., structure elements) or performed (e.g., behavior elements)."@en ;
+    skos:prefLabel "location"@en .
+
+archimate:Meaning a owl:Class ;
+    dct:identifier "Meaning" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A meaning in Archimate represents the knowledge or expertise present in, or the interpretation given to, a concept in a particular context."@en ;
+    skos:prefLabel "meaning"@en .
+
+archimate:Outcome a owl:Class ;
+    dct:identifier "Outcome" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "An outcome in Archimate represents an end result, effect, or consequence of a certain state of affairs."@en ;
+    skos:prefLabel "outcome"@en .
+
+archimate:Principle a owl:Class ;
+    dct:identifier "Principle" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A principle in Archimate represents a statement of intent defining a general property that applies to any system in a certain context in the architecture."@en ;
+    skos:prefLabel "principle"@en .
+
+archimate:Stakeholder a owl:Class ;
+    dct:identifier "Stakeholder" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A stakeholder in Archimate represents the role of an individual, team, or organization (or classes thereof) that represents their interests in the effects of the architecture."@en ;
+    skos:prefLabel "stakeholder"@en .
+
+archimate:StrategyLayerElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:CourseOfAction archimate:StrategyBehaviorElement archimate:Resource ) ;
+    skos:definition "The class of all elements from the strategy layer in Archimate."@en ;
+    skos:prefLabel "strategy layer elements"@en .
+
+archimate:Value a owl:Class ;
+    dct:identifier "Value" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A value in Archimate represents the relative worth, utility, or importance of a concept."@en ;
+    skos:prefLabel "value"@en .
+
+archimate:Viewpoint a owl:Class ;
+    dct:identifier "Viewpoint" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:altLabel "viewpoint" ;
+    skos:definition "A specification of the conventions for a particular kind of architecture view."@en ;
+    skos:prefLabel "archicture viewpoint"@en .
+
+archimate:andJunction a owl:ObjectProperty,
+        archimate:RelationshipConnector ;
+    dct:identifier "andJunction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationshipConnector ;
+    skos:prefLabel "And Junction"@en .
+
+archimate:flow a owl:ObjectProperty,
+        archimate:DynamicRelationship ;
+    dct:identifier "Flow" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Flow Relationship"@en .
+
+archimate:influence a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Influence" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Influence Relationship"@en .
+
+archimate:orJunction a owl:ObjectProperty,
+        archimate:RelationshipConnector ;
+    dct:identifier "orJunction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationshipConnector ;
+    skos:prefLabel "Or Junction"@en .
+
+archimate:property a owl:ObjectProperty,
+        archimate:RelationType ;
+    dct:identifier "Property" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Property Relationship"@en .
+
+archimate:readAccess a owl:ObjectProperty,
+        archimate:RelationType ;
+    dct:identifier "ReadAccess" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:access ;
+    skos:prefLabel "Read Access Relationship"@en .
+
+archimate:readWriteAccess a owl:ObjectProperty,
+        archimate:RelationType ;
+    dct:identifier "ReadWriteAccess" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:access ;
+    skos:prefLabel "Read-Write Access Relationship"@en .
+
+archimate:realization a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Realization" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Realization Relationship"@en .
+
+archimate:serving a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Serving" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Serving Relationship"@en .
+
+archimate:specialization a owl:ObjectProperty,
+        archimate:OtherRelationship ;
+    dct:identifier "Specialization" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Specialization Relationship"@en .
+
+archimate:triggering a owl:ObjectProperty,
+        archimate:DynamicRelationship ;
+    dct:identifier "Triggering" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Triggering Relationship"@en .
+
+archimate:writeAccess a owl:ObjectProperty,
+        archimate:RelationType ;
+    dct:identifier "WriteAccess" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:access ;
+    skos:prefLabel "Write Access Relationship"@en .
+
+model:BasicModel-Document a archiXML:Document ;
+    rdf:_1 model:BasicModel-Model ;
+    skos:definition "Example of a basic model with three elements and two relationships" ;
+    skos:prefLabel "Basic Model" ;
+    xml1:fragment "<model xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" identifier=\"Model-1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model</name><documentation xml:lang=\"en\">Example of a basic model with three elements and two relationships</documentation><elements><element identifier=\"BusinessActor1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A business actor</name><documentation xml:lang=\"en\">An example of a business actor</documentation></element><element identifier=\"BusinessObject1\" xsi:type=\"BusinessObject\"><name xml:lang=\"en\">A business object</name><documentation xml:lang=\"en\">An example of a business object</documentation></element><element identifier=\"BusinessRole1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A business role</name><documentation xml:lang=\"en\">An example of a business role</documentation></element></elements><relationships><relationship identifier=\"Relation_1\" source=\"BusinessActor1\" target=\"BusinessRole1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name><documentation xml:lang=\"en\">An example of a business actor and role assignment</documentation></relationship></relationships><views><diagrams><view identifier=\"View_1\" xsi:type=\"Diagram\"><name xml:lang=\"en\">An example of a view</name><documentation xml:lang=\"en\">An archimate view containing a depiction of three elements and two relationships</documentation></view></diagrams></views></model>"^^rdf:XML ;
+    prov:wasDerivedFrom model:BasicModel .
+
+model:aRelationship2-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship2-RelationshipName ;
+    rdf:_2 model:aRelationship2-RelationshipDocumentation ;
+    xsi:type "Association" ;
+    skos:prefLabel "Association Relationship"@en ;
+    xml1:fragment "<relationship identifier=\"Relation_2\" source=\"BusinessObject1\" target=\"Relation_1\" xsi:type=\"Association\"><name xml:lang=\"en\">Association Relationship</name><documentation xml:lang=\"en\">An example of a business object and relationship association</documentation></relationship>"^^rdf:XML ;
+    prov:wasDerivedFrom model:aRelationship2 ;
+    archiXML:identifier "Relation_2" ;
+    archiXML:source "BusinessObject1" ;
+    archiXML:target "Relation_1" .
+
+<https://data.rijksfinancien.nl/archixml/id/standard/archimate> a dct:Standard ;
+    dct:created "2023-10-29"^^xsd:date ;
+    dct:source "http://www.opengroup.org/xsd/archimate/3.0/"^^xsd:anyURI ;
+    skos:prefLabel "The ArchiMate® Enterprise Architecture Modeling Language"@en .
+
+archiXML:BendPoint a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The bendpoint element"@en ;
+    skos:prefLabel "the bendpoint element"@en ;
+    xml1:tag "bendpoint" .
+
+archiXML:Bounds a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The bounds element"@en ;
+    skos:prefLabel "the bounds element"@en ;
+    xml1:tag "bounds" .
+
+archiXML:Child a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The child element"@en ;
+    skos:prefLabel "the child element"@en ;
+    xml1:tag "child" .
+
+archiXML:Color a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The color element"@en ;
+    skos:prefLabel "the color element"@en ;
+    xml1:tag "color" .
+
+archiXML:Connection a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The connection element"@en ;
+    skos:prefLabel "the connection element"@en ;
+    xml1:tag "connection" .
+
+archiXML:Container a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The container element"@en ;
+    skos:prefLabel "the container element"@en ;
+    xml1:tag "container" .
+
+archiXML:FillColor a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The fillcolor element"@en ;
+    skos:prefLabel "the fillcolor element"@en ;
+    xml1:tag "fillColor" .
+
+archiXML:Folder a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The folder element"@en ;
+    skos:prefLabel "the folder element"@en ;
+    xml1:tag "folder" .
+
+archiXML:Font a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The font element"@en ;
+    skos:prefLabel "the font element"@en ;
+    xml1:tag "font" .
+
+archiXML:Item a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The item element"@en ;
+    skos:prefLabel "the item element"@en ;
+    xml1:tag "item" .
+
+archiXML:Label a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The label element"@en ;
+    skos:prefLabel "the label element"@en ;
+    xml1:tag "label" .
+
+archiXML:Line a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The line element"@en ;
+    skos:prefLabel "the line element"@en ;
+    xml1:tag "line" .
+
+archiXML:LineColor a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The linecolor element"@en ;
+    skos:prefLabel "the linecolor element"@en ;
+    xml1:tag "lineColor" .
+
+archiXML:Metadata a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The metadata element"@en ;
+    skos:prefLabel "the metadata element"@en ;
+    xml1:tag "metadata" .
+
+archiXML:Node a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The node element"@en ;
+    skos:prefLabel "the node element"@en ;
+    xml1:tag "node" .
+
+archiXML:Organizations a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The organizations element"@en ;
+    skos:prefLabel "the organizations element"@en ;
+    xml1:tag "organizations" .
+
+archiXML:Schema a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The schema element"@en ;
+    skos:prefLabel "the schema element"@en ;
+    xml1:tag "schema" .
+
+archiXML:SchemaVersion a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The schema version element"@en ;
+    skos:prefLabel "the schema version element"@en ;
+    xml1:tag "schemaversion" .
+
+archiXML:SourceConnection a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The source connection element"@en ;
+    skos:prefLabel "the source connection element"@en ;
+    xml1:tag "sourceConnection" .
+
+archiXML:Style a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The style element"@en ;
+    skos:prefLabel "the style element"@en ;
+    xml1:tag "style" .
+
+archiXML:a a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Represents the alpha (transparency) component of a color in the RGBA color model."@en ;
+    skos:note "The value conforms to the XML Schema datatype xs:unsignedByte, ranging from 0 to 255."@en ;
+    skos:prefLabel "the a attribute"@en ;
+    xml1:key "a" .
+
+archiXML:archimateElement a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the archimateElement attribute"@en ;
+    xml1:key "archimateElement" .
+
+archiXML:b a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Represents the blue component of a color in the RGB color model. The value is an integer between 0 and 255."@en ;
+    skos:prefLabel "the b attribute"@en ;
+    xml1:key "b" .
+
+archiXML:elementRef a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the elementRef attribute"@en ;
+    xml1:key "elementRef" .
+
+archiXML:fragment a owl:DatatypeProperty ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range rdf:XML ;
+    skos:definition "Property that links the xml fragment that is represented by an element within a XML-based archimate document to that element."@en ;
+    skos:prefLabel "fragment property"@en .
+
+archiXML:g a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Represents the green component of a color in the RGB color model. The value is an integer between 0 and 255."@en ;
+    skos:prefLabel "the g attribute"@en ;
+    xml1:key "g" .
+
+archiXML:h a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The height (associated with y) attribute from the top side to the bottom side of the bounding box of a concept."@en ;
+    skos:prefLabel "the h attribute"@en ;
+    xml1:key "h" .
+
+archiXML:height a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the height attribute"@en ;
+    xml1:key "height" .
+
+archiXML:id a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the id attribute"@en ;
+    xml1:key "id" .
+
+archiXML:identifier a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the identifier attribute"@en ;
+    xml1:key "identifier" .
+
+archiXML:identifierRef a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the identifierRef attribute"@en ;
+    xml1:key "identifierRef" .
+
+archiXML:name a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the name attribute"@en ;
+    xml1:key "name" .
+
+archiXML:r a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Represents the red component of a color in the RGB color model. The value is an integer between 0 and 255."@en ;
+    skos:prefLabel "the r attribute"@en ;
+    xml1:key "r" .
+
+archiXML:relationshipRef a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the relationshipRef attribute"@en ;
+    xml1:key "relationshipRef" .
+
+archiXML:size a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the size attribute"@en ;
+    xml1:key "size" .
+
+archiXML:source a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the source attribute"@en ;
+    xml1:key "source" .
+
+archiXML:target a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the target attribute"@en ;
+    xml1:key "target" .
+
+archiXML:type a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the type attribute"@en ;
+    xml1:key "type" .
+
+archiXML:version a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the version attribute"@en ;
+    xml1:key "version" .
+
+archiXML:w a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The width (associated with x) attribute from the Left side to the right side of the bounding box of a concept."@en ;
+    skos:prefLabel "the w attribute"@en ;
+    xml1:key "w" .
+
+archiXML:width a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:prefLabel "the width attribute"@en ;
+    xml1:key "width" .
+
+archiXML:x a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The x (towards the right, associated with width) attribute from the Top,Left (i.e. 0,0) corner of the diagram to the Top, Left corner of the bounding box of the concept."@en ;
+    skos:prefLabel "the x attribute"@en ;
+    xml1:key "x" .
+
+archiXML:y a owl:DatatypeProperty,
+        archiXML:Attribute ;
+    rdfs:domain xml1:DomElement ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "The y (towards the bottom, associated with height) attribute from the Top,Left (i.e. 0,0) corner of the diagram to the Top, Left corner of the bounding box of the concept."@enl ;
+    skos:prefLabel "the y attribute"@en ;
+    xml1:key "y" .
+
+<https://www.w3.org/1999/xlink/id/section/5.6> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#link-behaviors"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.6 Behavior Attributes (show and actuate)"@en .
+
+xlink:actuate a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.6.2> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the mechanism for processing XLink."@en ;
+    skos:prefLabel "the actuate attribute"@en ;
+    xml1:key "actuate" .
+
+xlink:arcrole a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.5> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the arc role for XLink."@en ;
+    skos:prefLabel "the arcrole attribute"@en ;
+    xml1:key "arcrole" .
+
+xlink:from a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.7> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the from for XLink."@en ;
+    skos:prefLabel "the from attribute"@en ;
+    xml1:key "from" .
+
+xlink:href a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.4> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the reference for XLink."@en ;
+    skos:prefLabel "the href attribute"@en ;
+    xml1:key "href" .
+
+xlink:label a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.7> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the label for XLink."@en ;
+    skos:prefLabel "the label attribute"@en ;
+    xml1:key "label" .
+
+xlink:role a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.5> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the role for XLink."@en ;
+    skos:prefLabel "the role attribute"@en ;
+    xml1:key "role" .
+
+xlink:show a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.6.1> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the display behavior for XLink."@en ;
+    skos:prefLabel "the show attribute"@en ;
+    xml1:key "show" .
+
+xlink:title a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.5> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the title for XLink."@en ;
+    skos:prefLabel "the title attribute"@en ;
+    xml1:key "title" .
+
+xlink:to a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.7> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the to for XLink."@en ;
+    skos:prefLabel "the to attribute"@en ;
+    xml1:key "to" .
+
+xlink:type a owl:DatatypeProperty,
+        xlink:Attribute ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/5.3> ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf xml1:attribute ;
+    skos:definition "Specifies the type for XLink."@en ;
+    skos:prefLabel "the type attribute"@en ;
+    xml1:key "type" .
+
+section:2.6.1 a dcm:Text ;
+    dct:isPartOf standard:xlink ;
+    dct:source "https://www.w3.org/TR/xmlschema-1/#xsi_type"^^xsd:anyURI ;
+    rdfs:isDefinedBy xsi: ;
+    skos:prefLabel "§ 2.6.1 xsi:type"@en .
+
+section:2.6.2 a dcm:Text ;
+    dct:isPartOf standard:xlink ;
+    dct:source "https://www.w3.org/TR/xmlschema-1/#xsi_nil"^^xsd:anyURI ;
+    rdfs:isDefinedBy xsi: ;
+    skos:prefLabel "§ 2.6.2 xsi:nil"@en .
+
+section:2.6.3 a dcm:Text ;
+    dct:isPartOf standard:xlink ;
+    dct:source "https://www.w3.org/TR/xmlschema-1/#xsi_schemaLocation"^^xsd:anyURI ;
+    rdfs:isDefinedBy xsi: ;
+    skos:prefLabel "§ 2.6.3 xsi:schemaLocation, xsi:noNamespaceSchemaLocation"@en .
+
+<http://www.w3.org/DOM/id/section/Attribute> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-attr"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.9.2. Interface Attr"@en .
+
+<http://www.w3.org/DOM/id/section/CDATASection> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-cdatasection"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.12. Interface CDATASection"@en .
+
+<http://www.w3.org/DOM/id/section/CharacterData> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-characterdata"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.10. Interface CharacterData"@en .
+
+<http://www.w3.org/DOM/id/section/Class> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#concept-class"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.9. Interface Element - Class"@en .
+
+<http://www.w3.org/DOM/id/section/Comment> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-comment"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.14. Interface Comment"@en .
+
+<http://www.w3.org/DOM/id/section/Document> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-document"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.5. Interface Document"@en .
+
+<http://www.w3.org/DOM/id/section/DocumentElement> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#document-element"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.2. Node tree - document element"@en .
+
+<http://www.w3.org/DOM/id/section/DocumentFragment> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-documentfragment"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.7. Interface DocumentFragment"@en .
+
+<http://www.w3.org/DOM/id/section/DocumentType> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-documenttype"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.6. Interface DocumentType"@en .
+
+<http://www.w3.org/DOM/id/section/ID> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#concept-id"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.9. Interface Element - Unique Identifier (ID)"@en .
+
+<http://www.w3.org/DOM/id/section/ProcessingInstruction> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-processinginstruction"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.13. Interface ProcessingInstruction"@en .
+
+<http://www.w3.org/DOM/id/section/ShadowRoot> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-shadowroot"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.8. Interface ShadowRoot"@en .
+
+<http://www.w3.org/DOM/id/section/Slot> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#concept-slot"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.2.2.1. Slots"@en .
+
+<http://www.w3.org/DOM/id/section/Text> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-text"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.11. Interface Text"@en .
+
+dom:CDATASection a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/CDATASection> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:Text ;
+    skos:definition "A CDATA section in a DOM document is used to include blocks of text that should not be interpreted as markup by a processor."@en ;
+    skos:prefLabel "CDATA Section"@en .
+
+dom:Comment a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Comment> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:CharacterData ;
+    skos:definition "Represents a comment in the HTML or XML document. Comments are not rendered but are included in the DOM for developers' reference."@en ;
+    skos:prefLabel "Comment"@en .
+
+dom:DocumentFragment a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/DocumentFragment> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:Node ;
+    skos:definition "Represents a minimal document object that has no parent. It can be used to hold a group of nodes for processing purposes before adding them to the main document."@en ;
+    skos:prefLabel "Document Fragment"@en .
+
+dom:DocumentType a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/DocumentType> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:DocumentTreeNode ;
+    skos:definition "Represents the document type declaration (<!DOCTYPE>) of a DOM-document. It specifies the document type to which the document conforms."@en ;
+    skos:prefLabel "Doctype"@en .
+
+dom:ProcessingInstruction a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/ProcessingInstruction> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:CharacterData ;
+    skos:definition "Represents a processing instruction in the DOM document. Processing instructions provide instructions to the application for processing the document."@en ;
+    skos:prefLabel "Processing Instruction"@en .
+
+dom:localName a owl:DatatypeProperty ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:domain dom:Element ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:range xsd:string ;
+    skos:definition "Specifies the local name for a DOM element."@en ;
+    skos:prefLabel "local name"@en .
+
+decl:dom sh:namespace "http://www.w3.org/DOM/model/def/"^^xsd:anyURI ;
+    sh:prefix "dom" .
+
+decl:function sh:namespace "http://www.w3.org/XML/model/function/"^^xsd:anyURI ;
+    sh:prefix "function" .
+
+decl:rdf sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+    sh:prefix "rdf" .
+
+decl:rdfs sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+    sh:prefix "rdfs" .
+
+decl:xml sh:namespace "http://www.w3.org/XML/model/def/"^^xsd:anyURI ;
+    sh:prefix "xml" .
+
+decl:xsd sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+    sh:prefix "xsd" .
+
+xml1:CDATASection a owl:Class ;
+    dct:conformsTo <http://www.w3.org/XML/id/section/XML-Spec> ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:CDATASection ;
+    skos:definition "A CDATA section in an XML document is used to include blocks of text that should not be interpreted as markup by the XML processor."@en ;
+    skos:prefLabel "XML CDATA Section"@en .
+
+xml1:Comment a owl:Class ;
+    dct:conformsTo <http://www.w3.org/XML/id/section/XML-Spec> ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:Comment ;
+    skos:definition "An XML comment is a piece of text within an XML document that is not interpreted as markup by the XML processor."@en ;
+    skos:prefLabel "XML Comment"@en .
+
+rule:XMLFragmentSerializationAlgorithm a sh:SPARQLRule ;
+    rdfs:comment "Create the XML fragment for a node in a XML document."@en ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "XML fragment serialization algorithm"@en ;
+    sh:construct """
+construct {
+
+  # Assert the new XML fragment for this node in the XML document
+  $this xml:fragment ?fragment.
+  
+} where {
+
+  # Establish the class of the node in the XML document
+  $this a/rdfs:subClassOf* ?classXML.
+  ?classXML rdfs:isDefinedBy xml:.
+
+  # Build the XML fragment for the node in the XML document depending on its class
+  bind(if(?classXML = xml:Element,                function:getElementFragment($this), 
+       if(?classXML = xml:Text ,                  function:getTextFragment($this), 
+       if(?classXML = xml:Comment,                function:getCommentFragment($this), 
+       if(?classXML = xml:CDATASection,           function:getCDATASectionFragment($this), 
+       if(?classXML = xml:ProcessingInstruction,  function:getProcessingInstructionFragment($this), 
+       if(?classXML = xml:DocumentType,           function:getDocumentTypeFragment($this), 
+       if(?classXML = xml:Document,               function:getChildNodeFragment($this), ?unboundDummy)))))))
+  as ?fragmentString)
+  
+  # Convert result from string to rdf:XML
+  bind(strdt(str(?fragmentString), rdf:XML) as ?fragment)
+
+}""" ;
+    sh:prefixes xml1: .
+
+target:SerializableNode a sh:SPARQLTarget ;
+    rdfs:comment "Select nodes in a XML document that do not have an XML fragment yet, and whose child nodes all have an XML fragment already."@en ;
+    rdfs:isDefinedBy xml1: ;
+    sh:prefixes xml1: ;
+    sh:select """
+select $this {
+
+  # Select all DOM nodes... 
+  $this a/rdfs:subClassOf* dom:DocumentTreeNode.
+  
+  # ...that do not yet have an xml fragment.
+  filter not exists { $this xml:fragment []. }
+  
+  # ...but whose child nodes (if any) all have an xml fragment
+  minus {
+    $this ?member ?child.
+    filter(strstarts(str(?member),concat(str(rdf:),'_')))               
+    filter not exists { ?child xml:fragment []. }
+    ?child a/rdfs:subClassOf* dom:DocumentTreeNode.
+  }
+}""" .
+
+archimate:ApplicationCollaboration a owl:Class ;
+    dct:identifier "ApplicationCollaboration" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "An application collaboration in Archimate represents an aggregate of two or more application internal active structure elements that work together to perform collective application behavior."@en ;
+    skos:prefLabel "application collaboration"@en .
+
+archimate:ApplicationComponent a owl:Class ;
+    dct:identifier "ApplicationComponent" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "An application component in Archimate represents an encapsulation of application functionality aligned to implementation structure, which is modular and replacable."@en ;
+    skos:prefLabel "application component"@en .
+
+archimate:ApplicationEvent a owl:Class ;
+    dct:identifier "ApplicationEvent" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Event ;
+    skos:definition "An application event in Archimate represents an application state change."@en ;
+    skos:prefLabel "application event"@en .
+
+archimate:ApplicationFunction a owl:Class ;
+    dct:identifier "ApplicationFunction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Function ;
+    skos:definition "An application function in Archimate represents automated behavior that can be performed by an application component."@en ;
+    skos:prefLabel "application function"@en .
+
+archimate:ApplicationInteraction a owl:Class ;
+    dct:identifier "ApplicationInteraction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Interaction ;
+    skos:definition "An application interaction in Archimate represents a unit of collective application behavior performed by (a collaboration of) two or more application components."@en ;
+    skos:prefLabel "application interaction"@en .
+
+archimate:ApplicationInterface a owl:Class ;
+    dct:identifier "ApplicationInterface" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ExternalActiveStructureElement ;
+    skos:definition "An application interface in Archimate represents a point of access where application services are made available to a user, another application component, or a node."@en ;
+    skos:prefLabel "application interface"@en .
+
+archimate:ApplicationInternalActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:ApplicationCollaboration archimate:ApplicationComponent ) ;
+    skos:definition "The class of all internal active structure elements from the business layer in Archimate."@en ;
+    skos:prefLabel "application internal active structure element"@en .
+
+archimate:ApplicationInternalBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:ApplicationFunction archimate:ApplicationProcess archimate:ApplicationInteraction ) ;
+    skos:definition "The class of all internal behavior elements from the business layer in Archimate."@en ;
+    skos:prefLabel "application internal behavior element"@en .
+
+archimate:ApplicationLayerElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:ApplicationInternalActiveStructureElement archimate:ApplicationInternalBehaviorElement archimate:ApplicationEvent archimate:ApplicationInterface archimate:ApplicationService archimate:DataObject ) ;
+    skos:definition "The class of all elements from the application layer in Archimate."@en ;
+    skos:prefLabel "application layer elements"@en .
+
+archimate:ApplicationProcess a owl:Class ;
+    dct:identifier "ApplicationProcess" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Process ;
+    skos:definition "An application process in Archimate represents a sequence of application behaviors that achieves a specific result."@en ;
+    skos:prefLabel "application process"@en .
+
+archimate:ApplicationService a owl:Class ;
+    dct:identifier "ApplicationService" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ExternalBehaviorElement ;
+    skos:definition "An application service in Archimate represents an explicitly defined exposed application behavior."@en ;
+    skos:prefLabel "application service"@en .
+
+archimate:Artifact a owl:Class ;
+    dct:identifier "Artifact" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "An artifact in Archimate represents a piece of data that is used or produced in a software development process, or by deployment and operation of an IT system."@en ;
+    skos:prefLabel "artifact"@en .
+
+archimate:BusinessCollaboration a owl:Class ;
+    dct:identifier "BusinessCollaboration" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A business collaboration in Archimate represents an aggregate of two or more business internal active structure elements that work together to perform collective behavior."@en ;
+    skos:prefLabel "business collaboration"@en .
+
+archimate:BusinessEvent a owl:Class ;
+    dct:identifier "BusinessEvent" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Event ;
+    skos:definition "A business event in Archimate represents a business-related state change."@en ;
+    skos:prefLabel "business event"@en .
+
+archimate:BusinessFunction a owl:Class ;
+    dct:identifier "BusinessFunction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Function ;
+    skos:definition "A business function in Archimate represents a collection of business behavior based on a chosen set of criteria such as required business resources and/or competencies, and is managed or performed as a whole."@en ;
+    skos:prefLabel "business function"@en .
+
+archimate:BusinessInteraction a owl:Class ;
+    dct:identifier "BusinessInteraction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Interaction ;
+    skos:definition "A business interaction in Archimate represents a unit of colletive business behavior perofrmed by (a collaboration of) two or more business actors, business roles, or business collaborations."@en ;
+    skos:prefLabel "business interaction"@en .
+
+archimate:BusinessInterface a owl:Class ;
+    dct:identifier "BusinessInterface" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ExternalActiveStructureElement ;
+    skos:definition "A business interface in Archimate represents a point of access where business services are made available to the environment."@en ;
+    skos:prefLabel "business interface"@en .
+
+archimate:BusinessInternalActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:BusinessActor archimate:BusinessRole archimate:BusinessCollaboration ) ;
+    skos:definition "The class of all internal active structure elements from the business layer in Archimate."@en ;
+    skos:prefLabel "business internal active structure element"@en .
+
+archimate:BusinessInternalBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    owl:unionOf ( archimate:BusinessProcess archimate:BusinessFunction archimate:BusinessInteraction ) ;
+    skos:definition "The class of all internal behavior elements from the business layer in Archimate."@en ;
+    skos:prefLabel "business internal behavior element"@en .
+
+archimate:BusinessLayerElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:BusinessInternalActiveStructureElement archimate:BusinessInternalBehaviorElement archimate:BusinessPassiveStructureElement archimate:BusinessEvent archimate:BusinessService archimate:BusinessInterface archimate:Product ) ;
+    skos:definition "The class of all elements from the business layer in Archimate."@en ;
+    skos:prefLabel "business layer elements"@en .
+
+archimate:BusinessPassiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    owl:unionOf ( archimate:BusinessObject archimate:Representation ) ;
+    skos:definition "The class of all passive structure elements from the business layer in Archimate."@en ;
+    skos:prefLabel "business passive structure element"@en .
+
+archimate:BusinessProcess a owl:Class ;
+    dct:identifier "BusinessProcess" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    skos:definition "A business process in Archimate represents a sequence of business behaviors that achieves a specific result such as a defined set of products or business services."@en ;
+    skos:prefLabel "business process"@en .
+
+archimate:BusinessService a owl:Class ;
+    dct:identifier "BusinessService" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    skos:definition "A business service in Archimate represents explicitly defined behavior that a business role, business actor, or business collaboration exposes to its environment."@en ;
+    skos:prefLabel "business service"@en .
+
+archimate:Capability a owl:Class ;
+    dct:identifier "Capability" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BehaviorElement ;
+    skos:definition "A capability in Archimate represents an ability that an active structure element such as an organization, person, or system, possesses."@en ;
+    skos:prefLabel "capability"@en .
+
+archimate:Collaboration a owl:Class ;
+    dct:identifier "Collaboration" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A collaboration represents an aggregate of two or more internal active structure elements, working together to perform some collective behavior."@en ;
+    skos:prefLabel "collaboration"@en .
+
+archimate:CommunicationNetwork a owl:Class ;
+    dct:identifier "CommunicationNetwork" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ActiveStructureElement ;
+    skos:definition "A communication network in Archimate."@en ;
+    skos:prefLabel "communication network"@en .
+
+archimate:CourseOfAction a owl:Class ;
+    dct:identifier "CourseOfAction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BehaviorElement ;
+    skos:definition "A course of action in Archimate represents an approach or plan for configuring some capabilities and resources of the enterprise, undertaken to achieve a goal."@en ;
+    skos:prefLabel "course of action"@en .
+
+archimate:DataObject a owl:Class ;
+    dct:identifier "DataObject" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "A data object in Archimate represents data structured for automated processing."@en ;
+    skos:prefLabel "data object"@en .
+
+archimate:Deliverable a owl:Class ;
+    dct:identifier "Deliverable" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "A deliverable in Archimate represents a series of action identified and designed to achieve specific results within specified time and resource constraints."@en ;
+    skos:prefLabel "deliverable"@en .
+
+archimate:DependencyRelationship a owl:Class ;
+    dct:identifier "dependency relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:RelationType ;
+    skos:definition "dependency relationships model how elements are used to support other elements."@en ;
+    skos:prefLabel "dependency relationship"@en .
+
+archimate:Device a owl:Class ;
+    dct:identifier "Device" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A device in Archimate."@en ;
+    skos:prefLabel "device"@en .
+
+archimate:DistributionNetwork a owl:Class ;
+    dct:identifier "DistributionNetwork" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ActiveStructureElement ;
+    skos:definition "A distribution network in Archimate represents a physical network used to transport materials or energy."@en ;
+    skos:prefLabel "distribution network"@en .
+
+archimate:Equipment a owl:Class ;
+    dct:identifier "Equipment" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "An equipment in Archimate represents one or more physical machines, tools, or instruments that can create, use, store, move, or transform materials."@en ;
+    skos:prefLabel "equipment"@en .
+
+archimate:Facility a owl:Class ;
+    dct:identifier "Facility" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A facility in Archimate represents a physical structure or environment."@en ;
+    skos:prefLabel "facility"@en .
+
+archimate:Gap a owl:Class ;
+    dct:identifier "Gap" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "A gap in Archimate represents a statement of difference between two plateaus."@en ;
+    skos:prefLabel "gap"@en .
+
+archimate:ImplementationEvent a owl:Class ;
+    dct:identifier "ImplementationEvent" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Event ;
+    skos:definition "An implementation event in Archimate represents a state change related to implementation or migration."@en ;
+    skos:prefLabel "implementation event"@en .
+
+archimate:ImplementationMigrationInternalBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:equivalentClass archimate:WorkPackage ;
+    skos:definition "The class of all internal behavior elements from the implementation and migration layer in Archimate."@en ;
+    skos:prefLabel "implementation and migration internal behavior element"@en .
+
+archimate:ImplementationMigrationPassiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:Deliverable archimate:Gap ) ;
+    skos:definition "The class of all passive structure elements from the implementation and migration layer in Archimate."@en ;
+    skos:prefLabel "implementation and migration passive structure element"@en .
+
+archimate:Material a owl:Class ;
+    dct:identifier "Material" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "A material in Archimate represents a tangible physical matter or energy."@en ;
+    skos:prefLabel "material"@en .
+
+archimate:Model a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A collection of concepts of the ArchiMate language structure."@en ;
+    skos:prefLabel "Model"@en .
+
+archimate:Node a owl:Class ;
+    dct:identifier "Node" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A node in Archimate represents a computational or physical resource that hosts, mannipulates, or interacts with other computational or physical resources."@en ;
+    skos:prefLabel "node"@en .
+
+archimate:OtherRelationship a owl:Class ;
+    dct:identifier "other relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:RelationType ;
+    skos:definition "other relationships are relationships that do not fall in one of the other relationship types."@en ;
+    skos:prefLabel "other relationship"@en .
+
+archimate:Path a owl:Class ;
+    dct:identifier "Path" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ActiveStructureElement ;
+    skos:definition "A path in Archimate represents a link between two or more technology technology internal active structure elements, through which these elements can exchange data, energy, or material."@en ;
+    skos:prefLabel "path"@en .
+
+archimate:Plateau a owl:Class ;
+    dct:identifier "Plateau" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:CompositeElement ;
+    skos:definition "A plateau in Archimate represents a relatively stable state of othe architecture that exists during a limited period of time."@en ;
+    skos:prefLabel "plateau"@en .
+
+archimate:Product a owl:Class ;
+    dct:identifier "Product" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:CompositeElement ;
+    skos:definition "A product in Archimate represents a perceptible form of the information carried by a business object."@en ;
+    skos:prefLabel "product"@en .
+
+archimate:Representation a owl:Class ;
+    dct:identifier "Representation" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "A representation in Archimate represents a coherent collection of services and/or passive structure elements, accompanied by a contract which is offerend as whole to (internal or external) customers."@en ;
+    skos:prefLabel "representation"@en .
+
+archimate:Requirement a owl:Class ;
+    dct:identifier "Requirement" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:MotivationElement ;
+    skos:definition "A requirement in Archimate represents a statement of need defining a property that applies to a specific system as described by the architecture."@en ;
+    skos:prefLabel "requirement"@en .
+
+archimate:Resource a owl:Class ;
+    dct:identifier "Resource" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:StructureElement ;
+    skos:definition "A resource in Archimate represents an asset owned or controlled by an individual or organization."@en ;
+    skos:prefLabel "resource"@en .
+
+archimate:StrategyBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:ValueStream archimate:Capability ) ;
+    skos:definition "The class of all behavior elements from the strategy layer in Archimate."@en ;
+    skos:prefLabel "strategy behavior element"@en .
+
+archimate:SystemSoftware a owl:Class ;
+    dct:identifier "SystemSoftware" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A system software in Archimate represents software that provides or contributes to an environment for storing, executing, and using software or data deployed within it."@en ;
+    skos:prefLabel "system software"@en .
+
+archimate:TechnologyActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:TechnologyInternalActiveStructureElement archimate:Path archimate:CommunicationNetwork archimate:DistributionNetwork ) ;
+    skos:definition "The class of all active structure elements from the technology layer in Archimate."@en ;
+    skos:prefLabel "technology internal active structure element"@en .
+
+archimate:TechnologyCollaboration a owl:Class ;
+    dct:identifier "TechnologyCollaboration" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Collaboration ;
+    skos:definition "A technology collaboration in Archimate represents an aggregate of two or more technology internal active structure elements that work together to perform collective technology behavior."@en ;
+    skos:prefLabel "technology collaboration"@en .
+
+archimate:TechnologyEvent a owl:Class ;
+    dct:identifier "TechnologyEvent" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Event ;
+    skos:definition "A technology event in Archimate represents a technology state change."@en ;
+    skos:prefLabel "technology event"@en .
+
+archimate:TechnologyFunction a owl:Class ;
+    dct:identifier "TechnologyFunction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Function ;
+    skos:definition "A technology function in Archimate represents a collection of technology behavior that can be performed by a technology internal active structure element."@en ;
+    skos:prefLabel "technology function"@en .
+
+archimate:TechnologyInteraction a owl:Class ;
+    dct:identifier "TechnologyInteraction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Interaction ;
+    skos:definition "A technology interaction in Archimate represents a unit of collective technology behavior performed by (a collaboration of) two or more technology internal active structure elements."@en ;
+    skos:prefLabel "technology interaction"@en .
+
+archimate:TechnologyInterface a owl:Class ;
+    dct:identifier "TechnologyInterface" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ExternalActiveStructureElement ;
+    skos:definition "A technology interface in Archimate represents a point of access where technology services offered by a technology internal active structure can be accessed."@en ;
+    skos:prefLabel "technology interface"@en .
+
+archimate:TechnologyInternalActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:Node archimate:TechnologyCollaboration archimate:SystemSoftware archimate:Device archimate:Equipment archimate:Facility ) ;
+    skos:definition "The class of all internal active elements from the technology layer in Archimate."@en ;
+    skos:prefLabel "technology internal active structure element"@en .
+
+archimate:TechnologyInternalBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:TechnologyFunction archimate:TechnologyProcess archimate:TechnologyInteraction ) ;
+    skos:definition "The class of all internal behavior elements from the technology layer in Archimate."@en ;
+    skos:prefLabel "technology internal behavior element"@en .
+
+archimate:TechnologyLayerElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:TechnologyActiveStructureElement archimate:TechnologyInternalBehaviorElement archimate:TechnologyPassiveStructureElement archimate:TechnologyEvent archimate:TechnologyInterface archimate:TechnologyService ) ;
+    skos:definition "The class of all elements from the technology layer in Archimate."@en ;
+    skos:prefLabel "technology layer elements"@en .
+
+archimate:TechnologyPassiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:Artifact archimate:Material ) ;
+    skos:definition "The class of all passive structure elements from the technology layer in Archimate."@en ;
+    skos:prefLabel "technology passive structure element"@en .
+
+archimate:TechnologyProcess a owl:Class ;
+    dct:identifier "TechnologyProcess" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Process ;
+    skos:definition "A technology process in Archimate represents a sequence of technology behaviors that achieves a specific result."@en ;
+    skos:prefLabel "technology process"@en .
+
+archimate:TechnologyService a owl:Class ;
+    dct:identifier "TechnologyService" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ExternalBehaviorElement ;
+    skos:definition "A technology service in Archimate represents an explicitly defined exposed technology behavior."@en ;
+    skos:prefLabel "technology service"@en .
+
+archimate:ValueStream a owl:Class ;
+    dct:identifier "ValueStream" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BehaviorElement ;
+    skos:definition "A value stream in Archimate represents a sequence of activities that create an overall result for a customer, stakeholder, or end user."@en ;
+    skos:prefLabel "value stream"@en .
+
+archimate:View a owl:Class ;
+    dct:identifier "View" ;
+    rdfs:isDefinedBy archimate: ;
+    skos:altLabel "view" ;
+    skos:definition "A representation of a system from the perspective of a related set of concerns."@en ;
+    skos:prefLabel "architecture view"@en .
+
+archimate:WorkPackage a owl:Class ;
+    dct:identifier "WorkPackage" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    skos:definition "A work package in Archimate."@en ;
+    skos:prefLabel "work package"@en .
+
+archimate:aggregation a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Aggregation" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Aggregation Relationship"@en .
+
+archimate:assignedTo a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Assignment" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Assignment Relationship"@en .
+
+archimate:association a owl:ObjectProperty,
+        archimate:DependencyRelationship ;
+    dct:identifier "Association" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Association Relationship"@en .
+
+archimate:composition a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Composition" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Composition Relationship"@en .
+
+model:BasicModel-Diagrams a archiXML:Diagrams ;
+    rdf:_1 view:aView-View ;
+    xml1:fragment "<diagrams><view identifier=\"View_1\" xsi:type=\"Diagram\"><name xml:lang=\"en\">An example of a view</name><documentation xml:lang=\"en\">An archimate view containing a depiction of three elements and two relationships</documentation></view></diagrams>"^^rdf:XML .
+
+model:BasicModel-Documentation a archiXML:Documentation ;
+    rdf:_1 model:BasicModel-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">Example of a basic model with three elements and two relationships</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:BasicModel-DocumentationText a archiXML:Text ;
+    xml1:fragment "Example of a basic model with three elements and two relationships" .
+
+model:BasicModel-Elements a archiXML:Elements ;
+    rdf:_1 model:aBusinessActor-Element ;
+    rdf:_2 model:aBusinessObject-Element ;
+    rdf:_3 model:aBusinessRole-Element ;
+    xml1:fragment "<elements><element identifier=\"BusinessActor1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A business actor</name><documentation xml:lang=\"en\">An example of a business actor</documentation></element><element identifier=\"BusinessObject1\" xsi:type=\"BusinessObject\"><name xml:lang=\"en\">A business object</name><documentation xml:lang=\"en\">An example of a business object</documentation></element><element identifier=\"BusinessRole1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A business role</name><documentation xml:lang=\"en\">An example of a business role</documentation></element></elements>"^^rdf:XML .
+
+model:BasicModel-Model a archiXML:Model ;
+    rdf:_1 model:BasicModel-ModelName ;
+    rdf:_2 model:BasicModel-Documentation ;
+    rdf:_3 model:BasicModel-Elements ;
+    rdf:_4 model:BasicModel-Relationships ;
+    rdf:_5 model:BasicModel-Views ;
+    xmlns:xsi "http://www.w3.org/2001/XMLSchema-instance" ;
+    xsi:schemaLocation "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd" ;
+    xml1:fragment "<model xmlns=\"http://www.opengroup.org/xsd/archimate/3.0/\" identifier=\"Model-1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd\"><name xml:lang=\"en\">Basic Model</name><documentation xml:lang=\"en\">Example of a basic model with three elements and two relationships</documentation><elements><element identifier=\"BusinessActor1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A business actor</name><documentation xml:lang=\"en\">An example of a business actor</documentation></element><element identifier=\"BusinessObject1\" xsi:type=\"BusinessObject\"><name xml:lang=\"en\">A business object</name><documentation xml:lang=\"en\">An example of a business object</documentation></element><element identifier=\"BusinessRole1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A business role</name><documentation xml:lang=\"en\">An example of a business role</documentation></element></elements><relationships><relationship identifier=\"Relation_1\" source=\"BusinessActor1\" target=\"BusinessRole1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name><documentation xml:lang=\"en\">An example of a business actor and role assignment</documentation></relationship></relationships><views><diagrams><view identifier=\"View_1\" xsi:type=\"Diagram\"><name xml:lang=\"en\">An example of a view</name><documentation xml:lang=\"en\">An archimate view containing a depiction of three elements and two relationships</documentation></view></diagrams></views></model>"^^rdf:XML ;
+    xml1:xmlns "http://www.opengroup.org/xsd/archimate/3.0/" ;
+    archiXML:identifier "Model-1" .
+
+model:BasicModel-ModelName a archiXML:Name ;
+    rdf:_1 model:BasicModel-ModelNameText ;
+    xml1:fragment "<name xml:lang=\"en\">Basic Model</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:BasicModel-ModelNameText a archiXML:Text ;
+    xml1:fragment "Basic Model" .
+
+model:BasicModel-Relationships a archiXML:Relationships ;
+    rdf:_1 model:aRelationship1-Relationship ;
+    xml1:fragment "<relationships><relationship identifier=\"Relation_1\" source=\"BusinessActor1\" target=\"BusinessRole1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name><documentation xml:lang=\"en\">An example of a business actor and role assignment</documentation></relationship></relationships>"^^rdf:XML .
+
+model:BasicModel-Views a archiXML:Views ;
+    rdf:_1 model:BasicModel-Diagrams ;
+    xml1:fragment "<views><diagrams><view identifier=\"View_1\" xsi:type=\"Diagram\"><name xml:lang=\"en\">An example of a view</name><documentation xml:lang=\"en\">An archimate view containing a depiction of three elements and two relationships</documentation></view></diagrams></views>"^^rdf:XML .
+
+model:aBusinessActor-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business actor" .
+
+model:aBusinessActor-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessActor-ElementName ;
+    rdf:_2 model:aBusinessActor-ElementDocumentation ;
+    xsi:type "BusinessActor" ;
+    skos:prefLabel "A business actor" ;
+    xml1:fragment "<element identifier=\"BusinessActor1\" xsi:type=\"BusinessActor\"><name xml:lang=\"en\">A business actor</name><documentation xml:lang=\"en\">An example of a business actor</documentation></element>"^^rdf:XML ;
+    prov:wasDerivedFrom model:aBusinessActor ;
+    archiXML:identifier "BusinessActor1" .
+
+model:aBusinessActor-ElementDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aBusinessActor-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">An example of a business actor</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessActor-ElementNameText ;
+    xml1:fragment "<name xml:lang=\"en\">A business actor</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aBusinessActor-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business actor" .
+
+model:aBusinessObject-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business object" .
+
+model:aBusinessObject-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessObject-ElementName ;
+    rdf:_2 model:aBusinessObject-ElementDocumentation ;
+    xsi:type "BusinessObject" ;
+    skos:prefLabel "A business object" ;
+    xml1:fragment "<element identifier=\"BusinessObject1\" xsi:type=\"BusinessObject\"><name xml:lang=\"en\">A business object</name><documentation xml:lang=\"en\">An example of a business object</documentation></element>"^^rdf:XML ;
+    prov:wasDerivedFrom model:aBusinessObject ;
+    archiXML:identifier "BusinessObject1" .
+
+model:aBusinessObject-ElementDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aBusinessObject-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">An example of a business object</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aBusinessObject-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessObject-ElementNameText ;
+    xml1:fragment "<name xml:lang=\"en\">A business object</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aBusinessObject-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business object" .
+
+model:aBusinessRole-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business role" .
+
+model:aBusinessRole-Element a archiXML:Element ;
+    rdf:_1 model:aBusinessRole-ElementName ;
+    rdf:_2 model:aBusinessRole-ElementDocumentation ;
+    xsi:type "BusinessRole" ;
+    skos:prefLabel "A business role" ;
+    xml1:fragment "<element identifier=\"BusinessRole1\" xsi:type=\"BusinessRole\"><name xml:lang=\"en\">A business role</name><documentation xml:lang=\"en\">An example of a business role</documentation></element>"^^rdf:XML ;
+    prov:wasDerivedFrom model:aBusinessRole ;
+    archiXML:identifier "BusinessRole1" .
+
+model:aBusinessRole-ElementDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aBusinessRole-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">An example of a business role</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementName a archiXML:Name ;
+    rdf:_1 model:aBusinessRole-ElementNameText ;
+    xml1:fragment "<name xml:lang=\"en\">A business role</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aBusinessRole-ElementNameText a archiXML:Text ;
+    xml1:fragment "A business role" .
+
+model:aRelationship1-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business actor and role assignment" .
+
+model:aRelationship1-Relationship a archiXML:Relationship ;
+    rdf:_1 model:aRelationship1-RelationshipName ;
+    rdf:_2 model:aRelationship1-RelationshipDocumentation ;
+    xsi:type "Assignment" ;
+    skos:prefLabel "Assignment Relationship"@en ;
+    xml1:fragment "<relationship identifier=\"Relation_1\" source=\"BusinessActor1\" target=\"BusinessRole1\" xsi:type=\"Assignment\"><name xml:lang=\"en\">Assignment Relationship</name><documentation xml:lang=\"en\">An example of a business actor and role assignment</documentation></relationship>"^^rdf:XML ;
+    prov:wasDerivedFrom model:aRelationship1 ;
+    archiXML:identifier "Relation_1" ;
+    archiXML:source "BusinessActor1" ;
+    archiXML:target "BusinessRole1" .
+
+model:aRelationship1-RelationshipDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aRelationship1-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">An example of a business actor and role assignment</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship1-RelationshipNameText ;
+    xml1:fragment "<name xml:lang=\"en\">Assignment Relationship</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aRelationship1-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Assignment Relationship"@en .
+
+model:aRelationship2-DocumentationText a archiXML:Text ;
+    xml1:fragment "An example of a business object and relationship association" .
+
+model:aRelationship2-RelationshipDocumentation a archiXML:Documentation ;
+    rdf:_1 model:aRelationship2-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">An example of a business object and relationship association</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aRelationship2-RelationshipName a archiXML:Name ;
+    rdf:_1 model:aRelationship2-RelationshipNameText ;
+    xml1:fragment "<name xml:lang=\"en\">Association Relationship</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+model:aRelationship2-RelationshipNameText a archiXML:Text ;
+    xml1:fragment "Association Relationship"@en .
+
+view:aBusinessActor a archimate:ViewNode ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a depiction of a business actor." ;
+    skos:prefLabel "A depiction of a business actor" ;
+    foaf:depicts model:aBusinessActor .
+
+view:aBusinessObject a archimate:ViewNode ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a depiction of a business object" ;
+    skos:prefLabel "A depiction of a business object" ;
+    foaf:depicts model:aBusinessObject .
+
+view:aBusinessRole a archimate:ViewNode ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a depiction of a business role." ;
+    skos:prefLabel "A depiction of a business role" ;
+    foaf:depicts model:aBusinessRole .
+
+view:aRelationship1 a archimate:Connection ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a depiction of relationship 1: a business actor - role assignment relation." ;
+    skos:prefLabel "A depiction of relationship 1: a business actor - role assignment relation" ;
+    foaf:depicts model:aRelationship1,
+        model:aRelationship2 .
+
+view:aView a archimate:View ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An archimate view containing a depiction of three elements and two relationships" ;
+    skos:prefLabel "An example of a view" ;
+    archimate:contains view:aBusinessActor,
+        view:aBusinessObject,
+        view:aBusinessRole,
+        view:aRelationship1,
+        view:aRelationship2 .
+
+view:aView-View a archiXML:View ;
+    rdf:_1 view:aView-ViewName ;
+    rdf:_2 view:aView-View-Documentation ;
+    xsi:type "Diagram" ;
+    skos:prefLabel "An example of a view" ;
+    xml1:fragment "<view identifier=\"View_1\" xsi:type=\"Diagram\"><name xml:lang=\"en\">An example of a view</name><documentation xml:lang=\"en\">An archimate view containing a depiction of three elements and two relationships</documentation></view>"^^rdf:XML ;
+    prov:wasDerivedFrom view:aView ;
+    archiXML:identifier "View_1" .
+
+view:aView-View-Documentation a archiXML:Documentation ;
+    rdf:_1 view:aView-View-DocumentationText ;
+    xml1:fragment "<documentation xml:lang=\"en\">An archimate view containing a depiction of three elements and two relationships</documentation>"^^rdf:XML ;
+    xml1:lang "en" .
+
+view:aView-View-DocumentationText a archiXML:Text ;
+    xml1:fragment "An archimate view containing a depiction of three elements and two relationships" .
+
+view:aView-ViewName a archiXML:Name ;
+    rdf:_1 view:aView-ViewNameText ;
+    xml1:fragment "<name xml:lang=\"en\">An example of a view</name>"^^rdf:XML ;
+    xml1:lang "en" .
+
+view:aView-ViewNameText a archiXML:Text ;
+    xml1:fragment "An example of a view" .
+
+archiXML:Diagrams a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The diagrams element"@en ;
+    skos:prefLabel "the diagrams element"@en ;
+    xml1:tag "diagrams" .
+
+archiXML:Document a owl:Class ;
+    dct:conformsTo archiXML: ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf xml1:Document ;
+    skos:definition "An archimate document consists of a tree of elements and text. Each element is denoted in the source by a start tag, such as ‘<element>’, and an end tag, such as ‘</element>’. Tags have to be nested such that elements are all completely within each other, without overlapping. Elements can have attributes, which control how the elements work. The ArchiXML Core Vocabulary defines a set of elements that can be used in an archimate document, along with rules about the ways in which the elements can be nested. Archimate user agents (e.g., web browsers) parse an archimate document, turning it into a DOM (Document Object Model) tree. A DOM tree is an in-memory representation of a document."@en ;
+    skos:prefLabel "archimate XML document"@en .
+
+archiXML:Elements a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The Elements element"@en ;
+    skos:prefLabel "the Elements element"@en ;
+    xml1:tag "elements" .
+
+archiXML:Model a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The model element represents the root (top-level element) of the Archimate xml document. All other elements must be descendants of this element."@en ;
+    skos:prefLabel "the model element"@en ;
+    xml1:tag "model" .
+
+archiXML:Relationships a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The relationships element"@en ;
+    skos:prefLabel "the relationships element"@en ;
+    xml1:tag "relationships" .
+
+archiXML:View a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The view element"@en ;
+    skos:prefLabel "the view element"@en ;
+    xml1:tag "view" .
+
+archiXML:Views a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The views element"@en ;
+    skos:prefLabel "the views element"@en ;
+    xml1:tag "views" .
+
+<https://www.w3.org/1999/xlink/id/section/5.3> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#link-types"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.3 XLink Element Type Attribute (type)"@en .
+
+<https://www.w3.org/1999/xlink/id/section/5.4> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#link-locators"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.4 Locator Attribute (href)"@en .
+
+<https://www.w3.org/1999/xlink/id/section/5.6.1> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#show-att"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.6.1 show Attribute"@en .
+
+<https://www.w3.org/1999/xlink/id/section/5.6.2> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#actuate-att"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.6.2 actuate Attribute"@en .
+
+dom:Document a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Document> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:DocumentTreeNode ;
+    skos:definition "In the DOM specification, the term 'document' is used for any markup-based resource, ranging from short static documents to long essays or reports with rich multimedia, as well as to fully-fledged interactive applications. Each such document is represented as a node tree, whose root is a document. Some of the nodes in a tree can have children, while others are always leaves. "@en ;
+    skos:prefLabel "Document"@en .
+
+dom:Text a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Text> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:CharacterData ;
+    skos:definition "Represents textual content within a DOM document. It's used to represent plain text nodes that are not part of markup elements. Text nodes can occur within elements, between elements, or as the content of attributes."@en ;
+    skos:prefLabel "Text"@en .
+
+xml1:Document a owl:Class ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:Document ;
+    skos:definition "A document encoded in XML (eXtensible Markup Language)."@en ;
+    skos:prefLabel "xml document"@en .
+
+xml1:DocumentType a owl:Class ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:DocumentType ;
+    skos:definition "A DOCTYPE is a required preamble."@en ;
+    skos:example "<!DOCTYPE xml>" ;
+    skos:prefLabel "the DOCTYPE"@en .
+
+xml1:Text a owl:Class ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:Text ;
+    skos:definition "A DOM node in a XML document that has textual content and that does not contain any XML vocabulary."@en ;
+    skos:prefLabel "text"@en .
+
+archimate:BusinessActor a owl:Class ;
+    dct:identifier "BusinessActor" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A business actor in Archimate represents a business entity that is capable of performing behavior."@en ;
+    skos:prefLabel "business actor"@en .
+
+archimate:BusinessRole a owl:Class ;
+    dct:identifier "BusinessRole" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalActiveStructureElement ;
+    skos:definition "A business role in Archimate represents the responsibility for performing specific behavior, to which an actor can be assigned, or the part an actor plays in a particular action or event."@en ;
+    skos:prefLabel "business role"@en .
+
+archimate:DynamicRelationship a owl:Class ;
+    dct:identifier "dynamic relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:RelationType ;
+    skos:definition "dynamic relationships are used to model behavioral dependencies between elements."@en ;
+    skos:prefLabel "dynamic relationship"@en .
+
+archimate:ExternalBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BehaviorElement ;
+    skos:altLabel "service"@en ;
+    skos:definition "An external behavior element, called a service, represents an explicitly defined exposed behavior."@en ;
+    skos:prefLabel "external behavior element"@en .
+
+archimate:Process a owl:Class ;
+    dct:identifier "Process" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    skos:definition "A process represents a sequence of behaviors that achieves a specific result."@en ;
+    skos:prefLabel "process"@en .
+
+archimate:relationshipConnector a owl:ObjectProperty ;
+    rdfs:domain archimate:Relationship ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:range archimate:Relationship ;
+    skos:prefLabel "the relationship connector"@en .
+
+model:aRelationship2 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business object and relationship association" ;
+    skos:prefLabel "A business object - relationship association" ;
+    archimate:from model:aBusinessObject ;
+    archimate:relationship archimate:association ;
+    archimate:to model:aRelationship1 .
+
+archiXML:Relationship a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The relationship element"@en ;
+    skos:prefLabel "the relationship element"@en ;
+    xml1:tag "relationship" .
+
+xsi:Attribute a owl:Class ;
+    dct:conformsTo section:AttributesAndSyntax ;
+    rdfs:isDefinedBy xsi: ;
+    rdfs:subClassOf xml1:Attribute ;
+    skos:definition "An XSI attribute is used to provide information related to XML Schema validation within an XML document. Such an attribute allows XML documents to declare how they relate to XML Schemas, specify the data types of elements, and control schema validation behavior."@en ;
+    skos:prefLabel "attribute"@en .
+
+<http://www.w3.org/DOM/id/section/Node> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-node"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.4. Interface Node"@en .
+
+dom:CharacterData a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/CharacterData> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:DocumentTreeNode ;
+    skos:definition "Represents textual data nodes within a DOM document. It is a common superclass for specific types of nodes that contain text, including elements, comments, and CDATA sections."@en ;
+    skos:prefLabel "Character Data"@en .
+
+archimate:BusinessObject a owl:Class ;
+    dct:identifier "BusinessObject" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:PassiveStructureElement ;
+    skos:definition "A business object in Archimate represents a concept used within a particular business domain."@en ;
+    skos:prefLabel "business object"@en .
+
+archimate:Concept a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    owl:unionOf ( archimate:Element archimate:Relationship archimate:RelationshipConnector ) ;
+    skos:definition "A concept is either an element or a relationship, or a relationship connector."@en ;
+    skos:prefLabel "concept"@en .
+
+archimate:ExternalActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ActiveStructureElement ;
+    skos:altLabel "interface"@en ;
+    skos:definition "An external active structure element, called interface, represents a point of access where one or more services are provided to the environment."@en ;
+    skos:prefLabel "external active structure element"@en .
+
+archimate:Function a owl:Class ;
+    dct:identifier "Function" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    skos:definition "A function represents a collection of behavior based on specific criteria, such as required resources, competencies, or location, and is managed, performed, or implemented as a whole."@en ;
+    skos:prefLabel "function"@en .
+
+archimate:Interaction a owl:Class ;
+    dct:identifier "Interaction" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:InternalBehaviorElement ;
+    skos:definition "An interaction represents a unit of collective behavior that must be performed by two or more internal active structure elements, either assigned directly or aggregated in a collaboration."@en ;
+    skos:prefLabel "interaction"@en .
+
+archimate:RelationshipConnector a owl:Class ;
+    dct:identifier "relationship connector" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Concept ;
+    skos:altLabel "junction"@en ;
+    skos:definition "A relationship connector is used to connect relationships of the same type."@en ;
+    skos:prefLabel "relationship connector"@en .
+
+archimate:access a owl:ObjectProperty,
+        archimate:StructuralRelationship ;
+    dct:identifier "Access" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subPropertyOf archimate:relationship ;
+    skos:prefLabel "Access Relationship"@en .
+
+model:aBusinessActor a archimate:BusinessActor ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business actor" ;
+    skos:prefLabel "A business actor" .
+
+model:aBusinessObject a archimate:BusinessObject ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business object" ;
+    skos:prefLabel "A business object" .
+
+model:aBusinessRole a archimate:BusinessRole ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business role" ;
+    skos:prefLabel "A business role" .
+
+model:aRelationship1 a archimate:Relationship ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "An example of a business actor and role assignment" ;
+    skos:prefLabel "A business actor - role assignment" ;
+    archimate:from model:aBusinessActor ;
+    archimate:relationship archimate:assignedTo ;
+    archimate:to model:aBusinessRole .
+
+archiXML:Element a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The Element element"@en ;
+    skos:prefLabel "the Element element"@en ;
+    xml1:tag "element" .
+
+<https://www.w3.org/1999/xlink/id/section/5.5> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#link-semantics"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.5 Semantic Attributes (role, arcrole, and title)"@en .
+
+<https://www.w3.org/1999/xlink/id/section/5.7> a dcm:Text ;
+    dct:isPartOf <https://www.w3.org/1999/xlink/id/standard/xlink> ;
+    dct:source "https://www.w3.org/TR/xlink/#traversal-atts"^^xsd:anyURI ;
+    rdfs:isDefinedBy xlink: ;
+    skos:prefLabel "§ 5.7 Traversal Attributes (label, from, and to)"@en .
+
+dom:Node a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Node> ;
+    rdfs:isDefinedBy dom: ;
+    skos:definition "A node is an object that implements Node. A node participates in a tree, which is known as the node tree."@en ;
+    skos:prefLabel "Node"@en .
+
+archimate:CompositeElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Element ;
+    owl:equivalentClass [ owl:unionOf ( [ a owl:Restriction ;
+                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                        owl:onClass [ a owl:Restriction ;
+                                owl:hasValue archimate:composition ;
+                                owl:onProperty archimate:relationship ] ;
+                        owl:onProperty [ owl:inverse archimate:to ] ] [ a owl:Restriction ;
+                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                        owl:onClass [ a owl:Restriction ;
+                                owl:hasValue archimate:aggregation ;
+                                owl:onProperty archimate:relationship ] ;
+                        owl:onProperty [ owl:inverse archimate:to ] ] ) ] ;
+    skos:definition "An element consisting of other elements from multiple aspects or layers of the language."@en ;
+    skos:prefLabel "passive structure element"@en .
+
+archimate:Event a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BehaviorElement ;
+    skos:definition "An event represents a state change."@en ;
+    skos:prefLabel "event"@en .
+
+archimate:StructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Element ;
+    skos:definition "Structure elements represent the structural aspects of the enterprise."@en ;
+    skos:prefLabel "structure element"@en .
+
+xmlns:Attribute a owl:Class ;
+    rdfs:isDefinedBy xmlns: ;
+    rdfs:subClassOf xml1:Attribute ;
+    skos:definition "An XSI attribute is used to provide information related to XML Schema validation within an XML document. Such an attribute allows XML documents to declare how they relate to XML Schemas, specify the data types of elements, and control schema validation behavior."@en ;
+    skos:prefLabel "attribute"@en .
+
+dom:Attribute a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Attribute> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:Node ;
+    skos:definition "An attribute is a name-value pair associated with a DOM element. An attributes has a namespace (null or a non-empty string), namespace prefix (null or a non-empty string), local name (a non-empty string), value (a string), and element (null or an element)."@en ;
+    skos:prefLabel "Attribute"@en .
+
+dom:DocumentTreeNode a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/DocumentTree> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:Node ;
+    skos:definition "A document tree node is any node within a node tree whose root is a document node. These nodes form the hierarchical representation of the document, including document, documenttype, elements, comments, and text nodes, that contribute to the document's structure and content."@en ;
+    skos:prefLabel "Document tree node"@en .
+
+archimate:ActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:StructureElement ;
+    skos:definition "Active structure elements are the subjects that can perform behavior."@en ;
+    skos:prefLabel "active structure element"@en .
+
+archimate:Relationship a owl:Class ;
+    dct:identifier "relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Concept ;
+    owl:equivalentClass [ owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:onProperty archimate:from ;
+                        owl:someValuesFrom archimate:Element ] [ a owl:Restriction ;
+                        owl:onProperty archimate:relation ;
+                        owl:someValuesFrom archimate:RelationType ] [ a owl:Restriction ;
+                        owl:onProperty archimate:to ;
+                        owl:someValuesFrom archimate:Element ] ) ] ;
+    skos:definition "A connection between a specific source and target concept. Classified as structural, dependency, dynamic, or other."@en ;
+    skos:prefLabel "relationship"@en .
+
+xmlns: a void:Dataset,
+        owl:Ontology ;
+    dct:abstract "The XMLNS Core Ontology provides a formal representation of XML Namespace declarations. It defines classes and properties to describe XML Namespace attributes and their usage within XML documents."@en ;
+    dct:created "2024-02-19"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "The XMLNS Ontology formalizes XML Namespace declarations, offering a structured representation of namespace attributes and their significance within XML documents. It includes definitions for essential concepts such as xmlns:xsi, xmlns:rdf, xmlns:xlink, xmlns:dc, xmlns:cc, etc. The ontology serves as a reference for understanding and working with XML Namespace declarations within the context of RDF-based applications."@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "http://creativecommons.org/licenses/by/4.0"^^xsd:anyURI ;
+    dct:publisher <https://rijksfinancien.nl> ;
+    dct:source <https://github.com/floresbakker/xmlnsvoc> ;
+    dct:status status:UnderDevelopment ;
+    dct:subject "xmlns"@en ;
+    dct:title "XMLNS Ontology"@en ;
+    vann:preferredNamespacePrefix "xmlns" ;
+    vann:preferredNamespaceUri "http://www.w3.org/2000/xmlns/model/def/" ;
+    void:uriRegexPattern "^http://www.w3.org/2000/xmlns/model/def/" ;
+    void:uriSpace "http://www.w3.org/2000/xmlns/model/def/"^^xsd:anyURI ;
+    owl:imports dct:,
+        rdf:,
+        rdfs:,
+        owl:,
+        skos: ;
+    owl:versionInfo "0.1.0" ;
+    foaf:depiction "https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg"^^xsd:anyURI ;
+    foaf:homepage "https://www.rijksfinancien.nl/"^^xsd:anyURI .
+
+archimate:BehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Element ;
+    skos:definition "Behavior elements represent the dynamic aspects of the enterprise."@en ;
+    skos:prefLabel "behavior element"@en .
+
+xsi: a void:Dataset,
+        owl:Ontology ;
+    dct:abstract "The XSI (XML Schema Instance) Core Ontology provides a formal representation of concepts related to XML Schema instance documents. It defines terms and relationships necessary for describing XML documents and their validation using XML Schema."@en ;
+    dct:created "2023-10-29"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "The XSI (XML Schema Instance) Ontology captures the essential elements and attributes associated with XML Schema instance documents. It formalizes concepts such as schema location and data types specified in XML documents, particularly for validation purposes using XML Schema definitions (XSD). This ontology aims to enhance interoperability and understanding of XML-based data exchange and validation processes."@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "http://creativecommons.org/licenses/by/4.0"^^xsd:anyURI ;
+    dct:publisher <https://rijksfinancien.nl> ;
+    dct:source <https://github.com/floresbakker/xsivoc> ;
+    dct:status status:UnderDevelopment ;
+    dct:subject "xsi"@en ;
+    dct:title "XSI Ontology"@en ;
+    vann:preferredNamespacePrefix "xsi" ;
+    vann:preferredNamespaceUri "http://www.w3.org/XML/model/def/" ;
+    void:uriRegexPattern "^http://www.w3.org/XML/model/def/" ;
+    void:uriSpace "http://www.w3.org/XML/model/def/"^^xsd:anyURI ;
+    owl:imports dct:,
+        rdf:,
+        rdfs:,
+        owl:,
+        skos: ;
+    owl:versionInfo "0.1.0" ;
+    foaf:depiction "https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg"^^xsd:anyURI ;
+    foaf:homepage "https://www.rijksfinancien.nl/"^^xsd:anyURI .
+
+<http://www.w3.org/DOM/id/section/Element> a dcm:Text ;
+    dct:isPartOf <http://www.w3.org/DOM/id/standard/dom> ;
+    dct:source "https://dom.spec.whatwg.org/#interface-element"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "4.9. Interface Element"@en .
+
+<http://www.w3.org/XML/id/standard/xml> a dct:Standard ;
+    dct:created "2021-11-09"^^xsd:date ;
+    dct:source "http://www.w3.org/TR/xml11"^^xsd:anyURI ;
+    rdfs:isDefinedBy xml1: ;
+    skos:prefLabel "Extensible Markup Language (XML) 1.1 (Second Edition)"@en .
+
+archimate:InternalBehaviorElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:BehaviorElement ;
+    skos:definition "An internal behavior element represents a unit of activity that can be performed by one or more active structure elements."@en ;
+    skos:prefLabel "internal behavior element"@en .
+
+archimate:StructuralRelationship a owl:Class ;
+    dct:identifier "structural relationship" ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:RelationType ;
+    skos:definition "structural relationships represent the \"static\" coherence within an architecture. They model the static construction or composition of concepts of the same or different types."@en ;
+    skos:prefLabel "structural relationship"@en .
+
+archiXML:Documentation a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The documentation element"@en ;
+    skos:prefLabel "the documentation element"@en ;
+    xml1:tag "documentation" .
+
+archiXML:Name a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf archiXML:DomElement ;
+    skos:definition "The name element"@en ;
+    skos:prefLabel "the name element"@en ;
+    xml1:tag "name" .
+
+<https://www.w3.org/1999/xlink/id/standard/xlink> a dct:Standard ;
+    dct:created "2024-02-19"^^xsd:date ;
+    dct:source "https://www.w3.org/TR/xlink/"^^xsd:anyURI ;
+    skos:prefLabel "XML Linking Language (XLink) Version 1.1"@en .
+
+archimate:Element a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:Concept ;
+    skos:definition "Base unit in the ArchiMate metamodel. Used to define and describe the constituent parts of Enterprise Architecture and their unique set of characteristics. An element is either a behavior element, a structure element, a motivation element, or a composite element."@en ;
+    skos:prefLabel "element"@en .
+
+archimate:PassiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:StructureElement ;
+    skos:definition "A passive structure element represents an element on which behavior is performed."@en ;
+    skos:prefLabel "passive structure element"@en .
+
+archimate:MotivationElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:StructureElement ;
+    skos:definition "A motivation element represents the context of or reason behind the architecture of an enterprise."@en ;
+    skos:prefLabel "passive structure element"@en .
+
+archimate:RelationType a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    skos:definition "A type of connection between a source and target concept."@en ;
+    skos:prefLabel "relation type"@en .
+
+xlink:Attribute a owl:Class ;
+    dct:conformsTo <https://www.w3.org/1999/xlink/id/section/AttributesAndSyntax> ;
+    rdfs:isDefinedBy xlink: ;
+    rdfs:subClassOf xml1:Attribute ;
+    skos:definition "An XLink attribute is used to create various types of links within an XML document. Such an attribute allows XML documents to declare how  elements in XML documents are linked to other resources."@en ;
+    skos:prefLabel "attribute"@en .
+
+archimate:InternalActiveStructureElement a owl:Class ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:subClassOf archimate:ActiveStructureElement ;
+    skos:definition "An internal active structure element represents an entity that is capable of performing behavior."@en ;
+    skos:prefLabel "internal active structure element"@en .
+
+dom:Element a owl:Class ;
+    dct:conformsTo <http://www.w3.org/DOM/id/section/Element> ;
+    rdfs:isDefinedBy dom: ;
+    rdfs:subClassOf dom:DocumentTreeNode ;
+    skos:definition "Represents an element in the document. Each element may contain other elements, attributes, or text nodes."@en ;
+    skos:prefLabel "Element"@en .
+
+xml1:Attribute a owl:Class ;
+    dct:conformsTo <http://www.w3.org/XML/id/section/XML-Spec> ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:Attribute ;
+    skos:definition "An XML attribute is a name-value pair associated with an XML element."@en ;
+    skos:prefLabel "XML Attribute"@en .
+
+model:BasicModel a archimate:Model ;
+    rdfs:isDefinedBy model:BasicModel ;
+    skos:definition "Example of a basic model with three elements and two relationships" ;
+    skos:prefLabel "Basic Model" .
+
+archimate:relationship a owl:ObjectProperty ;
+    rdfs:domain archimate:Element ;
+    rdfs:isDefinedBy archimate: ;
+    rdfs:range archimate:Element ;
+    skos:prefLabel "the relationship property"@en .
+
+archiXML:Text a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf xml1:Text ;
+    skos:definition "A plain text node in an Archimate document."@en ;
+    skos:prefLabel "The Archimate DOM text node"@en .
+
+xlink: a void:Dataset,
+        owl:Ontology ;
+    dct:abstract "The XLINK Core Ontology provides a formal representation of the XML Linking Language (XLink) Version 1.1. It defines classes and properties to describe the structure and semantics of XLink elements and attributes."@en ;
+    dct:created "2024-02-19"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "The XLINK Ontology formalizes the XML Linking Language (XLink) Version 1.1, offering a structured representation of its elements and attributes. It includes definitions for essential concepts such as XLink element types, link locators, semantic attributes, and behavior attributes. The ontology serves as a reference for understanding and working with XLink within the context of RDF-based applications."@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "http://creativecommons.org/licenses/by/4.0"^^xsd:anyURI ;
+    dct:publisher <https://rijksfinancien.nl> ;
+    dct:source <https://github.com/floresbakker/xlinkvoc> ;
+    dct:status status:UnderDevelopment ;
+    dct:subject "xlink"@en ;
+    dct:title "XLINK Ontology"@en ;
+    vann:preferredNamespacePrefix "xlink" ;
+    vann:preferredNamespaceUri "https://www.w3.org/1999/xlink/model/def/" ;
+    void:uriRegexPattern "^https://www.w3.org/1999/xlink/model/def/" ;
+    void:uriSpace "http://www.w3.org/1999/xlink/model/def/"^^xsd:anyURI ;
+    owl:imports dct:,
+        rdf:,
+        rdfs:,
+        owl:,
+        skos: ;
+    owl:versionInfo "0.1.0" ;
+    skos:example """
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix svg: <https://data.rijksfinancien.nl/svg/model/def/> .
+@prefix xlink: <http://www.w3.org/1999/xlink> .
+
+<https://data.rijksfinancien.nl/svg/doc/id/110/193> a svg:LinearGradient ;
+xlink:href "#linearGradient3931" ;
+svg:gradientTransform "translate(0,50)" ;
+svg:gradientUnits "userSpaceOnUse" ;
+svg:id "linearGradient3288" ;
+svg:x1 "321.67255" ;
+svg:x2 "325.79459" ;
+svg:y1 "442.76962" ;
+svg:y2 "409.21478" .""" ;
+    foaf:depiction "https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg"^^xsd:anyURI ;
+    foaf:homepage "https://www.rijksfinancien.nl/"^^xsd:anyURI .
+
+<http://www.w3.org/DOM/id/standard/dom> a dct:Standard ;
+    dct:created "2024-04-07"^^xsd:date ;
+    dct:source "https://dom.spec.whatwg.org/"^^xsd:anyURI ;
+    rdfs:isDefinedBy dom: ;
+    skos:prefLabel "Document Object Model (DOM) - Living Standard"@en .
+
+archiXML:Attribute a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf xml1:Attribute ;
+    skos:definition ".."@en ;
+    skos:prefLabel "attribute"@en .
+
+xml1:Element a owl:Class ;
+    dct:conformsTo <http://www.w3.org/XML/id/section/XML-Spec> ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:subClassOf dom:Element ;
+    skos:definition "An XML element in the Document Object Model (DOM) represents a unit of data in an XML document."@en ;
+    skos:prefLabel "XML DOM element"@en .
+
+archiXML:DomElement a owl:Class ;
+    rdfs:isDefinedBy archiXML: ;
+    rdfs:subClassOf xml1:Element ;
+    skos:definition "An element with namespace URI <> as defined in the Archimate specification, that is used to create and manipulate Archimate content."@en ;
+    skos:prefLabel "The Archimate DOM element"@en .
+
+xml1: a void:Dataset,
+        owl:Ontology ;
+    dct:abstract "The XML Core Ontology provides a formal representation of the Extensible Markup Language (XML) Version 1.0 (Fifth Edition). It defines classes and properties to describe the structure and semantics of XML documents, elements, attributes, comments, processing instructions, CDATA sections, and text elements. In addition, it includes SHACL shapes with algorithms for XML code serialization. This enables the generation of XML from RDF representations and the parsing of XML into RDF, offering comprehensive control and detailed description of XML content. This vocabulary enhances data management and integration, bridging XML and semantic technologies. The XML Core Ontology supports the use of domain specific extensions that are XML-based, like SVG, Archimate, XBRL and more. "@en ;
+    dct:created "2023-10-29"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "The XML Ontology formalizes the Extensible Markup Language (XML) Version 1.0 (Fifth Edition), offering a structured representation of its components and features. It defines classes to represent XML elements, datatype properties to represent XML attributes, and a small number of SHACL shapes with algorithms for the serialization of XML code. Central to this ontology is the class 'xml:Element', which represents an XML DOM element and is a subclass of 'dom:Element', the class encompassing all DOM elements. Any specific XML element from a domain specific extension of XML, like 'svg:Circle' in the SVG vocabulary, is a subclass of 'xml:Element'. Another fundamental component of this ontology is the 'xml:attribute' datatype property. Any attribute in XML, such as 'xml:id' or 'xml:class', is a subproperty of 'xml:attribute' and an individual of the class xml:Attribute. XML attributes can be standard attributes defined in the XML specification or custom-defined attributes. Additionally, there is the class of 'xml:Text', where all instantiations contain an 'xml:fragment' property relation with an actual textual string, as exemplified in the triples 'doc:1.0 a xml:Text; xml:fragment \"Hello, World!\".'. Together, these classes and attributes can represent any XML document in RDF. To serialize this XML document into actual XML code, there is the SHACL node shape shp:SerializableNode that processes the RDF structure and transforms it into XML code. The logic behind this shape is that the XML code can be serialized from the leaves of the tree upwards to the root of the XML document. This means that any arbitrary element in the DOM tree of an XML document can only be serialized to XML code when the underlying child elements of that element have already been serialized, including the XML code of attributes and their values. The outer edges of the tree consist of elements that do not contain child elements and can therefore be transformed into XML code immediately without needing any context, along with XML text elements that already contain XML fragments with textual strings. From the outer edges, the node shape shp:SerializableNode works its way up the tree until all XML elements have received an XML fragment, allowing the XML document to be created based on the 'xml:fragment' contained in the root element of that document. The processing halts the moment the document itself has an 'xml:fragment' attribute."@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "http://creativecommons.org/licenses/by/4.0"^^xsd:anyURI ;
+    dct:publisher <https://rijksfinancien.nl> ;
+    dct:source <https://github.com/floresbakker/xmlvoc> ;
+    dct:status status:UnderDevelopment ;
+    dct:subject "xml"@en ;
+    dct:title "XML Ontology"@en ;
+    vann:preferredNamespacePrefix "xml" ;
+    vann:preferredNamespaceUri "http://www.w3.org/XML/model/def/" ;
+    void:uriRegexPattern "^http://www.w3.org/XML/model/def/" ;
+    void:uriSpace "http://www.w3.org/XML/model/def/"^^xsd:anyURI ;
+    owl:imports dct:,
+        rdf:,
+        rdfs:,
+        owl:,
+        skos: ;
+    owl:versionInfo "0.1.0" ;
+    sh:declare decl:dom,
+        decl:function,
+        decl:rdf,
+        decl:rdfs,
+        decl:xml,
+        decl:xsd ;
+    foaf:depiction "https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg"^^xsd:anyURI ;
+    foaf:homepage "https://www.rijksfinancien.nl/"^^xsd:anyURI ;
+    respec:acknowledgements """
+    This standard has been developed through collaborative efforts and contributions from a diverse community of experts and stakeholders. Their dedication and expertise have been instrumental in bringing this vocabulary to fruition."""@en ;
+    respec:audience """
+    This document is intended for a diverse audience of software developers, data managers, semantic web enthusiasts, and anyone seeking to enhance the sustainability of information management, information processing, and information technology."""@en ;
+    respec:background "In an era where information flows ceaselessly, organizations must confront multiple pressing challenges regarding velocity, variety, insightfulness, adaptability, and validity. The speed at which information is generated, transformed, and consumed is unprecedented. Keeping pace with this velocity is essential for timely decision-making. Information is available in diverse formats, ranging from structured data to unstructured text and multimedia. Effective management necessitates the ability to handle this rich variety seamlessly. Information is not merely data; it embodies insights, functionality, and knowledge. Extracting meaningful insights and practical functionality is vital for organizational success. Organizations must be agile in adapting information products to swiftly address emerging challenges and opportunities. Finally, ensuring the correctness, compliance, and reliability of information is fundamental to trustworthy decision-making and operations."@en ;
+    respec:introduction """In today’s rapidly evolving information landscape, organizations face the critical challenge of effectively managing and leveraging vast amounts of data. The necessity for robust information products and agile information processing is ever-present, continually adapting across various sectors. In this dynamic context, the creation, validation, and utilization of information products stand as crucial elements for informed decision-making and operational efficiency. The ability to swiftly respond to unexpected challenges or capitalize on new opportunities relies on having the right answers to previously unasked questions.
+    
+    How can organizations successfully navigate this data-intensive environment? A significant part of the solution lies in the capability to exercise complete control over the generation, modification, validation, and reuse of information products. This requires a profound understanding of how to construct and deconstruct any arbitrary information product, examining it from its fundamental components to its broader, strategic implications.
+    
+    To address this necessity, we have developed the RDF-based Semantic XML Core Vocabulary - a transformative framework designed to facilitate the management of various information artifacts built upon XML."""@en ;
+    respec:objective "In response to these challenges, we introduce the RDF-based Semantic XML Core Vocabulary—a paradigm-shifting framework that empowers organizations to master the complexities of information management. With this vocabulary, organizations gain the ability to (1) construct and deconstruct, (2) generate and validate, and (3) adapt and reuse. Constructing and deconstructing means crafting and dismantling information products at will, from their essential building blocks to their overarching significance. Generating and validating involves creating new information products and rigorously ensuring their accuracy and completeness. Finally, adapting and reusing is about modifying existing information products to quickly respond to evolving scenarios and repurposing valuable components across various contexts. This innovative vocabulary serves as the foundation of an information management ecosystem that harmonizes the power of RDF with the versatility of XML. It revolutionizes how organizations handle information artifacts, enabling seamless transitions from raw data to strategic insights and practical solutions."@en .
+
+dom: a void:Dataset,
+        owl:Ontology ;
+    dct:abstract "The DOM Core Ontology provides a formal representation of the Document Object Model (DOM) as specified in the W3C Living Standard of DOM at https://dom.spec.whatwg.org/. It defines classes and properties to describe the structure and semantics of DOM documents, elements, attributes, comments, processing instructions, CDATA sections, and text elements."@en ;
+    dct:created "2023-10-29"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "The DOM Ontology formalizes the Document Object Model (DOM) as specified at https://dom.spec.whatwg.org/, offering a structured representation of its components and features. It includes definitions for essential concepts such as DOM documents, elements, attributes, comments, processing instructions, CDATA sections, and text elements. The ontology serves as a reference for understanding and working with DOM within the context of RDF-based applications."@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "http://creativecommons.org/licenses/by/4.0"^^xsd:anyURI ;
+    dct:publisher <https://rijksfinancien.nl> ;
+    dct:source <https://github.com/floresbakker/domvoc> ;
+    dct:status status:UnderDevelopment ;
+    dct:subject "dom"@en ;
+    dct:title "DOM Ontology"@en ;
+    vann:preferredNamespacePrefix "dom" ;
+    vann:preferredNamespaceUri "http://www.w3.org/DOM/model/def/" ;
+    void:uriRegexPattern "^http://www.w3.org/DOM/model/def/" ;
+    void:uriSpace "http://www.w3.org/DOM/model/def/"^^xsd:anyURI ;
+    owl:imports dct:,
+        rdf:,
+        rdfs:,
+        owl:,
+        skos: ;
+    owl:versionInfo "0.1.0" ;
+    foaf:depiction "https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg"^^xsd:anyURI ;
+    foaf:homepage "https://www.rijksfinancien.nl/"^^xsd:anyURI .
+
+xml1:attribute a owl:DatatypeProperty,
+        xml1:Attribute ;
+    rdfs:domain xml1:Element ;
+    rdfs:isDefinedBy xml1: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Property that is the parent property of all existing XML attributes. An attribute is a name-value pair that is associated with an XML element. Attributes provide additional information about an element and are specified within the start tag of an element. Attributes can modify the behavior or appearance of an element, define relationships between elements, or provide other metadata. The name of the attribute is followed by an equal sign (=) and the attribute's value, which is enclosed in double or single quotes. Some attributes affect the element simply by their presence in the start tag of the element, with the value implicitly being an empty string."@en ;
+    skos:prefLabel "has attribute property"@en .
+
+archiXML: a void:Dataset,
+        owl:Ontology,
+        ns1:Ontology ;
+    dct:abstract """
+The ArchiXML ontology is developed to represent Archimate terms and logic in RDF format, enabling the generation, parsing, validation, annotation, and reuse of Archimate documents using semantic web technologies.
+
+This ontology serves as a standardized representation of Archimate concepts and relationships, fostering interoperability, integration, and semantic understanding of Archimate models within the context of the Semantic Web. By formalizing Archimate vocabulary into an ontology, it becomes feasible to integrate Archimate models with other data sources, perform automated reasoning, and develop advanced analysis and visualization tools.
+
+This abstract provides a concise overview of the ArchiXML ontology, outlining its purpose, capabilities, and relevance in the context of enterprise architecture and semantic web technologies.
+"""@en ;
+    dct:conformsTo "https://www.w3.org/TR/SVG11/"^^xsd:anyURI ;
+    dct:created "2024-02-14"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description """
+The ArchiXML ontology serves as a formal representation of Archimate terms and logic in RDF format. It enables the generation, parsing, validation, annotation, and reuse of Archimate documents using semantic web technologies.
+
+This ontology encapsulates the richness of Archimate concepts and relationships, facilitating interoperability, integration, and semantic understanding of Archimate models within the context of the Semantic Web. By providing a standardized representation, it becomes feasible to integrate Archimate models with other data sources, perform automated reasoning, and develop advanced analysis and visualization tools.
+
+This description elaborates on the purpose, scope, and capabilities of the ArchiXML ontology, underscoring its significance in enhancing the manipulation and interpretation of Archimate models within the realm of semantic web technologies.
+"""@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "https://creativecommons.org/licenses/by/4.0/"^^xsd:anyURI ;
+    dct:publisher <https://www.example.com> ;
+    dct:source <https://www.opengroup.org/xsd/archimate/> ;
+    dct:status status:UnderDevelopment ;
+    dct:title "ArchiXML Core Vocabulary"@en ;
+    vann:preferredNamespacePrefix "archiXML" ;
+    vann:preferredNamespaceUri "https://data.rijksfinancien.nl/archixml/model/def/" ;
+    void:uriRegexPattern "^https://data.rijksfinancien.nl/archixml/model/def/" ;
+    void:uriSpace "https://data.rijksfinancien.nl/xml/archixml/def/"^^xsd:anyURI ;
+    owl:versionInfo "1.0" ;
+    skos:example """
+
+An example of an Archimate model:
+
+
+
+This can be represented in RDF using the Archimate vocabulary as follows:
+
+
+""" ;
+    foaf:homepage "https://www.opengroup.org/xsd/archimate/" ;
+    ns1:audience """
+The target audience for the ArchiXML ontology includes architects, researchers, practitioners, tool developers, and enthusiasts working in the fields of enterprise architecture, semantic web technologies, ontology engineering, and related disciplines. 
+
+This ontology caters to individuals and organizations involved in modeling, analyzing, and managing complex systems and architectures. Whether seeking to enhance interoperability between Archimate models and other data sources, develop semantic web-based tools for Archimate manipulation, or explore advanced analysis techniques, this ontology serves as a valuable resource for a diverse range of stakeholders.
+"""@en ;
+    ns1:background """
+The ArchiXML ontology emerges from the need to bridge the gap between the Archimate modeling language and semantic web technologies. While Archimate provides a comprehensive framework for describing enterprise architectures, its representation lacks the formal semantics necessary for automated processing, integration, and reasoning.
+
+By creating an ontology that captures the essence of Archimate concepts and relationships in RDF, we aim to unlock new opportunities for leveraging Archimate models within the semantic web ecosystem. 
+"""@en ;
+    ns1:introduction """
+The ArchiXML ontology is designed to represent the vocabulary and logic of Archimate in RDF format. Archimate, a widely used modeling language for enterprise architecture, encompasses a rich set of concepts and relationships to describe the structure and behavior of organizations. By formalizing Archimate concepts into an ontology, we enable interoperability, integration, and semantic understanding of Archimate models within the context of the Semantic Web.
+
+With this ontology, users can leverage semantic web technologies to generate, parse, validate, annotate, and reuse Archimate documents. By providing a standardized representation, it becomes feasible to integrate Archimate models with other data sources, perform automated reasoning, and develop advanced analysis and visualization tools.
+
+"""@en ;
+    ns1:objective """
+The primary objective of the ArchiXML ontology is to provide a standardized representation of Archimate concepts and relationships in RDF format. By formalizing the vocabulary and logic of Archimate, this ontology aims to facilitate interoperability, integration, and semantic understanding of Archimate models within the context of the Semantic Web.
+
+Key objectives include enabling the generation, parsing, validation, annotation, and reuse of Archimate documents using semantic web technologies. Additionally, the ontology seeks to support automated reasoning, advanced analysis, and visualization of Archimate models, thereby enhancing decision-making processes in enterprise architecture.
+"""@en .
+
+archimate: a void:Dataset,
+        owl:Ontology,
+        respec:Ontology ;
+    dct:abstract "Abstract of archimate vocabulary"@en ;
+    dct:created "2024-02-14"^^xsd:date ;
+    dct:creator "Flores Bakker" ;
+    dct:description "Description of archimate vocabulary"@en ;
+    dct:language "iso639-1:en" ;
+    dct:license "https://creativecommons.org/licenses/by/4.0/"^^xsd:anyURI ;
+    dct:publisher <https://www.example.com> ;
+    dct:source <https://www.example.com/archimate-vocabulary> ;
+    dct:status status:UnderDevelopment ;
+    dct:title "archimate Core Vocabulary"@en ;
+    vann:preferredNamespacePrefix "archimate" ;
+    vann:preferredNamespaceUri "https://data.rijksfinancien.nl/archimate/model/def/" ;
+    void:uriRegexPattern "^https://data.rijksfinancien.nl/archimate/model/def/" ;
+    void:uriSpace "https://data.rijksfinancien.nl/xml/archimate/def/"^^xsd:anyURI ;
+    owl:versionInfo "1.0" ;
+    skos:example """
+
+* An example of an archimate model:
+
+There are three Archimate elements, involving a Business Actor, a Business Role, and a Business Object. There are two relationships. The first relationship is an Assignment from the Business Actor to the Business Role, representing the assignment of a role to the actor. The second relationship is an Association from the Business Object to the Assignment Relationship. This means the Business Object is associated with the business actor's role assignment. For instance, when there is a contract stipulating the conditions of the actor's role assignment.
+
+* This can be represented in RDF using the archimate vocabulary as follows:
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix model: <https://data.rijksfinancien.nl/archimate/id/>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+### Model
+
+model:BasicModel 
+    rdf:type archimate:Model;
+    skos:prefLabel "Basic Model";
+    skos:definition "Example of a basic model with three elements and two relationships".
+
+### Element
+
+model:aBusinessActor 
+    rdf:type archimate:BusinessActor;
+    skos:prefLabel "A business actor";
+    skos:definition "An example of a business actor";
+    rdfs:isDefinedBy model:BasicModel.
+
+model:aBusinessRole 
+    rdf:type archimate:BusinessRole;
+    skos:prefLabel "A business role";
+    skos:definition "An example of a business role";
+    rdfs:isDefinedBy model:BasicModel.
+    
+model:aBusinessObject
+    rdf:type archimate:BusinessObject;
+    skos:prefLabel "A business object";
+    skos:definition "An example of a business object";
+    rdfs:isDefinedBy model:BasicModel.
+   
+### Relationship
+
+model:aRelationship1 
+    rdf:type archimate:Relationship;
+    skos:prefLabel "a business actor - role assignment";
+    skos:definition "An example of a business actor and role assignment";
+    archimate:from model:aBusinessActor;
+    archimate:relationship archimate:assignedTo;
+    archimate:to model:aBusinessRole;
+    rdfs:isDefinedBy model:BasicModel.  
+   
+model:aRelationship2
+    rdf:type archimate:Relationship;
+    skos:prefLabel "a business object - relationship association";
+    skos:definition "An example of a business object and relationship association";
+    archimate:from model:aBusinessObject;
+    archimate:relationship archimate:association;
+    archimate:to model:aRelationship1;
+    rdfs:isDefinedBy model:BasicModel.  
+
+""" ;
+    foaf:homepage "https://www.example.com/"^^xsd:anyURI ;
+    respec:audience "Audience of archimate vocabulary"@en ;
+    respec:background """In the field of enterprise architecture, Archimate plays a crucial role in modeling and analyzing complex systems and architectures. Archimate provides a standardized framework for describing the structure, behavior, and relationships within organizations, facilitating communication and decision-making processes.
+
+However, the representation of Archimate models in traditional formats lacks the semantic richness necessary for interoperability and advanced analysis. The Archimate Ontology addresses this limitation by formalizing Archimate concepts and relationships in RDF format, leveraging semantic web technologies to enhance interoperability, integration, and semantic understanding of Archimate models.
+
+With the Archimate Ontology, users can generate, parse, validate, annotate, and reuse Archimate documents using semantic web compliant technology, unlocking new possibilities for leveraging Archimate models within the wider context of the Semantic Web."""@en ;
+    respec:introduction "Introduction of archimate vocabulary."@en ;
+    respec:objective "Objective of archimate vocabulary"@en .
+
