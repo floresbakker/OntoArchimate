@@ -228,7 +228,7 @@ construct {
   ?style rdf:type svg:Style;
          xml:fragment """path, line, rect, circle, polyline, polygon {
       vector-effect: non-scaling-stroke;
-    }""";
+    }""".
   
   ?definitions rdf:type svg:Defs;
          dct:subject "definitions";
