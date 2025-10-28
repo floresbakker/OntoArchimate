@@ -514,7 +514,7 @@ view:aBusinessActor
     skos:prefLabel "A depiction of a business actor" ;
     skos:definition "An example of a depiction of a business actor." ;
     foaf:depicts model:aBusinessActor ;
-    archimate:horizontal 400 ;
+    archimate:horizontal 450 ;
     archimate:vertical 280 ;
     archimate:height 55 ;
     archimate:width 120 ;
@@ -527,17 +527,6 @@ view:aBusinessRole
     foaf:depicts model:aBusinessRole ;
     archimate:horizontal 700 ;
     archimate:vertical 280 ;
-    archimate:height 55 ;
-    archimate:width 120 ;
-    rdfs:isDefinedBy model:allElements .
-
-view:aBusinessObject 
-    rdf:type archimate:ViewNode ;
-    skos:prefLabel "A depiction of a business object" ;
-    skos:definition "An example of a depiction of a business object." ;
-    foaf:depicts model:aBusinessObject ;
-    archimate:horizontal 550 ;
-    archimate:vertical 450 ;
     archimate:height 55 ;
     archimate:width 120 ;
     rdfs:isDefinedBy model:allElements .
@@ -652,18 +641,20 @@ view:aProduct
     archimate:width 120 ;
     rdfs:isDefinedBy model:allElements .
 
-### APPLICATION LAYER (rows @ y=800, 970, 1140)
-
-view:anApplicationComponent
+view:aBusinessObject 
     rdf:type archimate:ViewNode ;
-    skos:prefLabel "A depiction of an application component" ;
-    skos:definition "An example of a depiction of an application component." ;
-    foaf:depicts model:anApplicationComponent ;
+    skos:prefLabel "A depiction of a business object" ;
+    skos:definition "An example of a depiction of a business object." ;
+    foaf:depicts model:aBusinessObject ;
     archimate:horizontal 200 ;
     archimate:vertical 800 ;
     archimate:height 55 ;
     archimate:width 120 ;
-    rdfs:isDefinedBy model:allElements .
+    rdfs:isDefinedBy model:allElements .    
+
+### APPLICATION LAYER (rows @ y=800, 970, 1140)
+
+
 
 view:anApplicationCollaboration
     rdf:type archimate:ViewNode ;
@@ -752,6 +743,17 @@ view:aDataObject
     archimate:height 55 ;
     archimate:width 120 ;
     rdfs:isDefinedBy model:allElements .
+
+view:anApplicationComponent
+    rdf:type archimate:ViewNode ;
+    skos:prefLabel "A depiction of an application component" ;
+    skos:definition "An example of a depiction of an application component." ;
+    foaf:depicts model:anApplicationComponent ;
+    archimate:horizontal 450 ;
+    archimate:vertical 1140 ;
+    archimate:height 55 ;
+    archimate:width 120 ;
+    rdfs:isDefinedBy model:allElements .    
 
 ### TECHNOLOGY & PHYSICAL LAYER (rows @ y=1320, 1490, 1660, 1830)
 
