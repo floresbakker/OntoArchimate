@@ -479,7 +479,7 @@ archiSVG:DriverIconPart2 a svg:Circle, archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
     
-archiSVG:DriverActorIconPart3 a svg:Line, archiSVG:Template ;
+archiSVG:DriverIconPart3 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
@@ -488,7 +488,7 @@ archiSVG:DriverActorIconPart3 a svg:Line, archiSVG:Template ;
     svg:y1 "5" ;
     svg:y2 "25" .
 
-archiSVG:DriverActorIconPart4 a svg:Line, archiSVG:Template ;
+archiSVG:DriverIconPart4 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
@@ -497,7 +497,7 @@ archiSVG:DriverActorIconPart4 a svg:Line, archiSVG:Template ;
     svg:y1 "15" ;
     svg:y2 "15" .
 
-archiSVG:DriverActorIconPart5 a svg:Line, archiSVG:Template ;
+archiSVG:DriverIconPart5 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
@@ -506,7 +506,7 @@ archiSVG:DriverActorIconPart5 a svg:Line, archiSVG:Template ;
     svg:y1 "8" ;
     svg:y2 "22" .
 
-archiSVG:DriverActorIconPart6 a svg:Line, archiSVG:Template ;
+archiSVG:DriverIconPart6 a svg:Line, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
