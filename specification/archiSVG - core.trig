@@ -456,16 +456,64 @@ archiSVG:DriverIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a driver in Archimate";
     dct:related archimate:Driver;
     svg:id "Driver";    
-    rdf:_1 archiSVG:DriverIconPart1.
+    rdf:_1 archiSVG:DriverIconPart1;
+    rdf:_2 archiSVG:DriverIconPart2;
+    rdf:_3 archiSVG:DriverIconPart3;
+    rdf:_4 archiSVG:DriverIconPart4;
+    rdf:_5 archiSVG:DriverIconPart5;
+    rdf:_6 archiSVG:DriverIconPart6.    
     
-archiSVG:DriverIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:DriverIconPart1 a svg:Circle, archiSVG:Template ;
+    svg:cx "125" ;
+    svg:cy "15" ;
     svg:fill "none" ;
-    svg:height "10" ;
+    svg:r "7" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" .
+
+archiSVG:DriverIconPart2 a svg:Circle, archiSVG:Template ;
+    svg:cx "125" ;
+    svg:cy "15" ;
+    svg:fill "black" ;
+    svg:r "2" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+    
+archiSVG:DriverActorIconPart3 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+    svg:x1 "125" ;
+    svg:x2 "125" ;
+    svg:y1 "5" ;
+    svg:y2 "25" .
+
+archiSVG:DriverActorIconPart4 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "115" ;
+    svg:x2 "135" ;
+    svg:y1 "15" ;
+    svg:y2 "15" .
+
+archiSVG:DriverActorIconPart5 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "118" ;
+    svg:x2 "132" ;
+    svg:y1 "8" ;
+    svg:y2 "22" .
+
+archiSVG:DriverActorIconPart6 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "132" ;
+    svg:x2 "118" ;
+    svg:y1 "8" ;
+    svg:y2 "22" .   
 
 archiSVG:AssessmentIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an assessment in Archimate";
@@ -495,31 +543,65 @@ archiSVG:GoalIcon a svg:Symbol, archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a goal in Archimate";
     dct:related archimate:Goal;
     svg:id "Goal";
-    rdf:_1 archiSVG:GoalIconPart1.
+    rdf:_1 archiSVG:GoalIconPart1;
+    rdf:_2 archiSVG:GoalIconPart2;
+    rdf:_3 archiSVG:GoalIconPart3.
     
-archiSVG:GoalIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:GoalIconPart1 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
     svg:fill "none" ;
-    svg:height "10" ;
+    svg:r "7" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+    svg:stroke-width "0.5" .
+
+archiSVG:GoalIconPart2 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "4.5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:GoalIconPart3 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "black" ;
+    svg:r "2" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .    
 
 archiSVG:OutcomeIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an outcome in Archimate";
     dct:related archimate:Outcome;
     svg:id "Outcome";    
-    rdf:_1 archiSVG:OutcomeIconPart1.
+    rdf:_1 archiSVG:OutcomeIconPart1;
+    rdf:_2 archiSVG:OutcomeIconPart2;
+    rdf:_3 archiSVG:OutcomeIconPart3.
     
-archiSVG:OutcomeIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:OutcomeIconPart1 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
     svg:fill "none" ;
-    svg:height "10" ;
+    svg:r "7" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+    svg:stroke-width "0.5" .
+
+archiSVG:OutcomeIconPart2 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "4.5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:OutcomeIconPart3 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "2" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" . 
 
 archiSVG:PrincipleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a principle in Archimate";
@@ -602,14 +684,14 @@ archiSVG:ValueIcon a svg:Symbol , archiSVG:Template ;
     svg:id "Value";    
     rdf:_1 archiSVG:ValueIconPart1.
     
-archiSVG:ValueIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:ValueIconPart1 a svg:Ellipse , archiSVG:Template ;
     svg:fill "none" ;
-    svg:height "10" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+    svg:cx "125" ;
+    svg:cy "10" ;
+    svg:rx "10";
+    svg:ry "5".
     
 archiSVG:CapabilityIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a capability in Archimate" ;
@@ -630,16 +712,33 @@ archiSVG:CourseOfActionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a course of action in Archimate" ;
     dct:related archimate:CourseOfAction;
     svg:id "CourseOfAction" ;
-    rdf:_1 archiSVG:CourseOfActionIconPart1 .
+    rdf:_1 archiSVG:CourseOfActionIconPart1;
+    rdf:_2 archiSVG:CourseOfActionIconPart2;
+    rdf:_3 archiSVG:CourseOfActionIconPart3.
     
-archiSVG:CourseOfActionIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:CourseOfActionIconPart1 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "7" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:CourseOfActionIconPart2 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "4.5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:CourseOfActionIconPart3 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "2" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" . 
 
 archiSVG:ResourceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a resource in Archimate" ;
@@ -662,14 +761,12 @@ archiSVG:ValueStreamIcon a svg:Symbol , archiSVG:Template ;
     svg:id "ValueStream" ;
     rdf:_1 archiSVG:ValueStreamIconPart1 .
     
-archiSVG:ValueStreamIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:ValueStreamIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d "M 135 10 L 130 5 L 120 5 L 125 10 L 120 15 L 130 15 Z".
+
 
 archiSVG:ApplicationComponentIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application component in Archimate";
@@ -1453,32 +1550,71 @@ archiSVG:PlateauIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a plateau in Archimate" ;
     dct:related archimate:Plateau;
     svg:id "Plateau" ;
-    rdf:_1 archiSVG:PlateauIconPart1 .
-    
-archiSVG:PlateauIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    rdf:_1 archiSVG:PlateauIconPart1;
+    rdf:_2 archiSVG:PlateauIconPart2;    
+    rdf:_3 archiSVG:PlateauIconPart3.
 
+archiSVG:PlateauIconPart1 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" ;
+    svg:x1 "125" ;
+    svg:x2 "135" ;
+    svg:y1 "14" ;
+    svg:y2 "14" .  
+    
+archiSVG:PlateauIconPart2 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" ;
+    svg:x1 "127" ;
+    svg:x2 "137" ;
+    svg:y1 "10" ;
+    svg:y2 "10" .    
+
+archiSVG:PlateauIconPart3 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" ;
+    svg:x1 "129" ;
+    svg:x2 "139" ;
+    svg:y1 "6" ;
+    svg:y2 "6" .   
+                      
 archiSVG:GapIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a gap in Archimate" ;
     dct:related archimate:Gap;
     svg:id "Gap" ;
-    rdf:_1 archiSVG:GapIconPart1 .
+    rdf:_1 archiSVG:GapIconPart1;
+    rdf:_2 archiSVG:GapIconPart2;
+    rdf:_3 archiSVG:GapIconPart3.
     
-archiSVG:GapIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:GapIconPart1 a svg:Circle , archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "6" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
 
+archiSVG:GapIconPart2 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "120" ;
+    svg:x2 "140" ;
+    svg:y1 "8" ;
+    svg:y2 "8" .    
+
+archiSVG:GapIconPart3 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "120" ;
+    svg:x2 "140" ;
+    svg:y1 "12" ;
+    svg:y2 "12" .   
+                      
 archiSVG:ImplementationEventIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an implementation event in Archimate" ;
     dct:related archimate:ImplementationEvent;
