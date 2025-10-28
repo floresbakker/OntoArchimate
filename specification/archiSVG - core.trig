@@ -325,7 +325,7 @@ archiSVG:flowStart rdf:type svg:G, archiSVG:Definition ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "1" .   
-
+    
 # Definition of icons 
     
 ### Icon definitions for all ArchiMate elements
@@ -699,14 +699,11 @@ archiSVG:CapabilityIcon a svg:Symbol , archiSVG:Template ;
     svg:id "Capability" ;
     rdf:_1 archiSVG:CapabilityIconPart1 .
     
-archiSVG:CapabilityIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:CapabilityIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M125 20 H130 V25 H125 Z M130 15 H135 V25 H130 Z M135 10 H140 V25 H135 Z M130 15 H140 V20 H130 Z";
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:stroke-width "0.5".
 
 archiSVG:CourseOfActionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a course of action in Archimate" ;
@@ -744,16 +741,43 @@ archiSVG:ResourceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a resource in Archimate" ;
     dct:related archimate:Resource;
     svg:id "Resource" ;
-    rdf:_1 archiSVG:ResourceIconPart1 .
-    
-archiSVG:ResourceIconPart1 a svg:Rect , archiSVG:Template ;
+    rdf:_1 archiSVG:ResourceIconPart1 ;
+    rdf:_2 archiSVG:ResourceIconPart2 ;
+    rdf:_3 archiSVG:ResourceIconPart3 ;
+    rdf:_4 archiSVG:ResourceIconPart4 .    
+
+archiSVG:ResourceIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d "M135,7.5 h1.5 a1,1 0 0 1 1,1 v3 a1,1 0 0 1 -1,1 h-1.5 z".   
+
+archiSVG:ResourceIconPart2 a svg:Rect , archiSVG:Template ;
+    svg:fill "black"; 
+    svg:height "6"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "1"; 
+    svg:x "119"; 
+    svg:y "7" .
+
+archiSVG:ResourceIconPart3 a svg:Rect , archiSVG:Template ;
+    svg:fill "black";  
+    svg:height "6"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "1"; 
+    svg:x "123.5"; 
+    svg:y "7" .
+
+archiSVG:ResourceIconPart4 a svg:Rect , archiSVG:Template ;
+    svg:fill "black"; 
+    svg:height "6"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:width "1"; 
+    svg:x "128"; 
+    svg:y "7" . 
 
 archiSVG:ValueStreamIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a value stream in Archimate" ;
@@ -1292,16 +1316,24 @@ archiSVG:SystemSoftwareIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for system software in Archimate" ;
     dct:related archimate:SystemSoftware;
     svg:id "SystemSoftware" ;
-    rdf:_1 archiSVG:SystemSoftwareIconPart1 .
-    
-archiSVG:SystemSoftwareIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
+    rdf:_1 archiSVG:SystemSoftwareIconPart1 ;
+    rdf:_2 archiSVG:SystemSoftwareIconPart2 .
+   
+archiSVG:SystemSoftwareIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M 79.37 2.54 C 59.09 15.78 53.91 42.18 67.8 61.52 C 81.68 80.85 109.38 85.79 129.66 72.55";
+    svg:fill "none" ;
+    svg:stroke "black" ;
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .    
+    svg:transform "rotate(-175,80.55,41.75)".
+    
+archiSVG:SystemSoftwareIconPart2 a svg:Ellipse, archiSVG:Template ;
+    svg:cx "45" ;
+    svg:cy "50.54" ;
+    svg:rx "45" ;
+    svg:ry "45" ;
+    svg:fill "none" ;    
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".  
 
 archiSVG:TechnologyCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology collaboration in Archimate";
@@ -1443,14 +1475,11 @@ archiSVG:FacilityIcon a svg:Symbol , archiSVG:Template ;
     svg:id "Facility" ;
     rdf:_1 archiSVG:FacilityIconPart1 .
     
-archiSVG:FacilityIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
+archiSVG:FacilityIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M 120 5 L 120 25 L 140 25 L 140 15 L 135 17 L 135 15 L 130 17 L 130 15 L 125 17 L 125 5 Z";
+    svg:fill "none";  
     svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:stroke-width "0.5".
 
 archiSVG:DistributionNetworkIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a distribution network in Archimate" ;
@@ -1471,17 +1500,44 @@ archiSVG:MaterialIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a material in Archimate" ;
     dct:related archimate:Material;
     svg:id "Material" ;
-    rdf:_1 archiSVG:MaterialIconPart1 .
+    rdf:_1 archiSVG:MaterialIconPart1 ;
+    rdf:_2 archiSVG:MaterialIconPart2 ;
+    rdf:_3 archiSVG:MaterialIconPart3 ;
+    rdf:_4 archiSVG:MaterialIconPart4 .    
     
-archiSVG:MaterialIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
+archiSVG:MaterialIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M 120 5 L 115 15 L 120 25 L 135 25 L 140 15 L 135 5 Z";
+    svg:fill "none";  
     svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:stroke-width "0.5".
 
+archiSVG:MaterialIconPart2 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" ;
+    svg:x1 "123" ;
+    svg:x2 "118" ;
+    svg:y1 "7" ;
+    svg:y2 "15" .  
+    
+archiSVG:MaterialIconPart3 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" ;
+    svg:x1 "132" ;
+    svg:x2 "137" ;
+    svg:y1 "7" ;
+    svg:y2 "15" .    
+
+archiSVG:MaterialIconPart4 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "2" ;
+    svg:x1 "122" ;
+    svg:x2 "133" ;
+    svg:y1 "22" ;
+    svg:y2 "22" .
+                      
 archiSVG:PathIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a path in Archimate" ;
     dct:related archimate:Path;
