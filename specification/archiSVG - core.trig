@@ -432,7 +432,8 @@ archiSVG:StakeholderIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a stakeholder in Archimate";
     dct:related archimate:Stakeholder;
     svg:id "Stakeholder";
-    rdf:_1 archiSVG:StakeholderIconPart1.
+    rdf:_1 archiSVG:StakeholderIconPart1;
+    rdf:_2 archiSVG:StakeholderIconPart2.
     
 archiSVG:StakeholderIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
@@ -441,7 +442,15 @@ archiSVG:StakeholderIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
-    svg:y "5" .
+    svg:y "5" ;
+    svg:rx="3";
+    svg:ry="5".
+    
+archiSVG:StakeholderIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M 130 5 A 3 5 0 0 0 130 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5". 
 
 archiSVG:DriverIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a driver in Archimate";
@@ -899,7 +908,8 @@ archiSVG:BusinessRoleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business role in Archimate";
     dct:related archimate:BusinessRole;
     svg:id "BusinessRole";    
-    rdf:_1 archiSVG:BusinessRoleIconPart1.
+    rdf:_1 archiSVG:BusinessRoleIconPart1;
+    rdf:_2 archiSVG:BusinessRoleIconPart2.
     
 archiSVG:BusinessRoleIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
@@ -908,7 +918,15 @@ archiSVG:BusinessRoleIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
-    svg:y "5" .
+    svg:y "5" ;
+    svg:rx="3";
+    svg:ry="5".
+    
+archiSVG:BusinessRoleIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M 130 5 A 3 5 0 0 0 130 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".   
 
 archiSVG:BusinessCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business collaboration in Archimate";
@@ -1093,16 +1111,30 @@ archiSVG:RepresentationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a representation in Archimate";
     dct:related archimate:Representation;
     svg:id "Representation";    
-    rdf:_1 archiSVG:RepresentationIconPart1.
+    rdf:_1 archiSVG:RepresentationIconPart1;
+    rdf:_2 archiSVG:RepresentationIconPart2;
+    rdf:_3 archiSVG:RepresentationIconPart3;    
     
 archiSVG:RepresentationIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
-    svg:height "10" ;
+    svg:height "3" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
     svg:y "5" .
+    
+archiSVG:RepresentationIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M 115 15 L 115 5 L 135 5 L 135 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".
+
+archiSVG:RepresentationIconPart3 a svg:Path , archiSVG:Template ;
+    svg:d "M 115 15 C 120 23, 125 10, 135 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".
 
 archiSVG:ProductIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a product in Archimate";
@@ -1387,16 +1419,20 @@ archiSVG:DeliverableIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a deliverable in Archimate" ;
     dct:related archimate:Deliverable;
     svg:id "Deliverable" ;
-    rdf:_1 archiSVG:DeliverableIconPart1 .
+    rdf:_1 archiSVG:DeliverableIconPart1;
+    rdf:_2 archiSVG:DeliverableIconPart2.    
     
-archiSVG:DeliverableIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:DeliverableIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M 115 15 L 115 5 L 135 5 L 135 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".
+
+archiSVG:DeliverableIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M 115 15 C 120 23, 125 10, 135 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".
 
 archiSVG:WorkPackageIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a work package in Archimate" ;
@@ -1449,14 +1485,11 @@ archiSVG:ImplementationEventIcon a svg:Symbol , archiSVG:Template ;
     svg:id "ImplementationEvent" ;
     rdf:_1 archiSVG:ImplementationEventIconPart1 .
     
-archiSVG:ImplementationEventIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:ImplementationEventIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M 130.5 5 A 5 5 0 0 1 130.5 15 L 118 15 L 120 10 L 118 5 Z";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".
 
 ### Generic elements
 
