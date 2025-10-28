@@ -310,16 +310,19 @@ rule:DefinitionsIcons
     skos:prefLabel 'SVG definitions of icons rule'@en;
     sh:construct '''
 
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct:      <http://purl.org/dc/terms/>
-prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
-prefix prov:     <http://www.w3.org/ns/prov#>
-prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
-prefix skos:     <http://www.w3.org/2004/02/skos/core#>
-prefix svg:      <http://www.w3.org/SVG/model/def/>
-prefix xml:      <http://www.w3.org/XML/model/def/>
-prefix xsi:      <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xlink:     <https://www.w3.org/1999/xlink/model/def/>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
@@ -341,9 +344,30 @@ construct {
   ?definitionTemplate 
               rdf:type svg:Symbol, archiSVG:Template;
               skos:prefLabel ?label;
+              dct:related ?archimateClass;
               svg:id ?id;
               ?memberComponent ?componentTemplate.
   filter(strstarts(str(?memberComponent), concat(str(rdf:), '_')))
+  
+  # Only get the SVG templates for the archimate elements that are actually in use
+  {select ?archimateClass where {
+      
+      ?archimateClass rdfs:subClassOf* archimate:Element.
+      ?element 
+          rdf:type ?archimateClass;
+          rdfs:isDefinedBy ?model.
+      ?viewNode foaf:depicts ?element.
+      ?view 
+           archimate:contains ?viewNode;
+           rdfs:isDefinedBy ?model.       
+      ?doc
+           rdf:type svg:Document;
+           prov:wasDerivedFrom ?view;
+           rdf:_1 ?svg.
+      ?svg rdf:_1 ?definitions.
+      ?definitions rdf:_2 $this.
+      }
+  }
   
   ?componentTemplate 
              ?predicate ?object.
