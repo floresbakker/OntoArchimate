@@ -1330,14 +1330,11 @@ archiSVG:SystemSoftwareIcon a svg:Symbol , archiSVG:Template ;
     svg:id "SystemSoftware" ;
     rdf:_1 archiSVG:SystemSoftwareIconPart1 .
    
-archiSVG:SystemSoftwareIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:SystemSoftwareIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d "M129 8 C125.9624 8 123.5 10.4624 123.5 13.5 C123.5 16.5376 125.9624 19 129 19 C132.0376 19 134.5 16.5376 134.5 13.5 C134.5 10.4624 132.0376 8 129 8 Z M133.75 16.2631 C136.3806 14.7444 137.2819 11.3806 135.7631 8.75 C134.2444 6.1194 130.8806 5.2181 128.25 6.7369 C127.4139 7.2196 126.7196 7.9139 126.2369 8.75".
 
 archiSVG:TechnologyCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology collaboration in Archimate";
