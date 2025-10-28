@@ -724,7 +724,8 @@ archiSVG:ApplicationInterfaceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application interface in Archimate";
     dct:related archimate:ApplicationInterface;
     svg:id "ApplicationInterface";    
-    rdf:_1 archiSVG:ApplicationInterfaceIconPart1.
+    rdf:_1 archiSVG:ApplicationInterfaceIconPart1;
+    rdf:_2 archiSVG:ApplicationInterfaceIconPart2.
     
 archiSVG:ApplicationInterfaceIconPart1 a svg:Circle , archiSVG:Template ;
     svg:cx "125" ;
@@ -734,6 +735,15 @@ archiSVG:ApplicationInterfaceIconPart1 a svg:Circle , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
+archiSVG:ApplicationInterfaceIconPart2 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "120" ;
+    svg:x2 "115" ;
+    svg:y1 "11" ;
+    svg:y2 "11" .    
+    
 archiSVG:ApplicationFunctionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application function in Archimate";
     dct:related archimate:ApplicationFunction;
@@ -768,11 +778,9 @@ archiSVG:ApplicationProcessIcon a svg:Symbol , archiSVG:Template ;
     svg:id "ApplicationProcess";    
     rdf:_1 archiSVG:ApplicationProcessIconPart1.
     
-archiSVG:ApplicationProcessIconPart1 a svg:Circle , archiSVG:Template ;
-    svg:cx "125" ;
-    svg:cy "10" ;
+archiSVG:ApplicationProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:fill "none" ;
-    svg:r "5" ;
+    svg:points "125,8 135,8 135,5 141,10.5, 135,16 135,13 125,13 125,8" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
@@ -905,31 +913,48 @@ archiSVG:BusinessCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business collaboration in Archimate";
     dct:related archimate:BusinessCollaboration;
     svg:id "BusinessCollaboration";
-    rdf:_1 archiSVG:BusinessCollaborationIconPart1.
+    rdf:_1 archiSVG:BusinessCollaborationIconPart1;
+    rdf:_2 archiSVG:BusinessCollaborationIconPart2.
     
-archiSVG:BusinessCollaborationIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:BusinessCollaborationIconPart1 a svg:Circle, archiSVG:Template ;
+    svg:cx "125" ;
+    svg:cy "10" ;
     svg:fill "none" ;
-    svg:height "10" ;
+    svg:r "5" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+    svg:stroke-width "0.5" .
+
+archiSVG:BusinessCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ; 
+    svg:fill "none" ;
+    svg:r "5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
 
 archiSVG:BusinessInterfaceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business interface in Archimate";
     dct:related archimate:BusinessInterface;
     svg:id "BusinessInterface";    
-    rdf:_1 archiSVG:BusinessInterfaceIconPart1.
+    rdf:_1 archiSVG:BusinessInterfaceIconPart1;
+    rdf:_2 archiSVG:BusinessInterfaceIconPart2.
     
-archiSVG:BusinessInterfaceIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:BusinessInterfaceIconPart1 a svg:Circle , archiSVG:Template ;
+    svg:cx "125" ;
+    svg:cy "10" ;
     svg:fill "none" ;
-    svg:height "10" ;
+    svg:r "5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:BusinessInterfaceIconPart2 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+    svg:x1 "120" ;
+    svg:x2 "115" ;
+    svg:y1 "11" ;
+    svg:y2 "11" .   
 
 archiSVG:BusinessProcessIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business process in Archimate";
@@ -1124,31 +1149,48 @@ archiSVG:TechnologyCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology collaboration in Archimate";
     dct:related archimate:TechnologyCollaboration;
     svg:id "TechnologyCollaboration" ;
-    rdf:_1 archiSVG:TechnologyCollaborationIconPart1 .
+    rdf:_1 archiSVG:TechnologyCollaborationIconPart1;
+    rdf:_2 archiSVG:TechnologyCollaborationIconPart2.
     
-archiSVG:TechnologyCollaborationIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none";
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:TechnologyCollaborationIconPart1 a svg:Circle, archiSVG:Template ;
+    svg:cx "125" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:TechnologyCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
+    svg:cx "130" ;
+    svg:cy "10" ; 
+    svg:fill "none" ;
+    svg:r "5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
 
 archiSVG:TechnologyInterfaceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology interface in Archimate" ;
     dct:related archimate:TechnologyInterface;
     svg:id "TechnologyInterface" ;
-    rdf:_1 archiSVG:TechnologyInterfaceIconPart1 .
+    rdf:_1 archiSVG:TechnologyInterfaceIconPart1;
+    rdf:_2 archiSVG:TechnologyInterfaceIconPart2.
     
-archiSVG:TechnologyInterfaceIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:TechnologyInterfaceIconPart1 a svg:Circle , archiSVG:Template ;
+    svg:cx "125" ;
+    svg:cy "10" ;
+    svg:fill "none" ;
+    svg:r "5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
+
+archiSVG:TechnologyInterfaceIconPart2 a svg:Line, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:x1 "120" ;
+    svg:x2 "115" ;
+    svg:y1 "11" ;
+    svg:y2 "11" . 
 
 archiSVG:TechnologyFunctionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology function in Archimate" ;
@@ -1171,14 +1213,11 @@ archiSVG:TechnologyProcessIcon a svg:Symbol , archiSVG:Template ;
     svg:id "TechnologyProcess" ;
     rdf:_1 archiSVG:TechnologyProcessIconPart1 .
     
-archiSVG:TechnologyProcessIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20";
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:TechnologyProcessIconPart1 a svg:Polyline, archiSVG:Template ;
+    svg:fill "none" ;
+    svg:points "125,8 135,8 135,5 141,10.5, 135,16 135,13 125,13 125,8" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" .
 
 archiSVG:TechnologyInteractionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology interaction in Archimate";
@@ -1199,16 +1238,18 @@ archiSVG:TechnologyServiceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology service in Archimate" ;
     dct:related archimate:TechnologyService;
     svg:id "TechnologyService" ;
-    rdf:_1 archiSVG:TechnologyServiceIconPart1 .
+    rdf:_1 archiSVG:TechnologyServiceIconPart1.
     
 archiSVG:TechnologyServiceIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:fill "none" ;
+    svg:height "10" ;
+    svg:rx "5" ;
+    svg:ry "5" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:width "20" ;
+    svg:x "115" ;
+    svg:y "5".
 
 archiSVG:TechnologyEventIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology event in Archimate" ;
