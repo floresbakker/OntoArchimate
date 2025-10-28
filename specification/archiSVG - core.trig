@@ -443,8 +443,8 @@ archiSVG:StakeholderIconPart1 a svg:Rect , archiSVG:Template ;
     svg:width "20" ;
     svg:x "115" ;
     svg:y "5" ;
-    svg:rx="3";
-    svg:ry="5".
+    svg:rx "3";
+    svg:ry "5".
     
 archiSVG:StakeholderIconPart2 a svg:Path , archiSVG:Template ;
     svg:d "M 130 5 A 3 5 0 0 0 130 15";
@@ -919,8 +919,8 @@ archiSVG:BusinessRoleIconPart1 a svg:Rect , archiSVG:Template ;
     svg:width "20" ;
     svg:x "115" ;
     svg:y "5" ;
-    svg:rx="3";
-    svg:ry="5".
+    svg:rx "3";
+    svg:ry "5".
     
 archiSVG:BusinessRoleIconPart2 a svg:Path , archiSVG:Template ;
     svg:d "M 130 5 A 3 5 0 0 0 130 15";
@@ -1113,7 +1113,7 @@ archiSVG:RepresentationIcon a svg:Symbol , archiSVG:Template ;
     svg:id "Representation";    
     rdf:_1 archiSVG:RepresentationIconPart1;
     rdf:_2 archiSVG:RepresentationIconPart2;
-    rdf:_3 archiSVG:RepresentationIconPart3;    
+    rdf:_3 archiSVG:RepresentationIconPart3.
     
 archiSVG:RepresentationIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
