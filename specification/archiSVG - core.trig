@@ -432,7 +432,8 @@ archiSVG:StakeholderIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a stakeholder in Archimate";
     dct:related archimate:Stakeholder;
     svg:id "Stakeholder";
-    rdf:_1 archiSVG:StakeholderIconPart1.
+    rdf:_1 archiSVG:StakeholderIconPart1;
+    rdf:_2 archiSVG:StakeholderIconPart2.
     
 archiSVG:StakeholderIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
@@ -441,7 +442,15 @@ archiSVG:StakeholderIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
-    svg:y "5" .
+    svg:y "5" ;
+    svg:rx="3";
+    svg:ry="5".
+    
+archiSVG:StakeholderIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M 130 5 A 3 5 0 0 0 130 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5". 
 
 archiSVG:DriverIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a driver in Archimate";
@@ -899,7 +908,8 @@ archiSVG:BusinessRoleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business role in Archimate";
     dct:related archimate:BusinessRole;
     svg:id "BusinessRole";    
-    rdf:_1 archiSVG:BusinessRoleIconPart1.
+    rdf:_1 archiSVG:BusinessRoleIconPart1;
+    rdf:_2 archiSVG:BusinessRoleIconPart2.
     
 archiSVG:BusinessRoleIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none" ;
@@ -908,7 +918,15 @@ archiSVG:BusinessRoleIconPart1 a svg:Rect , archiSVG:Template ;
     svg:stroke-width "0.5" ;
     svg:width "20" ;
     svg:x "115" ;
-    svg:y "5" .
+    svg:y "5" ;
+    svg:rx="3";
+    svg:ry="5".
+    
+archiSVG:BusinessRoleIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M 130 5 A 3 5 0 0 0 130 15";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".   
 
 archiSVG:BusinessCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business collaboration in Archimate";
