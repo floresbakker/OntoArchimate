@@ -1449,14 +1449,11 @@ archiSVG:ImplementationEventIcon a svg:Symbol , archiSVG:Template ;
     svg:id "ImplementationEvent" ;
     rdf:_1 archiSVG:ImplementationEventIconPart1 .
     
-archiSVG:ImplementationEventIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
-    svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+archiSVG:ImplementationEventIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M 130.5 5 A 5 5 0 0 1 130.5 15 L 118 15 L 120 10 L 118 5 Z";
+    svg:fill "none" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5".
 
 ### Generic elements
 
