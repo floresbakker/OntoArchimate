@@ -424,7 +424,7 @@ archiSVG:LocationIcon a svg:Symbol , archiSVG:Template ;
     
 archiSVG:LocationIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
-    svg:d "M 50 10 C 75 10, 90 40, 70 70 C 60 90, 50 110, 50 110 C 50 110, 40 90, 30 70 C 10 40, 25 10, 50 10 Z";
+    svg:d "M 125 5 C 130 5, 135 10, 132 17 C 130 20, 125 27, 125 27 C 125 27, 120 20, 118 17 C 115 10, 120 5, 125 5 Z";
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
