@@ -744,7 +744,8 @@ archiSVG:ResourceIcon a svg:Symbol , archiSVG:Template ;
     rdf:_1 archiSVG:ResourceIconPart1 ;
     rdf:_2 archiSVG:ResourceIconPart2 ;
     rdf:_3 archiSVG:ResourceIconPart3 ;
-    rdf:_4 archiSVG:ResourceIconPart4 .    
+    rdf:_4 archiSVG:ResourceIconPart4 ;
+    rdf:_5 archiSVG:ResourceIconPart5 .    
 
 archiSVG:ResourceIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
@@ -753,6 +754,17 @@ archiSVG:ResourceIconPart1 a svg:Path , archiSVG:Template ;
     svg:d "M135,7.5 h1.5 a1,1 0 0 1 1,1 v3 a1,1 0 0 1 -1,1 h-1.5 z".   
 
 archiSVG:ResourceIconPart2 a svg:Rect , archiSVG:Template ;
+    svg:fill "none" ;
+    svg:height "10" ;
+    svg:stroke "black" ;
+    svg:stroke-width "0.5" ;
+    svg:width "20" ;
+    svg:x "115" ;
+    svg:y "5" ;
+    svg:rx "3";
+    svg:ry "5".
+    
+archiSVG:ResourceIconPart3 a svg:Rect , archiSVG:Template ;
     svg:fill "black"; 
     svg:height "6"; 
     svg:stroke "black"; 
@@ -761,7 +773,7 @@ archiSVG:ResourceIconPart2 a svg:Rect , archiSVG:Template ;
     svg:x "119"; 
     svg:y "7" .
 
-archiSVG:ResourceIconPart3 a svg:Rect , archiSVG:Template ;
+archiSVG:ResourceIconPart4 a svg:Rect , archiSVG:Template ;
     svg:fill "black";  
     svg:height "6"; 
     svg:stroke "black"; 
@@ -770,7 +782,7 @@ archiSVG:ResourceIconPart3 a svg:Rect , archiSVG:Template ;
     svg:x "123.5"; 
     svg:y "7" .
 
-archiSVG:ResourceIconPart4 a svg:Rect , archiSVG:Template ;
+archiSVG:ResourceIconPart5 a svg:Rect , archiSVG:Template ;
     svg:fill "black"; 
     svg:height "6"; 
     svg:stroke "black"; 
@@ -1316,24 +1328,16 @@ archiSVG:SystemSoftwareIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for system software in Archimate" ;
     dct:related archimate:SystemSoftware;
     svg:id "SystemSoftware" ;
-    rdf:_1 archiSVG:SystemSoftwareIconPart1 ;
-    rdf:_2 archiSVG:SystemSoftwareIconPart2 .
+    rdf:_1 archiSVG:SystemSoftwareIconPart1 .
    
-archiSVG:SystemSoftwareIconPart1 a svg:Path , archiSVG:Template ;
-    svg:d "M 79.37 2.54 C 59.09 15.78 53.91 42.18 67.8 61.52 C 81.68 80.85 109.38 85.79 129.66 72.55";
-    svg:fill "none" ;
-    svg:stroke "black" ;
+archiSVG:SystemSoftwareIconPart1 a svg:Rect , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:height "10"; 
+    svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:transform "rotate(-175,80.55,41.75)".
-    
-archiSVG:SystemSoftwareIconPart2 a svg:Ellipse, archiSVG:Template ;
-    svg:cx "45" ;
-    svg:cy "50.54" ;
-    svg:rx "45" ;
-    svg:ry "45" ;
-    svg:fill "none" ;    
-    svg:stroke "black" ;
-    svg:stroke-width "0.5".  
+    svg:width "20"; 
+    svg:x "115"; 
+    svg:y "5" .
 
 archiSVG:TechnologyCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology collaboration in Archimate";
