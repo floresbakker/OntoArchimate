@@ -385,11 +385,12 @@ archiSVG:iconDefinitions rdf:type svg:G , archiSVG:Template ;
     rdf:_52 archiSVG:MaterialIcon ;
     rdf:_53 archiSVG:PathIcon ;
     rdf:_54 archiSVG:CommunicationNetworkIcon ;
-    rdf:_55 archiSVG:DeliverableIcon ;
-    rdf:_56 archiSVG:WorkPackageIcon ;
-    rdf:_57 archiSVG:PlateauIcon ;
-    rdf:_58 archiSVG:GapIcon ;
-    rdf:_59 archiSVG:ImplementationEventIcon .   
+    rdf:_55 archiSVG:EquipmentIcon ;
+    rdf:_56 archiSVG:DeliverableIcon ;
+    rdf:_57 archiSVG:WorkPackageIcon ;
+    rdf:_58 archiSVG:PlateauIcon ;
+    rdf:_59 archiSVG:GapIcon ;
+    rdf:_60 archiSVG:ImplementationEventIcon .   
 
 archiSVG:GroupingIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a grouping in Archimate";
@@ -576,32 +577,19 @@ archiSVG:OutcomeIcon a svg:Symbol , archiSVG:Template ;
     dct:related archimate:Outcome;
     svg:id "Outcome";    
     rdf:_1 archiSVG:OutcomeIconPart1;
-    rdf:_2 archiSVG:OutcomeIconPart2;
-    rdf:_3 archiSVG:OutcomeIconPart3.
+    rdf:_2 archiSVG:OutcomeIconPart2.
     
-archiSVG:OutcomeIconPart1 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
+archiSVG:OutcomeIconPart1 a svg:Path, archiSVG:Template ;
     svg:fill "none" ;
-    svg:r "7" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" .
+    svg:stroke-width "1.2" ;
+    svg:d """M133 15.5 C133 11.9101 130.0898 9 126.5 9 C122.9101 9 120 11.9102 120 15.5 C120 19.0899 122.9101 22 126.5 22 C130.0899 22 133 19.0898 133 15.5 ZM130.5 15.5 C130.5 13.2909 128.7091 11.5 126.5 11.5 C124.2909 11.5 122.5 13.2909 122.5 15.5 C122.5 17.7091 124.2909 19.5 126.5 19.5 C128.7091 19.5 130.5 17.7091 130.5 15.5 ZM128 15.5 C128 14.6716 127.3284 14 126.5 14 C125.6716 14 125 14.6716 125 15.5 C125 16.3284 125.6716 17 126.5 17 C127.3284 17 128 16.3284 128 15.5 ZM127 15.5 C127 15.2239 126.7761 15 126.5 15 C126.2239 15 126 15.2239 126 15.5 C126 15.7761 126.2239 16 126.5 16 C126.7761 16 127 15.7761 127 15.5 Z""".
 
-archiSVG:OutcomeIconPart2 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
+archiSVG:OutcomeIconPart2 a svg:Path, archiSVG:Template ;
     svg:fill "none" ;
-    svg:r "4.5" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" .
-
-archiSVG:OutcomeIconPart3 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
-    svg:fill "none" ;
-    svg:r "2" ;
-    svg:stroke "black" ;
-    svg:stroke-width "0.5" . 
+    svg:stroke-width "1.2" ;
+    svg:d """M126 16 L135.5 6.5 M133 9 L134 4 M133 9 L138 """.
 
 archiSVG:PrincipleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a principle in Archimate";
@@ -667,16 +655,34 @@ archiSVG:MeaningIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a meaning in Archimate";
     dct:related archimate:Meaning;
     svg:id "Meaning";    
-    rdf:_1 archiSVG:MeaningIconPart1.
+    rdf:_1 archiSVG:MeaningIconPart1 ;
+    rdf:_2 archiSVG:MeaningIconPart2 ;
+    rdf:_3 archiSVG:MeaningIconPart3 ;
+    rdf:_4 archiSVG:MeaningIconPart4 .
     
-archiSVG:MeaningIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none" ;
-    svg:height "10" ;
-    svg:stroke "black" ;
-    svg:stroke-width "0.5" ;
-    svg:width "20" ;
-    svg:x "115" ;
-    svg:y "5" .
+archiSVG:MeaningIconPart1 a svg:Path , archiSVG:Template ;
+    svg:d "M133 5.4019 C131.0868 4.5735 128.6405 5.0651 127.5359 6.5 C126.8338 7.412 126.8208 8.5334 127.5015 9.4544";
+    svg:fill "none"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
+
+archiSVG:MeaningIconPart2 a svg:Path , archiSVG:Template ;
+    svg:d "M137.152 9.847 C138.5121 8.5414 138.2035 6.656 136.4626 5.636 C135.1978 4.8948 133.4647 4.7925 132.0608 5.3761";
+    svg:fill "none"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
+
+archiSVG:MeaningIconPart3 a svg:Path , archiSVG:Template ;
+    svg:d "M132.2641 12.1401 C131.1771 13.1822 129.2823 13.2926 128.0318 12.3868 C126.9181 11.58 126.6739 10.2181 127.4558 9.1752";
+    svg:fill "none"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
+
+archiSVG:MeaningIconPart4 a svg:Path , archiSVG:Template ;
+    svg:d "M136.9776 9.6344 C137.1796 11.2789 136.0101 12.7757 134.3656 12.9776 C133.5579 13.0768 132.7445 12.8436 132.112 12.3314";
+    svg:fill "none"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
 
 archiSVG:ValueIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a value in Archimate";
@@ -802,7 +808,6 @@ archiSVG:ValueStreamIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5";
     svg:d "M 135 10 L 130 5 L 120 5 L 125 10 L 120 15 L 130 15 Z".
-
 
 archiSVG:ApplicationComponentIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application component in Archimate";
@@ -1300,29 +1305,40 @@ archiSVG:NodeIcon a svg:Symbol , archiSVG:Template ;
     svg:id "Node" ;
     rdf:_1 archiSVG:NodeIconPart1 .
     
-archiSVG:NodeIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:NodeIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d """M122 9 L133 9 L133 20 L122 20 Z
+         M122 9 L125 6
+         M133 9 L136 6
+         M133 20 L136 17
+         M125 6 L136 6
+         M136 6 L136 17""".
 
 archiSVG:DeviceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a device in Archimate" ;
     dct:related archimate:Device;
     svg:id "Device" ;
-    rdf:_1 archiSVG:DeviceIconPart1 .
+    rdf:_1 archiSVG:DeviceIconPart1 ;
+    rdf:_2 archiSVG:DeviceIconPart2 .
     
 archiSVG:DeviceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
+    svg:height "8"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:width "11"; 
+    svg:x "124"; 
+    svg:y "5" ;
+    svg:rx "1.5";
+    svg:ry "1.5".
+
+archiSVG:DeviceIconPart2 a svg:Polygon , archiSVG:Template ;
+    svg:points "123 17 126 13 133 13 136 17";
+    svg:fill "none";  
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".  
 
 archiSVG:SystemSoftwareIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for system software in Archimate" ;
@@ -1461,14 +1477,11 @@ archiSVG:ArtifactIcon a svg:Symbol , archiSVG:Template ;
     svg:id "Artifact" ;
     rdf:_1 archiSVG:ArtifactIconPart1 .
     
-archiSVG:ArtifactIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:ArtifactIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d "M124 6 L131 6 L136 11 L136 21 L124 21 L124 6 M131 6 L131 11 L136 11".
 
 archiSVG:FacilityIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a facility in Archimate" ;
@@ -1482,20 +1495,67 @@ archiSVG:FacilityIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5".
 
+archiSVG:EquipmentIcon a svg:Symbol , archiSVG:Template ;
+    skos:prefLabel "SVG-based icon for an equipment in Archimate" ;
+    dct:related archimate:Equipment;
+    svg:id "Equipment" ;
+    rdf:_1 archiSVG:EquipmentIconPart1 ;
+    rdf:_2 archiSVG:EquipmentIconPart2 ;
+    rdf:_3 archiSVG:EquipmentIconPart3 ;
+    rdf:_4 archiSVG:EquipmentIconPart4 .
+    
+archiSVG:EquipmentIconPart1 a svg:Polygon , archiSVG:Template ;
+    svg:points """136 21 138 21 138 19 136 19 135 17 136 15 135 14 133 15 131 14 131 12 129 12
+             129 14 127 15 125 14 124 15 125 17 124 19 122 19 122 21 124 21 125 23 124 25
+             125 26 127 25 129 26 129 28 131 28 131 26 133 25 135 26 136 25 135 23""";
+    svg:fill "none";  
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
+
+archiSVG:EquipmentIconPart2 a svg:Polygon , archiSVG:Template ;
+    svg:points """139 10 140 10 140 8 139 8 138 6 138 5 137 4 136 5 134 5 133 4 132 5
+             132 6 131 8 130 8 130 10 131 10 132 12 132 13 133 14 134 13 136 13 137 14
+             138 13 138 12""";
+    svg:fill "none";  
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
+
+archiSVG:EquipmentIconPart3 a svg:Path , archiSVG:Template ;
+    svg:d """M133 20 C133 18.3431 131.6569 17 130 17
+           C128.3431 17 127 18.3431 127 20
+           C127 21.6569 128.3431 23 130 23
+           C131.6569 23 133 21.6568 133 20 Z""";
+    svg:fill "none";  
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".
+
+archiSVG:EquipmentIconPart4 a svg:Path , archiSVG:Template ;
+    svg:d """M137 9 C137 7.8954 136.1046 7 135 7
+           C133.8954 7 133 7.8954 133 9
+           C133 10.1046 133.8954 11 135 11
+           C136.1046 11 137 10.1046 137 9 Z""";
+    svg:fill "none";  
+    svg:stroke "black"; 
+    svg:stroke-width "0.5".    
+
 archiSVG:DistributionNetworkIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a distribution network in Archimate" ;
     dct:related archimate:DistributionNetwork;
     svg:id "DistributionNetwork" ;
-    rdf:_1 archiSVG:DistributionNetworkIconPart1 .
+    rdf:_1 archiSVG:DistributionNetworkIconPart1 ;
+    rdf:_2 archiSVG:DistributionNetworkIconPart2 .    
     
-archiSVG:DistributionNetworkIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:DistributionNetworkIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
+    svg:d "M112 20 L123 20 M112 24 L123 24";
     svg:stroke "black"; 
-    svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:stroke-width "1.5".
+
+archiSVG:DistributionNetworkIconPart2 a svg:Path , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:d "M114 17 L109 22 L114 27 M121 17 L126 22 L121 27";
+    svg:stroke "black"; 
+    svg:stroke-width "1.5".
 
 archiSVG:MaterialIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a material in Archimate" ;
@@ -1543,16 +1603,20 @@ archiSVG:PathIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a path in Archimate" ;
     dct:related archimate:Path;
     svg:id "Path" ;
-    rdf:_1 archiSVG:PathIconPart1 .
+    rdf:_1 archiSVG:PathIconPart1 ;
+    rdf:_2 archiSVG:PathIconPart2 .    
     
-archiSVG:PathIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:PathIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d "M125.5 12 L127.5 12 M129.5 12 L131.5 12 M133.5 12 L135.5 12".
+    
+archiSVG:PathIconPart2 a svg:Path , archiSVG:Template ;
+    svg:fill "none"; 
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:d "M127 7 L122 12 L127 17 M134 7 L139 12 L134 17".
 
 archiSVG:CommunicationNetworkIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a communication network in Archimate" ;
@@ -1560,14 +1624,11 @@ archiSVG:CommunicationNetworkIcon a svg:Symbol , archiSVG:Template ;
     svg:id "CommunicationNetwork" ;
     rdf:_1 archiSVG:CommunicationNetworkIconPart1 .
     
-archiSVG:CommunicationNetworkIconPart1 a svg:Rect , archiSVG:Template ;
+archiSVG:CommunicationNetworkIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:height "10"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d """M128 14.5 C128 13.1193 126.8807 12 125.5 12 C124.1193 12 123 13.1193 123 14.5 C123 15.8807 124.1193 17 125.5 17 C126.8807 17 128 15.8807 128 14.5 ZM130 6.5 C130 5.1193 128.8807 4 127.5 4 C126.1193 4 125 5.1193 125 6.5 C125 7.8807 126.1193 9 127.5 9 C128.8807 9 130 7.8807 130 6.5 ZM138 6.5 C138 5.1193 136.8807 4 135.5 4 C134.1193 4 133 5.1193 133 6.5 C133 7.8807 134.1193 9 135.5 9 C136.8807 9 138 7.8807 138 6.5 ZM136 14.5 C136 13.1193 134.8807 12 133.5 12 C132.1193 12 131 13.1193 131 14.5 C131 15.8807 132.1193 17 133.5 17 C134.8807 17 136 15.8807 136 14.5 ZM126 12 L127 9 M134 12 L135 9 M128 14.5 L131 14.5 M130 6.5 L133 6.5""".
 
 archiSVG:DeliverableIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a deliverable in Archimate" ;
@@ -1592,16 +1653,20 @@ archiSVG:WorkPackageIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a work package in Archimate" ;
     dct:related archimate:WorkPackage;
     svg:id "WorkPackage" ;
-    rdf:_1 archiSVG:WorkPackageIconPart1 .
+    rdf:_1 archiSVG:WorkPackageIconPart1 ;
+    rdf:_2 archiSVG:WorkPackageIconPart2 .    
     
-archiSVG:WorkPackageIconPart1 a svg:Rect , archiSVG:Template ;
-    svg:fill "none"; 
-    svg:height "10"; 
+archiSVG:WorkPackageIconPart1 a svg:Path , archiSVG:Template ;
+    svg:fill "none";  
     svg:stroke "black"; 
     svg:stroke-width "0.5";
-    svg:width "20"; 
-    svg:x "115"; 
-    svg:y "5" .
+    svg:d """M135.7286 10.0391 C136.5786 7.7037 135.3745 5.1214 133.0391 4.2714 C130.7037 3.4214 128.1214 4.6255 127.2714 6.9609 C126.4214 9.2963 127.6255 11.8786 129.9609 12.7286 C130.5784 12.9534 131.2376 13.0401 131.8922 12.9829 M131.5 13 L138 13""".
+
+archiSVG:WorkPackageIconPart2 a svg:Path , archiSVG:Template ;
+    svg:fill "none";  
+    svg:stroke "black"; 
+    svg:stroke-width "0.5";
+    svg:d """M138 10 L142 13 L138 16 Z""".   
 
 archiSVG:PlateauIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a plateau in Archimate" ;
@@ -2692,10 +2757,11 @@ archiSVG:technologyLayer a svg:G , archiSVG:Template ;
     rdf:_10 archiSVG:TechnologyEvent;
     rdf:_11 archiSVG:Artifact;
     rdf:_12 archiSVG:Facility;
-    rdf:_13 archiSVG:DistributionNetwork;
-    rdf:_14 archiSVG:Material;
-    rdf:_15 archiSVG:Path;
-    rdf:_16 archiSVG:CommunicationNetwork .
+    rdf:_13 archiSVG:Equipment;    
+    rdf:_14 archiSVG:DistributionNetwork;
+    rdf:_15 archiSVG:Material;
+    rdf:_16 archiSVG:Path;
+    rdf:_17 archiSVG:CommunicationNetwork .
 
 archiSVG:Node a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Node ;
@@ -3007,6 +3073,30 @@ archiSVG:FacilityText a svg:TextElement , archiSVG:Template ;
 archiSVG:FacilityTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Facility" .
 
+archiSVG:Equipment a svg:G , archiSVG:Template ;
+    foaf:depicts archimate:Equipment ;
+    skos:prefLabel "SVG depiction of an equipment in Archimate" ;
+    rdf:_1 archiSVG:EquipmentBox ;
+    rdf:_2 archiSVG:EquipmentIconUse ;
+    rdf:_3 archiSVG:EquipmentText .
+
+archiSVG:EquipmentBox a svg:Path , archiSVG:Template ;
+    svg:fill "rgb(204,204,255)" ;
+    svg:stroke "black" ;
+    svg:d "M 8,0 H 136 L 144,8 V 47 L 136,55 H 8 L 0,47 V 8 Z" .
+
+archiSVG:EquipmentIconUse rdf:type svg:Use , archiSVG:Template ;
+    xlink:href "#Equipment" .
+
+archiSVG:EquipmentText a svg:TextElement , archiSVG:Template ;
+    rdf:_1 archiSVG:EquipmentTextFragment ;
+    svg:font-family "Segoe UI" ;
+    svg:font-size "9" ;
+    svg:x "50" ;
+    svg:y "15" .
+
+archiSVG:EquipmentTextFragment a svg:Text , archiSVG:Template ;
+    xml:fragment "Equipment" .
 
 archiSVG:DistributionNetwork a svg:G , archiSVG:Template ;
     foaf:depicts archimate:DistributionNetwork ;
