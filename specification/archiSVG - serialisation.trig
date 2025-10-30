@@ -209,45 +209,57 @@ prefix xsi:      <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 
 construct {
 
-  ?doc   rdf:type svg:Document;
-         skos:prefLabel ?svgLabel;
-         skos:definition ?svgDefinition;
-         rdf:_1 ?svg;
-         prov:wasDerivedFrom $this.
+  ?doc   
+    rdf:type svg:Document;
+    skos:prefLabel ?svgLabel;
+    skos:definition ?svgDefinition;
+    rdf:_1 ?svg;
+    prov:wasDerivedFrom $this.
          
-  ?svg   rdf:type svg:Svg;
-         xml:xmlns "http://www.w3.org/2000/svg" ;
-         xmlns:xlink "http://www.w3.org/1999/xlink" ;
-         svg:viewBox ?viewBox;
-         svg:height "900";
-         rdf:_1 ?style;
-         rdf:_2 ?definitions;
-         rdf:_3 ?elements;
-         rdf:_4 ?relationships.
+  ?svg   
+    rdf:type svg:Svg;
+    xml:xmlns "http://www.w3.org/2000/svg" ;
+    xmlns:xlink "http://www.w3.org/1999/xlink" ;
+    svg:viewBox ?viewBox;
+    svg:height "900";
+    rdf:_1 ?style;
+    rdf:_2 ?definitions;
+    rdf:_3 ?elements;
+    rdf:_4 ?relationships.
 
-  ?style rdf:type svg:Style;
-         xml:fragment """path, line, rect, circle, polyline, polygon {
+  ?style 
+    rdf:type svg:Style;
+    rdf:_1 ?styleText.
+
+  ?styleText
+    rdf:type svg:Text;
+    xml:fragment """path, line, rect, circle, polyline, polygon {
       vector-effect: non-scaling-stroke;
     }""".
   
-  ?definitions rdf:type svg:Defs;
-         dct:subject "definitions";
-         rdf:_1 ?definitionsRelations;
-         rdf:_2 ?definitionsIcons.
+  ?definitions 
+    rdf:type svg:Defs;
+    dct:subject "definitions";
+    rdf:_1 ?definitionsRelations;
+    rdf:_2 ?definitionsIcons.
          
-  ?definitionsRelations rdf:type svg:G;  
-         dct:subject "definitions of relations".
+  ?definitionsRelations 
+    rdf:type svg:G;  
+    dct:subject "definitions of relations".
   
-  ?definitionsIcons rdf:type svg:G;  
-         dct:subject "definitions of icons".
+  ?definitionsIcons 
+    rdf:type svg:G;  
+    dct:subject "definitions of icons".
   
-  ?elements rdf:type svg:G;
-         dct:subject "elements";
-         skos:prefLabel "Archimate elements".
+  ?elements 
+    rdf:type svg:G;
+    dct:subject "elements";
+    skos:prefLabel "Archimate elements".
          
-  ?relationships rdf:type svg:G;
-         dct:subject "relationships";
-         skos:prefLabel "Archimate relationships".
+  ?relationships 
+    rdf:type svg:G;
+    dct:subject "relationships";
+    skos:prefLabel "Archimate relationships".
 
 } where {
 
@@ -266,6 +278,7 @@ construct {
   BIND(IRI(CONCAT(STR($this),"-SVG-Document"))              as ?doc)
   BIND(IRI(CONCAT(STR($this),"-SVG"))                       as ?svg)
   BIND(IRI(CONCAT(STR($this),"-SVG-Style"))                 as ?style)  
+  BIND(IRI(CONCAT(STR($this),"-SVG-StyleText"))             as ?styleText)    
   BIND(IRI(CONCAT(STR($this),"-SVG-Definitions"))           as ?definitions)  
   BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Relations")) as ?definitionsRelations)  
   BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Icons"))     as ?definitionsIcons)  
