@@ -544,33 +544,13 @@ archiSVG:GoalIcon a svg:Symbol, archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a goal in Archimate";
     dct:related archimate:Goal;
     svg:id "Goal";
-    rdf:_1 archiSVG:GoalIconPart1;
-    rdf:_2 archiSVG:GoalIconPart2;
-    rdf:_3 archiSVG:GoalIconPart3.
+    rdf:_1 archiSVG:GoalIconPart1.
     
-archiSVG:GoalIconPart1 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
+archiSVG:GoalIconPart1 a svg:Path, archiSVG:Template ;
+    svg:d """M133 15.5 C133 11.9101 130.0898 9 126.5 9 C122.9101 9 120 11.9102 120 15.5 C120 19.0899 122.9101 22 126.5 22 C130.0899 22 133 19.0898 133 15.5 ZM130.5 15.5 C130.5 13.2909 128.7091 11.5 126.5 11.5 C124.2909 11.5 122.5 13.2909 122.5 15.5 C122.5 17.7091 124.2909 19.5 126.5 19.5 C128.7091 19.5 130.5 17.7091 130.5 15.5 ZM128 15.5 C128 14.6716 127.3284 14 126.5 14 C125.6716 14 125 14.6716 125 15.5 C125 16.3284 125.6716 17 126.5 17 C127.3284 17 128 16.3284 128 15.5 ZM127 15.5 C127 15.2239 126.7761 15 126.5 15 C126.2239 15 126 15.2239 126 15.5 C126 15.7761 126.2239 16 126.5 16 C126.7761 16 127 15.7761 127 15.5 Z""";
     svg:fill "none" ;
-    svg:r "7" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" .
-
-archiSVG:GoalIconPart2 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
-    svg:fill "none" ;
-    svg:r "4.5" ;
-    svg:stroke "black" ;
-    svg:stroke-width "0.5" .
-
-archiSVG:GoalIconPart3 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
-    svg:fill "black" ;
-    svg:r "2" ;
-    svg:stroke "black" ;
-    svg:stroke-width "0.5" .    
+    svg:stroke-width "0.5" . 
 
 archiSVG:OutcomeIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an outcome in Archimate";
@@ -589,7 +569,7 @@ archiSVG:OutcomeIconPart2 a svg:Path, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "1.2" ;
-    svg:d """M126 16 L135.5 6.5 M133 9 L134 4 M133 9 L138 """.
+    svg:d """M126 16 L135.5 6.5 M133 9 L134 4 M133 9 L138 8""".
 
 archiSVG:PrincipleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a principle in Archimate";
@@ -719,29 +699,22 @@ archiSVG:CourseOfActionIcon a svg:Symbol , archiSVG:Template ;
     rdf:_2 archiSVG:CourseOfActionIconPart2;
     rdf:_3 archiSVG:CourseOfActionIconPart3.
     
-archiSVG:CourseOfActionIconPart1 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
-    svg:fill "none" ;
-    svg:r "7" ;
-    svg:stroke "black" ;
-    svg:stroke-width "0.5" .
+archiSVG:CourseOfActionIconPart1 a svg:Path, archiSVG:Template ;
+    svg:d "M120.6 14 L126.6 15 L123.6 20.2";
+    svg:fill "black" ;
+    svg:stroke "none".
 
-archiSVG:CourseOfActionIconPart2 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
+archiSVG:CourseOfActionIconPart2 a svg:Path, archiSVG:Template ;
+    svg:d "M123.5 17 C121.0735 17 118.9973 18.7422 118.576 21.1318";
     svg:fill "none" ;
-    svg:r "4.5" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" .
+    svg:stroke-width "2" .
 
-archiSVG:CourseOfActionIconPart3 a svg:Circle, archiSVG:Template ;
-    svg:cx "130" ;
-    svg:cy "10" ;
+archiSVG:CourseOfActionIconPart3 a svg:Path, archiSVG:Template ;
+    svg:d "M139 11.5 C139 7.9101 136.0898 5 132.5 5 C128.9101 5 126 7.9102 126 11.5 C126 15.0899 128.9101 18 132.5 18 C136.0899 18 139 15.0898 139 11.5 ZM136.5 11.5 C136.5 9.2909 134.7091 7.5 132.5 7.5 C130.2909 7.5 128.5 9.2909 128.5 11.5 C128.5 13.7091 130.2909 15.5 132.5 15.5 C134.7091 15.5 136.5 13.7091 136.5 11.5 ZM134 11.5 C134 10.6716 133.3284 10 132.5 10 C131.6716 10 131 10.6716 131 11.5 C131 12.3284 131.6716 13 132.5 13 C133.3284 13 134 12.3284 134 11.5 ZM133 11.5 C133 11.2239 132.7761 11 132.5 11 C132.2239 11 132 11.2239 132 11.5 C132 11.7761 132.2239 12 132.5 12 C132.7761 12 133 11.7761 133 11.5 Z";
     svg:fill "none" ;
-    svg:r "2" ;
     svg:stroke "black" ;
-    svg:stroke-width "0.5" . 
+    svg:stroke-width "1.2" . 
 
 archiSVG:ResourceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a resource in Archimate" ;
@@ -1547,13 +1520,13 @@ archiSVG:DistributionNetworkIcon a svg:Symbol , archiSVG:Template ;
     
 archiSVG:DistributionNetworkIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:d "M112 20 L123 20 M112 24 L123 24";
+    svg:d "M125 10 L136 10 M125 14 L136 14";
     svg:stroke "black"; 
     svg:stroke-width "1.5".
 
 archiSVG:DistributionNetworkIconPart2 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
-    svg:d "M114 17 L109 22 L114 27 M121 17 L126 22 L121 27";
+    svg:d "M127 7 L122 12 L127 17 M134 7 L139 12 L134 17";
     svg:stroke "black"; 
     svg:stroke-width "1.5".
 
