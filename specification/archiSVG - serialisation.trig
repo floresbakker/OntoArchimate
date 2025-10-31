@@ -285,7 +285,7 @@ construct {
   bind(coalesce(?label, 'A view') as ?svgLabel)
   bind(coalesce(?definition, 'A view in an archimate model.') as ?svgDefinition)
   
-  bind("400 280 821 506" as ?viewBox)
+  bind(function:getViewBox($this) as ?viewBox)
   
   # Create IRI's
   BIND(IRI(CONCAT(STR($this),"-SVG-Document"))              as ?doc)
