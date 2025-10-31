@@ -264,13 +264,13 @@ construct {
   
   ?elements 
     rdf:type svg:G;
-    svg:class "ElementInstance";    
+    svg:class "ElementInstances";    
     dct:subject "elements";
     skos:prefLabel "Archimate elements".
          
   ?relationships 
     rdf:type svg:G;
-    svg:class "RelationshipInstance";     
+    svg:class "RelationshipInstances";     
     dct:subject "relationships";
     skos:prefLabel "Archimate relationships".
 

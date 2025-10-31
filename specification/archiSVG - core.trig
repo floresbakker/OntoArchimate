@@ -103,7 +103,7 @@ archiSVG:definitions rdf:type svg:G, archiSVG:Definitions, archiSVG:Template ;
     rdf:_1 archiSVG:relationDefinitions;
     rdf:_2 archiSVG:iconDefinitions;
     rdf:_3 archiSVG:boxDefinitions.
-    
+
 archiSVG:relationDefinitions rdf:type svg:G, archiSVG:Template ;
     skos:prefLabel 'Template for SVG definitions of relations';
     rdf:_1 archiSVG:association;
@@ -119,7 +119,9 @@ archiSVG:relationDefinitions rdf:type svg:G, archiSVG:Template ;
     rdf:_11 archiSVG:influence.    
 
 # Definition of relations 
-    
+
+# Aggregation
+
 archiSVG:aggregation rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:aggregation;
     svg:id "aggregation";
@@ -136,6 +138,8 @@ archiSVG:aggregationStart rdf:type svg:Polyline, archiSVG:Definition ;
     svg:points "10,0 0,5 10,10 20,5 10,0" ;
     svg:stroke "black" ;
     svg:stroke-width "1" .
+
+# Association
     
 archiSVG:association rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:association;
@@ -154,6 +158,8 @@ archiSVG:associationStart rdf:type svg:G, archiSVG:Definition ;
     svg:stroke "black" ;
     svg:stroke-width "1" .    
  
+# Composition
+
 archiSVG:composition rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:composition;
     svg:id "composition";
@@ -171,6 +177,8 @@ archiSVG:compositionStart rdf:type svg:Polyline, archiSVG:Definition ;
     svg:stroke "black" ;
     svg:stroke-width "1" .
 
+# Influence
+
 archiSVG:influence rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:influence;
     svg:id "influence";
@@ -187,7 +195,9 @@ archiSVG:influenceEnd rdf:type svg:Polyline, archiSVG:Definition ;
     svg:points "5,0 15,5 5,10";
     svg:stroke "black" ;
     svg:stroke-width "1" .
-    
+
+# Access: read
+
 archiSVG:read rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:readAccess;
     svg:id "read";
@@ -204,6 +214,8 @@ archiSVG:readStart rdf:type svg:Polyline, archiSVG:Definition ;
     svg:points "10,10 0,5 10,0";
     svg:stroke "black" ;
     svg:stroke-width "1" . 
+
+# Access: write
 
 archiSVG:write rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:writeAccess;
@@ -222,6 +234,8 @@ archiSVG:writeStart rdf:type svg:Polyline, archiSVG:Definition ;
     svg:stroke "black" ;
     svg:stroke-width "1" .     
 
+# Serving
+
 archiSVG:serving rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:serving;
     svg:id "serving";
@@ -239,6 +253,8 @@ archiSVG:servingEnd rdf:type svg:Polyline, archiSVG:Definition ;
     svg:stroke "black" ;
     svg:stroke-width "1" .     
 
+# Realization
+
 archiSVG:realization rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:realization;
     svg:id "realization";
@@ -255,7 +271,9 @@ archiSVG:realizationEnd rdf:type svg:Polyline, archiSVG:Definition ;
     svg:points "5,0 5,10 15,5 5,0" ;
     svg:stroke "black" ;
     svg:stroke-width "1" .  
-    
+
+# Assignment
+
 archiSVG:assignmentStart rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:assignment;
     svg:id "assignmentStart";
@@ -292,6 +310,8 @@ archiSVG:assignmentEndArrow rdf:type svg:Polyline, archiSVG:Definition ;
     svg:stroke-width "1" ;
     svg:fill "black".
 
+# Specialization
+
 archiSVG:specialization rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:specialization;
     svg:id "specialization";
@@ -309,6 +329,8 @@ archiSVG:specializationEnd rdf:type svg:Polyline, archiSVG:Definition ;
     svg:stroke "black" ;
     svg:stroke-width "1" .  
 
+# Triggering
+
 archiSVG:triggering rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:triggering;
     svg:id "triggering";
@@ -324,6 +346,8 @@ archiSVG:triggeringStart rdf:type svg:G, archiSVG:Definition ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "1" . 
+
+# Flow
 
 archiSVG:flow rdf:type svg:Marker, archiSVG:Definition ;
     rdfa:resource archimate:flow;
@@ -407,6 +431,8 @@ archiSVG:iconDefinitions rdf:type svg:G , archiSVG:Template ;
     rdf:_59 archiSVG:GapIcon ;
     rdf:_60 archiSVG:ImplementationEventIcon .   
 
+# Grouping icon
+
 archiSVG:GroupingIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a grouping in Archimate";
     dct:related archimate:Grouping;
@@ -433,6 +459,8 @@ archiSVG:GroupingIconPart2 a svg:Rect , archiSVG:Template ;
     svg:x "115" ;
     svg:y "5".
 
+# Location icon
+
 archiSVG:LocationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a location in Archimate";
     dct:related archimate:Location;
@@ -445,6 +473,8 @@ archiSVG:LocationIconPart1 a svg:Path , archiSVG:Template ;
     svg:d "M 125 5 C 130 5, 135 10, 132 17 C 130 20, 125 27, 125 27 C 125 27, 120 20, 118 17 C 115 10, 120 5, 125 5 Z";
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
+
+# Stakeholder icon
 
 archiSVG:StakeholderIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a stakeholder in Archimate";
@@ -470,6 +500,8 @@ archiSVG:StakeholderIconPart2 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5". 
+
+# Driver icon
 
 archiSVG:DriverIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a driver in Archimate";
@@ -535,6 +567,8 @@ archiSVG:DriverIconPart6 a svg:Line, archiSVG:Template ;
     svg:y1 "8" ;
     svg:y2 "22" .   
 
+# Assessment icon
+
 archiSVG:AssessmentIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an assessment in Archimate";
     dct:related archimate:Assessment;
@@ -560,6 +594,8 @@ archiSVG:AssessmentIconPart2 a svg:Line, archiSVG:Template ;
     svg:y1 "12" ;
     svg:y2 "15" .
 
+# Goal icon
+
 archiSVG:GoalIcon a svg:Symbol, archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a goal in Archimate";
     dct:related archimate:Goal;
@@ -572,6 +608,8 @@ archiSVG:GoalIconPart1 a svg:Path, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "1.2" .
+
+# Outcome icon
 
 archiSVG:OutcomeIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an outcome in Archimate";
@@ -592,6 +630,8 @@ archiSVG:OutcomeIconPart2 a svg:Path, archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "1.2" ;
     svg:d """M126 16 L135.5 6.5 M133 9 L134 4 M133 9 L138 8""".
+
+# Principle icon
 
 archiSVG:PrincipleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a principle in Archimate";
@@ -630,6 +670,8 @@ archiSVG:PrincipleIconPart3 a svg:Circle , archiSVG:Template ;
     svg:cx "130";
     svg:cy "13".
 
+# Requirement icon
+
 archiSVG:RequirementIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a requirement in Archimate";
     dct:related archimate:Requirement;
@@ -643,6 +685,8 @@ archiSVG:RequirementIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
+# Constraint icon
+
 archiSVG:ConstraintIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a constraint in Archimate";
     dct:related archimate:Constraint;
@@ -655,6 +699,8 @@ archiSVG:ConstraintIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:points "125,8 139,8 135,16 121,16, 125,8 123,8 119,16 123,16" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
+
+# Meaning icon
 
 archiSVG:MeaningIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a meaning in Archimate";
@@ -690,6 +736,8 @@ archiSVG:MeaningIconPart4 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5".
 
+# Value icon
+
 archiSVG:ValueIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a value in Archimate";
     dct:related archimate:Value;
@@ -705,7 +753,9 @@ archiSVG:ValueIconPart1 a svg:Ellipse , archiSVG:Template ;
     svg:cy "10" ;
     svg:rx "10";
     svg:ry "5".
-    
+
+# Capability icon
+
 archiSVG:CapabilityIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a capability in Archimate" ;
     dct:related archimate:Capability;
@@ -718,6 +768,8 @@ archiSVG:CapabilityIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none"; 
     svg:stroke "black"; 
     svg:stroke-width "0.5".
+
+# Course of action icon
 
 archiSVG:CourseOfActionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a course of action in Archimate" ;
@@ -744,6 +796,8 @@ archiSVG:CourseOfActionIconPart3 a svg:Path, archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "1.2" . 
+
+# Resource icon
 
 archiSVG:ResourceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a resource in Archimate" ;
@@ -800,6 +854,8 @@ archiSVG:ResourceIconPart5 a svg:Rect , archiSVG:Template ;
     svg:x "128"; 
     svg:y "7" . 
 
+# Value stream icon
+
 archiSVG:ValueStreamIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a value stream in Archimate" ;
     dct:related archimate:ValueStream;
@@ -812,6 +868,8 @@ archiSVG:ValueStreamIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5";
     svg:d "M 135 10 L 130 5 L 120 5 L 125 10 L 120 15 L 130 15 Z".
+
+# Application component icon
 
 archiSVG:ApplicationComponentIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application component in Archimate";
@@ -849,6 +907,8 @@ archiSVG:ApplicationComponentIconPart3 a svg:Rect , archiSVG:Template ;
     svg:x "122" ;
     svg:y "10" .
 
+# Application collaboration icon
+
 archiSVG:ApplicationCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application collaboration in Archimate";
     dct:related archimate:ApplicationCollaboration;
@@ -872,6 +932,8 @@ archiSVG:ApplicationCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
     svg:r "5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
+
+# Application interface icon
 
 archiSVG:ApplicationInterfaceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application interface in Archimate";
@@ -897,7 +959,9 @@ archiSVG:ApplicationInterfaceIconPart2 a svg:Line, archiSVG:Template ;
     svg:x2 "115" ;
     svg:y1 "11" ;
     svg:y2 "11" .    
-    
+
+# Application function icon
+
 archiSVG:ApplicationFunctionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application function in Archimate";
     dct:related archimate:ApplicationFunction;
@@ -910,6 +974,8 @@ archiSVG:ApplicationFunctionIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+
+# Application interaction icon
 
 archiSVG:ApplicationInteractionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application interaction in Archimate";
@@ -930,6 +996,8 @@ archiSVG:ApplicationInteractionIconPart2 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+    
+# Application process icon
 
 archiSVG:ApplicationProcessIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application process in Archimate";
@@ -944,6 +1012,8 @@ archiSVG:ApplicationProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
+# Application event icon
+
 archiSVG:ApplicationEventIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an application event in Archimate";
     dct:related archimate:ApplicationEvent;
@@ -956,6 +1026,8 @@ archiSVG:ApplicationEventIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+
+# Data object icon
 
 archiSVG:DataObjectIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a data object in Archimate";
@@ -983,6 +1055,8 @@ archiSVG:DataObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:x "115" ;
     svg:y "5".
 
+# Application service icon
+
 archiSVG:ApplicationServiceIcon a svg:Symbol, archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a application service in Archimate";
     dct:related archimate:ApplicationService;
@@ -1000,6 +1074,8 @@ archiSVG:ApplicationServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:width "20" ;
     svg:x "115" ;
     svg:y "5".
+
+# Business actor icon
 
 archiSVG:BusinessActorIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business actor in Archimate";
@@ -1056,6 +1132,8 @@ archiSVG:BusinessActorIconPart5 a svg:Line, archiSVG:Template ;
     svg:y1 "22" ;
     svg:y2 "27" .
 
+# Business role icon
+
 archiSVG:BusinessRoleIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business role in Archimate";
     dct:related archimate:BusinessRole;
@@ -1081,6 +1159,8 @@ archiSVG:BusinessRoleIconPart2 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".   
 
+# Business collaboration icon
+
 archiSVG:BusinessCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business collaboration in Archimate";
     dct:related archimate:BusinessCollaboration;
@@ -1104,6 +1184,8 @@ archiSVG:BusinessCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
     svg:r "5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
+
+# Business interface icon
 
 archiSVG:BusinessInterfaceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business interface in Archimate";
@@ -1130,6 +1212,8 @@ archiSVG:BusinessInterfaceIconPart2 a svg:Line, archiSVG:Template ;
     svg:y1 "11" ;
     svg:y2 "11" .   
 
+# Business process icon
+
 archiSVG:BusinessProcessIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business process in Archimate";
     dct:related archimate:BusinessProcess;
@@ -1143,6 +1227,8 @@ archiSVG:BusinessProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
 
+# Business function icon
+
 archiSVG:BusinessFunctionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business function in Archimate";
     dct:related archimate:BusinessFunction;
@@ -1155,6 +1241,8 @@ archiSVG:BusinessFunctionIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+
+# Business interaction icon
 
 archiSVG:BusinessInteractionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business interaction in Archimate";
@@ -1176,6 +1264,8 @@ archiSVG:BusinessInteractionIconPart2 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
 
+# Business event icon
+
 archiSVG:BusinessEventIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business event in Archimate";
     dct:related archimate:BusinessEvent;
@@ -1188,6 +1278,8 @@ archiSVG:BusinessEventIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+
+# Business service icon
 
 archiSVG:BusinessServiceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business service in Archimate";
@@ -1206,6 +1298,8 @@ archiSVG:BusinessServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:width "20" ;
     svg:x "115" ;
     svg:y "5" .
+
+# Business object icon
 
 archiSVG:BusinessObjectIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a business object in Archimate";
@@ -1232,6 +1326,8 @@ archiSVG:BusinessObjectIconPart2 a svg:Rect , archiSVG:Template ;
     svg:width "20" ;
     svg:x "115" ;
     svg:y "5" . 
+
+# Contract icon
 
 archiSVG:ContractIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a contract in Archimate";
@@ -1269,6 +1365,8 @@ archiSVG:ContractIconPart3 a svg:Rect , archiSVG:Template ;
     svg:x "115" ;
     svg:y "12" .     
 
+# Representation icon
+
 archiSVG:RepresentationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a representation in Archimate";
     dct:related archimate:Representation;
@@ -1299,6 +1397,8 @@ archiSVG:RepresentationIconPart3 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
 
+# Product icon
+
 archiSVG:ProductIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a product in Archimate";
     dct:related archimate:Product;
@@ -1324,7 +1424,9 @@ archiSVG:ProductIconPart1 a svg:Rect , archiSVG:Template ;
     svg:width "10" ;
     svg:x "115" ;
     svg:y "5" .   
-    
+
+# Node icon
+
 archiSVG:NodeIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a node in Archimate" ;
     dct:related archimate:Node;
@@ -1342,6 +1444,8 @@ archiSVG:NodeIconPart1 a svg:Path , archiSVG:Template ;
          M133 20 L136 17
          M125 6 L136 6
          M136 6 L136 17""".
+
+# Device icon
 
 archiSVG:DeviceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a device in Archimate" ;
@@ -1368,6 +1472,8 @@ archiSVG:DeviceIconPart2 a svg:Polygon , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5".  
 
+# System software
+
 archiSVG:SystemSoftwareIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for system software in Archimate" ;
     dct:related archimate:SystemSoftware;
@@ -1380,6 +1486,8 @@ archiSVG:SystemSoftwareIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5";
     svg:d "M129 8 C125.9624 8 123.5 10.4624 123.5 13.5 C123.5 16.5376 125.9624 19 129 19 C132.0376 19 134.5 16.5376 134.5 13.5 C134.5 10.4624 132.0376 8 129 8 Z M133.75 16.2631 C136.3806 14.7444 137.2819 11.3806 135.7631 8.75 C134.2444 6.1194 130.8806 5.2181 128.25 6.7369 C127.4139 7.2196 126.7196 7.9139 126.2369 8.75".
+
+# Technology collaboration icon
 
 archiSVG:TechnologyCollaborationIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology collaboration in Archimate";
@@ -1404,6 +1512,8 @@ archiSVG:TechnologyCollaborationIconPart2 a svg:Circle, archiSVG:Template ;
     svg:r "5" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
+
+# Technology interface icon
 
 archiSVG:TechnologyInterfaceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology interface in Archimate" ;
@@ -1430,6 +1540,8 @@ archiSVG:TechnologyInterfaceIconPart2 a svg:Line, archiSVG:Template ;
     svg:y1 "11" ;
     svg:y2 "11" . 
 
+# Technology function icon
+
 archiSVG:TechnologyFunctionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology function in Archimate" ;
     dct:related archimate:TechnologyFunction;
@@ -1443,6 +1555,8 @@ archiSVG:TechnologyFunctionIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
 
+# Technology process icon
+
 archiSVG:TechnologyProcessIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology process in Archimate" ;
     dct:related archimate:TechnologyProcess;
@@ -1455,6 +1569,8 @@ archiSVG:TechnologyProcessIconPart1 a svg:Polyline, archiSVG:Template ;
     svg:points "125,8 135,8 135,5 141,10.5, 135,16 135,13 125,13 125,8" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5" .
+
+# Technology interaction icon
 
 archiSVG:TechnologyInteractionIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology interaction in Archimate";
@@ -1476,6 +1592,8 @@ archiSVG:TechnologyInteractionIconPart2 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
 
+# Technology service icon
+
 archiSVG:TechnologyServiceIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology service in Archimate" ;
     dct:related archimate:TechnologyService;
@@ -1494,6 +1612,8 @@ archiSVG:TechnologyServiceIconPart1 a svg:Rect , archiSVG:Template ;
     svg:x "115" ;
     svg:y "5".
 
+# Technology event icon
+
 archiSVG:TechnologyEventIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a technology event in Archimate" ;
     dct:related archimate:TechnologyEvent;
@@ -1506,6 +1626,8 @@ archiSVG:TechnologyEventIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+
+# Artifact icon
 
 archiSVG:ArtifactIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an artifact in Archimate" ;
@@ -1520,6 +1642,8 @@ archiSVG:ArtifactIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke-width "0.5";
     svg:d "M124 6 L131 6 L136 11 L136 21 L124 21 L124 6 M131 6 L131 11 L136 11".
 
+# Facility icon
+
 archiSVG:FacilityIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a facility in Archimate" ;
     dct:related archimate:Facility;
@@ -1532,6 +1656,8 @@ archiSVG:FacilityIconPart1 a svg:Path , archiSVG:Template ;
     svg:fill "none";  
     svg:stroke "black"; 
     svg:stroke-width "0.5".
+
+# Equipment icon
 
 archiSVG:EquipmentIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an equipment in Archimate" ;
@@ -1577,6 +1703,8 @@ archiSVG:EquipmentIconPart4 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5".    
 
+# Distribution network icon
+
 archiSVG:DistributionNetworkIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a distribution network in Archimate" ;
     dct:related archimate:DistributionNetwork;
@@ -1596,6 +1724,8 @@ archiSVG:DistributionNetworkIconPart2 a svg:Path , archiSVG:Template ;
     svg:d "M127 7 L122 12 L127 17 M134 7 L139 12 L134 17";
     svg:stroke "black"; 
     svg:stroke-width "1.5".
+
+# Material icon
 
 archiSVG:MaterialIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a material in Archimate" ;
@@ -1639,7 +1769,9 @@ archiSVG:MaterialIconPart4 a svg:Line, archiSVG:Template ;
     svg:x2 "132" ;
     svg:y1 "21" ;
     svg:y2 "21" .
-                      
+
+# Path icon
+
 archiSVG:PathIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a path in Archimate" ;
     dct:related archimate:Path;
@@ -1660,6 +1792,8 @@ archiSVG:PathIconPart2 a svg:Path , archiSVG:Template ;
     svg:stroke-width "0.5";
     svg:d "M127 7 L122 12 L127 17 M134 7 L139 12 L134 17".
 
+# Communication network icon
+
 archiSVG:CommunicationNetworkIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a communication network in Archimate" ;
     dct:related archimate:CommunicationNetwork;
@@ -1672,6 +1806,8 @@ archiSVG:CommunicationNetworkIconPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5";
     svg:d """M128 14.5 C128 13.1193 126.8807 12 125.5 12 C124.1193 12 123 13.1193 123 14.5 C123 15.8807 124.1193 17 125.5 17 C126.8807 17 128 15.8807 128 14.5 ZM130 6.5 C130 5.1193 128.8807 4 127.5 4 C126.1193 4 125 5.1193 125 6.5 C125 7.8807 126.1193 9 127.5 9 C128.8807 9 130 7.8807 130 6.5 ZM138 6.5 C138 5.1193 136.8807 4 135.5 4 C134.1193 4 133 5.1193 133 6.5 C133 7.8807 134.1193 9 135.5 9 C136.8807 9 138 7.8807 138 6.5 ZM136 14.5 C136 13.1193 134.8807 12 133.5 12 C132.1193 12 131 13.1193 131 14.5 C131 15.8807 132.1193 17 133.5 17 C134.8807 17 136 15.8807 136 14.5 ZM126 12 L127 9 M134 12 L135 9 M128 14.5 L131 14.5 M130 6.5 L133 6.5""".
+
+# Deliverable icon
 
 archiSVG:DeliverableIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a deliverable in Archimate" ;
@@ -1693,6 +1829,8 @@ archiSVG:DeliverableIconPart2 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
 
+# Work package icon
+
 archiSVG:WorkPackageIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a work package in Archimate" ;
     dct:related archimate:WorkPackage;
@@ -1712,6 +1850,8 @@ archiSVG:WorkPackageIconPart2 a svg:Path , archiSVG:Template ;
     svg:stroke "black"; 
     svg:stroke-width "0.5";
     svg:d """M138 10 L142 13 L138 16 Z""".   
+
+# Plateau icon
 
 archiSVG:PlateauIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a plateau in Archimate" ;
@@ -1748,6 +1888,8 @@ archiSVG:PlateauIconPart3 a svg:Line, archiSVG:Template ;
     svg:x2 "139" ;
     svg:y1 "6" ;
     svg:y2 "6" .   
+
+# Gap icon 
                       
 archiSVG:GapIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for a gap in Archimate" ;
@@ -1783,6 +1925,8 @@ archiSVG:GapIconPart3 a svg:Line, archiSVG:Template ;
     svg:x2 "140" ;
     svg:y1 "12" ;
     svg:y2 "12" .   
+
+# Implementation icon
                       
 archiSVG:ImplementationEventIcon a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based icon for an implementation event in Archimate" ;
@@ -1805,6 +1949,8 @@ archiSVG:boxDefinitions rdf:type svg:G, archiSVG:Template ;
     rdf:_2 archiSVG:behaviorElement;
     rdf:_3 archiSVG:motivationElement.
 
+# Structure element
+
 archiSVG:structureElement a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based box for a structure element in Archimate" ;
     dct:related archimate:StructureElement ;
@@ -1817,6 +1963,8 @@ archiSVG:structureElementPart1 a svg:Path , archiSVG:Template ;
     svg:fill "currentColor" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
+
+# Behavior element
 
 archiSVG:behaviorElement a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based box for a structure element in Archimate" ;
@@ -1831,6 +1979,8 @@ archiSVG:behaviorElementPart1 a svg:Path , archiSVG:Template ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
 
+# Motivation element
+
 archiSVG:motivationElement a svg:Symbol , archiSVG:Template ;
     skos:prefLabel "SVG-based box for a motivation element in Archimate" ;
     dct:related archimate:MotivationElement ;
@@ -1843,7 +1993,6 @@ archiSVG:motivationElementPart1 a svg:Path , archiSVG:Template ;
     svg:fill "currentColor" ;
     svg:stroke "black" ;
     svg:stroke-width "0.5".
-
 
 
 ### Generic elements
@@ -1865,7 +2014,7 @@ archiSVG:Grouping a svg:G , archiSVG:Template ;
 archiSVG:GroupingBox a svg:Use  , archiSVG:Template ;
     skos:prefLabel "Grouping";
     xlink:href "#StructureElement";
-    svg:color "rgb(181,255,255)" .
+    svg:color "white" .
 
 archiSVG:GroupingIconUse rdf:type svg:Use, archiSVG:Template ;
     xlink:href "#Grouping".
@@ -1893,7 +2042,7 @@ archiSVG:Location a svg:G , archiSVG:Template ;
 archiSVG:LocationBox a svg:Use  , archiSVG:Template ;
     skos:prefLabel "Location";
     xlink:href "#StructureElement";
-    svg:color "rgb(181,255,255)" ;
+    svg:color "rgb(237,207,226)" ;
     svg:stroke "black" .
 
 archiSVG:LocationIconUse rdf:type svg:Use, archiSVG:Template ;
@@ -1978,7 +2127,6 @@ archiSVG:DriverText a svg:TextElement , archiSVG:Template ;
 archiSVG:DriverTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Driver" .    
 
-
 # Assessment
 
 archiSVG:Assessment a svg:G , archiSVG:Template ;
@@ -2005,7 +2153,6 @@ archiSVG:AssessmentText a svg:TextElement , archiSVG:Template ;
 
 archiSVG:AssessmentTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Assessment" .    
-
 
 # Goal
 
@@ -2034,7 +2181,6 @@ archiSVG:GoalText a svg:TextElement , archiSVG:Template ;
 archiSVG:GoalTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Goal" .    
 
-
 # Outcome
 
 archiSVG:Outcome a svg:G , archiSVG:Template ;
@@ -2061,7 +2207,6 @@ archiSVG:OutcomeText a svg:TextElement , archiSVG:Template ;
 
 archiSVG:OutcomeTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Outcome" .    
-
 
 # Principle
 
@@ -2090,7 +2235,6 @@ archiSVG:PrincipleText a svg:TextElement , archiSVG:Template ;
 archiSVG:PrincipleTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Principle" .       
 
-
 # Requirement
 
 archiSVG:Requirement a svg:G , archiSVG:Template ;
@@ -2117,7 +2261,6 @@ archiSVG:RequirementText a svg:TextElement , archiSVG:Template ;
 
 archiSVG:RequirementTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Requirement" .    
-
 
 # Constraint
 
@@ -2146,7 +2289,6 @@ archiSVG:ConstraintText a svg:TextElement , archiSVG:Template ;
 archiSVG:ConstraintTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Constraint" .   
 
-
 # Meaning
 
 archiSVG:Meaning a svg:G , archiSVG:Template ;
@@ -2173,7 +2315,6 @@ archiSVG:MeaningText a svg:TextElement , archiSVG:Template ;
 
 archiSVG:MeaningTextFragment a svg:Text  , archiSVG:Template ;
     xml:fragment "Meaning" .  
-
 
 # Value
 
@@ -2859,6 +3000,8 @@ archiSVG:technologyLayer a svg:G , archiSVG:Template ;
     rdf:_16 archiSVG:Path;
     rdf:_17 archiSVG:CommunicationNetwork .
 
+# Node
+
 archiSVG:Node a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Node ;
     skos:prefLabel "SVG depiction of a node in Archimate" ;
@@ -2867,7 +3010,7 @@ archiSVG:Node a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:NodeText .
 
 archiSVG:NodeBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -2884,6 +3027,7 @@ archiSVG:NodeText a svg:TextElement , archiSVG:Template ;
 archiSVG:NodeTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Node" .
 
+# Device 
 
 archiSVG:Device a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Device ;
@@ -2893,7 +3037,7 @@ archiSVG:Device a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:DeviceText .
 
 archiSVG:DeviceBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -2910,6 +3054,7 @@ archiSVG:DeviceText a svg:TextElement , archiSVG:Template ;
 archiSVG:DeviceTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Device" .
 
+# System software
 
 archiSVG:SystemSoftware a svg:G , archiSVG:Template ;
     foaf:depicts archimate:SystemSoftware ;
@@ -2919,7 +3064,7 @@ archiSVG:SystemSoftware a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:SystemSoftwareText .
 
 archiSVG:SystemSoftwareBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -2936,6 +3081,8 @@ archiSVG:SystemSoftwareText a svg:TextElement , archiSVG:Template ;
 archiSVG:SystemSoftwareTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "System Software" .
 
+# Technology collaboration
+
 archiSVG:TechnologyCollaboration a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyCollaboration ;
     skos:prefLabel "SVG depiction of a technology collaboration in Archimate" ;
@@ -2944,7 +3091,7 @@ archiSVG:TechnologyCollaboration a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyCollaborationText .
 
 archiSVG:TechnologyCollaborationBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -2961,6 +3108,8 @@ archiSVG:TechnologyCollaborationText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyCollaborationTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Collaboration" .
 
+# Technology interface
+
 archiSVG:TechnologyInterface a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyInterface ;
     skos:prefLabel "SVG depiction of a technology interface in Archimate" ;
@@ -2969,7 +3118,7 @@ archiSVG:TechnologyInterface a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyInterfaceText .
 
 archiSVG:TechnologyInterfaceBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -2986,6 +3135,8 @@ archiSVG:TechnologyInterfaceText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyInterfaceTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Interface" .
 
+# Technology function
+
 archiSVG:TechnologyFunction a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyFunction ;
     skos:prefLabel "SVG depiction of a technology function in Archimate" ;
@@ -2994,7 +3145,7 @@ archiSVG:TechnologyFunction a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyFunctionText .
 
 archiSVG:TechnologyFunctionBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3011,6 +3162,7 @@ archiSVG:TechnologyFunctionText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyFunctionTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Function" .
 
+# Technology process
 
 archiSVG:TechnologyProcess a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyProcess ;
@@ -3020,7 +3172,7 @@ archiSVG:TechnologyProcess a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyProcessText .
 
 archiSVG:TechnologyProcessBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3037,6 +3189,7 @@ archiSVG:TechnologyProcessText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyProcessTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Process" .
 
+# Technology interaction
 
 archiSVG:TechnologyInteraction a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyInteraction ;
@@ -3046,7 +3199,7 @@ archiSVG:TechnologyInteraction a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyInteractionText .
 
 archiSVG:TechnologyInteractionBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3063,6 +3216,7 @@ archiSVG:TechnologyInteractionText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyInteractionTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Interaction" .
 
+# Technology service
 
 archiSVG:TechnologyService a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyService ;
@@ -3072,7 +3226,7 @@ archiSVG:TechnologyService a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyServiceText .
 
 archiSVG:TechnologyServiceBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3089,6 +3243,7 @@ archiSVG:TechnologyServiceText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyServiceTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Service" .
 
+# Technology event
 
 archiSVG:TechnologyEvent a svg:G , archiSVG:Template ;
     foaf:depicts archimate:TechnologyEvent ;
@@ -3098,7 +3253,7 @@ archiSVG:TechnologyEvent a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:TechnologyEventText .
 
 archiSVG:TechnologyEventBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3115,6 +3270,7 @@ archiSVG:TechnologyEventText a svg:TextElement , archiSVG:Template ;
 archiSVG:TechnologyEventTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Technology Event" .
 
+# Artifact
 
 archiSVG:Artifact a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Artifact ;
@@ -3124,7 +3280,7 @@ archiSVG:Artifact a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:ArtifactText .
 
 archiSVG:ArtifactBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3141,6 +3297,7 @@ archiSVG:ArtifactText a svg:TextElement , archiSVG:Template ;
 archiSVG:ArtifactTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Artifact" .
 
+# Facility
 
 archiSVG:Facility a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Facility ;
@@ -3150,7 +3307,7 @@ archiSVG:Facility a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:FacilityText .
 
 archiSVG:FacilityBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3167,6 +3324,8 @@ archiSVG:FacilityText a svg:TextElement , archiSVG:Template ;
 archiSVG:FacilityTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Facility" .
 
+# Equipment
+
 archiSVG:Equipment a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Equipment ;
     skos:prefLabel "SVG depiction of an equipment in Archimate" ;
@@ -3175,7 +3334,7 @@ archiSVG:Equipment a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:EquipmentText .
 
 archiSVG:EquipmentBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3192,6 +3351,8 @@ archiSVG:EquipmentText a svg:TextElement , archiSVG:Template ;
 archiSVG:EquipmentTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Equipment" .
 
+# Distribution network
+
 archiSVG:DistributionNetwork a svg:G , archiSVG:Template ;
     foaf:depicts archimate:DistributionNetwork ;
     skos:prefLabel "SVG depiction of a distribution network in Archimate" ;
@@ -3200,7 +3361,7 @@ archiSVG:DistributionNetwork a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:DistributionNetworkText .
 
 archiSVG:DistributionNetworkBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3217,6 +3378,7 @@ archiSVG:DistributionNetworkText a svg:TextElement , archiSVG:Template ;
 archiSVG:DistributionNetworkTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Distribution Network" .
 
+# Material
 
 archiSVG:Material a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Material ;
@@ -3226,7 +3388,7 @@ archiSVG:Material a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:MaterialText .
 
 archiSVG:MaterialBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3243,6 +3405,7 @@ archiSVG:MaterialText a svg:TextElement , archiSVG:Template ;
 archiSVG:MaterialTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Material" .
 
+# Path
 
 archiSVG:Path a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Path ;
@@ -3252,7 +3415,7 @@ archiSVG:Path a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:PathText .
 
 archiSVG:PathBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3269,6 +3432,8 @@ archiSVG:PathText a svg:TextElement , archiSVG:Template ;
 archiSVG:PathTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Path" .
 
+# Communication network
+
 archiSVG:CommunicationNetwork a svg:G , archiSVG:Template ;
     foaf:depicts archimate:CommunicationNetwork ;
     skos:prefLabel "SVG depiction of a communication network in Archimate" ;
@@ -3277,7 +3442,7 @@ archiSVG:CommunicationNetwork a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:CommunicationNetworkText .
 
 archiSVG:CommunicationNetworkBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(201,231,183)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3304,6 +3469,8 @@ archiSVG:implementationMigrationLayer a svg:G , archiSVG:Template ;
     rdf:_4 archiSVG:Gap;
     rdf:_5 archiSVG:ImplementationEvent.
 
+# Deliverable
+
 archiSVG:Deliverable a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Deliverable ;
     skos:prefLabel "SVG depiction of a deliverable in Archimate" ;
@@ -3312,7 +3479,7 @@ archiSVG:Deliverable a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:DeliverableText .
 
 archiSVG:DeliverableBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(255,224,224)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3329,6 +3496,7 @@ archiSVG:DeliverableText a svg:TextElement , archiSVG:Template ;
 archiSVG:DeliverableTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Deliverable" .
 
+# Work package
 
 archiSVG:WorkPackage a svg:G , archiSVG:Template ;
     foaf:depicts archimate:WorkPackage ;
@@ -3338,7 +3506,7 @@ archiSVG:WorkPackage a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:WorkPackageText .
 
 archiSVG:WorkPackageBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(255,224,224)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3355,6 +3523,7 @@ archiSVG:WorkPackageText a svg:TextElement , archiSVG:Template ;
 archiSVG:WorkPackageTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Work Package" .
 
+# Plateau
 
 archiSVG:Plateau a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Plateau ;
@@ -3364,7 +3533,7 @@ archiSVG:Plateau a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:PlateauText .
 
 archiSVG:PlateauBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(255,224,224)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement". 
 
@@ -3381,6 +3550,7 @@ archiSVG:PlateauText a svg:TextElement , archiSVG:Template ;
 archiSVG:PlateauTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Plateau" .
 
+# Gap
 
 archiSVG:Gap a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Gap ;
@@ -3390,7 +3560,7 @@ archiSVG:Gap a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:GapText .
 
 archiSVG:GapBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(255,224,224)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3407,6 +3577,7 @@ archiSVG:GapText a svg:TextElement , archiSVG:Template ;
 archiSVG:GapTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Gap" .
 
+# Implementation event
 
 archiSVG:ImplementationEvent a svg:G , archiSVG:Template ;
     foaf:depicts archimate:ImplementationEvent ;
@@ -3416,7 +3587,7 @@ archiSVG:ImplementationEvent a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:ImplementationEventText .
 
 archiSVG:ImplementationEventBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(255,224,224)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3443,6 +3614,8 @@ archiSVG:strategyLayer a svg:G , archiSVG:Template ;
     rdf:_4 archiSVG:ValueStream;
     rdf:_5 archiSVG:ImplementationEvent. 
 
+# Capability 
+
 archiSVG:Capability a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Capability ;
     skos:prefLabel "SVG depiction of a capability in Archimate" ;
@@ -3451,7 +3624,7 @@ archiSVG:Capability a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:CapabilityText .
 
 archiSVG:CapabilityBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(245,222,170)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3468,6 +3641,7 @@ archiSVG:CapabilityText a svg:TextElement , archiSVG:Template ;
 archiSVG:CapabilityTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Capability" .
 
+# Course of action
 
 archiSVG:CourseOfAction a svg:G , archiSVG:Template ;
     foaf:depicts archimate:CourseOfAction ;
@@ -3477,7 +3651,7 @@ archiSVG:CourseOfAction a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:CourseOfActionText .
 
 archiSVG:CourseOfActionBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(245,222,170)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3494,6 +3668,7 @@ archiSVG:CourseOfActionText a svg:TextElement , archiSVG:Template ;
 archiSVG:CourseOfActionTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Course of Action" .
 
+# Resource 
 
 archiSVG:Resource a svg:G , archiSVG:Template ;
     foaf:depicts archimate:Resource ;
@@ -3503,7 +3678,7 @@ archiSVG:Resource a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:ResourceText .
 
 archiSVG:ResourceBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(245,222,170)" ;
     svg:stroke "black" ;
     xlink:href "#StructureElement".
 
@@ -3520,6 +3695,7 @@ archiSVG:ResourceText a svg:TextElement , archiSVG:Template ;
 archiSVG:ResourceTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Resource" .
 
+# Value stream
 
 archiSVG:ValueStream a svg:G , archiSVG:Template ;
     foaf:depicts archimate:ValueStream ;
@@ -3529,7 +3705,7 @@ archiSVG:ValueStream a svg:G , archiSVG:Template ;
     rdf:_3 archiSVG:ValueStreamText .
 
 archiSVG:ValueStreamBox a svg:Use , archiSVG:Template ;
-    svg:color "rgb(204,204,255)" ;
+    svg:color "rgb(245,222,170)" ;
     svg:stroke "black" ;
     xlink:href "#BehaviorElement".
 
@@ -3547,7 +3723,7 @@ archiSVG:ValueStreamTextFragment a svg:Text , archiSVG:Template ;
     xml:fragment "Value Stream" .
 
     
-### Relationship
+### Relationships
 
 archiSVG:relationships a svg:G , archiSVG:Template ;
     skos:prefLabel "SVG depiction of all relationships in Archimate";
@@ -3564,6 +3740,7 @@ archiSVG:relationships a svg:G , archiSVG:Template ;
     rdf:_11 archiSVG:Flow.
 
 # Associate
+
 archiSVG:Associate a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship association";
     foaf:depicts archimate:association;
@@ -3577,6 +3754,7 @@ archiSVG:AssociateLine a svg:Polyline, archiSVG:Template;
     svg:marker-start "url(#association)".
 
 # Aggregate
+
 archiSVG:Aggegrate a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship aggregate";
     foaf:depicts archimate:aggregation;
@@ -3590,6 +3768,7 @@ archiSVG:AggregateLine a svg:Polyline, archiSVG:Template;
     svg:marker-start "url(#aggregation)".
     
 # Access
+
 archiSVG:Access a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship access.";
     foaf:depicts archimate:access;
@@ -3605,6 +3784,7 @@ archiSVG:AccessLine a svg:Polyline, archiSVG:Template;
     svg:marker-end "url(#write)".    
 
 # Compose
+
 archiSVG:Compose a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship compose";
     foaf:depicts archimate:composition;
@@ -3633,6 +3813,7 @@ archiSVG:InfluenceLine a svg:Polyline, archiSVG:Template;
     svg:marker-end "url(#influence)".  
 
 # Serving
+
 archiSVG:Serving a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship serving";
     foaf:depicts archimate:serving;
@@ -3646,6 +3827,7 @@ archiSVG:ServingLine a svg:Polyline, archiSVG:Template;
     svg:marker-end "url(#serving)".
 
 # Realization
+
 archiSVG:Realization a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship realization";
     foaf:depicts archimate:realization;
@@ -3660,6 +3842,7 @@ archiSVG:RealizationLine a svg:Polyline, archiSVG:Template;
     svg:marker-end "url(#realization)".
 
 # Assignment
+
 archiSVG:Assignment a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship assignment";
     foaf:depicts archimate:assignedTo;
@@ -3674,6 +3857,7 @@ archiSVG:AssignmentLine a svg:Polyline, archiSVG:Template;
     svg:marker-end "url(#assignmentEnd)".
 
 # Specialization
+
 archiSVG:Specialization a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship specialization";
     foaf:depicts archimate:specialization;
@@ -3687,6 +3871,7 @@ archiSVG:SpecializationLine a svg:Polyline, archiSVG:Template;
     svg:marker-end "url(#specialization)".
 
 # Triggering
+
 archiSVG:Triggering a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship trigger";
     foaf:depicts archimate:triggering;
@@ -3700,6 +3885,7 @@ archiSVG:TriggeringLine a svg:Polyline, archiSVG:Template;
     svg:marker-start "url(#triggering)".
 
 # Flow
+
 archiSVG:Flow a svg:G, archiSVG:Template;
     skos:prefLabel "SVG-based icon for the relationship flow";
     foaf:depicts archimate:flow;
