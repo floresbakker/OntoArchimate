@@ -552,12 +552,13 @@ target:DefinitionsBoxes
     sh:select '''
 
 prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
-prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
-prefix dct: <http://purl.org/dc/terms/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix prov: <http://www.w3.org/ns/prov#>
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-prefix svg: <http://www.w3.org/SVG/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:      <http://www.w3.org/ns/rdfa/model/def/>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
 
 select $this {
 
@@ -601,6 +602,7 @@ construct {
   ?definition rdf:type svg:Symbol;
               skos:prefLabel ?label;
               svg:id ?id;
+              rdfa:resource ?rdfaResource;                   
               ?memberComponent ?component.
 
   ?component ?predicate ?object. 
@@ -616,6 +618,7 @@ construct {
               skos:prefLabel ?label;
               dct:related ?archimateClass;
               svg:id ?id;
+              rdfa:resource ?rdfaResource;                   
               ?memberComponent ?componentTemplate.
   filter(strstarts(str(?memberComponent), concat(str(rdf:), '_')))
   
