@@ -436,6 +436,10 @@ This XML document can be read into Archimate based tooling and visualised as fol
 
 We can also roundtrip from the XML document back to the RDF-based archiXML back to the RDF-based archimate core vocabulary. This means that one can parse archimate documents made in tools like Archi, BizzDesign and the like, and then convert them to RDF, provided one uses the open exchange XML-based format for Archimate.
 
+## Example #2: All Archimate elements as visualized through archiSVG.
+
+![Example #2](/examples/AllArchimateElements.svg)
+
 
 # Tools and dependencies
 
