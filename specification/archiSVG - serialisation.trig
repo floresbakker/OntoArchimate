@@ -201,6 +201,7 @@ prefix dct:      <http://purl.org/dc/terms/>
 prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov:     <http://www.w3.org/ns/prov#>
 prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:     <http://www.w3.org/ns/rdfa/model/def/>
 prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix svg:      <http://www.w3.org/SVG/model/def/>
 prefix xml:      <http://www.w3.org/XML/model/def/>
@@ -222,6 +223,8 @@ construct {
     xmlns:xlink "http://www.w3.org/1999/xlink" ;
     svg:viewBox ?viewBox;
     svg:height "900";
+    rdfa:resource $this;
+    svg:title ?svgLabel;
     rdf:_1 ?style;
     rdf:_2 ?definitions;
     rdf:_3 ?elements;
@@ -233,31 +236,40 @@ construct {
 
   ?styleText
     rdf:type svg:Text;
-    xml:fragment """path, line, rect, circle, polyline, polygon {
-      vector-effect: non-scaling-stroke;
+    xml:fragment """
     }""".
   
   ?definitions 
     rdf:type svg:Defs;
     dct:subject "definitions";
     rdf:_1 ?definitionsRelations;
-    rdf:_2 ?definitionsIcons.
+    rdf:_2 ?definitionsIcons;
+    rdf:_3 ?definitionsBoxes.
          
   ?definitionsRelations 
     rdf:type svg:G;  
+    svg:class "DefinitionRelation";
     dct:subject "definitions of relations".
   
   ?definitionsIcons 
     rdf:type svg:G;  
+    svg:class "DefinitionIcon";    
     dct:subject "definitions of icons".
+
+  ?definitionsBoxes 
+    rdf:type svg:G;  
+    svg:class "DefinitionBox";    
+    dct:subject "definitions of boxes".    
   
   ?elements 
     rdf:type svg:G;
+    svg:class "ElementInstance";    
     dct:subject "elements";
     skos:prefLabel "Archimate elements".
          
   ?relationships 
     rdf:type svg:G;
+    svg:class "RelationshipInstance";     
     dct:subject "relationships";
     skos:prefLabel "Archimate relationships".
 
@@ -282,6 +294,7 @@ construct {
   BIND(IRI(CONCAT(STR($this),"-SVG-Definitions"))           as ?definitions)  
   BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Relations")) as ?definitionsRelations)  
   BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Icons"))     as ?definitionsIcons)  
+  BIND(IRI(CONCAT(STR($this),"-SVG-Definitions-Boxes"))     as ?definitionsBoxes)    
   BIND(IRI(CONCAT(STR($this),"-SVG-Elements"))              as ?elements)
   BIND(IRI(CONCAT(STR($this),"-SVG-Relationships"))         as ?relationships)
 
@@ -337,6 +350,7 @@ prefix foaf:      <http://xmlns.com/foaf/0.1/>
 prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov:      <http://www.w3.org/ns/prov#>
 prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:      <http://www.w3.org/ns/rdfa/model/def/>
 prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:      <http://www.w3.org/2004/02/skos/core#>
 prefix svg:       <http://www.w3.org/SVG/model/def/>
@@ -351,6 +365,7 @@ construct {
   ?definition rdf:type svg:Symbol;
               skos:prefLabel ?label;
               svg:id ?id;
+              rdfa:resource ?rdfaResource;              
               ?memberComponent ?component.
 
   ?component ?predicate ?object. 
@@ -366,6 +381,7 @@ construct {
               skos:prefLabel ?label;
               dct:related ?archimateClass;
               svg:id ?id;
+              rdfa:resource ?rdfaResource;              
               ?memberComponent ?componentTemplate.
   filter(strstarts(str(?memberComponent), concat(str(rdf:), '_')))
   
@@ -449,6 +465,7 @@ prefix dct:      <http://purl.org/dc/terms/>
 prefix function: <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov:     <http://www.w3.org/ns/prov#>
 prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:     <http://www.w3.org/ns/rdfa/model/def/>
 prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:     <http://www.w3.org/2004/02/skos/core#>
 prefix svg:      <http://www.w3.org/SVG/model/def/>
@@ -461,6 +478,7 @@ construct {
   
   ?definition rdf:type svg:Marker;
               svg:id ?id;
+              rdfa:resource ?rdfaResource;                 
               svg:markerWidth ?markerWidth;
               svg:markerHeight ?markerHeight;
               svg:refX ?refX;
@@ -486,6 +504,7 @@ construct {
   ?definitionTemplate 
               rdf:type svg:Marker, archiSVG:Definition;
               svg:id ?id;
+              rdfa:resource ?rdfaResource;                 
               svg:markerWidth ?markerWidth;
               svg:markerHeight ?markerHeight;
               svg:refX ?refX;
@@ -507,6 +526,100 @@ construct {
               svg:cx ?cx ;
               svg:cy ?cy ;
               svg:r ?r .  }
+
+  bind(str(strafter(str(?member), concat(str(rdf:), '_')))          as ?definitionIdentifier)
+  bind(str(strafter(str(?memberComponent), concat(str(rdf:), '_'))) as ?componentIdentifier) 
+  
+  # Create IRI's
+  BIND(IRI(CONCAT(STR($this),"-Definition-", ?definitionIdentifier))     as ?definition)
+  BIND(IRI(CONCAT(STR(?definition),"-Component-", ?componentIdentifier)) as ?component)  
+  
+  }
+''';
+    rdfs:isDefinedBy archiSVG:.    
+
+shp:DefinitionsBoxes
+    a sh:NodeShape;
+    sh:rule rule:DefinitionsBoxes;
+    sh:target target:DefinitionsBoxes;
+    skos:prefLabel 'definitions boxes shape'@en;
+    rdfs:isDefinedBy archiSVG:.
+
+target:DefinitionsBoxes
+    a sh:SPARQLTarget;
+    rdfs:comment 'Select all definitions of boxes in the archisvg template.'@en;
+    sh:select '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG: <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix svg: <http://www.w3.org/SVG/model/def/>
+
+select $this {
+
+  # Select all definitions... 
+  $this rdf:type svg:G;
+      dct:subject "definitions of boxes".
+    
+  # ...that are not processed yet
+  filter not exists { 
+  $this ?member ?definition.
+  ?definition rdf:type svg:Symbol.
+  }
+}
+''';
+    rdfs:isDefinedBy archiSVG:.
+
+rule:DefinitionsBoxes
+    a sh:SPARQLRule;
+    rdfs:comment 'A rule that creates SVG definitions for boxes.'@en;
+    skos:prefLabel 'SVG definitions of boxes rule'@en;
+    sh:construct '''
+
+prefix archimate: <https://data.rijksfinancien.nl/archimate/model/def/>
+prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
+prefix dct:       <http://purl.org/dc/terms/>
+prefix foaf:      <http://xmlns.com/foaf/0.1/>
+prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
+prefix prov:      <http://www.w3.org/ns/prov#>
+prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos:      <http://www.w3.org/2004/02/skos/core#>
+prefix svg:       <http://www.w3.org/SVG/model/def/>
+prefix xlink:     <https://www.w3.org/1999/xlink/model/def/>
+prefix xml:       <http://www.w3.org/XML/model/def/>
+prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
+
+construct {
+
+  $this      ?member ?definition.
+  
+  ?definition rdf:type svg:Symbol;
+              skos:prefLabel ?label;
+              svg:id ?id;
+              ?memberComponent ?component.
+
+  ?component ?predicate ?object. 
+
+} where {
+ 
+  archiSVG:boxDefinitions
+              ?member ?definitionTemplate.
+  filter(strstarts(str(?member), concat(str(rdf:), '_')))  
+  
+  ?definitionTemplate 
+              rdf:type svg:Symbol, archiSVG:Template;
+              skos:prefLabel ?label;
+              dct:related ?archimateClass;
+              svg:id ?id;
+              ?memberComponent ?componentTemplate.
+  filter(strstarts(str(?memberComponent), concat(str(rdf:), '_')))
+  
+  ?componentTemplate 
+             ?predicate ?object.
 
   bind(str(strafter(str(?member), concat(str(rdf:), '_')))          as ?definitionIdentifier)
   bind(str(strafter(str(?memberComponent), concat(str(rdf:), '_'))) as ?componentIdentifier) 
@@ -568,6 +681,7 @@ prefix foaf:      <http://xmlns.com/foaf/0.1/>
 prefix function:  <https://data.rijksfinancien.nl/archisvg/model/function/>
 prefix prov:      <http://www.w3.org/ns/prov#>
 prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:      <http://www.w3.org/ns/rdfa/model/def/>
 prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:      <http://www.w3.org/2004/02/skos/core#>
 prefix svg:       <http://www.w3.org/SVG/model/def/>
@@ -580,6 +694,8 @@ construct {
 
     ?elementNode 
           rdf:type svg:G, archiSVG:Element;
+          rdfa:resource $this;
+          svg:title ?elementName;
           skos:prefLabel ?elementName;
           svg:transform  ?translate;
           rdf:_1 ?box;
@@ -673,11 +789,11 @@ prefix xsi:       <http://www.w3.org/2001/XMLSchema-instance/model/def/>
 construct {
 
     ?box 
-          rdf:type svg:Path;
+          rdf:type svg:Use;
           skos:prefLabel ?elementName;
-          svg:d         ?path ;
+          xlink:href    ?boxID;
           svg:transform ?scale;
-          svg:fill      ?fillColor ;
+          svg:color     ?fillColor ;
           svg:stroke    ?lineColor .
 
 } where {
@@ -691,10 +807,16 @@ construct {
                foaf:depicts ?archimateClass;
                rdf:_1 ?boxTemplate.
 
-  ?boxTemplate rdf:type svg:Path, archiSVG:Template;
-               svg:d      ?path ;
-               svg:fill   ?defaultFillColor ;
-               svg:stroke ?defaultLineColor .
+  ?boxTemplate rdf:type svg:Use, archiSVG:Template;
+               xlink:href  ?boxID .
+               
+  optional {
+  ?boxTemplate svg:color ?defaultFillColor .
+  }
+               
+  optional {               
+  ?boxTemplate svg:stroke ?defaultLineColor .
+  }
                
   optional {
   $this
@@ -722,10 +844,10 @@ construct {
   bind(concat("rgb(", ?lineColorR, "," ,?lineColorG, "," ,?lineColorB, ")") as ?lineColorElement)
   }               
   
-  bind(coalesce(?heightElement,    "55")                       as ?height)
-  bind(coalesce(?widthElement,     "144")                      as ?width)
-  bind(coalesce(?fillColorElement, ?defaultFillColor)          as ?fillColor)
-  bind(coalesce(?lineColorElement, ?defaultLineColor)          as ?lineColor)  
+  bind(coalesce(?heightElement,    "55")                                as ?height)
+  bind(coalesce(?widthElement,     "144")                               as ?width)
+  bind(coalesce(?fillColorElement, ?defaultFillColor, "none")           as ?fillColor)
+  bind(coalesce(?lineColorElement, ?defaultLineColor, "black")          as ?lineColor)  
     
   # Calculate the scaling of the box against the size of the template box
   bind(concat('scale(', str(xsd:integer(?width)/144), ',', str(xsd:integer(?height)/55), ')') as ?scale)
@@ -1570,6 +1692,7 @@ prefix archiSVG:  <https://data.rijksfinancien.nl/archisvg/model/def/>
 prefix foaf:      <http://xmlns.com/foaf/0.1/>
 prefix prov:      <http://www.w3.org/ns/prov#>
 prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfa:      <http://www.w3.org/ns/rdfa/model/def/>
 prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos:      <http://www.w3.org/2004/02/skos/core#>
 prefix svg:       <http://www.w3.org/SVG/model/def/>
@@ -1578,6 +1701,8 @@ construct {
 
     ?connection
           rdf:type svg:G, archiSVG:Connection;
+          svg:title ?relationshipName;
+          rdfa:resource $this;
           skos:prefLabel ?relationshipName;
           rdf:_1 ?connectionPart;
           archiSVG:accessType ?accessType;
