@@ -1,0 +1,173 @@
+# Generic prefixes
+prefix dcm: <http://purl.org/dc/dcmitype/>
+prefix dct: <http://purl.org/dc/terms/>
+prefix dom: <http://www.w3.org/DOM/model/def/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix html: <https://www.w3.org/html/model/def/>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix status: <http://purl.org/adms/status/>
+prefix vann: <http://purl.org/vocab/vann/>
+prefix void: <http://rdfs.org/ns/void#>
+prefix xml: <http://www.w3.org/XML/model/def/> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# RDFa prefixes
+prefix rdfa: <http://www.w3.org/ns/rdfa/model/def/>
+prefix section: <http://www.w3.org/ns/rdfa/id/section/>
+prefix standard: <http://www.w3.org/ns/rdfa/id/standard/>
+
+
+rdfa: {
+  rdfa:
+    a
+      owl:Ontology,
+      void:Dataset;
+    dct:created '2023-10-29'^^xsd:date;
+    dct:creator
+      'Flores Bakker';
+    dct:language 'iso639-1:en';
+    dct:license 'http://creativecommons.org/licenses/by/4.0'^^xsd:anyURI;
+    dct:publisher <https://rijksfinancien.nl>;
+    dct:status status:UnderDevelopment;
+    dct:subject 'RDFa'@en;
+    dct:title 'RDFa Ontology'@en;
+    dct:source <https://github.com/floresbakker/rdfa-voc>;
+    dct:abstract "The RDFa Core Ontology provides a formal representation of the attributes as specified in the W3C Living Standard of RDFa at https://www.w3.org/TR/rdfa-core/. It defines properties to describe these attributes."@en;
+    dct:description "The RDFa Core Ontology provides a formal representation of the attributes as specified in the W3C Living Standard of RDFa at https://www.w3.org/TR/rdfa-core/. It defines properties to describe these attributes. The ontology serves as a reference for understanding and working with RDFa within the context of RDF-based applications."@en;
+    foaf:depiction 'https://www.rijksfinancien.nl/themes/custom/indicia_theme/files/logo-rijksoverheid.svg'^^xsd:anyURI;
+    foaf:homepage 'https://www.rijksfinancien.nl/'^^xsd:anyURI;
+    owl:imports
+      dct:,
+      owl:,
+      rdf:,
+      rdfs:,
+      skos:;
+    owl:versionInfo '0.1.0';
+    vann:preferredNamespacePrefix 'rdfa';
+    vann:preferredNamespaceUri 'http://www.w3.org/ns/rdfa/model/def/';
+    void:uriRegexPattern '^http://www.w3.org/ns/rdfa/model/def/';
+    void:uriSpace 'http://www.w3.org/ns/rdfa/model/def/'^^xsd:anyURI.
+
+  standard:rdfa
+    a dct:Standard;
+    dct:created '2024-09-27'^^xsd:date;
+    dct:source 'https://www.w3.org/TR/rdfa-core/'^^xsd:anyURI;
+    skos:prefLabel 'RDFa Core 1.1 - Third Edition'@en;
+    skos:definition 'Syntax and processing rules for embedding RDF through attributes'@en;
+    rdfs:isDefinedBy rdfa:.
+
+### Sections from the RDFa Specification ###
+
+  section:AttributesAndSyntax
+    a dcm:Text;
+    dct:isPartOf standard:rdfa;
+    dct:source 'https://www.w3.org/TR/rdfa-core/#s_syntax'^^xsd:anyURI;
+    skos:prefLabel '5. Attributes and Syntax'@en;
+    rdfs:isDefinedBy rdfa:.
+
+### Classes ###
+
+rdfa:Attribute
+    rdf:type owl:Class;
+    rdfs:subClassOf dom:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    skos:definition """An RDFa attribute is used within web documents (HTML, XHTML, or XML) to embed structured metadata in the form of RDF (Resource Description Framework) triples. These attributes either define RDF concepts (like subjects, predicates, and objects) or modify existing HTML attributes to include RDF semantics. RDFa attributes allow semantic data to be expressed directly in web content without altering its visual presentation for human readers."""@en;
+    skos:prefLabel 'attribute'@en;
+    rdfs:isDefinedBy rdfa:.
+
+### Properties ###
+
+### Generic properties ###
+
+rdfa:key
+    a owl:DatatypeProperty;
+    rdfs:subPropertyOf dom:localName;
+    rdfs:domain rdfa:Attribute;
+    rdfs:range xsd:string;
+    skos:definition 'Property that links the key name of a specific RDFa attribute to that RDFa attribute.'@en;
+    skos:prefLabel 'key property'@en;
+    rdfs:isDefinedBy rdfa:.
+
+### RDFa attributes ###
+
+rdfa:property
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:string;
+    rdfa:key 'property';
+    skos:prefLabel 'the property attribute'@en;
+    skos:definition "Specifies a property for an DOM element."@en;
+    rdfs:isDefinedBy rdfa:.
+    
+rdfa:typeof
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:string;
+    rdfa:key 'typeof';
+    skos:prefLabel 'the typeof attribute'@en;
+    skos:definition "Specifies a type for an HTML element (RDF class)."@en;
+    rdfs:isDefinedBy rdfa:.
+
+rdfa:vocab
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:anyURI;
+    rdfa:key 'vocab';
+    skos:prefLabel 'the vocab attribute'@en;
+    skos:definition "Declares a default vocabulary for the HTML document."@en;
+    rdfs:isDefinedBy rdfa:.
+
+rdfa:prefix
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:string;
+    rdfa:key 'prefix';
+    skos:prefLabel 'the prefix attribute'@en;
+    skos:definition "Declares a set of namespace prefixes for CURIEs used in the document."@en;
+    rdfs:isDefinedBy rdfa:.
+
+rdfa:about
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:anyURI;
+    rdfa:key 'about';
+    skos:prefLabel 'the about attribute'@en;
+    skos:definition "Specifies the subject of the RDF triples in the context of the HTML element."@en;
+    rdfs:isDefinedBy rdfa:.
+
+rdfa:resource
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:anyURI;
+    rdfa:key 'resource';
+    skos:prefLabel 'the resource attribute'@en;
+    skos:definition "Specifies the object resource of the RDF triples."@en;
+    rdfs:isDefinedBy rdfa:.
+
+rdfa:datatype
+    a owl:DatatypeProperty;
+    rdf:type rdfa:Attribute;
+    dct:conformsTo section:AttributesAndSyntax;
+    rdfs:domain dom:Element;
+    rdfs:range xsd:anyURI;
+    rdfa:key 'datatype';
+    skos:prefLabel 'the datatype attribute'@en;
+    skos:definition "Specifies the datatype of a literal in RDF."@en;
+    rdfs:isDefinedBy rdfa:.
+
+}

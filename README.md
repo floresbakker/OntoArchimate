@@ -15,7 +15,7 @@ The family of OntoArchimate consists of the following six vocabularies:
 
 With OntoArchimate one can describe architecture according to the Archimate standard, using the RDF-based Archimate Core Vocabulary. From here, we can transform this architecture to a RDF-based model of an XML document representing that architecture, using the ArchiXML Core Vocabulary and ArchiXML Serialisation Vocabulary. We can then serialize this to an actual XML document using the XML Core Vocabulary. We can also roundtrip this process and start with an XML file, parse it to the ArchiXML vocabulary then serialize it to the Archimate Core Vocabulary, using the Archimate Serialisation Vocabulary. Finally, we can also express Archimate views as SVG images, through the use of the ArchiSVG Core Vocabulary and ArchiSVG Serialisation Vocabulary.
 
-![Overview OntoArchimate Objects](/Examples/OntoArchimateObjects.JPG)
+![Overview OntoArchimate Objects](/examples/OntoArchimateObjects.JPG)
 
 OntoArchimate also makes use of another family of vocabularies:
 
@@ -59,7 +59,7 @@ In this example we consider an Archimate model consisting of three Archimate ele
 
 Relationship 2 is thus connecting a Business Object with relationship 1.
 
-![Example #1](/Examples/ArchimateExample1.JPG)
+![Example #1](/examples/ArchimateExample1.JPG)
 
 This can be represented in RDF using the archimate vocabulary as follows:
 
@@ -432,7 +432,7 @@ The above mentioned archiXML code can then be serialized using the ArchiXML - co
 
 This XML document can be read into Archimate based tooling and visualised as follows:
 
-![Example #1](/Examples/ArchimateExample1.JPG)
+![Example #1](/examples/ArchimateExample1.JPG)
 
 We can also roundtrip from the XML document back to the RDF-based archiXML back to the RDF-based archimate core vocabulary. This means that one can parse archimate documents made in tools like Archi, BizzDesign and the like, and then convert them to RDF, provided one uses the open exchange XML-based format for Archimate.
 
@@ -451,7 +451,7 @@ This repository comes with five, fairly primitive, Python-based tools to handle 
 
 The tool OntoArchimate Playground is used to transform an RDF-based representation of an Archimate model into actual archimate XML code or an actual SVG image (including RDF & SVG representations), ready for use in archimate-compliant software. In addition, it is also possible to transform archimate XML code to an abstract RDF-based representation of an Archimate model. Please note that OntoArchimate Playground is not meant for production use as it is rather slow and unforgiving in the user experience it offers. It is advised to apply the OntoArchimate vocabularies as contained in this repository within a fast enviroment consisting of a performant triple store, sparlq engine and shacl engine for an optimal experience.
 
-![OntoArchimatePlayground](/Examples/Playground.JPG)
+![OntoArchimatePlayground](/examples/Playground.JPG)
 
 ### How to use Playground
 

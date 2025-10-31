@@ -86,6 +86,17 @@ xmlns: {
     skos:prefLabel 'the rdf attribute'@en;
     rdfs:isDefinedBy xmlns:.
 
+  xmlns:rdfa
+    a owl:DatatypeProperty;
+    xml:key 'rdfa';
+    rdfs:domain xml:Element;
+    rdfs:range xsd:string;
+    rdfs:subPropertyOf xml:attribute;
+    rdf:type xmlns:Attribute;    
+    skos:definition "The 'rdfa' attribute is used to specify the RDFa namespace within an XML document. It associates elements and attributes with RDFa resources and statements."@en;
+    skos:prefLabel 'the rdfa attribute'@en;
+    rdfs:isDefinedBy xmlns:.    
+
   xmlns:xlink 
     a owl:DatatypeProperty;
     xml:key 'xlink';

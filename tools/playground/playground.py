@@ -45,6 +45,7 @@ xmlns_vocabulary        = readStringFromFile(directory_path + "/specification/xm
 xlink_vocabulary        = readStringFromFile(directory_path + "/specification/xlink - core.trig")
 xsi_vocabulary          = readStringFromFile(directory_path + "/specification/xsi - core.trig")
 svg_vocabulary          = readStringFromFile(directory_path + "/specification/svg - core.trig")
+rdfa_vocabulary         = readStringFromFile(directory_path + "/specification/rdfa - core.trig")
 archimate_vocabulary    = readStringFromFile(directory_path + "/specification/archimate - core.trig")
 archiXML_vocabulary     = readStringFromFile(directory_path + "/specification/archiXML - core.trig")
 archiSVG_vocabulary     = readStringFromFile(directory_path + "/specification/archiSVG - core.trig")
@@ -52,7 +53,7 @@ archimate_serialisation = readStringFromFile(directory_path + "/specification/ar
 archiXML_serialisation  = readStringFromFile(directory_path + "/specification/archiXML - serialisation.trig")
 archiSVG_serialisation  = readStringFromFile(directory_path + "/specification/archiSVG - serialisation.trig")
 
-vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archimate_vocabulary + '\n' + archiXML_vocabulary + '\n' + archiSVG_vocabulary + '\n' + svg_vocabulary
+vocabulary = dom_vocabulary + '\n' + xml_vocabulary + '\n' + xmlns_vocabulary + '\n' + xlink_vocabulary + '\n' + xsi_vocabulary + '\n' + archimate_vocabulary + '\n' + archiXML_vocabulary + '\n' + archiSVG_vocabulary + '\n' + svg_vocabulary + '\n' + rdfa_vocabulary + '\n'
 example_rdf_code = readStringFromFile(directory_path + "/examples/ArchimateBasicModel.trig")
 example_archimate_code = readStringFromFile(directory_path + "/examples/ArchimateBasicModel.xml")
 
