@@ -212,7 +212,7 @@ construct {
   ?documentationTextNode rdf:type archiXML:Text;
          xml:fragment ?archimateDocumentation.
   ?elementsNode rdf:type archiXML:Elements.
-  ?relationshipsNode rdf:type archiXML:Relationships.
+  # No line for ?relationshipsNode as this is an optional node
   ?viewsNode rdf:type archiXML:Views;
          rdf:_1 ?diagramsNode.  
   ?diagramsNode rdf:type archiXML:Diagrams.
@@ -522,8 +522,10 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     
 select $this
 where {
-  # Select individuals of archiXML:Relationships
-  $this rdf:type archiXML:Relationships.
+  # Select the archiXML:Relationships node
+  ?model rdf:type archiXML:Model;
+         ?memberRelationships $this.
+  filter(strstarts(str(?memberRelationships), concat(str(rdf:), '_')))         
   ?unprocessedRelationship rdf:type archiXML:Relationship.
   filter not exists {
       $this ?member ?unprocessedRelationship .
@@ -547,7 +549,9 @@ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 construct {
 
-  $this ?rdf_member ?relationship.
+  $this 
+     rdf:type archiXML:Relationships;
+     ?rdf_member ?relationship.
   
 } where {
   ?relationship rdf:type archiXML:Relationship;
@@ -861,7 +865,7 @@ construct {
            archiXML:r ?fontColorR .               
 
 } where {
-
+  
   # Get the archimate metadata of the archimate view
   ?archimateView rdf:type archimate:View;
                   archimate:contains* $this.
@@ -872,6 +876,13 @@ construct {
   ?archiXMLElement prov:wasDerivedFrom ?element;
                    archiXML:identifier ?elementIdentifier. 
   bind("Element" as ?xsiType)
+
+  # Set unique identifier
+  BIND(CONCAT("Node_",STR(?elementIdentifier)) as ?nodeIdentifier)
+
+  # Create IRI's
+  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)  
   
   optional {
   $this
@@ -882,6 +893,13 @@ construct {
   }
   
   optional {
+
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
+  
   $this
     archimate:fillColor  ?fillColor;
     archimate:lineColor  ?lineColor;
@@ -909,18 +927,6 @@ construct {
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB.
   }
-  # Set unique identifier
-  BIND(CONCAT("Node_",STR(?elementIdentifier)) as ?nodeIdentifier)
-
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)  
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
- 
   }
 ''';
     rdfs:isDefinedBy archiXML:.
@@ -1051,6 +1057,16 @@ construct {
     archimate:width      ?w.
   }
   
+  # Set unique identifier
+  BIND(CONCAT("Node_",STR(?containerIdentifier)) as ?nodeIdentifier)
+
+  # Create IRI's
+  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)   
+  }
+
   optional {
   $this
     archimate:fillColor  ?fillColor;
@@ -1078,21 +1094,13 @@ construct {
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB.
-  }
-  # Set unique identifier
-  BIND(CONCAT("Node_",STR(?containerIdentifier)) as ?nodeIdentifier)
 
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
- 
+
   }
 ''';
     rdfs:isDefinedBy archiXML:.
@@ -1216,6 +1224,15 @@ construct {
       skos:prefLabel ?label.
   }
   
+  # Set unique identifier
+  BIND(CONCAT("Node_",STR(?labelIdentifier)) as ?nodeIdentifier)
+
+  # Create IRI's
+  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
+
   optional {
   $this
     archimate:horizontal ?x;
@@ -1251,21 +1268,13 @@ construct {
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB.
-  }
-  # Set unique identifier
-  BIND(CONCAT("Node_",STR(?labelIdentifier)) as ?nodeIdentifier)
 
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)    
- 
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI)     
+  }
   }
 ''';
     rdfs:isDefinedBy archiXML:.    
@@ -1404,6 +1413,16 @@ construct {
     archimate:width      ?w.
   }
   
+  # Set unique identifier
+  BIND(CONCAT("Node_",STR(?labelIdentifier)) as ?nodeIdentifier)
+
+  # Create IRI's
+  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
+  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-viewref"))                 as ?viewRefIRI)   
+
   optional {
   $this
     archimate:fillColor  ?fillColor;
@@ -1431,23 +1450,15 @@ construct {
     archimate:red   ?fontColorR;
     archimate:green ?fontColorG;
     archimate:blue  ?fontColorB.
-  }
-  # Set unique identifier
-  BIND(CONCAT("Node_",STR(?labelIdentifier)) as ?nodeIdentifier)
 
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View-"))                           as ?view)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier))                             as ?elementNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-label"))                   as ?labelNode)
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-labelText"))               as ?labelTextNode)  
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-nodestyle"))               as ?nodeStyleIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fillcolor"))               as ?fillColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-linecolor"))               as ?lineColorIRI)
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-font"))                    as ?fontIRI)    
   BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-fontcolor"))               as ?fontColorIRI) 
-  BIND(IRI(CONCAT(STR(?view),?nodeIdentifier, "-viewref"))                 as ?viewRefIRI)   
- 
+    
   }
+}
 ''';
     rdfs:isDefinedBy archiXML:.    
 
@@ -1560,27 +1571,6 @@ construct {
   $this foaf:depicts ?relationship.
   
   optional {
-  $this
-    archimate:lineColor  ?connectionLineColor;
-    archimate:font       ?connectionFont.
-
-  ?connectionLineColor rdf:type archimate:Color;
-    archimate:red   ?connectionLineColorR;
-    archimate:green ?connectionLineColorG;
-    archimate:blue  ?connectionLineColorB. 
-
-  ?connectionFont rdf:type archimate:Font;
-    archimate:fontName  ?connectionFontName;
-    archimate:fontSize  ?connectionFontSize;
-    archimate:fontColor ?connectionFontColor.
-
-  ?connectionFontColor rdf:type archimate:Color;
-    archimate:red   ?connectionFontColorR;
-    archimate:green ?connectionFontColorG;
-    archimate:blue  ?connectionFontColorB.
-  }
-  
-  optional {
   $this 
      archimate:bendPoint ?bendPointList.
   ?bendPointList rdf:rest*/rdf:first ?bendPoint.
@@ -1651,14 +1641,37 @@ construct {
   # - Take into account that viewnodes, containers and notes take precedence over relationships (hence offset of + ?indexNode)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexRelationship + 3 + ?indexNode))) as ?memberConnection)
   BIND(IRI(CONCAT(STR(rdf:), "_", STR(?indexBendPoint +2))) as ?memberBendPoint)
-  
-  # Create IRI's
-  BIND(IRI(CONCAT(STR(?archimateView),"-View"))                                             as ?view)
-  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))                                        as ?connectionNode)
+    
+  optional {
+  $this
+    archimate:lineColor  ?connectionLineColor;
+    archimate:font       ?connectionFont.
+
+  ?connectionLineColor rdf:type archimate:Color;
+    archimate:red   ?connectionLineColorR;
+    archimate:green ?connectionLineColorG;
+    archimate:blue  ?connectionLineColorB. 
+
+  ?connectionFont rdf:type archimate:Font;
+    archimate:fontName  ?connectionFontName;
+    archimate:fontSize  ?connectionFontSize;
+    archimate:fontColor ?connectionFontColor.
+
+  ?connectionFontColor rdf:type archimate:Color;
+    archimate:red   ?connectionFontColorR;
+    archimate:green ?connectionFontColorG;
+    archimate:blue  ?connectionFontColorB.
+
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-nodestyle"))                          as ?connectionStyle)
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-linecolor"))                          as ?connectionLineColorIRI)
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-font"))                               as ?connectionFontIRI)    
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-fontcolor"))                          as ?connectionFontColorIRI)
+    
+  }
+  
+  # Create IRI's
+  BIND(IRI(CONCAT(STR(?archimateView),"-View"))                                             as ?view)
+  BIND(IRI(CONCAT(STR(?view),?connectionIdentifier))                                        as ?connectionNode)
   BIND(IRI(CONCAT(STR(?view),?connectionIdentifier, "-bendpoint-", str(?indexBendPoint+1))) as ?connectionBendPointIRI)
  
   }

@@ -38,13 +38,13 @@ In the field of enterprise architecture, Archimate plays a crucial role in model
 
 However, the representation of Archimate models in traditional formats lacks the semantic richness necessary for interoperability and advanced analysis. The Archimate Ontology addresses this limitation by formalizing Archimate concepts and relationships in RDF format, leveraging semantic web technologies to enhance interoperability, integration, and semantic understanding of Archimate models.
 
-With the Archimate Ontology, users can generate, parse, validate, annotate, and reuse Archimate documents using semantic web compliant technology, unlocking new possibilities for leveraging Archimate models within the wider context of the Semantic Web.
+With the Archimate Ontology, users can generate, parse, validate, annotate, visualize and reuse Archimate documents using semantic web compliant technology, unlocking new possibilities for leveraging Archimate models within the wider context of the Semantic Web.
 
 # Introduction
 
 Let us explore the OntoArchimate family of vocabularies with examples of Archimate models.
 
-## Example #1: Basic Archimate model with three elements and two relationships:
+## Example #1: Basic Archimate model with three elements and two relationships
 
 In this example we consider an Archimate model consisting of three Archimate elements...
 
@@ -436,7 +436,7 @@ This XML document can be read into Archimate based tooling and visualised as fol
 
 We can also roundtrip from the XML document back to the RDF-based archiXML back to the RDF-based archimate core vocabulary. This means that one can parse archimate documents made in tools like Archi, BizzDesign and the like, and then convert them to RDF, provided one uses the open exchange XML-based format for Archimate.
 
-## Example #2: All Archimate elements as visualized through archiSVG.
+## Example #2: All Archimate elements as visualized through archiSVG
 
 ![Example #2](/examples/AllArchimateElements.svg)
 

@@ -223,7 +223,6 @@ def serializeXMLFragment(shaclgraph, serializable_graph):
         for result in resultquery:
             print ("check if fragment is complete: ", result)
             if result == False:
-                
                 return serializeXMLFragment(shaclgraph, serializable_graph)
          
             else:
@@ -315,7 +314,7 @@ where {
 @app.route('/convert2Archimate', methods=['POST'])
 def convert_to_archimate():
     try:
-        print("Starting to convert RDF to XML...")    
+        print("Converting RDF to XML...")    
         print("Step 1: transforming archimate vocabulary to archiXML...")    
         text = request.form['rdf']   
         g = Dataset(default_union=True)
@@ -341,7 +340,7 @@ def convert_to_archimate():
 @app.route('/convert2SVG', methods=['POST'])
 def convert_to_SVG():
     try:
-        print("Starting to convert RDF to SVG...")    
+        print("Converting RDF to SVG...")    
         print("Step 1: transforming archimate vocabulary to archiSVG...")  
         text = request.form['rdf']   
         g = Dataset(default_union=True)
@@ -369,7 +368,7 @@ def convert_to_SVG():
 @app.route('/convert2RDF', methods=['POST'])
 def convert_to_rdf():
     try:
-        print("Starting to convert XML to RDF...")
+        print("Converting XML to RDF...")
         print("Step 1: parsing XML into ArchiXML...")
         archimateInput = request.form['archimate']
         # initialize graph

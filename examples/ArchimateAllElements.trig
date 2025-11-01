@@ -12,6 +12,12 @@ prefix view:      <https://data.rijksfinancien.nl/archimate/view/id/>
 
 model:allElements {
 
+model:allElements
+    rdf:type archimate:Model ;
+    skos:prefLabel "All Archimate elements" ;
+    skos:definition "Model with all Archimate elements" ;
+    rdfs:isDefinedBy model:allElements .
+
 ### STRATEGY LAYER
 
 model:aCapability
