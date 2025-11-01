@@ -524,8 +524,7 @@ select $this
 where {
   # Select the archiXML:Relationships node
   ?model rdf:type archiXML:Model;
-         ?memberRelationships $this.
-  filter(strstarts(str(?memberRelationships), concat(str(rdf:), '_')))         
+         rdf:_4 $this.
   ?unprocessedRelationship rdf:type archiXML:Relationship.
   filter not exists {
       $this ?member ?unprocessedRelationship .
