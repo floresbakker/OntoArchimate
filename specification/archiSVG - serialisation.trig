@@ -393,9 +393,10 @@ construct {
       ?element 
           rdf:type ?archimateClass;
           rdfs:isDefinedBy ?model.
-      ?viewNode foaf:depicts ?element.
+      ?viewNode foaf:depicts ?element.  
+      ?rootviewNode archimate:contains* ?viewNode.
       ?view 
-           archimate:contains ?viewNode;
+           archimate:contains ?rootViewNode;
            rdfs:isDefinedBy ?model.       
       ?doc
            rdf:type svg:Document;
@@ -2642,18 +2643,24 @@ select ?result where {
     # 2. Horizontal line
     # horizontal line when [a] and [b] are overlapping vertically   
     
-    bind(if(function:isVerticalOverlap($from, $to),   function:getStartHorizontalCoordinate($from, $to)                                    , ?unboundDummy) as ?startHorizontalLineX)
-    bind(if(function:isVerticalOverlap($from, $to),   function:getMaxVerticalCoordinate($from, $to) + function:getDeltaVertical($from, $to), ?unboundDummy) as ?startHorizontalLineY)
+    bind(if(function:isVerticalOverlap($from, $to) && !function:isHorizontalOverlap($from, $to),   function:getStartHorizontalCoordinate($from, $to)                                    , ?unboundDummy) as ?startHorizontalLineX)
+    bind(if(function:isVerticalOverlap($from, $to) && !function:isHorizontalOverlap($from, $to),   function:getMaxVerticalCoordinate($from, $to) + function:getDeltaVertical($from, $to), ?unboundDummy) as ?startHorizontalLineY)
 
     # 3. Vertical line
     # vertical line when [a] and [b] are overlapping horizontally   
     
-    bind(if(function:isHorizontalOverlap($from, $to), function:getMaxHorizontalCoordinate($from, $to) + function:getDeltaHorizontal($from, $to), ?unboundDummy) as ?startVerticalLineX)
-    bind(if(function:isHorizontalOverlap($from, $to), function:getStartVerticalCoordinate($from, $to)                                          , ?unboundDummy) as ?startVerticalLineY)
+    bind(if(function:isHorizontalOverlap($from, $to) && !function:isVerticalOverlap($from, $to),   function:getMaxHorizontalCoordinate($from, $to) + function:getDeltaHorizontal($from, $to), ?unboundDummy) as ?startVerticalLineX)
+    bind(if(function:isHorizontalOverlap($from, $to) && !function:isVerticalOverlap($from, $to),   function:getStartVerticalCoordinate($from, $to)                                          , ?unboundDummy) as ?startVerticalLineY)
 
-    # 4. Concatenate result
+    # 4. Boxed in (horizontal and vertical overlap)
+    # Boxed in line from middle to middle when [a] and [b] are overlapping both vertically and horizontally 
     
-    bind(concat(str(coalesce(?startDiagonalX1,?startDiagonalX2,?startDiagonalX3,?startDiagonalX4,?startHorizontalLineX, ?startVerticalLineX,"")), ',', str(coalesce(?startDiagonalY1,?startDiagonalY2,?startDiagonalY3,?startDiagonalY4,?startHorizontalLineY, ?startVerticalLineY,""))) as ?result)
+    bind(if(function:isVerticalOverlap($from, $to) && function:isHorizontalOverlap($from, $to),    (?fromX + ?fromX + ?fromW)/2, ?unboundDummy) as ?startBoxedInLineX)
+    bind(if(function:isVerticalOverlap($from, $to) && function:isHorizontalOverlap($from, $to),    (?fromY + ?fromY + ?fromH)/2, ?unboundDummy) as ?startBoxedInLineY)  
+
+    # 5. Concatenate result
+    
+    bind(concat(str(coalesce(?startDiagonalX1,?startDiagonalX2,?startDiagonalX3,?startDiagonalX4,?startHorizontalLineX,?startVerticalLineX,?startBoxedInLineX,"")), ',', str(coalesce(?startDiagonalY1,?startDiagonalY2,?startDiagonalY3,?startDiagonalY4,?startHorizontalLineY,?startVerticalLineY,?startBoxedInLineY,""))) as ?result)
 }
 """ .
 
@@ -2735,18 +2742,24 @@ select ?result where {
     # 2. Horizontal line
     # horizontal line when [a] and [b] are overlapping vertically   
     
-    bind(if(function:isVerticalOverlap($from, $to),   function:getEndHorizontalCoordinate($from, $to)                                        ,   ?unboundDummy) as ?endHorizontalLineX)
-    bind(if(function:isVerticalOverlap($from, $to),   function:getMaxVerticalCoordinate($from, $to)   + function:getDeltaVertical($from, $to),   ?unboundDummy) as ?endHorizontalLineY)
+    bind(if(function:isVerticalOverlap($from, $to) && !function:isHorizontalOverlap($from, $to),   function:getEndHorizontalCoordinate($from, $to)                                        ,   ?unboundDummy) as ?endHorizontalLineX)
+    bind(if(function:isVerticalOverlap($from, $to) && !function:isHorizontalOverlap($from, $to),   function:getMaxVerticalCoordinate($from, $to)   + function:getDeltaVertical($from, $to),   ?unboundDummy) as ?endHorizontalLineY)
 
     # 3. Vertical line
     # vertical line when [a] and [b] are overlapping horizontally   
     
-    bind(if(function:isHorizontalOverlap($from, $to), function:getMaxHorizontalCoordinate($from, $to) + function:getDeltaHorizontal($from, $to), ?unboundDummy) as ?endVerticalLineX)
-    bind(if(function:isHorizontalOverlap($from, $to), function:getEndVerticalCoordinate($from, $to)                                            , ?unboundDummy) as ?endVerticalLineY)
+    bind(if(function:isHorizontalOverlap($from, $to) && !function:isVerticalOverlap($from, $to), function:getMaxHorizontalCoordinate($from, $to) + function:getDeltaHorizontal($from, $to), ?unboundDummy) as ?endVerticalLineX)
+    bind(if(function:isHorizontalOverlap($from, $to) && !function:isVerticalOverlap($from, $to), function:getEndVerticalCoordinate($from, $to)                                            , ?unboundDummy) as ?endVerticalLineY)
 
-    # 4. Concatenate result
+    # 4. Boxed in (horizontal and vertical overlap)
+    # Boxed in line from middle to middle when [a] and [b] are overlapping both vertically and horizontally 
+
+    bind(if(function:isHorizontalOverlap($from, $to) && function:isVerticalOverlap($from, $to), (?toX + ?toX + ?toW)/2, ?unboundDummy) as ?endBoxedInLineX)
+    bind(if(function:isHorizontalOverlap($from, $to) && function:isVerticalOverlap($from, $to), (?toY + ?toY + ?toH)/2, ?unboundDummy) as ?endBoxedInLineY)
     
-    bind(concat(str(coalesce(?endDiagonalX1,?endDiagonalX2,?endDiagonalX3,?endDiagonalX4,?endHorizontalLineX, ?endVerticalLineX,"")), ',', str(coalesce(?endDiagonalY1,?endDiagonalY2,?endDiagonalY3,?endDiagonalY4,?endHorizontalLineY, ?endVerticalLineY,""))) as ?result)
+    # 5. Concatenate result
+    
+    bind(concat(str(coalesce(?endDiagonalX1,?endDiagonalX2,?endDiagonalX3,?endDiagonalX4,?endHorizontalLineX,?endVerticalLineX,?endBoxedInLineX,"")), ',', str(coalesce(?endDiagonalY1,?endDiagonalY2,?endDiagonalY3,?endDiagonalY4,?endHorizontalLineY, ?endVerticalLineY,?endBoxedInLineY,""))) as ?result)
 }
 """ .
 
@@ -3296,32 +3309,79 @@ where {
 }
 """ .
 
-
-function:escapeXML
+function:getMidXCoordinate
     a sh:SPARQLFunction ;
-    rdfs:comment "Escapes XML characters in the input string." ;
+    rdfs:comment "Returns a string containing the X coordinate for the middle point of a line between two input coordinates." ;
     sh:parameter [
-        sh:path function:input ;
+        sh:path function:from ;
         sh:datatype xsd:string ;
-        sh:description "The input string to escape XML characters from." ;
+        sh:description "The coordinate from which the line starts." ;
+        sh:order 1;
     ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:string ;
+        sh:description "The coordinate where the line ends." ;
+        sh:order 2;        
+    ] ;    
+    sh:parameter [
+        sh:path function:padding ;
+        sh:datatype xsd:decimal ;
+        sh:description "A padding." ;
+        sh:order 3;        
+    ] ;     
     sh:returnType xsd:string ;
     sh:select """
-       SELECT ?result WHERE {
-       BIND(replace(
-                    replace(
-                        replace(
-                            replace(
-                                replace(
-                                    $input,
-                                    '&', '&amp;'),
-                                '<', '&lt;'),
-                            '>', '&gt;'),
-                        '\"', '&quot;'),
-                    "\'", '&apos;')
-                AS ?result).
-        }
-        """ .
+
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+      bind(xsd:decimal(strbefore($from, ","))   as ?start)
+      bind(xsd:decimal(strbefore($to  , ","))   as ?end)
+      bind(str(((?start + ?end)/2) - $padding)  as ?result)
+      
+}
+""" .
+
+function:getMidYCoordinate
+    a sh:SPARQLFunction ;
+    rdfs:comment "Returns a string containing the Y coordinate for the middle point of a line between two input coordinates." ;
+    sh:parameter [
+        sh:path function:from ;
+        sh:datatype xsd:string ;
+        sh:description "The coordinate from which the line starts." ;
+        sh:order 1;
+    ] ;
+    sh:parameter [
+        sh:path function:to ;
+        sh:datatype xsd:string ;
+        sh:description "The coordinate where the line ends." ;
+        sh:order 2;        
+    ] ;    
+    sh:parameter [
+        sh:path function:padding ;
+        sh:datatype xsd:decimal ;
+        sh:description "A padding." ;
+        sh:order 3;        
+    ] ;        
+    sh:returnType xsd:string ;
+    sh:select """
+
+prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
+
+select ?result
+
+where {
+  
+      bind(xsd:decimal(strafter($from, ","))       as ?start)
+      bind(xsd:decimal(strafter($to  , ","))       as ?end)
+      bind(str(((?start + ?end)/2) - $padding)     as ?result)
+
+}
+""" .
         
 function:getViewBox
     a sh:SPARQLFunction ;
@@ -3380,78 +3440,30 @@ bind(concat(str(?minX), " ",str(?minY), " ",str(?maxX+1), " ",str(?maxY+1)) as ?
 }
 """ .
 
-function:getMidXCoordinate
+function:escapeXML
     a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the X coordinate for the middle point of a line between two input coordinates." ;
+    rdfs:comment "Escapes XML characters in the input string." ;
     sh:parameter [
-        sh:path function:from ;
+        sh:path function:input ;
         sh:datatype xsd:string ;
-        sh:description "The coordinate from which the line starts." ;
-        sh:order 1;
+        sh:description "The input string to escape XML characters from." ;
     ] ;
-    sh:parameter [
-        sh:path function:to ;
-        sh:datatype xsd:string ;
-        sh:description "The coordinate where the line ends." ;
-        sh:order 2;        
-    ] ;    
-    sh:parameter [
-        sh:path function:padding ;
-        sh:datatype xsd:decimal ;
-        sh:description "A padding." ;
-        sh:order 3;        
-    ] ;     
     sh:returnType xsd:string ;
     sh:select """
-
-prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
-
-select ?result
-
-where {
-  
-      bind(xsd:decimal(strbefore($from, ","))   as ?start)
-      bind(xsd:decimal(strbefore($to  , ","))   as ?end)
-      bind(str(((?start + ?end)/2) - $padding)     as ?result)
-      
-}
-""" .
-
-function:getMidYCoordinate
-    a sh:SPARQLFunction ;
-    rdfs:comment "Returns a string containing the Y coordinate for the middle point of a line between two input coordinates." ;
-    sh:parameter [
-        sh:path function:from ;
-        sh:datatype xsd:string ;
-        sh:description "The coordinate from which the line starts." ;
-        sh:order 1;
-    ] ;
-    sh:parameter [
-        sh:path function:to ;
-        sh:datatype xsd:string ;
-        sh:description "The coordinate where the line ends." ;
-        sh:order 2;        
-    ] ;    
-    sh:parameter [
-        sh:path function:padding ;
-        sh:datatype xsd:decimal ;
-        sh:description "A padding." ;
-        sh:order 3;        
-    ] ;        
-    sh:returnType xsd:string ;
-    sh:select """
-
-prefix xsd:         <http://www.w3.org/2001/XMLSchema#>
-
-select ?result
-
-where {
-  
-      bind(xsd:decimal(strafter($from, ","))       as ?start)
-      bind(xsd:decimal(strafter($to  , ","))       as ?end)
-      bind(str(((?start + ?end)/2) - $padding)     as ?result)
-
-}
-""" .
+       SELECT ?result WHERE {
+       BIND(replace(
+                    replace(
+                        replace(
+                            replace(
+                                replace(
+                                    $input,
+                                    '&', '&amp;'),
+                                '<', '&lt;'),
+                            '>', '&gt;'),
+                        '\"', '&quot;'),
+                    "\'", '&apos;')
+                AS ?result).
+        }
+        """ .
 
 }
